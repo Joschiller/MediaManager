@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MediaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Catalogues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="DeletionConfirmationMedium" Type="bit" Nullable="false" />
+          <Property Name="DeletionConfirmationPart" Type="bit" Nullable="false" />
+          <Property Name="DeletionConfirmationTag" Type="bit" Nullable="false" />
+          <Property Name="DeletionConfirmationPlaylist" Type="bit" Nullable="false" />
+          <Property Name="ShowTitleOfTheDayAsMedium" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MT_Relation">
+          <Key>
+            <PropertyRef Name="MediaId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediumId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Favourite" Type="bit" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
+          <Property Name="Publication Year" Type="int" Nullable="false" />
+          <Property Name="Image" Type="image" />
+        </EntityType>
+        <EntityType Name="PT_Relation">
+          <Key>
+            <PropertyRef Name="PartId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="PartId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Media_ToCatalogues">
+          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_Relation_ToMedia">
+          <End Role="Media" Type="Self.Media" Multiplicity="1" />
+          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MT_Relation">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_Relation_ToTags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MT_Relation">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parts_ToMedia">
+          <End Role="Media" Type="Self.Media" Multiplicity="1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="MediumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PT_Relation_ToParts">
+          <End Role="Parts" Type="Self.Parts" Multiplicity="1" />
+          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PT_Relation">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PT_Relation_ToTags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PT_Relation">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_ToCatalogues">
+          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediaDBModelStoreContainer">
+          <EntitySet Name="Catalogues" EntityType="Self.Catalogues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MT_Relation" EntityType="Self.MT_Relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PT_Relation" EntityType="Self.PT_Relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Media_ToCatalogues" Association="Self.FK_Media_ToCatalogues">
+            <End Role="Catalogues" EntitySet="Catalogues" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToMedia" Association="Self.FK_MT_Relation_ToMedia">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToTags" Association="Self.FK_MT_Relation_ToTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_ToMedia" Association="Self.FK_Parts_ToMedia">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToParts" Association="Self.FK_PT_Relation_ToParts">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToTags" Association="Self.FK_PT_Relation_ToTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_ToCatalogues" Association="Self.FK_Tags_ToCatalogues">
+            <End Role="Catalogues" EntitySet="Catalogues" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Catalogue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeletionConfirmationMedium" Type="Boolean" Nullable="false" />
+          <Property Name="DeletionConfirmationPart" Type="Boolean" Nullable="false" />
+          <Property Name="DeletionConfirmationTag" Type="Boolean" Nullable="false" />
+          <Property Name="DeletionConfirmationPlaylist" Type="Boolean" Nullable="false" />
+          <Property Name="ShowTitleOfTheDayAsMedium" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Media" Relationship="Self.FK_Media_ToCatalogues" FromRole="Catalogues" ToRole="Media" />
+          <NavigationProperty Name="Tags" Relationship="Self.FK_Tags_ToCatalogues" FromRole="Catalogues" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Catalogue" Relationship="Self.FK_Media_ToCatalogues" FromRole="Media" ToRole="Catalogues" />
+          <NavigationProperty Name="MT_Relation" Relationship="Self.FK_MT_Relation_ToMedia" FromRole="Media" ToRole="MT_Relation" />
+          <NavigationProperty Name="Parts" Relationship="Self.FK_Parts_ToMedia" FromRole="Media" ToRole="Parts" />
+        </EntityType>
+        <EntityType Name="MT_Relation">
+          <Key>
+            <PropertyRef Name="MediaId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Medium" Relationship="Self.FK_MT_Relation_ToMedia" FromRole="MT_Relation" ToRole="Media" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_MT_Relation_ToTags" FromRole="MT_Relation" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediumId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Favourite" Type="Boolean" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Publication_Year" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Medium" Relationship="Self.FK_Parts_ToMedia" FromRole="Parts" ToRole="Media" />
+          <NavigationProperty Name="PT_Relation" Relationship="Self.FK_PT_Relation_ToParts" FromRole="Parts" ToRole="PT_Relation" />
+        </EntityType>
+        <EntityType Name="PT_Relation">
+          <Key>
+            <PropertyRef Name="PartId" />
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="PartId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="Self.FK_PT_Relation_ToParts" FromRole="PT_Relation" ToRole="Parts" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_PT_Relation_ToTags" FromRole="PT_Relation" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Catalogue" Relationship="Self.FK_Tags_ToCatalogues" FromRole="Tags" ToRole="Catalogues" />
+          <NavigationProperty Name="MT_Relation" Relationship="Self.FK_MT_Relation_ToTags" FromRole="Tags" ToRole="MT_Relation" />
+          <NavigationProperty Name="PT_Relation" Relationship="Self.FK_PT_Relation_ToTags" FromRole="Tags" ToRole="PT_Relation" />
+        </EntityType>
+        <Association Name="FK_Media_ToCatalogues">
+          <End Role="Catalogues" Type="Self.Catalogue" Multiplicity="1" />
+          <End Role="Media" Type="Self.Medium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_ToCatalogues">
+          <End Role="Catalogues" Type="Self.Catalogue" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_Relation_ToMedia">
+          <End Role="Media" Type="Self.Medium" Multiplicity="1" />
+          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MT_Relation">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parts_ToMedia">
+          <End Role="Media" Type="Self.Medium" Multiplicity="1" />
+          <End Role="Parts" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="MediumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MT_Relation_ToTags">
+          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
+          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MT_Relation">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PT_Relation_ToParts">
+          <End Role="Parts" Type="Self.Part" Multiplicity="1" />
+          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PT_Relation">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PT_Relation_ToTags">
+          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
+          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PT_Relation">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catalogues" EntityType="Self.Catalogue" />
+          <EntitySet Name="Media" EntityType="Self.Medium" />
+          <EntitySet Name="MT_Relation" EntityType="Self.MT_Relation" />
+          <EntitySet Name="Parts" EntityType="Self.Part" />
+          <EntitySet Name="PT_Relation" EntityType="Self.PT_Relation" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <AssociationSet Name="FK_Media_ToCatalogues" Association="Self.FK_Media_ToCatalogues">
+            <End Role="Catalogues" EntitySet="Catalogues" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_ToCatalogues" Association="Self.FK_Tags_ToCatalogues">
+            <End Role="Catalogues" EntitySet="Catalogues" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToMedia" Association="Self.FK_MT_Relation_ToMedia">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_ToMedia" Association="Self.FK_Parts_ToMedia">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToTags" Association="Self.FK_MT_Relation_ToTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToParts" Association="Self.FK_PT_Relation_ToParts">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToTags" Association="Self.FK_PT_Relation_ToTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MediaDBModelStoreContainer" CdmEntityContainer="MediaDBEntities">
+          <EntitySetMapping Name="Catalogues">
+            <EntityTypeMapping TypeName="MediaDBModel.Catalogue">
+              <MappingFragment StoreEntitySet="Catalogues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DeletionConfirmationMedium" ColumnName="DeletionConfirmationMedium" />
+                <ScalarProperty Name="DeletionConfirmationPart" ColumnName="DeletionConfirmationPart" />
+                <ScalarProperty Name="DeletionConfirmationTag" ColumnName="DeletionConfirmationTag" />
+                <ScalarProperty Name="DeletionConfirmationPlaylist" ColumnName="DeletionConfirmationPlaylist" />
+                <ScalarProperty Name="ShowTitleOfTheDayAsMedium" ColumnName="ShowTitleOfTheDayAsMedium" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Media">
+            <EntityTypeMapping TypeName="MediaDBModel.Medium">
+              <MappingFragment StoreEntitySet="Media">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MT_Relation">
+            <EntityTypeMapping TypeName="MediaDBModel.MT_Relation">
+              <MappingFragment StoreEntitySet="MT_Relation">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="MediaDBModel.Part">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MediumId" ColumnName="MediumId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Favourite" ColumnName="Favourite" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Publication_Year" ColumnName="Publication Year" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Relation">
+            <EntityTypeMapping TypeName="MediaDBModel.PT_Relation">
+              <MappingFragment StoreEntitySet="PT_Relation">
+                <ScalarProperty Name="PartId" ColumnName="PartId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="MediaDBModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="MediaDBModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
