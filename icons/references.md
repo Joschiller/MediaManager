@@ -8,25 +8,25 @@ Enabled controls will use the colored variant. Disabled controls will use a mono
 
 Differnt base colors differentiate between different categories of actions.
 
-| Color Group | Color Name   | Color Code | Example | Usage                 |
-| ----------: | :----------- | :--------- | :------ | :-------------------- |
-|     Primary | yellow       | #ffe278    |         | navigation            |
-|     Primary | light orange | #ffb454    |         | navigation            |
-|   Secondary | light blue   | #7ed8f6    |         | navigation            |
-|   Secondary | blue         | #6aa9ff    |         | small indicator icons |
-|   Secondary | dark blue    | #4895ff    |         | small indicator icons |
-|   Secondary | dark purple  | #3d4566    |         | small indicator icons |
-|   Secondary | purple       | #4d5e80    |         | small indicator icons |
-|   Secondary | light purple | #f379ca    |         | small indicator icons |
-|      Accent | dark red     | #e56722    |         | destructive actions   |
-|      Accent | red          | #f37b2a    |         | destructive actions   |
-|      Accent | dark green   | #66bb00    |         | adding, saving        |
-|      Accent | light green  | #77dd00    |         | adding, saving        |
-|      Accent | dark orange  | #ff7d47    |         | destructive actions   |
-|      Accent | black        | #141414    |         |                       |
-|      Accent | dark gray    | #585859    |         |                       |
-|      Accent | light gray   | #d7e8ff    |         |                       |
-|      Accent | white        | #f7f9fa    |         |                       |
+| Color Group | Color Name   | Color Code | Example                        | Usage                 |
+| ----------: | :----------- | :--------- | :----------------------------- | :-------------------- |
+|     Primary | yellow       | #ffe278    | ![](./assets/yellow.png)       | navigation            |
+|     Primary | light orange | #ffb454    | ![](./assets/light_orange.png) | navigation            |
+|   Secondary | light blue   | #7ed8f6    | ![](./assets/light_blue.png)   | navigation            |
+|   Secondary | blue         | #6aa9ff    | ![](./assets/blue.png)         | small indicator icons |
+|   Secondary | dark blue    | #4895ff    | ![](./assets/dark_blue.png)    | small indicator icons |
+|   Secondary | dark purple  | #3d4566    | ![](./assets/dark_purple.png)  | small indicator icons |
+|   Secondary | purple       | #4d5e80    | ![](./assets/purple.png)       | small indicator icons |
+|   Secondary | light purple | #f379ca    | ![](./assets/light_purple.png) | small indicator icons |
+|      Accent | dark red     | #e56722    | ![](./assets/dark_red.png)     | destructive actions   |
+|      Accent | red          | #f37b2a    | ![](./assets/red.png)          | destructive actions   |
+|      Accent | dark green   | #66bb00    | ![](./assets/dark_green.png)   | adding, saving        |
+|      Accent | light green  | #77dd00    | ![](./assets/light_green.png)  | adding, saving        |
+|      Accent | dark orange  | #ff7d47    | ![](./assets/dark_orange.png)  | destructive actions   |
+|      Accent | black        | #141414    | ![](./assets/black.png)        | text, background      |
+|      Accent | dark gray    | #585859    | ![](./assets/dark_gray.png)    | text, background      |
+|      Accent | light gray   | #d7e8ff    | ![](./assets/light_gray.png)   | text, background      |
+|      Accent | white        | #f7f9fa    | ![](./assets/white.png)        | text, background      |
 
 ## Icons
 
