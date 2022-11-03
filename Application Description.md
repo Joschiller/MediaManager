@@ -401,7 +401,7 @@ Media parts contain the following data:
 |        Attribute | Data Type    | Explanation                               |
 | ---------------: | :----------- | :---------------------------------------- |
 |               Id | Numeric      | Identification of the part                |
-|         Media Id | Numeric      | Reference to the parent medium            |
+|        Medium Id | Numeric      | Reference to the parent medium            |
 |            Title | Text         | Title of the part                         |
 |      Description | Text         | Detailed description of the part          |
 |        Favourite | True/False   | Whether the part is a favourite           |
@@ -422,10 +422,11 @@ Each tag can have one of the follow values:
 
 Configured tags contain the following data:
 
-| Attribute | Data Type | Explanation               |
-| --------: | :-------- | :------------------------ |
-|        Id | Numeric   | Identification of the tag |
-|     Title | Text      | Title of the tag          |
+|    Attribute | Data Type | Explanation                       |
+| -----------: | :-------- | :-------------------------------- |
+|           Id | Numeric   | Identification of the tag         |
+| Catalogue Id | Numeric   | Reference to the parent catalogue |
+|        Title | Text      | Title of the tag                  |
 
 ### 5.2 Algorithms
 
