@@ -1,4 +1,38 @@
-# Theming
+# Style Guide
+
+## Window Styling
+
+### General Window Regions
+
+![](./assets/Window_Styles-Window_Regions.png)
+
+- Navigation Bar: contains all main actions as buttons
+  - Section 1: Navigation
+  - Section 2: Editing
+  - End: Help
+- Left and Right Panel:
+  - the left panel contains actions relevant for the right panel (e.g. selecting from a list)
+  - the left and right panel can also be merged together to a singular panel
+  - the left and right panel can also be completely unrelated
+- Status Bar: contains status messages
+
+> The general control flow is from top to bottom and from left to right.
+
+### Control Flow Examples
+
+![](./assets/Window_Styles-List_Controls.png)
+
+![](./assets/Window_Styles-Search_Controls.png)
+
+## Font
+
+| Usage        | Font     | Font Size | Variant               | Sample                                                                          |
+| :----------- | :------- | --------: | :-------------------- | :------------------------------------------------------------------------------ |
+| Window Title | Consolas |        35 | bold                  | <span style="font-family: consolas; font-size: 35px"><b>Window Title</b></span> |
+| Sub Title    | Consolas |        25 | regular               | <span style="font-family: consolas; font-size: 25px">Sub Title</span>           |
+| Small Title  | Consolas |        16 | regular               | <span style="font-family: consolas; font-size: 16px">Small Title</span>         |
+| Normal Text  | Consolas |        12 | regular, italic, bold | <span style="font-family: consolas; font-size: 12px">Normal Text</span>         |
+| Small Text   | Consolas |        10 | regular, italic       | <span style="font-family: consolas; font-size: 10px"><i>Small Text</i></span>   |
 
 ## Color Scheme
 
