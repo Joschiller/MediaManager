@@ -49,11 +49,11 @@ Differnt base colors differentiate between different categories of actions.
 |   Secondary | light blue   | #7ed8f6    | ![](./assets/light_blue.png)   | navigation            |
 |   Secondary | blue         | #6aa9ff    | ![](./assets/blue.png)         | small indicator icons |
 |   Secondary | dark blue    | #4895ff    | ![](./assets/dark_blue.png)    | small indicator icons |
-|   Secondary | dark purple  | #3d4566    | ![](./assets/dark_purple.png)  | small indicator icons |
-|   Secondary | purple       | #4d5e80    | ![](./assets/purple.png)       | small indicator icons |
-|   Secondary | light purple | #f379ca    | ![](./assets/light_purple.png) | small indicator icons |
+|    Tertiary | dark purple  | #3d4566    | ![](./assets/dark_purple.png)  | small indicator icons |
+|    Tertiary | purple       | #4d5e80    | ![](./assets/purple.png)       | small indicator icons |
+|    Tertiary | light purple | #f379ca    | ![](./assets/light_purple.png) | small indicator icons |
 |      Accent | dark red     | #e56722    | ![](./assets/dark_red.png)     | destructive actions   |
-|      Accent | red          | #f37b2a    | ![](./assets/red.png)          | destructive actions   |
+|      Accent | light red    | #f37b2a    | ![](./assets/red.png)          | destructive actions   |
 |      Accent | dark green   | #66bb00    | ![](./assets/dark_green.png)   | adding, saving        |
 |      Accent | light green  | #77dd00    | ![](./assets/light_green.png)  | adding, saving        |
 |      Accent | dark orange  | #ff7d47    | ![](./assets/dark_orange.png)  | destructive actions   |

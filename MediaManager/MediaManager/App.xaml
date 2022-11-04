@@ -1,9 +1,37 @@
 ﻿<Application x:Class="MediaManager.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MediaManager"
+             xmlns:local="clr-namespace:MediaManager" xmlns:system="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!--#region Base Values -->
+        <!--#region Color Definitions -->
+        <Color x:Key="color_primary">#ffe278</Color>
+        <Color x:Key="color_primary_dark">#ffb454</Color>
+        <Color x:Key="color_secondary_light">#7ed8f6</Color>
+        <Color x:Key="color_secondary">#6aa9ff</Color>
+        <Color x:Key="color_secondary_dark">#4895ff</Color>
+        <Color x:Key="color_tertiary_dark">#3d4566</Color>
+        <Color x:Key="color_tertiary">#4d5e80</Color>
+        <Color x:Key="color_tertiary_light">#f379ca</Color>
+        <Color x:Key="color_accent_red_dark">#e56722</Color>
+        <Color x:Key="color_accent_red_light">#f37b2a</Color>
+        <Color x:Key="color_accent_green_dark">#66bb00</Color>
+        <Color x:Key="color_accent_green_light">#77dd00</Color>
+        <Color x:Key="color_accent_orange">#ff7d47</Color>
+        <Color x:Key="color_black">#141414</Color>
+        <Color x:Key="color_gray_dark">#585859</Color>
+        <Color x:Key="color_gray_light">#d7e8ff</Color>
+        <Color x:Key="color_white">#f7f9fa</Color>
+        <!--#endregion-->
+        <!--#region Text Style Definitions -->
+        <system:Double x:Key="fontSize_windowTitle">35</system:Double>
+        <system:Double x:Key="fontSize_subTitle">25</system:Double>
+        <system:Double x:Key="fontSize_smallTitle">16</system:Double>
+        <system:Double x:Key="fontSize_normal">12</system:Double>
+        <system:Double x:Key="fontSize_small">10</system:Double>
+        <FontFamily x:Key="defaultFont">Consolas</FontFamily>
+        <!--#endregion-->
+        <!--#endregion-->
     </Application.Resources>
 </Application>
