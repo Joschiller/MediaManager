@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dbb7899631524525af8942eca90835e7" Name="Diagram1" ZoomLevel="70">
-        <EntityTypeShape EntityType="MediaDBModel.Catalogue" Width="1.5" PointX="7" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.Medium" Width="1.5" PointX="9.25" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.MT_Relation" Width="1.5" PointX="9.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.Part" Width="1.5" PointX="11.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.PT_Relation" Width="1.5" PointX="11.5" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.Setting" Width="1.5" PointX="4.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MediaDBModel.Tag" Width="1.5" PointX="7" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaDBModel.Catalogue" Width="1.5" PointX="7" PointY="2.5" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Medium" Width="1.5" PointX="9.25" PointY="2.5" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.MT_Relation" Width="1.5" PointX="9.25" PointY="5.875" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Part" Width="1.5" PointX="11.5" PointY="2.5" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.PT_Relation" Width="1.5" PointX="11.5" PointY="6.375" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Setting" Width="1.5" PointX="4.75" PointY="2.5" IsExpanded="true" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Tag" Width="1.5" PointX="7" PointY="6.25" IsExpanded="true" FillColor="255, 226, 120" />
         <AssociationConnector Association="MediaDBModel.FK_Media_ToCatalogues" ManuallyRouted="false" />
         <AssociationConnector Association="MediaDBModel.FK_Tags_ToCatalogues" ManuallyRouted="false" />
         <AssociationConnector Association="MediaDBModel.FK_MT_Relation_ToMedia" ManuallyRouted="false" />
