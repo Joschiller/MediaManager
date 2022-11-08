@@ -24,6 +24,10 @@
         <Color x:Key="color_gray_light">#d7e8ff</Color>
         <Color x:Key="color_white">#f7f9fa</Color>
         <!--#endregion-->
+        <!--#region Content-->
+        <SolidColorBrush x:Key="window_background_brush" Color="{StaticResource color_white}"/>
+        <SolidColorBrush x:Key="control_background_brush" Color="{StaticResource color_gray_light}"/>
+        <!--#endregion-->
         <!--#region Text Style Definitions -->
         <system:Double x:Key="fontSize_windowTitle">35</system:Double>
         <system:Double x:Key="fontSize_subTitle">25</system:Double>
