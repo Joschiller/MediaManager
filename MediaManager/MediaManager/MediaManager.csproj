@@ -56,6 +56,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -82,6 +85,9 @@
     <Compile Include="Catalogue.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Globals\LanguageProvider\LanguageProvider.cs" />
+    <Compile Include="Globals\LanguageProvider\LanguageUser.cs" />
+    <Compile Include="Globals\LanguageProvider\UpdatedLanguageUser.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
