@@ -85,6 +85,11 @@
     <Compile Include="Catalogue.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml.cs">
+      <DependentUpon>GeneralButtonBasedDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialogStyle.cs" />
+    <Compile Include="Globals\DefaultDialogs\SuccessMode.cs" />
     <Compile Include="Globals\LanguageProvider\LanguageProvider.cs" />
     <Compile Include="Globals\LanguageProvider\LanguageUser.cs" />
     <Compile Include="Globals\LanguageProvider\UpdatedLanguageUser.cs" />
@@ -115,6 +120,10 @@
     <Compile Include="Tag.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Globals\SettingsEditor\SettingsEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
