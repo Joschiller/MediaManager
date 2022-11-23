@@ -97,6 +97,16 @@
       <DependentUpon>SettingsEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globals\SettingsEditor\SettingsEditorItem.cs" />
+    <Compile Include="Globals\XMLImportExport\DuplicateNameException.cs" />
+    <Compile Include="Globals\XMLImportExport\ExportThread.cs" />
+    <Compile Include="Globals\XMLImportExport\ImportThread.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewer.xaml.cs">
+      <DependentUpon>ThreadProcessViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewerConfig.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewerStyle.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadStepper.cs" />
+    <Compile Include="Globals\XMLImportExport\XMLExport.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -125,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Globals\SettingsEditor\SettingsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Globals\XMLImportExport\ThreadProcessViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
