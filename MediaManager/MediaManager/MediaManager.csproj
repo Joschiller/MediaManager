@@ -56,6 +56,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -82,6 +85,29 @@
     <Compile Include="Catalogue.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml.cs">
+      <DependentUpon>GeneralButtonBasedDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialogStyle.cs" />
+    <Compile Include="Globals\DefaultDialogs\SuccessMode.cs" />
+    <Compile Include="Globals\LanguageProvider\LanguageProvider.cs" />
+    <Compile Include="Globals\LanguageProvider\LanguageUser.cs" />
+    <Compile Include="Globals\LanguageProvider\UpdatedLanguageUser.cs" />
+    <Compile Include="Globals\Navigation.cs" />
+    <Compile Include="Globals\SettingsEditor\SettingsEditor.xaml.cs">
+      <DependentUpon>SettingsEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\SettingsEditor\SettingsEditorItem.cs" />
+    <Compile Include="Globals\XMLImportExport\DuplicateNameException.cs" />
+    <Compile Include="Globals\XMLImportExport\ExportThread.cs" />
+    <Compile Include="Globals\XMLImportExport\ImportThread.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewer.xaml.cs">
+      <DependentUpon>ThreadProcessViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewerConfig.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadProcessViewerStyle.cs" />
+    <Compile Include="Globals\XMLImportExport\ThreadStepper.cs" />
+    <Compile Include="Globals\XMLImportExport\XMLExport.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -105,6 +131,18 @@
     <Compile Include="Tag.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Globals\SettingsEditor\SettingsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Globals\XMLImportExport\ThreadProcessViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -158,6 +196,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Resources\Deutsch.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\English.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
