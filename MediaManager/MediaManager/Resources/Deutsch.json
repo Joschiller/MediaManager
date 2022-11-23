@@ -1,0 +1,21 @@
+{
+  "ApplicationName": "Media Manager",
+  "Common": {
+    "Button": {
+      "Cancel": "Abbrechen",
+      "No": "Nein",
+      "Ok": "Ok",
+      "Yes": "Ja"
+    },
+    "ValidationText": {
+      "Intro": "Bitte ",
+      "Concat": " und "
+    }
+  },
+  "Dialog": {
+    "UnsavedChanges": "Es liegen ungespeicherte Änderungen vor! Wollen Sie diese Änderungen speichern?",
+    "DeletionConfirmation": {
+      "Intro": "Soll {0} wirklich gelöscht werden?"
+    }
+  }
+}
