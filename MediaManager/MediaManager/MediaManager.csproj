@@ -88,6 +88,10 @@
     <Compile Include="Globals\LanguageProvider\LanguageProvider.cs" />
     <Compile Include="Globals\LanguageProvider\LanguageUser.cs" />
     <Compile Include="Globals\LanguageProvider\UpdatedLanguageUser.cs" />
+    <Compile Include="Globals\SettingsEditor\SettingsEditor.xaml.cs">
+      <DependentUpon>SettingsEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\SettingsEditor\SettingsEditorItem.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,6 +115,10 @@
     <Compile Include="Tag.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Globals\SettingsEditor\SettingsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
