@@ -10,6 +10,9 @@ namespace MediaManager.GUI.Atoms
     /// </summary>
     public partial class TagCheckbox : UserControl
     {
+        public delegate void TagValueChangeHandler(TagCheckbox sender, bool? newValue);
+        public event TagValueChangeHandler TagValueChanged;
+
         public string TagName { get; set; } = "";
         private bool? _Value = null;
         public bool? Value
@@ -53,6 +56,7 @@ namespace MediaManager.GUI.Atoms
                 else if (Value.Value) Value = null;
                 else if (!Value.Value) Value = true;
             }
+            TagValueChanged?.Invoke(this, Value);
         }
     }
 }
