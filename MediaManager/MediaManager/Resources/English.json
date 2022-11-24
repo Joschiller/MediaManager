@@ -7,6 +7,10 @@
       "Ok": "Ok",
       "Yes": "Yes"
     },
+    "Tooltip": {
+      "Back": "Back",
+      "Help": "Show help"
+    },
     "ValidationText": {
       "Intro": "Please ",
       "Concat": " and "

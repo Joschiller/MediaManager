@@ -35,6 +35,5 @@ namespace MediaManager.GUI.Atoms
                     break;
             }
         }
-
     }
 }
