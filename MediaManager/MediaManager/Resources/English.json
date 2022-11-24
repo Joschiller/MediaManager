@@ -16,6 +16,12 @@
       "Concat": " and "
     }
   },
+  "Component": {
+    "Pager": {
+      "Previous": "Previous",
+      "Next": "Next"
+    }
+  },
   "Dialog": {
     "UnsavedChanges": "There exist unsaved changes! Do you want to save your changes?",
     "DeletionConfirmation": {

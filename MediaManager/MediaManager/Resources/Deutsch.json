@@ -16,6 +16,12 @@
       "Concat": " und "
     }
   },
+  "Component": {
+    "Pager": {
+      "Previous": "Zurück",
+      "Next": "Weiter"
+    }
+  },
   "Dialog": {
     "UnsavedChanges": "Es liegen ungespeicherte Änderungen vor! Wollen Sie diese Änderungen speichern?",
     "DeletionConfirmation": {
