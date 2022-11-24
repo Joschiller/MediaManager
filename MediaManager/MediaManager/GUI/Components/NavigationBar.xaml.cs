@@ -2,6 +2,7 @@
 using MediaManager.GUI.Atoms;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -15,29 +16,27 @@ namespace MediaManager.GUI.Components
     public partial class NavigationBar : UserControl, UpdatedLanguageUser
     {
         public ObservableCollection<NavigationButtonGroup> Children { get; private set; } = new ObservableCollection<NavigationButtonGroup>();
-        public bool WithBackButton
+        private NavigationBarMode _Mode = 0;
+        /// <summary>
+        /// Presentation mode of the <see cref="NavigationBar"/>.
+        /// <br/>
+        /// Concatenation of several modi can be done using a comma inside the WPF. e.g. <c>Mode="WithAppIcon,WithBackButton,WithHelpButton"</c>
+        /// </summary>
+        [TypeConverter(typeof(EnumConverter))]
+        public NavigationBarMode Mode
         {
-            get => back.Visibility == Visibility.Visible;
+            get => _Mode;
             set
             {
-                back.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                icon1.Visibility = !value && WithAppIcon ? Visibility.Visible : Visibility.Collapsed;
-                icon2.Visibility = value && WithAppIcon ? Visibility.Visible : Visibility.Collapsed;
+                _Mode = value;
+                var withIcon = ((int)value & (int)NavigationBarMode.WithAppIcon) != 0;
+                var withBack = ((int)value & (int)NavigationBarMode.WithBackButton) != 0;
+                var withHelp = ((int)value & (int)NavigationBarMode.WithHelpButton) != 0;
+                icon1.Visibility = withIcon && !withBack ? Visibility.Visible : Visibility.Collapsed;
+                icon2.Visibility = withIcon && withBack ? Visibility.Visible : Visibility.Collapsed;
+                back.Visibility = withBack ? Visibility.Visible : Visibility.Collapsed;
+                help.Visibility = withHelp ? Visibility.Visible : Visibility.Collapsed;
             }
-        }
-        public bool WithAppIcon
-        {
-            get => icon1.Visibility == Visibility.Visible || icon1.Visibility == Visibility.Visible;
-            set
-            {
-                icon1.Visibility = !WithBackButton && value ? Visibility.Visible : Visibility.Collapsed;
-                icon2.Visibility = WithBackButton && value ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-        public bool WithHelpButton
-        {
-            get => help.Visibility == Visibility.Visible;
-            set => help.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
         public event EventHandler IconClicked;
         public event EventHandler BackClicked;
@@ -77,4 +76,10 @@ namespace MediaManager.GUI.Components
             help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
         }
     }
+
+    public enum NavigationBarMode {
+        WithAppIcon = 1,
+        WithBackButton = 2,
+        WithHelpButton = 4,
+    };
 }
