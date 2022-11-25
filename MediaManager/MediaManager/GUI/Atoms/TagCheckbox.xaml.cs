@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -13,27 +14,24 @@ namespace MediaManager.GUI.Atoms
         public delegate void TagValueChangeHandler(TagCheckbox sender, bool? newValue);
         public event TagValueChangeHandler TagValueChanged;
 
-        public string TagName { get; set; } = "";
-        private bool? _Value = null;
+        public string TagName
+        {
+            get => (string)GetValue(TagNameProperty);
+            set => SetValue(TagNameProperty, value);
+        }
+        public static readonly DependencyProperty TagNameProperty = DependencyProperty.Register("TagName", typeof(string), typeof(TagCheckbox));
         public bool? Value
         {
-            get { return _Value; }
-            set
-            {
-                _Value = value;
-                if (!value.HasValue)
-                {
-                    checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_neutral.png", UriKind.Relative));
-                }
-                else if (value.Value)
-                {
-                    checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_positive.png", UriKind.Relative));
-                }
-                else
-                {
-                    checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_negative.png", UriKind.Relative));
-                }
-            }
+            get => (bool?)GetValue(TagValueProperty);
+            set => SetValue(TagValueProperty, value);
+        }
+        public static readonly DependencyProperty TagValueProperty = DependencyProperty.Register("Value", typeof(bool?), typeof(TagCheckbox), new PropertyMetadata(null, OnTagValuePropertyChanged));
+        public static void OnTagValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var value = (bool?)e.NewValue;
+            if (!value.HasValue) ((TagCheckbox)d).checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_neutral.png", UriKind.Relative));
+            else if (value.Value) ((TagCheckbox)d).checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_positive.png", UriKind.Relative));
+            else ((TagCheckbox)d).checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_negative.png", UriKind.Relative));
         }
 
         public TagCheckbox()
