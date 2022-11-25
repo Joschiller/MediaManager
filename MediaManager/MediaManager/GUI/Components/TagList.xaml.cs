@@ -13,7 +13,12 @@ namespace MediaManager.GUI.Components
         public delegate void TagValueChangeHandler(List<ValuedTag> tags);
         public event TagValueChangeHandler TagValueChanged;
 
-        public ObservableCollection<ValuedTag> Tags { get; set; } = new ObservableCollection<ValuedTag>();
+        public ObservableCollection<ValuedTag> Tags { get; private set; } = new ObservableCollection<ValuedTag>();
+        public void SetTagList(List<ValuedTag> tags)
+        {
+            Tags.Clear();
+            tags.OrderBy(tag => tag.Tag.Title).ToList().ForEach(Tags.Add);
+        }
 
         public TagList()
         {
