@@ -22,6 +22,16 @@
       "Next": "Weiter"
     }
   },
+  "Controls": {
+    "Search": {
+      "ExactMode": "_Exakt suchen",
+      "SearchDescriptionMode": "_Beschreibungen durchsuchen",
+      "FavouriteOnlyMode": "Nur in _Favoriten suchen",
+      "ShowMedia": "Medien _anzeigen",
+      "ShowParts": "Teile _anzeigen",
+      "Search": "_Suchen"
+    }
+  },
   "Dialog": {
     "UnsavedChanges": "Es liegen ungespeicherte Änderungen vor! Wollen Sie diese Änderungen speichern?",
     "DeletionConfirmation": {

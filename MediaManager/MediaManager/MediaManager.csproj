@@ -86,6 +86,7 @@
     <Compile Include="Catalogue.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Globals\DataConnector.cs" />
     <Compile Include="GUI\Atoms\NavigationButton.xaml.cs">
       <DependentUpon>NavigationButton.xaml</DependentUpon>
     </Compile>
@@ -130,6 +131,14 @@
     <Compile Include="GUI\Components\TagList.xaml.cs">
       <DependentUpon>TagList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Search\SearchInput.xaml.cs">
+      <DependentUpon>SearchInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Search\SearchPanel.xaml.cs">
+      <DependentUpon>SearchPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Search\SearchParameters.cs" />
+    <Compile Include="GUI\Controls\Search\SearchResultMode.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -147,6 +156,7 @@
     <Compile Include="PT_Relation.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Search\SearchResultItem.cs" />
     <Compile Include="Setting.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
@@ -192,6 +202,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Components\TagList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Search\SearchInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Search\SearchPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

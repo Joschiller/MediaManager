@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="MediaManager.GUI.Controls.Search.SearchPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:components="clr-namespace:MediaManager.GUI.Components"
+             mc:Ignorable="d">
+    <DockPanel>
+        <local:SearchInput x:Name="input" DockPanel.Dock="Top" SearchParametersChanged="input_SearchParametersChanged"/>
+        <components:Pager x:Name="pager" DockPanel.Dock="Top" HorizontalAlignment="Right" PageChanged="pager_PageChanged"/>
+        <ListView x:Name="resultList" ItemsSource="{Binding SearchResult}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Tag="{Binding Id}" Text="{Binding Text}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
+</UserControl>
