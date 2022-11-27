@@ -37,6 +37,7 @@ namespace MediaManager.GUI.Components
         public Pager()
         {
             InitializeComponent();
+            UpdateGUI();
         }
 
         private void prev_Click(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace MediaManager.GUI.Components
         {
             page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
             prev.IsEnabled = CurrentPage > 1;
-            next.IsEnabled = CurrentPage <= TotalPages;
+            next.IsEnabled = CurrentPage < TotalPages;
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
