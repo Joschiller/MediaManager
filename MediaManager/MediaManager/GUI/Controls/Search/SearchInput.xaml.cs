@@ -19,7 +19,8 @@ namespace MediaManager.GUI.Controls.Search
                 ExactMode = exactMode.IsChecked.HasValue && exactMode.IsChecked.Value,
                 SearchWithinDescriptions = searchDescriptionMode.IsChecked.HasValue && searchDescriptionMode.IsChecked.Value,
                 OnlySearchWithinFavourites = favouriteOnlyMode.IsChecked.HasValue && favouriteOnlyMode.IsChecked.Value,
-                SearchResult = CurrentSearchResultMode
+                SearchResult = CurrentSearchResultMode,
+                SearchTags = new System.Collections.Generic.List<ValuedTag>(tagList.Tags)
             };
         }
 
