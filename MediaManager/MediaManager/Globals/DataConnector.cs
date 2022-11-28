@@ -1,15 +1,22 @@
 ﻿using MediaManager.GUI.Controls.Search;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaManager.Globals
 {
     public static class DataConnector
     {
         private static MediaDBEntities DBCONNECTION = new MediaDBEntities();
+
+        public static Catalogue CURRENT_CATALOGUE
+        {
+            get
+            {
+                var id = DBCONNECTION.Settings.Where(s => s.Key == "CURRENT_CATALOGUE_ID").FirstOrDefault()?.Value;
+                if (id == null || int.Parse(id) == -1) return null;
+                return DBCONNECTION.Catalogues.Find(int.Parse(id));
+            }
+        }
 
         public static class Reader
         {
@@ -56,6 +63,18 @@ namespace MediaManager.Globals
                 }
 
                 return result;
+            }
+
+            public static class Settings
+            {
+                public static int ResultListLength
+                {
+                    get
+                    {
+                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "RESULT_LIST_LENGTH")?.Value;
+                        return val != null ? int.Parse(val) : 20;
+                    }
+                }
             }
         }
     }
