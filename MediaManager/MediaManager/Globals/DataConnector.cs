@@ -19,7 +19,41 @@ namespace MediaManager.Globals
             {
                 var result = new List<SearchResultItem>();
 
-                // TODO filter
+                var fittingTitle = DBCONNECTION.Parts.Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString));
+                var fittingSearchString = parameters.SearchWithinDescriptions
+                    ? fittingTitle.Union(DBCONNECTION.Parts.Where(p => p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
+                    : fittingTitle;
+
+                var fittingTags = parameters.ExactMode
+                    ? fittingSearchString.Where(p => parameters.SearchTags.All(t => !t.Value.HasValue || p.PT_Relation.Any(r => r.TagId == t.Tag.Id && r.Value == t.Value.Value)))
+                    : fittingSearchString.Where(p => !parameters.SearchTags.Any(t => p.PT_Relation.Any(r => t.Value.HasValue && r.TagId == t.Tag.Id && r.Value == !t.Value.Value)));
+
+                var fittingFavourites = parameters.OnlySearchWithinFavourites
+                    ? fittingTags.Where(p => p.Favourite)
+                    : fittingTags;
+
+                if (parameters.SearchResult == SearchResultMode.MediaList)
+                {
+                    foreach(var item in fittingFavourites.Select(p => p.Medium).Distinct().OrderBy(m => m.Title))
+                    {
+                        result.Add(new SearchResultItem
+                        {
+                            Id = item.Id,
+                            Text = item.Title
+                        });
+                    }
+                }
+                else
+                {
+                    foreach (var item in fittingFavourites)
+                    {
+                        result.Add(new SearchResultItem
+                        {
+                            Id = item.Id,
+                            Text = item.Title + " (" + item.Medium.Title + ")"
+                        });
+                    }
+                }
 
                 return result;
             }
