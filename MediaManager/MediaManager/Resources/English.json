@@ -39,7 +39,9 @@
       "Edit": "Edit",
       "Delete": "Delete",
       "Save": "Save Changes",
-      "Discard": "Discard Changes"
+      "Discard": "Discard Changes",
+      "MediaDeletion": "the selected medium",
+      "PartDeletion": "the selected media part"
     }
   },
   "Dialog": {

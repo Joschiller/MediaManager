@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using static MediaManager.Globals.DataConnector.Reader;
 using static MediaManager.Globals.DataConnector.Writer;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Controls.Edit
 {
@@ -65,10 +66,13 @@ namespace MediaManager.GUI.Controls.Edit
         private void editButton_Click(object sender, RoutedEventArgs e) => EditClicked?.Invoke(sender, e);
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO deletion confirmation
-            if (Mode == ElementMode.Medium) DeleteMedium(CurrentId);
-            else DeletePart(CurrentId);
-            DeleteClicked?.Invoke(sender, e);
+            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString(Mode == ElementMode.Medium ? "Controls.Edit.MediaDeletion" : "Controls.Edit.PartDeletion"));
+            if (confirmation.HasValue && confirmation.Value)
+            {
+                if (Mode == ElementMode.Medium) DeleteMedium(CurrentId);
+                else DeletePart(CurrentId);
+                DeleteClicked?.Invoke(sender, e);
+            }
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);

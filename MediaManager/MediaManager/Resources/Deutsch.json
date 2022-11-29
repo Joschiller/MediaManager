@@ -39,7 +39,9 @@
       "Edit": "Bearbeiten",
       "Delete": "Löschen",
       "Save": "Änderungen speichern",
-      "Discard": "Änderungen verwerfen"
+      "Discard": "Änderungen verwerfen",
+      "MediaDeletion": "das gewählte Medium",
+      "PartDeletion": "der gewählte Medienteil"
     }
   },
   "Dialog": {
