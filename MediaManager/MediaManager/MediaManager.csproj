@@ -87,6 +87,9 @@
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals\DataConnector.cs" />
+    <Compile Include="GUI\Atoms\ImageButton.xaml.cs">
+      <DependentUpon>ImageButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Atoms\NavigationButton.xaml.cs">
       <DependentUpon>NavigationButton.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
     </Compile>
     <Compile Include="TagValue.cs" />
     <Compile Include="ValuedTag.cs" />
+    <Page Include="GUI\Atoms\ImageButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Atoms\NavigationButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
