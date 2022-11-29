@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MediaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MediaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Catalogues">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,7 +87,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MT_Relation_ToMedia">
-          <End Role="Media" Type="Self.Media" Multiplicity="1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Media">
@@ -99,7 +101,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MT_Relation_ToTags">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -111,7 +115,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parts_ToMedia">
-          <End Role="Media" Type="Self.Media" Multiplicity="1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Media">
@@ -123,7 +129,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PT_Relation_ToParts">
-          <End Role="Parts" Type="Self.Parts" Multiplicity="1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parts">
@@ -135,7 +143,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PT_Relation_ToTags">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -147,7 +157,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tags_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1" />
+          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Catalogues">
@@ -195,8 +207,7 @@
             <End Role="Tags" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MediaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
