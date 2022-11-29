@@ -30,6 +30,16 @@
       "ShowMedia": "_Show Media",
       "ShowParts": "_Show Parts",
       "Search": "Search"
+    },
+    "Edit": {
+      "Length": "Length",
+      "Minute": "Minute",
+      "Minutes": "Minutes",
+      "Publication": "Publication",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "Save": "Save Changes",
+      "Discard": "Discard Changes"
     }
   },
   "Dialog": {

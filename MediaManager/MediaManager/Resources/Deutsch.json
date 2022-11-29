@@ -30,6 +30,16 @@
       "ShowMedia": "Medien _anzeigen",
       "ShowParts": "Teile _anzeigen",
       "Search": "_Suchen"
+    },
+    "Edit": {
+      "Length": "Länge",
+      "Minute": "Minute",
+      "Minutes": "Minuten",
+      "Publication": "Veröffentlichung",
+      "Edit": "Bearbeiten",
+      "Delete": "Löschen",
+      "Save": "Änderungen speichern",
+      "Discard": "Änderungen verwerfen"
     }
   },
   "Dialog": {

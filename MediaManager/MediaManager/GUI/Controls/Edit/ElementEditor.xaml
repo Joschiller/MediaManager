@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MediaManager.GUI.Controls.Edit.ElementEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button x:Name="favoriteButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="favoriteButton_Click">
+                <Image x:Name="favoriteIcon"/>
+            </Button>
+            <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
+        </DockPanel>
+        <TextBox x:Name="location" DockPanel.Dock="Top" MaxLength="128" TextChanged="textChanged"/>
+        <TextBox x:Name="description" DockPanel.Dock="Top" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged"/>
+        <DockPanel DockPanel.Dock="Bottom">
+            <Grid x:Name="integerMeta">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center"/>
+                <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center"/>
+                <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+            </Grid>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="saveButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="saveButton_Click">
+                    <Image Source="../../../Resources/save.png"/>
+                </Button>
+                <Button x:Name="discardButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="discardButton_Click">
+                    <Image Source="../../../Resources/undo.png"/>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
+            <StackPanel DockPanel.Dock="Right" Orientation="Vertical">
+                <Button x:Name="selectImage" Click="selectImage_Click"/>
+                <Button x:Name="removeImage" Click="removeImage_Click"/>
+                <TextBlock x:Name="imagePath"/>
+            </StackPanel>
+            <Image x:Name="image"/>
+        </DockPanel>
+        <components:TagList x:Name="tags"/>
+    </DockPanel>
+</UserControl>
