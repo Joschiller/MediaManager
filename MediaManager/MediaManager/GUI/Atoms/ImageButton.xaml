@@ -9,6 +9,6 @@
         <Button x:Name="btn" ToolTip="{Binding Tooltip}" Background="Transparent" BorderBrush="Transparent" Click="btn_Click">
             <Image Source="{Binding EnabledIconSource}" Height="{Binding Size}" Width="{Binding Size}" Margin="4"/>
         </Button>
-        <Image x:Name="disabledIcon" Source="{Binding DisabledIconSource}" Height="{Binding Size}" Width="{Binding Size}" Margin="4"/>
+        <Image x:Name="disabledIcon" Source="{Binding DisabledIconSource}" Height="{Binding Size}" Width="{Binding Size}" Margin="4" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

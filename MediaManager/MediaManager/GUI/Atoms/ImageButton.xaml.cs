@@ -9,29 +9,31 @@ namespace MediaManager.GUI.Atoms
     /// </summary>
     public partial class ImageButton : UserControl
     {
-        public object Tooltip { get; set; }
-        public int Size { get; set; }
+        public object Tooltip { get; set; } = null;
+        public int Size { get; set; } = 48;
         public ImageSource EnabledIconSource { get; set; }
         public ImageSource DisabledIconSource { get; set; } = null;
         public bool Enabled
         {
-            get => IsEnabled;
-            set
-            {
-                IsEnabled = value;
-                btn.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
-                disabledIcon.Visibility = IsEnabled ? Visibility.Collapsed : Visibility.Visible;
-                if (!IsEnabled && DisabledIconSource == null) DisabledIconSource = EnabledIconSource;
-            }
+            get => btn.Visibility == Visibility.Visible;
+            set => RefreshGUI(value);
         }
         public event RoutedEventHandler Click;
+
+        private void RefreshGUI(bool enabled)
+        {
+            btn.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
+            disabledIcon.Visibility = enabled ? Visibility.Collapsed : Visibility.Visible;
+            if (!enabled && DisabledIconSource == null) DisabledIconSource = EnabledIconSource;
+        }
 
         public ImageButton()
         {
             InitializeComponent();
             DataContext = this;
+            RefreshGUI(Enabled);
         }
 
-        private void btn_Click(object sender, RoutedEventArgs e) => Click?.Invoke(sender, e);
+        private void btn_Click(object sender, RoutedEventArgs e) => Click?.Invoke(this, e);
     }
 }
