@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components"
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
@@ -28,12 +28,8 @@
                 <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
             </Grid>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button x:Name="editButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="editButton_Click">
-                    <Image Source="../../../Resources/edit_blue.png"/>
-                </Button>
-                <Button x:Name="deleteButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="deleteButton_Click">
-                    <Image Source="../../../Resources/delete.png"/>
-                </Button>
+                <atoms:ImageButton x:Name="editButton" DockPanel.Dock="Right" Size="48" Click="editButton_Click" EnabledIconSource="../../../Resources/edit_blue.png"/>
+                <atoms:ImageButton x:Name="deleteButton" DockPanel.Dock="Right" Size="48" Click="deleteButton_Click" EnabledIconSource="../../../Resources/delete.png"/>
             </StackPanel>
         </DockPanel>
         <Image x:Name="image" DockPanel.Dock="Bottom"/>

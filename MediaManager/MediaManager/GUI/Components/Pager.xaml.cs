@@ -53,8 +53,8 @@ namespace MediaManager.GUI.Components
         private void UpdateGUI()
         {
             page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
-            prev.IsEnabled = CurrentPage > 1;
-            next.IsEnabled = CurrentPage < TotalPages;
+            prev.Enabled = CurrentPage > 1;
+            next.Enabled = CurrentPage < TotalPages;
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);

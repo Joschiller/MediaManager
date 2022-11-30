@@ -157,6 +157,15 @@
   <data name="nofavorite" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nofavorite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="nonext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nonext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noprevious" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\noprevious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nosave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nosave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

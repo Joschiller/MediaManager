@@ -55,7 +55,7 @@ namespace MediaManager.GUI.Controls.Edit
 
                 title.Text = part.Title;
                 IsCurrentlyFavorite = part.Favourite;
-                favoriteIcon.Source = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
+                favoriteButton.EnabledIconSource = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
                 description.Text = part.Description;
                 length.SetValue((uint)part.Length);
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
@@ -69,13 +69,13 @@ namespace MediaManager.GUI.Controls.Edit
         private void favoriteButton_Click(object sender, RoutedEventArgs e)
         {
             IsCurrentlyFavorite = !IsCurrentlyFavorite;
-            favoriteIcon.Source = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
-            saveButton.IsEnabled = true;
+            favoriteButton.EnabledIconSource = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
+            saveButton.Enabled = true;
         }
-        private void textChanged(object sender, TextChangedEventArgs e) => saveButton.IsEnabled = true;
-        private void numericValueChanged(uint newVal) => saveButton.IsEnabled = true;
-        private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.IsEnabled = true;
-        private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.IsEnabled = true;
+        private void textChanged(object sender, TextChangedEventArgs e) => saveButton.Enabled = true;
+        private void numericValueChanged(uint newVal) => saveButton.Enabled = true;
+        private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
+        private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {

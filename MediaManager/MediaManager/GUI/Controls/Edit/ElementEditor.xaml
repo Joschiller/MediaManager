@@ -7,9 +7,7 @@
              mc:Ignorable="d">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <Button x:Name="favoriteButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="favoriteButton_Click">
-                <Image x:Name="favoriteIcon"/>
-            </Button>
+            <atoms:ImageButton x:Name="favoriteButton" DockPanel.Dock="Right" Size="48" Click="favoriteButton_Click"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
         <TextBox x:Name="location" DockPanel.Dock="Top" MaxLength="128" TextChanged="textChanged"/>
@@ -30,12 +28,8 @@
                 <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
             </Grid>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button x:Name="saveButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="saveButton_Click">
-                    <Image Source="../../../Resources/save.png"/>
-                </Button>
-                <Button x:Name="discardButton" DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" Height="48" Width="48" Click="discardButton_Click">
-                    <Image Source="../../../Resources/undo.png"/>
-                </Button>
+                <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
+                <atoms:ImageButton x:Name="discardButton" DockPanel.Dock="Right" Size="48" Click="discardButton_Click" EnabledIconSource="../../../Resources/undo.png"/>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom">
