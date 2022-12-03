@@ -75,6 +75,7 @@ namespace MediaManager.GUI.Components
             back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
             help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
         }
+        ~NavigationBar() => LanguageProvider.Unregister(this);
     }
 
     public enum NavigationBarMode {

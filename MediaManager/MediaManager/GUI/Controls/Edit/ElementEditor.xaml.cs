@@ -100,7 +100,7 @@ namespace MediaManager.GUI.Controls.Edit
         }
         private void discardButton_Click(object sender, RoutedEventArgs e) => QuitEditing?.Invoke(sender, e);
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
             textLength.Text = LanguageProvider.getString("Controls.Edit.Length");

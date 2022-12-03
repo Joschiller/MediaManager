@@ -64,5 +64,6 @@ namespace MediaManager.GUI.Components
             next.ToolTip = LanguageProvider.getString("Component.Pager.Next");
             throw new NotImplementedException();
         }
+        ~Pager() => LanguageProvider.Unregister(this);
     }
 }

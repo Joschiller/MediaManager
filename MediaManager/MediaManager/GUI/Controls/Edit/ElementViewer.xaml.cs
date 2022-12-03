@@ -75,7 +75,7 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
             textLength.Text = LanguageProvider.getString("Controls.Edit.Length");

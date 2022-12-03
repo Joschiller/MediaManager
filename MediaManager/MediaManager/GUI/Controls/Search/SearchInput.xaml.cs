@@ -45,7 +45,7 @@ namespace MediaManager.GUI.Controls.Search
         }
         private void tagList_TagValueChanged(System.Collections.Generic.List<ValuedTag> tags) => SearchParametersChanged?.Invoke(CurrentSearchParameters);
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
             exactMode.Content = LanguageProvider.getString("Controls.Search.ExactMode");
