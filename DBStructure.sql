@@ -60,6 +60,22 @@ CREATE TABLE [dbo].[PT_Relation] (
     CONSTRAINT [FK_PT_Relation_ToTags] FOREIGN KEY ([TagId]) REFERENCES [dbo].[Tags] ([Id]) ON DELETE CASCADE
 );
 
+CREATE TABLE [dbo].[Playlists] (
+    [Id]          INT            IDENTITY (1, 1) NOT NULL,
+    [CatalogueId] INT            NOT NULL,
+    [Title]       NVARCHAR (128) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Playlists_ToCatalogues] FOREIGN KEY ([CatalogueId]) REFERENCES [dbo].[Catalogues] ([Id]) ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[PPl_Relation] (
+    [PartId]     INT NOT NULL,
+    [PlaylistId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([PartId] ASC, [PlaylistId] ASC),
+    CONSTRAINT [FK_PPl_Relation_ToParts] FOREIGN KEY ([PartId]) REFERENCES [dbo].[Parts] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PPl_Relation_ToPlaylists] FOREIGN KEY ([PlaylistId]) REFERENCES [dbo].[Playlists] ([Id]) ON DELETE CASCADE
+);
+
 CREATE TABLE [dbo].[Settings] (
     [Key]   NVARCHAR (512) NOT NULL,
     [Value] NVARCHAR (512) NOT NULL,

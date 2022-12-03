@@ -50,6 +50,22 @@
           <Property Name="Publication Year" Type="int" Nullable="false" />
           <Property Name="Image" Type="image" />
         </EntityType>
+        <EntityType Name="Playlists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PPl_Relation">
+          <Key>
+            <PropertyRef Name="PartId" />
+            <PropertyRef Name="PlaylistId" />
+          </Key>
+          <Property Name="PartId" Type="int" Nullable="false" />
+          <Property Name="PlaylistId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PT_Relation">
           <Key>
             <PropertyRef Name="PartId" />
@@ -128,6 +144,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Playlists_ToCatalogues">
+          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Playlists">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PPl_Relation_ToParts">
+          <End Role="Parts" Type="Self.Parts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PPl_Relation" Type="Self.PPl_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PPl_Relation">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PPl_Relation_ToPlaylists">
+          <End Role="Playlists" Type="Self.Playlists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PPl_Relation" Type="Self.PPl_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PPl_Relation">
+              <PropertyRef Name="PlaylistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PT_Relation_ToParts">
           <End Role="Parts" Type="Self.Parts" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -175,6 +233,8 @@
           <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MT_Relation" EntityType="Self.MT_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Playlists" EntityType="Self.Playlists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PPl_Relation" EntityType="Self.PPl_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PT_Relation" EntityType="Self.PT_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
@@ -193,6 +253,18 @@
           <AssociationSet Name="FK_Parts_ToMedia" Association="Self.FK_Parts_ToMedia">
             <End Role="Media" EntitySet="Media" />
             <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlists_ToCatalogues" Association="Self.FK_Playlists_ToCatalogues">
+            <End Role="Catalogues" EntitySet="Catalogues" />
+            <End Role="Playlists" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PPl_Relation_ToParts" Association="Self.FK_PPl_Relation_ToParts">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="PPl_Relation" EntitySet="PPl_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PPl_Relation_ToPlaylists" Association="Self.FK_PPl_Relation_ToPlaylists">
+            <End Role="Playlists" EntitySet="Playlists" />
+            <End Role="PPl_Relation" EntitySet="PPl_Relation" />
           </AssociationSet>
           <AssociationSet Name="FK_PT_Relation_ToParts" Association="Self.FK_PT_Relation_ToParts">
             <End Role="Parts" EntitySet="Parts" />
@@ -225,6 +297,7 @@
           <Property Name="ShowTitleOfTheDayAsMedium" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Media" Relationship="Self.FK_Media_ToCatalogues" FromRole="Catalogues" ToRole="Media" />
           <NavigationProperty Name="Tags" Relationship="Self.FK_Tags_ToCatalogues" FromRole="Catalogues" ToRole="Tags" />
+          <NavigationProperty Name="Playlists" Relationship="MediaDBModel.FK_Playlists_ToCatalogues" FromRole="Catalogue" ToRole="Playlist" />
         </EntityType>
         <EntityType Name="Medium">
           <Key>
@@ -264,6 +337,7 @@
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Medium" Relationship="Self.FK_Parts_ToMedia" FromRole="Parts" ToRole="Media" />
           <NavigationProperty Name="PT_Relation" Relationship="Self.FK_PT_Relation_ToParts" FromRole="Parts" ToRole="PT_Relation" />
+          <NavigationProperty Name="Playlists" Relationship="MediaDBModel.PPl_Relation" FromRole="Part" ToRole="Playlist" />
         </EntityType>
         <EntityType Name="PT_Relation">
           <Key>
@@ -414,7 +488,44 @@
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PT_Relation" EntitySet="PT_Relation" />
           </AssociationSet>
+          <EntitySet Name="Playlists" EntityType="MediaDBModel.Playlist" />
+          <AssociationSet Name="FK_Playlists_ToCatalogues" Association="MediaDBModel.FK_Playlists_ToCatalogues">
+            <End Role="Catalogue" EntitySet="Catalogues" />
+            <End Role="Playlist" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="PPl_Relation" Association="MediaDBModel.PPl_Relation">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="Playlist" EntitySet="Playlists" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalogue" Relationship="MediaDBModel.FK_Playlists_ToCatalogues" FromRole="Playlist" ToRole="Catalogue" />
+          <NavigationProperty Name="Parts" Relationship="MediaDBModel.PPl_Relation" FromRole="Playlist" ToRole="Part" />
+        </EntityType>
+        <Association Name="FK_Playlists_ToCatalogues">
+          <End Type="MediaDBModel.Catalogue" Role="Catalogue" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.Playlist" Role="Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="CatalogueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PPl_Relation">
+          <End Type="MediaDBModel.Part" Role="Part" Multiplicity="*" />
+          <End Type="MediaDBModel.Playlist" Role="Playlist" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -495,6 +606,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="MediaDBModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlists">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PPl_Relation" TypeName="MediaDBModel.PPl_Relation" StoreEntitySet="PPl_Relation">
+            <EndProperty Name="Playlist">
+              <ScalarProperty Name="Id" ColumnName="PlaylistId" />
+            </EndProperty>
+            <EndProperty Name="Part">
+              <ScalarProperty Name="Id" ColumnName="PartId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

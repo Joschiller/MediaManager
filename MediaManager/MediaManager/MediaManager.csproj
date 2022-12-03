@@ -160,6 +160,9 @@
     <Compile Include="Part.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Playlist.cs">
+      <DependentUpon>MediaDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PT_Relation.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
