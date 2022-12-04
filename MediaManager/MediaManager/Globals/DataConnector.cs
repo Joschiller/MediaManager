@@ -17,6 +17,7 @@ namespace MediaManager.Globals
                 return DBCONNECTION.Catalogues.Find(int.Parse(id));
             }
         }
+        // TODO put all requests that are based on a catalogue inside common static class
 
         public static class Reader
         {
@@ -25,7 +26,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var mediaTags = GetMedium(id).MT_Relation;
-                foreach (var t in CURRENT_CATALOGUE.Tags)
+                foreach (var t in CURRENT_CATALOGUE?.Tags ?? new List<Tag>())
                 {
                     var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -41,7 +42,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var partTags = GetPart(id).PT_Relation;
-                foreach (var t in CURRENT_CATALOGUE.Tags)
+                foreach (var t in CURRENT_CATALOGUE?.Tags ?? new List<Tag>())
                 {
                     var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
