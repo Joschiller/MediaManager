@@ -29,6 +29,7 @@ namespace MediaManager.GUI.Controls.Search
         public SearchInput()
         {
             InitializeComponent();
+            RegisterAtLanguageProvider();
         }
 
         private void searchText_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

@@ -38,6 +38,7 @@ namespace MediaManager.GUI.Components
         {
             InitializeComponent();
             UpdateGUI();
+            RegisterAtLanguageProvider();
         }
 
         private void prev_Click(object sender, RoutedEventArgs e)

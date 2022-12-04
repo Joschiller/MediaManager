@@ -24,6 +24,7 @@ namespace MediaManager.GUI.Controls.Edit
             InitializeComponent();
             length.SetMin(0);
             publication.SetMin(0);
+            RegisterAtLanguageProvider();
         }
 
         public void LoadElement(ElementMode mode, int id)

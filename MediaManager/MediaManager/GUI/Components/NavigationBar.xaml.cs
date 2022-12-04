@@ -48,6 +48,7 @@ namespace MediaManager.GUI.Components
             DataContext = this;
 
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
+            RegisterAtLanguageProvider();
         }
 
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

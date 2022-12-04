@@ -23,6 +23,7 @@ namespace MediaManager.GUI.Controls.Edit
         public ElementViewer()
         {
             InitializeComponent();
+            RegisterAtLanguageProvider();
         }
 
         public void LoadItem(ElementMode mode, int id)
