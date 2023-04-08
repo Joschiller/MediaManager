@@ -48,6 +48,7 @@ namespace MediaManager.GUI.Components
             DataContext = this;
 
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
+            RegisterAtLanguageProvider();
         }
 
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -75,6 +76,7 @@ namespace MediaManager.GUI.Components
             back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
             help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
         }
+        ~NavigationBar() => LanguageProvider.Unregister(this);
     }
 
     public enum NavigationBarMode {

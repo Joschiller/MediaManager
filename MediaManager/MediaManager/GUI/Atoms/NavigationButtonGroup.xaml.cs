@@ -11,7 +11,7 @@ namespace MediaManager.GUI.Atoms
     public partial class NavigationButtonGroup : UserControl
     {
         public Orientation Orientation { get; set; } = Orientation.Horizontal;
-        public ObservableCollection<NavigationButton> Children { get; private set; } = new ObservableCollection<NavigationButton>();
+        public ObservableCollection<ImageButton> Children { get; private set; } = new ObservableCollection<ImageButton>();
 
         public NavigationButtonGroup()
         {
@@ -26,10 +26,10 @@ namespace MediaManager.GUI.Atoms
             switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    foreach (NavigationButton elem in e.NewItems) container.Children.Add(elem);
+                    foreach (ImageButton elem in e.NewItems) container.Children.Add(elem);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    foreach (NavigationButton elem in e.OldItems) container.Children.Remove(elem);
+                    foreach (ImageButton elem in e.OldItems) container.Children.Remove(elem);
                     break;
                 default:
                     break;

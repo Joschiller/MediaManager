@@ -32,5 +32,6 @@ namespace MediaManager
         public virtual DbSet<PT_Relation> PT_Relation { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Playlist> Playlists { get; set; }
     }
 }

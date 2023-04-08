@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="MediaManager.GUI.Controls.Search.SearchInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:components="clr-namespace:MediaManager.GUI.Components"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button x:Name="startSearch" DockPanel.Dock="Right" Click="startSearch_Click">Search</Button>
+            <TextBox x:Name="searchText" KeyDown="searchText_KeyDown"/>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+            <CheckBox x:Name="exactMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search _Exact</CheckBox>
+            <CheckBox x:Name="searchDescriptionMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search in _Description</CheckBox>
+            <CheckBox x:Name="favouriteOnlyMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search only within _Favourites</CheckBox>
+            <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click">_Show Media</Button>
+        </DockPanel>
+        <components:TagList x:Name="tagList" TagValueChanged="tagList_TagValueChanged"/>
+    </DockPanel>
+</UserControl>

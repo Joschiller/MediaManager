@@ -18,6 +18,7 @@ namespace MediaManager
         public Part()
         {
             this.PT_Relation = new HashSet<PT_Relation>();
+            this.Playlists = new HashSet<Playlist>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace MediaManager
         public virtual Medium Medium { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PT_Relation> PT_Relation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Playlist> Playlists { get; set; }
     }
 }

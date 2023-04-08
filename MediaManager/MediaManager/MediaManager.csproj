@@ -86,8 +86,9 @@
     <Compile Include="Catalogue.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Atoms\NavigationButton.xaml.cs">
-      <DependentUpon>NavigationButton.xaml</DependentUpon>
+    <Compile Include="Globals\DataConnector.cs" />
+    <Compile Include="GUI\Atoms\ImageButton.xaml.cs">
+      <DependentUpon>ImageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Atoms\NavigationButtonGroup.xaml.cs">
       <DependentUpon>NavigationButtonGroup.xaml</DependentUpon>
@@ -124,6 +125,40 @@
     <Compile Include="GUI\Components\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Components\Pager.xaml.cs">
+      <DependentUpon>Pager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Components\TagList.xaml.cs">
+      <DependentUpon>TagList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Edit\ElementEditor.xaml.cs">
+      <DependentUpon>ElementEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Edit\ElementMode.cs" />
+    <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
+      <DependentUpon>ElementViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\MultiUseTabs.xaml.cs">
+      <DependentUpon>MultiUseTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\MultiUseTabsControl.cs" />
+    <Compile Include="GUI\Controls\MultiUseTabs\PlaylistEditor.xaml.cs">
+      <DependentUpon>PlaylistEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\StatisticsOverview.xaml.cs">
+      <DependentUpon>StatisticsOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\TitleOfTheDay.xaml.cs">
+      <DependentUpon>TitleOfTheDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Search\SearchInput.xaml.cs">
+      <DependentUpon>SearchInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Search\SearchPanel.xaml.cs">
+      <DependentUpon>SearchPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Search\SearchParameters.cs" />
+    <Compile Include="GUI\Controls\Search\SearchResultMode.cs" />
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,16 +173,22 @@
     <Compile Include="Part.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Playlist.cs">
+      <DependentUpon>MediaDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PT_Relation.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Search\SearchResultItem.cs" />
     <Compile Include="Setting.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
-    <Page Include="GUI\Atoms\NavigationButton.xaml">
+    <Compile Include="TagValue.cs" />
+    <Compile Include="ValuedTag.cs" />
+    <Page Include="GUI\Atoms\ImageButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +217,46 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Components\NavigationBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Components\Pager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Components\TagList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Edit\ElementEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Edit\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\MultiUseTabs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\PlaylistEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\StatisticsOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\TitleOfTheDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Search\SearchInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Search\SearchPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,10 +297,55 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Resources\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\edit_blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\favorite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\help.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\next_random.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\nofavorite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\noprevious.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\nonext.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\nosave.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\playlist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\previous.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\next.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\title_of_the_day.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\statistics.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\undo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Properties\Resources.resx">

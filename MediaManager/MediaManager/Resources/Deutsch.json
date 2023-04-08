@@ -2,7 +2,10 @@
   "ApplicationName": "Media Manager",
   "Common": {
     "Button": {
+      "Add": "Hinzufügen",
       "Cancel": "Abbrechen",
+      "Create": "Erstellen",
+      "Delete": "Löschen",
       "No": "Nein",
       "Ok": "Ok",
       "Yes": "Ja"
@@ -14,6 +17,51 @@
     "ValidationText": {
       "Intro": "Bitte ",
       "Concat": " und "
+    }
+  },
+  "Component": {
+    "Pager": {
+      "Previous": "Zurück",
+      "Next": "Weiter"
+    }
+  },
+  "Controls": {
+    "Search": {
+      "ExactMode": "_Exakt suchen",
+      "SearchDescriptionMode": "_Beschreibungen durchsuchen",
+      "FavouriteOnlyMode": "Nur in _Favoriten suchen",
+      "ShowMedia": "Medien _anzeigen",
+      "ShowParts": "Teile _anzeigen",
+      "Search": "_Suchen"
+    },
+    "Edit": {
+      "Length": "Länge",
+      "Minute": "Minute",
+      "Minutes": "Minuten",
+      "Publication": "Veröffentlichung",
+      "Edit": "Bearbeiten",
+      "Delete": "Löschen",
+      "Save": "Änderungen speichern",
+      "Discard": "Änderungen verwerfen",
+      "MediaDeletion": "das gewählte Medium",
+      "PartDeletion": "der gewählte Medienteil"
+    },
+    "MultiUseTabs": {
+      "StatisticsOverview": {
+        "CountMedia": "Medienanzahl",
+        "CountParts": "Medienteilanzahl"
+      },
+      "TitleOfTheDay": {
+        "Next": "Nächsten anzeigen",
+        "Medium": "Medium",
+        "Tags": "Kategorien",
+        "Empty": "Es existieren noch keine Medien!"
+      },
+      "PlaylistEditor": {
+        "Title": "Playlistname",
+        "Length": "Playlistlänge",
+        "Tag": "Playlistthema"
+      }
     }
   },
   "Dialog": {

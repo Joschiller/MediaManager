@@ -2,7 +2,10 @@
   "ApplicationName": "Media Manager",
   "Common": {
     "Button": {
+      "Add": "Add",
       "Cancel": "Cancel",
+      "Create": "Create",
+      "Delete": "Delete",
       "No": "No",
       "Ok": "Ok",
       "Yes": "Yes"
@@ -14,6 +17,51 @@
     "ValidationText": {
       "Intro": "Please ",
       "Concat": " and "
+    }
+  },
+  "Component": {
+    "Pager": {
+      "Previous": "Previous",
+      "Next": "Next"
+    }
+  },
+  "Controls": {
+    "Search": {
+      "ExactMode": "Search _Exact",
+      "SearchDescriptionMode": "Search in _Description",
+      "FavouriteOnlyMode": "Search only within _Favourites",
+      "ShowMedia": "_Show Media",
+      "ShowParts": "_Show Parts",
+      "Search": "Search"
+    },
+    "Edit": {
+      "Length": "Length",
+      "Minute": "Minute",
+      "Minutes": "Minutes",
+      "Publication": "Publication",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "Save": "Save Changes",
+      "Discard": "Discard Changes",
+      "MediaDeletion": "the selected medium",
+      "PartDeletion": "the selected media part"
+    },
+    "MultiUseTabs": {
+      "StatisticsOverview": {
+        "CountMedia": "Count of Media",
+        "CountParts": "Count of Media Parts"
+      },
+      "TitleOfTheDay": {
+        "Next": "Show Next",
+        "Medium": "Medium",
+        "Tags": "Tags",
+        "Empty": "No media exist yet!"
+      },
+      "PlaylistEditor": {
+        "Title": "Playlist Name",
+        "Length": "Playlist Length",
+        "Tag": "Playlist Theme"
+      }
     }
   },
   "Dialog": {

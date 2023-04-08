@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="MediaManager.GUI.Atoms.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Atoms"
+             mc:Ignorable="d">
+    <Grid>
+        <Button x:Name="btn" ToolTip="{Binding Tooltip}" Margin="0" Background="Transparent" BorderBrush="Transparent" Click="btn_Click" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="{Binding EnabledIconSource}" Height="{Binding Size}" Width="{Binding Size}" Margin="4"/>
+        </Button>
+        <Image x:Name="disabledIcon" Source="{Binding DisabledIconSource}" Height="{Binding Size}" Width="{Binding Size}" Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>
