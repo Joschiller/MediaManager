@@ -30,18 +30,17 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             return string.Join(", ", filteredTags);
         }
         private Part CurrentItem = null;
-        private bool ShowBasedOnPart = true; // TODO decide based on setting => show title and description of medium or of part within medium
         private void ShowCurrentItem()
         {
             if (CurrentItem != null)
             {
-                title.Text = ShowBasedOnPart ? CurrentItem.Title : CurrentItem.Medium.Title;
-                description.Text = ShowBasedOnPart
-                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ":" + CurrentItem.Medium.Title + "\n" + "\n"
+                title.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
+                description.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium
+                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ":" + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
+                    + CurrentItem.Medium.Description)
+                    : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ":" + CurrentItem.Medium.Title + "\n" + "\n"
                     + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ":" + getTagsString(Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
-                    + CurrentItem.Description)
-                    : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ":" + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
-                    + CurrentItem.Medium.Description);
+                    + CurrentItem.Description);
             }
             else
             {
