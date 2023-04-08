@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.DataConnector.Reader;
 using static MediaManager.Globals.DataConnector.Writer;
 
@@ -25,8 +26,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             showDataForSelection();
             RegisterAtLanguageProvider();
         }
-
-        public bool Visible { get; set; } = true;
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
@@ -96,7 +95,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
 
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/playlist.png", UriKind.Relative));
-        public bool GetIsVisible() => Visible;
+        public bool GetIsVisible() => Reader.Settings.PlaylistEditorVisible;
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {

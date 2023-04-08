@@ -3,6 +3,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.DataConnector.Reader;
 
 namespace MediaManager.GUI.Controls.MultiUseTabs
@@ -19,8 +20,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             RegisterAtLanguageProvider();
         }
 
-        public bool Visible { get; set; } = true;
-
         public void Reload()
         {
             valueMediaCount.Text = CountOfMedia.ToString();
@@ -28,7 +27,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
 
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
-        public bool GetIsVisible() => Visible;
+        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {

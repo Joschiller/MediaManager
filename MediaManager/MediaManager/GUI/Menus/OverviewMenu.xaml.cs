@@ -9,19 +9,11 @@ namespace MediaManager.GUI.Menus
     /// <summary>
     /// Interaction logic for OverviewMenu.xaml
     /// </summary>
-    public partial class OverviewMenu : Window, UpdatedLanguageUser, SettingsUser
+    public partial class OverviewMenu : Window, UpdatedLanguageUser
     {
         public OverviewMenu()
         {
             InitializeComponent();
-            LoadSettings();
-        }
-        public void LoadSettings()
-        {
-            Resources["resultListLength"] = Reader.Settings.ResultListLength;
-            Resources["showPlaylistEditor"] = Reader.Settings.PlaylistEditorVisible;
-            Resources["showTitleOfTheDay"] = Reader.Settings.TitleOfTheDayVisible;
-            Resources["showStatisticsOverview"] = Reader.Settings.StatisticsOverviewVisible;
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);

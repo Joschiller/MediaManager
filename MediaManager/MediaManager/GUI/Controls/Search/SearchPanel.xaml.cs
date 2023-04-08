@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.DataConnector.Reader;
 
 namespace MediaManager.GUI.Controls.Search
@@ -18,7 +19,7 @@ namespace MediaManager.GUI.Controls.Search
         private List<SearchResultItem> CompleteResultList = new List<SearchResultItem>();
         public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
 
-        public int ItemsPerPage { get; set; } = 20;
+        public int ItemsPerPage { get; set; } = Reader.Settings.ResultListLength;
 
         public SearchPanel()
         {
