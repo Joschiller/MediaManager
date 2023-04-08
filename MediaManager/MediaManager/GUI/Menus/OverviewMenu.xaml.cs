@@ -35,5 +35,43 @@ namespace MediaManager.GUI.Menus
             Resources["btnSettings"] = LanguageProvider.getString("Menus.Overview.Tooltip.Settings");
             Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.Tooltip.Analyze");
         }
+
+        private void btnAddClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnTagsClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnCatalogsClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnAnalyzeClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void NavigationBar_IconClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void NavigationBar_HelpClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SearchPanel_MediumSelected(int mediumId, int? partId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

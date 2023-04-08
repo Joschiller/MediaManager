@@ -16,16 +16,16 @@
         <system:String x:Key="btnAnalyze">Open Analyze Menu</system:String>
     </Window.Resources>
     <DockPanel>
-        <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton">
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add.png" ToolTip="{DynamicResource btnAdd}"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" ToolTip="{DynamicResource btnTags}"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" ToolTip="{DynamicResource btnCatalogs}"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add.png" ToolTip="{DynamicResource btnAdd}" Click="btnAddClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" ToolTip="{DynamicResource btnSettings}"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" ToolTip="{DynamicResource btnAnalyze}"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
         <Grid>
@@ -38,7 +38,7 @@
                 <multiusetabs:TitleOfTheDay/>
                 <multiusetabs:StatisticsOverview/>
             </multiusetabs:MultiUseTabs>
-            <search:SearchPanel Grid.Column="1"/>
+            <search:SearchPanel Grid.Column="1" MediumSelected="SearchPanel_MediumSelected"/>
         </Grid>
     </DockPanel>
 </Window>
