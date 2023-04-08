@@ -2,7 +2,10 @@
   "ApplicationName": "Media Manager",
   "Common": {
     "Button": {
+      "Add": "Hinzufügen",
       "Cancel": "Abbrechen",
+      "Create": "Erstellen",
+      "Delete": "Löschen",
       "No": "Nein",
       "Ok": "Ok",
       "Yes": "Ja"
@@ -42,6 +45,23 @@
       "Discard": "Änderungen verwerfen",
       "MediaDeletion": "das gewählte Medium",
       "PartDeletion": "der gewählte Medienteil"
+    },
+    "MultiUseTabs": {
+      "StatisticsOverview": {
+        "CountMedia": "Medienanzahl",
+        "CountParts": "Medienteilanzahl"
+      },
+      "TitleOfTheDay": {
+        "Next": "Nächsten anzeigen",
+        "Medium": "Medium",
+        "Tags": "Kategorien",
+        "Empty": "Es existieren noch keine Medien!"
+      },
+      "PlaylistEditor": {
+        "Title": "Playlistname",
+        "Length": "Playlistlänge",
+        "Tag": "Playlistthema"
+      }
     }
   },
   "Dialog": {

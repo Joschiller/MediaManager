@@ -37,6 +37,8 @@ namespace MediaManager.Globals
                 }
                 return result;
             }
+            public static List<Medium> Media { get => CURRENT_CATALOGUE?.Media.ToList() ?? new List<Medium>(); }
+            public static int CountOfMedia { get => CURRENT_CATALOGUE?.Media.Count() ?? 0; }
             public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
             public static List<ValuedTag> GetTagsForPart(int id)
             {
@@ -53,6 +55,10 @@ namespace MediaManager.Globals
                 }
                 return result;
             }
+            public static List<Part> GetPartsForTag(int id) => DBCONNECTION?.Tags.Find(id).PT_Relation.Select(r => r.Part).ToList() ?? new List<Part>();
+            public static int CountOfParts { get => CURRENT_CATALOGUE?.Media.Select(m => m.Parts.Count).Sum() ?? 0; }
+            public static List<Playlist> Playlists { get => CURRENT_CATALOGUE?.Playlists.ToList() ?? new List<Playlist>(); }
+            public static List<Tag> Tags { get => CURRENT_CATALOGUE?.Tags.ToList() ?? new List<Tag>(); }
 
             public static List<SearchResultItem> SearchUsingParameters(SearchParameters parameters)
             {
@@ -121,6 +127,11 @@ namespace MediaManager.Globals
                 DBCONNECTION.Parts.Remove(DBCONNECTION.Parts.Find(id));
                 DBCONNECTION.SaveChanges();
             }
+            public static void DeletePlaylist(int id)
+            {
+                DBCONNECTION.Playlists.Remove(DBCONNECTION.Playlists.Find(id));
+                DBCONNECTION.SaveChanges();
+            }
 
             public static void SaveMedium(Medium medium, List<ValuedTag> tags)
             {
@@ -160,6 +171,26 @@ namespace MediaManager.Globals
                         Value = t.Value.Value
                     });
                 }
+                DBCONNECTION.SaveChanges();
+            }
+            public static int CreatePlaylist(string title)
+            {
+                DBCONNECTION.Playlists.Add(new Playlist
+                {
+                    CatalogueId = CURRENT_CATALOGUE.Id,
+                    Title = title
+                });
+                DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Playlists.ToList().Last().Id;
+            }
+            public static void AddPartToPlaylist(int playlistId, int partId)
+            {
+                DBCONNECTION.Playlists.Find(playlistId).Parts.Add(DBCONNECTION.Parts.Find(partId));
+                DBCONNECTION.SaveChanges();
+            }
+            public static void RemovePartFromPlaylist(int playlistId, int partId)
+            {
+                DBCONNECTION.Playlists.Find(playlistId).Parts.Remove(DBCONNECTION.Parts.Find(partId));
                 DBCONNECTION.SaveChanges();
             }
         }

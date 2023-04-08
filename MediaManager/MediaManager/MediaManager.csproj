@@ -138,6 +138,19 @@
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\MultiUseTabs.xaml.cs">
+      <DependentUpon>MultiUseTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\MultiUseTabsControl.cs" />
+    <Compile Include="GUI\Controls\MultiUseTabs\PlaylistEditor.xaml.cs">
+      <DependentUpon>PlaylistEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\StatisticsOverview.xaml.cs">
+      <DependentUpon>StatisticsOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MultiUseTabs\TitleOfTheDay.xaml.cs">
+      <DependentUpon>TitleOfTheDay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\Search\SearchInput.xaml.cs">
       <DependentUpon>SearchInput.xaml</DependentUpon>
     </Compile>
@@ -223,6 +236,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\MultiUseTabs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\PlaylistEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\StatisticsOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\MultiUseTabs\TitleOfTheDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Controls\Search\SearchInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,6 +312,9 @@
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\next_random.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\nofavorite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -295,6 +327,9 @@
     <Content Include="Resources\nosave.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\playlist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\previous.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -302,6 +337,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\title_of_the_day.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\statistics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\undo.png">
