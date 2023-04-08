@@ -64,6 +64,18 @@
       }
     }
   },
+  "Menus": {
+    "Overview": {
+      "Tooltip": {
+        "Add": "Medium hinzufügen",
+        "AddTag": "Kategorie hinzufügen",
+        "Tags": "Kategoriemenü öffnen",
+        "Catalogs": "Katalogmenü öffnen",
+        "Settings": "Einschellungsmenü öffnen",
+        "Analyze": "Analysemenü öffnen"
+      }
+    }
+  },
   "Dialog": {
     "UnsavedChanges": "Es liegen ungespeicherte Änderungen vor! Wollen Sie diese Änderungen speichern?",
     "DeletionConfirmation": {
