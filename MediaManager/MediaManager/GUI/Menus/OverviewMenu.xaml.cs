@@ -1,28 +1,27 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using MediaManager.Globals;
+using MediaManager.Globals.LanguageProvider;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Menus
 {
     /// <summary>
     /// Interaction logic for OverviewMenu.xaml
     /// </summary>
-    public partial class OverviewMenu : Window, UpdatedLanguageUser
+    public partial class OverviewMenu : Window, UpdatedLanguageUser, SettingsUser
     {
         public OverviewMenu()
         {
             InitializeComponent();
+            LoadSettings();
+        }
+        public void LoadSettings()
+        {
+            Resources["resultListLength"] = Reader.Settings.ResultListLength;
+            Resources["showPlaylistEditor"] = Reader.Settings.PlaylistEditorVisible;
+            Resources["showTitleOfTheDay"] = Reader.Settings.TitleOfTheDayVisible;
+            Resources["showStatisticsOverview"] = Reader.Settings.StatisticsOverviewVisible;
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);

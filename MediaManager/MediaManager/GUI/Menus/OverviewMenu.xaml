@@ -14,6 +14,10 @@
         <system:String x:Key="btnCatalogs">Open Catalog Menu</system:String>
         <system:String x:Key="btnSettings">Open Settings Menu</system:String>
         <system:String x:Key="btnAnalyze">Open Analyze Menu</system:String>
+        <system:Int32 x:Key="resultListLength">20</system:Int32>
+        <system:Boolean x:Key="showPlaylistEditor">True</system:Boolean>
+        <system:Boolean x:Key="showTitleOfTheDay">True</system:Boolean>
+        <system:Boolean x:Key="showStatisticsOverview">True</system:Boolean>
     </Window.Resources>
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
@@ -34,11 +38,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <multiusetabs:MultiUseTabs Grid.Column="0">
-                <multiusetabs:PlaylistEditor/>
-                <multiusetabs:TitleOfTheDay/>
-                <multiusetabs:StatisticsOverview/>
+                <multiusetabs:PlaylistEditor Visible="{DynamicResource showPlaylistEditor}"/>
+                <multiusetabs:TitleOfTheDay Visible="{DynamicResource showTitleOfTheDay}"/>
+                <multiusetabs:StatisticsOverview Visible="{DynamicResource showStatisticsOverview}"/>
             </multiusetabs:MultiUseTabs>
-            <search:SearchPanel Grid.Column="1" MediumSelected="SearchPanel_MediumSelected"/>
+            <search:SearchPanel Grid.Column="1" ItemsPerPage="{DynamicResource resultListLength}" MediumSelected="SearchPanel_MediumSelected"/>
         </Grid>
     </DockPanel>
 </Window>

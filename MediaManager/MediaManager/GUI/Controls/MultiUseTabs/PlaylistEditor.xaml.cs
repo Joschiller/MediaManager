@@ -93,7 +93,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
                 RemovePartFromPlaylist(selectedPlaylist.Id, selectedPart.Value);
                 showDataForSelection();
             }
-
         }
 
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/playlist.png", UriKind.Relative));

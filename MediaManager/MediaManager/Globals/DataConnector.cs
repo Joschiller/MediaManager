@@ -113,6 +113,30 @@ namespace MediaManager.Globals
                         return val != null ? int.Parse(val) : 20;
                     }
                 }
+                public static bool PlaylistEditorVisible
+                {
+                    get
+                    {
+                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_PLAYLIST_EDITOR")?.Value;
+                        return val != null ? bool.Parse(val) : true;
+                    }
+                }
+                public static bool TitleOfTheDayVisible
+                {
+                    get
+                    {
+                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_TITLE_OF_THE_DAY")?.Value;
+                        return val != null ? bool.Parse(val) : true;
+                    }
+                }
+                public static bool StatisticsOverviewVisible
+                {
+                    get
+                    {
+                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_STATISTICS_OVERVIEW")?.Value;
+                        return val != null ? bool.Parse(val) : true;
+                    }
+                }
             }
         }
         public static class Writer

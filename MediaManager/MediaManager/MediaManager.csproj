@@ -87,6 +87,7 @@
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals\DataConnector.cs" />
+    <Compile Include="Globals\SettingsUser.cs" />
     <Compile Include="GUI\Atoms\ImageButton.xaml.cs">
       <DependentUpon>ImageButton.xaml</DependentUpon>
     </Compile>
