@@ -19,7 +19,7 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAdd"] = LanguageProvider.getString("Menus.Overview.Tooltip.Add");
+            Resources["btnAddMedium"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddMedium");
             Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddTag");
             Resources["btnTags"] = LanguageProvider.getString("Menus.Overview.Tooltip.Tags");
             Resources["btnCatalogs"] = LanguageProvider.getString("Menus.Overview.Tooltip.Catalogs");
@@ -27,7 +27,7 @@ namespace MediaManager.GUI.Menus
             Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.Tooltip.Analyze");
         }
 
-        private void btnAddClick(object sender, RoutedEventArgs e)
+        private void btnAddMediumClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }

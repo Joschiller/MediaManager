@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="OverviewMenu" Height="450" Width="800">
     <Window.Resources>
-        <system:String x:Key="btnAdd">Add Medium</system:String>
+        <system:String x:Key="btnAddMedium">Add Medium</system:String>
         <system:String x:Key="btnAddTag">Add Tag</system:String>
         <system:String x:Key="btnTags">Open Tag Menu</system:String>
         <system:String x:Key="btnCatalogs">Open Catalog Menu</system:String>
@@ -18,7 +18,7 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add.png" ToolTip="{DynamicResource btnAdd}" Click="btnAddClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_medium.png" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>

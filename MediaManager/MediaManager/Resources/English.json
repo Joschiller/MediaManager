@@ -67,7 +67,7 @@
   "Menus": {
     "Overview": {
       "Tooltip": {
-        "Add": "Add Medium",
+        "AddMedium": "Add Medium",
         "AddTag": "Add Tag",
         "Tags": "Open Tag Menu",
         "Catalogs": "Open Catalog Menu",
