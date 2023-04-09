@@ -96,6 +96,13 @@
         "ExportCatalog": "Export catalog",
         "DeleteCatalog": "Delete catalog"
       }
+    },
+    "Settings": {
+      "ToolTip": {
+        "Save": "Save settings",
+        "Discard": "Discard changes"
+      },
+      "ValidationFailed": "There are invalid settings. Please check the inserted values and try saving again."
     }
   },
   "Dialog": {

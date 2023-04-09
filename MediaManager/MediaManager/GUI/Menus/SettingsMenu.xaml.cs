@@ -1,17 +1,9 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using MediaManager.Globals.DefaultDialogs;
+using MediaManager.Globals.LanguageProvider;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
 {
@@ -30,7 +22,8 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            throw new NotImplementedException();
+            Resources["btnSave"] = LanguageProvider.getString("Menus.Settings.ToolTip.Save");
+            Resources["btnDiscard"] = LanguageProvider.getString("Menus.Settings.ToolTip.Discard");
         }
         #endregion
 
@@ -40,6 +33,19 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
+        private void btnSaveClick(object sender, RoutedEventArgs e)
+        {
+            if (editor.ValidateData())
+            {
+                editor.SaveData();
+                editor.LoadData(CURRENT_CATALOGUE.Id);
+            }
+            else
+            {
+                ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.ValidationFailed"), SuccessMode.Error);
+            }
+        }
+        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(CURRENT_CATALOGUE.Id);
         #endregion
     }
 }

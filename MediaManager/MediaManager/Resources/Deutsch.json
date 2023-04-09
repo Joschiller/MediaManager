@@ -96,6 +96,13 @@
         "ExportCatalog": "Katalog exportieren",
         "DeleteCatalog": "Katalog löschen"
       }
+    },
+    "Settings": {
+      "ToolTip": {
+        "Save": "Einstellungen speichern",
+        "Discard": "Änderungen verwerfen"
+      },
+      "ValidationFailed": "Einige Einstellungen weisen invalide Werte auf. Versuchen Sie, die Werte zu korrigieren und erneut zu speichen."
     }
   },
   "Dialog": {
