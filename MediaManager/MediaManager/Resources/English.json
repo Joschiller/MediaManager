@@ -88,6 +88,14 @@
         "EditTag": "Edit tag",
         "DeleteTag": "Delete tag"
       }
+    },
+    "Catalog": {
+      "Tooltip": {
+        "AddCatalog": "Add catalog",
+        "EditCatalog": "Edit catalog",
+        "ExportCatalog": "Export catalog",
+        "DeleteCatalog": "Delete catalog"
+      }
     }
   },
   "Dialog": {

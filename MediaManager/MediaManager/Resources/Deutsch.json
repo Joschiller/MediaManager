@@ -88,6 +88,14 @@
         "EditTag": "Kategorie bearbeiten",
         "DeleteTag": "Kategorie löschen"
       }
+    },
+    "Catalog": {
+      "Tooltip": {
+        "AddCatalog": "Katalog hinzufügen",
+        "EditCatalog": "Katalog bearbeiten",
+        "ExportCatalog": "Katalog exportieren",
+        "DeleteCatalog": "Katalog löschen"
+      }
     }
   },
   "Dialog": {

@@ -1,17 +1,6 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MediaManager.GUI.Menus
 {
@@ -30,13 +19,32 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            throw new NotImplementedException();
+            Resources["btnAddCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.AddCatalog");
+            Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.EditCatalog");
+            Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.ExportCatalog");
+            Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.DeleteCatalog");
         }
         #endregion
 
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnExportCatalogClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnEditTagClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
