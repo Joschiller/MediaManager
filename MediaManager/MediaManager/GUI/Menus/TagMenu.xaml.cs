@@ -1,17 +1,7 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using MediaManager.GUI.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MediaManager.GUI.Menus
 {
@@ -30,7 +20,7 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            throw new NotImplementedException();
+            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddTag");
         }
         #endregion
 
@@ -40,6 +30,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
+        private void btnAddTagClick(object sender, RoutedEventArgs e) => new EditTagDialog(null).ShowDialog();
         #endregion
     }
 }

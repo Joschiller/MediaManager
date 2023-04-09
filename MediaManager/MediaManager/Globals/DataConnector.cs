@@ -22,6 +22,7 @@ namespace MediaManager.Globals
         public static class Reader
         {
             public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
+            public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
             public static List<ValuedTag> GetTagsForMedium(int id)
             {
                 var result = new List<ValuedTag>();
@@ -141,6 +142,11 @@ namespace MediaManager.Globals
         }
         public static class Writer
         {
+            public static void DeleteTag(int id)
+            {
+                DBCONNECTION.Tags.Remove(DBCONNECTION.Tags.Find(id));
+                DBCONNECTION.SaveChanges();
+            }
             public static void DeleteMedium(int id)
             {
                 DBCONNECTION.Media.Remove(DBCONNECTION.Media.Find(id));
@@ -157,6 +163,11 @@ namespace MediaManager.Globals
                 DBCONNECTION.SaveChanges();
             }
 
+            public static void CreateTag(Tag tag)
+            {
+                DBCONNECTION.Tags.Add(tag);
+                DBCONNECTION.SaveChanges();
+            }
             public static int CreateMedium()
             {
                 CURRENT_CATALOGUE.Media.Add(new Medium { Title = "", Location = "", Description = "" });
@@ -168,6 +179,13 @@ namespace MediaManager.Globals
                 DBCONNECTION.Parts.Add(new Part { MediumId = mediumId, Title = "", Favourite = false, Description = "", Length = 0, Publication_Year = 0 });
                 DBCONNECTION.SaveChanges();
                 return DBCONNECTION.Parts.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
+            }
+
+            public static void SaveTag(Tag tag)
+            {
+                var original = DBCONNECTION.Tags.Find(tag.Id);
+                original.Title = tag.Title;
+                DBCONNECTION.SaveChanges();
             }
             public static void SaveMedium(Medium medium, List<ValuedTag> tags)
             {
