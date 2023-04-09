@@ -17,7 +17,8 @@
     "ValidationText": {
       "Intro": "Bitte ",
       "Concat": " und "
-    }
+    },
+    "DispatcherUnhandledException": "Es ist ein unerwarteter Fehler aufgetreten. Bitte schließen und starten Sie die Anwendung neu!\nSie können einen Screenshot aufnehmen, um Ihre Daten später wiederherzustellen oder den Fehler zu melden."
   },
   "Component": {
     "Pager": {

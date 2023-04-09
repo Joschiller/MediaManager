@@ -17,7 +17,8 @@
     "ValidationText": {
       "Intro": "Please ",
       "Concat": " and "
-    }
+    },
+    "DispatcherUnhandledException": "An unexpected error occurred. Please close and restart the application!\nYou can take a screenshot to restore your data later on or to report the error."
   },
   "Component": {
     "Pager": {
