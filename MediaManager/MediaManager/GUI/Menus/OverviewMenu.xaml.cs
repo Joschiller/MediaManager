@@ -43,22 +43,10 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void btnTagsClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void btnCatalogsClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void btnSettingsClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void btnAnalyzeClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void btnTagsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new TagMenu());
+        private void btnCatalogsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new CatalogMenu());
+        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
+        private void btnAnalyzeClick(object sender, RoutedEventArgs e) => OpenWindow(this, new AnalyzeMenu());
         #endregion
 
         private void SearchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId));

@@ -164,11 +164,23 @@
     </Compile>
     <Compile Include="GUI\Controls\Search\SearchParameters.cs" />
     <Compile Include="GUI\Controls\Search\SearchResultMode.cs" />
+    <Compile Include="GUI\Menus\AnalyzeMenu.xaml.cs">
+      <DependentUpon>AnalyzeMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Menus\CatalogMenu.xaml.cs">
+      <DependentUpon>CatalogMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Menus\EditMenu.xaml.cs">
       <DependentUpon>EditMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Menus\OverviewMenu.xaml.cs">
       <DependentUpon>OverviewMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Menus\SettingsMenu.xaml.cs">
+      <DependentUpon>SettingsMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Menus\TagMenu.xaml.cs">
+      <DependentUpon>TagMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
@@ -275,11 +287,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Menus\AnalyzeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Menus\CatalogMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Menus\EditMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Menus\OverviewMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Menus\SettingsMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Menus\TagMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
