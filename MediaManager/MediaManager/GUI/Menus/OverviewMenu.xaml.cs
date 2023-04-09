@@ -11,6 +11,7 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class OverviewMenu : Window, UpdatedLanguageUser
     {
+        #region Setup
         public OverviewMenu()
         {
             InitializeComponent();
@@ -26,7 +27,17 @@ namespace MediaManager.GUI.Menus
             Resources["btnSettings"] = LanguageProvider.getString("Menus.Overview.Tooltip.Settings");
             Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.Tooltip.Analyze");
         }
+        #endregion
 
+        #region Navbar
+        private void NavigationBar_IconClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void NavigationBar_HelpClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         private void btnAddMediumClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
@@ -51,14 +62,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void NavigationBar_IconClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
 
         private void SearchPanel_MediumSelected(int mediumId, int? partId)
         {
