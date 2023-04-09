@@ -1,17 +1,8 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static MediaManager.Globals.DataConnector.Reader;
 using static MediaManager.Globals.DataConnector.Writer;
 using static MediaManager.Globals.Navigation;
 
@@ -31,10 +22,20 @@ namespace MediaManager.GUI.Menus
             InitializeComponent();
             RegisterAtLanguageProvider();
 
-            // TODO: assign mediumId to MediumId OR create medium and use generated id
-            // MediumId = mediumId ??
+            MediumId = mediumId ?? CreateMedium();
             SelectedPartId = mediumId != null ? partId : null;
-            // TODO: select part or "select" medium to show it's information
+            reloadData();
+            startEditing();
+        }
+        private void reloadData()
+        {
+            var medium = GetMedium(MediumId);
+            list.SetPartList(medium.Title, medium.Parts.Select(m => new Controls.List.PartListElement
+            {
+                Id = m.Id,
+                Title = m.Title
+            }).ToList());
+            list.SelectItem(SelectedPartId);
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -68,7 +69,10 @@ namespace MediaManager.GUI.Menus
         }
         private void btnAddPartClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var newPartId = CreatePart(MediumId);
+            reloadData();
+            list.SelectItem(newPartId);
+            startEditing();
         }
         private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
         {
@@ -81,6 +85,27 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
+        #region Change View
+        private void list_SelectionChanged(int? id)
+        {
+            SelectedPartId = id;
+            viewer.Visibility = Visibility.Visible;
+            editor.Visibility = Visibility.Collapsed;
+            viewer.LoadElement(
+                SelectedPartId.HasValue ? Controls.Edit.ElementMode.Part : Controls.Edit.ElementMode.Medium,
+                SelectedPartId.HasValue ? SelectedPartId.Value : MediumId
+                );
+        }
+        private void startEditing()
+        {
+            viewer.Visibility = Visibility.Collapsed;
+            editor.Visibility = Visibility.Visible;
+            editor.LoadElement(
+                SelectedPartId.HasValue ? Controls.Edit.ElementMode.Part : Controls.Edit.ElementMode.Medium,
+                SelectedPartId.HasValue ? SelectedPartId.Value : MediumId
+                );
+        }
+
         private void viewer_EditClicked(Controls.Edit.ElementMode mode, int id)
         {
             viewer.Visibility = Visibility.Collapsed;
@@ -90,27 +115,16 @@ namespace MediaManager.GUI.Menus
         private void viewer_DeleteClicked(Controls.Edit.ElementMode mode, int id)
         {
             if (mode == Controls.Edit.ElementMode.Medium) Close();
-            else
-            {
-                throw new NotImplementedException();
-                // TODO: unselect current element: SelectedPartId = null;
-            }
+            else list.SelectItem(null);
         }
         private void editor_QuitEditing(Controls.Edit.ElementMode mode, int id)
         {
             viewer.Visibility = Visibility.Visible;
             editor.Visibility = Visibility.Collapsed;
             viewer.LoadElement(mode, id);
-            if (mode == Controls.Edit.ElementMode.Medium)
-            {
-                throw new NotImplementedException();
-                // TODO: reload medium title
-            }
-            else
-            {
-                throw new NotImplementedException();
-                // TODO: reload part list and re-select current part
-            }
+            var medium = GetMedium(MediumId);
+            reloadData();
         }
+        #endregion
     }
 }

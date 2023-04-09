@@ -157,6 +157,18 @@ namespace MediaManager.Globals
                 DBCONNECTION.SaveChanges();
             }
 
+            public static int CreateMedium()
+            {
+                CURRENT_CATALOGUE.Media.Add(new Medium { Title = "", Location = "", Description = "" });
+                DBCONNECTION.SaveChanges();
+                return CURRENT_CATALOGUE.Media.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
+            }
+            public static int CreatePart(int mediumId)
+            {
+                DBCONNECTION.Parts.Add(new Part { MediumId = mediumId, Title = "", Favourite = false, Description = "", Length = 0, Publication_Year = 0 });
+                DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Parts.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
+            }
             public static void SaveMedium(Medium medium, List<ValuedTag> tags)
             {
                 var original = DBCONNECTION.Media.Find(medium.Id);
