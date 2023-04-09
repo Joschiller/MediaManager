@@ -38,10 +38,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void btnAddMediumClick(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(this, new EditMenu(null, null));
-        }
+        private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null));
         private void btnAddTagClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();

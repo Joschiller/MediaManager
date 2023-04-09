@@ -13,7 +13,7 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementEditor : UserControl, UpdatedLanguageUser
     {
-        public event EventHandler QuitEditing;
+        public event ElementEventHandler QuitEditing;
 
         private ElementMode Mode;
         private int CurrentId;
@@ -78,7 +78,7 @@ namespace MediaManager.GUI.Controls.Edit
         private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
         private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        public void saveChanges()
         {
             if (Mode == ElementMode.Medium) SaveMedium(new Medium
             {
@@ -97,9 +97,13 @@ namespace MediaManager.GUI.Controls.Edit
                 Publication_Year = (int)publication.Value,
                 // TODO image
             }, new System.Collections.Generic.List<ValuedTag>(tags.Tags));
-            QuitEditing?.Invoke(sender, e);
         }
-        private void discardButton_Click(object sender, RoutedEventArgs e) => QuitEditing?.Invoke(sender, e);
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            saveChanges();
+            QuitEditing?.Invoke(Mode, CurrentId);
+        }
+        private void discardButton_Click(object sender, RoutedEventArgs e) => QuitEditing?.Invoke(Mode, CurrentId);
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)

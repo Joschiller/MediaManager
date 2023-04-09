@@ -134,6 +134,7 @@
     <Compile Include="GUI\Controls\Edit\ElementEditor.xaml.cs">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Edit\ElementEventHandler.cs" />
     <Compile Include="GUI\Controls\Edit\ElementMode.cs" />
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>

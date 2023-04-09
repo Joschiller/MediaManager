@@ -14,8 +14,8 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementViewer : UserControl, UpdatedLanguageUser
     {
-        public event EventHandler EditClicked;
-        public event EventHandler DeleteClicked;
+        public event ElementEventHandler EditClicked;
+        public event ElementEventHandler DeleteClicked;
 
         private ElementMode Mode;
         private int CurrentId;
@@ -26,7 +26,7 @@ namespace MediaManager.GUI.Controls.Edit
             RegisterAtLanguageProvider();
         }
 
-        public void LoadItem(ElementMode mode, int id)
+        public void LoadElement(ElementMode mode, int id)
         {
             Mode = mode;
             CurrentId = id;
@@ -64,7 +64,7 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        private void editButton_Click(object sender, RoutedEventArgs e) => EditClicked?.Invoke(sender, e);
+        private void editButton_Click(object sender, RoutedEventArgs e) => EditClicked?.Invoke(Mode, CurrentId);
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString(Mode == ElementMode.Medium ? "Controls.Edit.MediaDeletion" : "Controls.Edit.PartDeletion"));
@@ -72,7 +72,7 @@ namespace MediaManager.GUI.Controls.Edit
             {
                 if (Mode == ElementMode.Medium) DeleteMedium(CurrentId);
                 else DeletePart(CurrentId);
-                DeleteClicked?.Invoke(sender, e);
+                DeleteClicked?.Invoke(Mode, CurrentId);
             }
         }
 
