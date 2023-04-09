@@ -67,7 +67,7 @@
   },
   "Menus": {
     "Overview": {
-      "Tooltip": {
+      "ToolTip": {
         "AddMedium": "Add medium",
         "AddTag": "Add tag",
         "Tags": "Open tag menu",
@@ -77,20 +77,20 @@
       }
     },
     "Edit": {
-      "Tooltip": {
+      "ToolTip": {
         "AddPart": "Add part",
         "DeleteMedium": "Delete medium"
       }
     },
     "Tag": {
-      "Tooltip": {
+      "ToolTip": {
         "AddTag": "Add tag",
         "EditTag": "Edit tag",
         "DeleteTag": "Delete tag"
       }
     },
     "Catalog": {
-      "Tooltip": {
+      "ToolTip": {
         "AddCatalog": "Add catalog",
         "EditCatalog": "Edit catalog",
         "ExportCatalog": "Export catalog",

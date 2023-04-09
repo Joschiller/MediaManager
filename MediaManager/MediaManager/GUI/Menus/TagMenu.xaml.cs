@@ -23,9 +23,9 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.AddTag");
-            Resources["btnEditTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.EditTag");
-            Resources["btnDeleteTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.DeleteTag");
+            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.AddTag");
+            Resources["btnEditTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.EditTag");
+            Resources["btnDeleteTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.DeleteTag");
         }
         #endregion
 

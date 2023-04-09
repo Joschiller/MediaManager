@@ -41,8 +41,8 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddPart"] = LanguageProvider.getString("Menus.Edit.Tooltip.AddPart");
-            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.Tooltip.DeleteMedium");
+            Resources["btnAddPart"] = LanguageProvider.getString("Menus.Edit.ToolTip.AddPart");
+            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
         }
         #endregion
 

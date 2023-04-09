@@ -19,10 +19,10 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.AddCatalog");
-            Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.EditCatalog");
-            Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.ExportCatalog");
-            Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.Tooltip.DeleteCatalog");
+            Resources["btnAddCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.AddCatalog");
+            Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.EditCatalog");
+            Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ExportCatalog");
+            Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.DeleteCatalog");
         }
         #endregion
 

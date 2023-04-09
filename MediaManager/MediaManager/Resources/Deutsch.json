@@ -67,7 +67,7 @@
   },
   "Menus": {
     "Overview": {
-      "Tooltip": {
+      "ToolTip": {
         "AddMedium": "Medium hinzufügen",
         "AddTag": "Kategorie hinzufügen",
         "Tags": "Kategoriemenü öffnen",
@@ -77,20 +77,20 @@
       }
     },
     "Edit": {
-      "Tooltip": {
+      "ToolTip": {
         "AddPart": "Teil hinzufügen",
         "DeleteMedium": "Medium löschen"
       }
     },
     "Tag": {
-      "Tooltip": {
+      "ToolTip": {
         "AddTag": "Kategorie hinzufügen",
         "EditTag": "Kategorie bearbeiten",
         "DeleteTag": "Kategorie löschen"
       }
     },
     "Catalog": {
-      "Tooltip": {
+      "ToolTip": {
         "AddCatalog": "Katalog hinzufügen",
         "EditCatalog": "Katalog bearbeiten",
         "ExportCatalog": "Katalog exportieren",

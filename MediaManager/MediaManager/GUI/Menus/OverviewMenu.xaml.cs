@@ -21,12 +21,12 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddMedium"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddMedium");
-            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddTag");
-            Resources["btnTags"] = LanguageProvider.getString("Menus.Overview.Tooltip.Tags");
-            Resources["btnCatalogs"] = LanguageProvider.getString("Menus.Overview.Tooltip.Catalogs");
-            Resources["btnSettings"] = LanguageProvider.getString("Menus.Overview.Tooltip.Settings");
-            Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.Tooltip.Analyze");
+            Resources["btnAddMedium"] = LanguageProvider.getString("Menus.Overview.ToolTip.AddMedium");
+            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.ToolTip.AddTag");
+            Resources["btnTags"] = LanguageProvider.getString("Menus.Overview.ToolTip.Tags");
+            Resources["btnCatalogs"] = LanguageProvider.getString("Menus.Overview.ToolTip.Catalogs");
+            Resources["btnSettings"] = LanguageProvider.getString("Menus.Overview.ToolTip.Settings");
+            Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.ToolTip.Analyze");
         }
         #endregion
 
