@@ -139,6 +139,10 @@
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\List\PartList.xaml.cs">
+      <DependentUpon>PartList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\List\PartListElement.cs" />
     <Compile Include="GUI\Controls\MultiUseTabs\MultiUseTabs.xaml.cs">
       <DependentUpon>MultiUseTabs.xaml</DependentUpon>
     </Compile>
@@ -240,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Controls\Edit\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\List\PartList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
