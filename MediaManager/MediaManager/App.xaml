@@ -38,5 +38,28 @@
         <FontFamily x:Key="defaultFont">Consolas</FontFamily>
         <!--#endregion-->
         <!--#endregion-->
+        <!--#region Style Definitions -->
+        <!--#region Window -->
+        <Style TargetType="Window" x:Key="baseWindow">
+            <Setter Property="Title" Value="Media Manager"/>
+            <Setter Property="FontSize" Value="{StaticResource fontSize_normal}"/>
+            <Setter Property="FontFamily" Value="{StaticResource defaultFont}"/>
+            <Setter Property="Background" Value="{StaticResource window_background_brush}"/>
+        </Style>
+        <Style TargetType="Window" x:Key="defaultWindow" BasedOn="{StaticResource baseWindow}">
+            <Setter Property="Height" Value="450"/>
+            <Setter Property="Width" Value="1200"/>
+            <Setter Property="MinHeight" Value="450"/>
+            <Setter Property="MinWidth" Value="1200"/>
+        </Style>
+        <Style TargetType="Window" x:Key="defaultDialog" BasedOn="{StaticResource baseWindow}">
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="ShowInTaskbar" Value="False"/>
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource accent_border_brush}"/>
+        </Style>
+        <!--#endregion-->
+        <!--#endregion-->
     </Application.Resources>
 </Application>

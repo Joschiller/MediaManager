@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
         mc:Ignorable="d"
-        Title="EditMenu" Height="450" Width="800">
+        Style="{StaticResource defaultWindow}">
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
@@ -13,6 +13,7 @@
                 <atoms:ImageButton EnabledIconSource="../../Resources/delete_medium.png" ToolTip="{DynamicResource btnDeleteMedium}" Click="btnDeleteMediumClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
+        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

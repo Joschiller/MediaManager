@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:multiusetabs="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:search="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="OverviewMenu" Height="450" Width="800">
+        Style="{StaticResource defaultWindow}">
     <Window.Resources>
         <system:String x:Key="btnAddMedium">Add Medium</system:String>
         <system:String x:Key="btnAddTag">Add Tag</system:String>
@@ -28,6 +28,7 @@
                 <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
+        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
