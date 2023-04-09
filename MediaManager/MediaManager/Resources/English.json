@@ -81,6 +81,13 @@
         "AddPart": "Add part",
         "DeleteMedium": "Delete medium"
       }
+    },
+    "Tag": {
+      "Tooltip": {
+        "AddTag": "Add tag",
+        "EditTag": "Edit tag",
+        "DeleteTag": "Delete tag"
+      }
     }
   },
   "Dialog": {

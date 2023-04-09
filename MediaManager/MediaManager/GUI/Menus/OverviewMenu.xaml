@@ -8,12 +8,12 @@
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}">
     <Window.Resources>
-        <system:String x:Key="btnAddMedium">Add Medium</system:String>
-        <system:String x:Key="btnAddTag">Add Tag</system:String>
-        <system:String x:Key="btnTags">Open Tag Menu</system:String>
-        <system:String x:Key="btnCatalogs">Open Catalog Menu</system:String>
-        <system:String x:Key="btnSettings">Open Settings Menu</system:String>
-        <system:String x:Key="btnAnalyze">Open Analyze Menu</system:String>
+        <system:String x:Key="btnAddMedium">Add medium</system:String>
+        <system:String x:Key="btnAddTag">Add tag</system:String>
+        <system:String x:Key="btnTags">Open tag menu</system:String>
+        <system:String x:Key="btnCatalogs">Open catalog menu</system:String>
+        <system:String x:Key="btnSettings">Open settings menu</system:String>
+        <system:String x:Key="btnAnalyze">Open analyze menu</system:String>
     </Window.Resources>
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">

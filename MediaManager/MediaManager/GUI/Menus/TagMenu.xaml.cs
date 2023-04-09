@@ -10,6 +10,9 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class TagMenu : Window, UpdatedLanguageUser
     {
+        // TODO: add lists
+        // TODO: only show edit/delete button for tag, if a tag is selected
+
         #region Setup
         public TagMenu()
         {
@@ -20,7 +23,9 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.Tooltip.AddTag");
+            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.AddTag");
+            Resources["btnEditTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.EditTag");
+            Resources["btnDeleteTag"] = LanguageProvider.getString("Menus.Tag.Tooltip.DeleteTag");
         }
         #endregion
 
@@ -31,6 +36,14 @@ namespace MediaManager.GUI.Menus
             throw new NotImplementedException();
         }
         private void btnAddTagClick(object sender, RoutedEventArgs e) => new EditTagDialog(null).ShowDialog();
+        private void btnEditTagClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void btnDeleteTagClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

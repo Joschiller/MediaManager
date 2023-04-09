@@ -81,6 +81,13 @@
         "AddPart": "Teil hinzufügen",
         "DeleteMedium": "Medium löschen"
       }
+    },
+    "Tag": {
+      "Tooltip": {
+        "AddTag": "Kategorie hinzufügen",
+        "EditTag": "Kategorie bearbeiten",
+        "DeleteTag": "Kategorie löschen"
+      }
     }
   },
   "Dialog": {
