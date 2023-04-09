@@ -121,6 +121,9 @@
   <data name="add_medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_medium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="add_part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_part.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_tag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -144,6 +147,9 @@
   </data>
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_medium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Deutsch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deutsch.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

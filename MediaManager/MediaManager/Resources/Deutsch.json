@@ -74,6 +74,12 @@
         "Settings": "Einschellungsmenü öffnen",
         "Analyze": "Analysemenü öffnen"
       }
+    },
+    "Edit": {
+      "Tooltip": {
+        "AddPart": "Teil hinzufügen",
+        "DeleteMedium": "Medium löschen"
+      }
     }
   },
   "Dialog": {

@@ -1,0 +1,23 @@
+﻿<Window x:Class="MediaManager.GUI.Menus.EditMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+        mc:Ignorable="d"
+        Title="EditMenu" Height="450" Width="800">
+    <DockPanel>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
+            <atoms:NavigationButtonGroup>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_part.png" ToolTip="{DynamicResource btnAddPart}" Click="btnAddPartClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_medium.png" ToolTip="{DynamicResource btnDeleteMedium}" Click="btnDeleteMediumClick"/>
+            </atoms:NavigationButtonGroup>
+        </components:NavigationBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </DockPanel>
+</Window>

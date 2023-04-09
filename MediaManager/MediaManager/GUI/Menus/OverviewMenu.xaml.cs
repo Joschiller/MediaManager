@@ -1,8 +1,7 @@
-﻿using MediaManager.Globals;
-using MediaManager.Globals.LanguageProvider;
+﻿using MediaManager.Globals.LanguageProvider;
 using System;
 using System.Windows;
-using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
 {
@@ -15,6 +14,7 @@ namespace MediaManager.GUI.Menus
         public OverviewMenu()
         {
             InitializeComponent();
+            RegisterAtLanguageProvider();
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -40,7 +40,7 @@ namespace MediaManager.GUI.Menus
         }
         private void btnAddMediumClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            OpenWindow(this, new EditMenu(null, null));
         }
         private void btnAddTagClick(object sender, RoutedEventArgs e)
         {
@@ -64,9 +64,6 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
-        private void SearchPanel_MediumSelected(int mediumId, int? partId)
-        {
-            throw new NotImplementedException();
-        }
+        private void SearchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId));
     }
 }

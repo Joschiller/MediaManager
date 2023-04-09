@@ -67,12 +67,18 @@
   "Menus": {
     "Overview": {
       "Tooltip": {
-        "AddMedium": "Add Medium",
-        "AddTag": "Add Tag",
-        "Tags": "Open Tag Menu",
-        "Catalogs": "Open Catalog Menu",
-        "Settings": "Open Settings Menu",
-        "Analyze": "Open Analyze Menu"
+        "AddMedium": "Add medium",
+        "AddTag": "Add tag",
+        "Tags": "Open tag menu",
+        "Catalogs": "Open catalog menu",
+        "Settings": "Open settings menu",
+        "Analyze": "Open analyze menu"
+      }
+    },
+    "Edit": {
+      "Tooltip": {
+        "AddPart": "Add part",
+        "DeleteMedium": "Delete medium"
       }
     }
   },
