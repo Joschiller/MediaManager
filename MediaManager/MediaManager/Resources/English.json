@@ -63,6 +63,21 @@
         "Length": "Playlist Length",
         "Tag": "Playlist Theme"
       }
+    },
+    "Settings": {
+      "Language": {
+        "Label": "Language",
+        "Validation": "select a language"
+      },
+      "MultiUseTabs": {
+        "PlaylistLabel": "Show playlist section",
+        "TitleOfTheDayLabel": "Show title of the day section",
+        "StatisticsLabel": "Show statistics section"
+      },
+      "SearchResult": {
+        "Label": "Items per page of the search result",
+        "Validation": "insert a result list length between 1 and 50"
+      }
     }
   },
   "Menus": {
@@ -102,7 +117,9 @@
         "Save": "Save settings",
         "Discard": "Discard changes"
       },
-      "ValidationFailed": "There are invalid settings. Please check the inserted values and try saving again."
+      "Saved": "The settings were successfully saved.",
+      "ValidationFailed": "There are invalid settings. Please check the inserted values and try saving again.",
+      "TabName": "Settings"
     }
   },
   "Dialog": {

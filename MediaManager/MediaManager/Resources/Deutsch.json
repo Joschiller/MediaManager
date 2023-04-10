@@ -63,6 +63,21 @@
         "Length": "Playlistlänge",
         "Tag": "Playlistthema"
       }
+    },
+    "Settings": {
+      "Language": {
+        "Label": "Sprache",
+        "Validation": "eine Sprache wählen"
+      },
+      "MultiUseTabs": {
+        "PlaylistLabel": "Playlists anzeigen",
+        "TitleOfTheDayLabel": "Titel des Tages anzeigen",
+        "StatisticsLabel": "Statistiken anzeigen"
+      },
+      "SearchResult": {
+        "Label": "Elemente je Suchergebnisseite",
+        "Validation": "eine Suchergebnislistenlänge zwischen 1 und 50 eingeben"
+      }
     }
   },
   "Menus": {
@@ -102,7 +117,9 @@
         "Save": "Einstellungen speichern",
         "Discard": "Änderungen verwerfen"
       },
-      "ValidationFailed": "Einige Einstellungen weisen invalide Werte auf. Versuchen Sie, die Werte zu korrigieren und erneut zu speichen."
+      "Saved": "Die Einstellungen wurden erfolgreich gespeichert.",
+      "ValidationFailed": "Einige Einstellungen weisen invalide Werte auf. Versuchen Sie, die Werte zu korrigieren und erneut zu speichen.",
+      "TabName": "Einstellungen"
     }
   },
   "Dialog": {

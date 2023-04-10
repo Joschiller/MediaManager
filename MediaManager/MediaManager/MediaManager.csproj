@@ -185,6 +185,15 @@
     <Compile Include="GUI\Menus\TagMenu.xaml.cs">
       <DependentUpon>TagMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Settings\LanguageSetting.xaml.cs">
+      <DependentUpon>LanguageSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Settings\MultiUseTabsSetting.xaml.cs">
+      <DependentUpon>MultiUseTabsSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Settings\SearchResultSetting.xaml.cs">
+      <DependentUpon>SearchResultSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MediaDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -315,6 +324,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Menus\TagMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\LanguageSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\MultiUseTabsSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\SearchResultSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,5 +535,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

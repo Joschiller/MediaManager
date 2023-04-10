@@ -2,7 +2,6 @@
 using MediaManager.Globals.LanguageProvider;
 using System;
 using System.Windows;
-using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -17,6 +16,7 @@ namespace MediaManager.GUI.Menus
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
+            editor.LoadData(null);
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -38,14 +38,15 @@ namespace MediaManager.GUI.Menus
             if (editor.ValidateData())
             {
                 editor.SaveData();
-                editor.LoadData(CURRENT_CATALOGUE.Id);
+                editor.LoadData(null);
+                ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.Saved"), SuccessMode.Success);
             }
             else
             {
                 ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.ValidationFailed"), SuccessMode.Error);
             }
         }
-        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(CURRENT_CATALOGUE.Id);
+        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(null);
         #endregion
     }
 }

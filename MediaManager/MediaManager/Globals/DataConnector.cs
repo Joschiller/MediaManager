@@ -1,4 +1,5 @@
 ﻿using MediaManager.GUI.Controls.Search;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -106,38 +107,15 @@ namespace MediaManager.Globals
 
             public static class Settings
             {
-                public static int ResultListLength
+                private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue) where T : struct
                 {
-                    get
-                    {
-                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "RESULT_LIST_LENGTH")?.Value;
-                        return val != null ? int.Parse(val) : 20;
-                    }
+                    var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName)?.Value;
+                    return val != null ? parser(val) : defaultValue;
                 }
-                public static bool PlaylistEditorVisible
-                {
-                    get
-                    {
-                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_PLAYLIST_EDITOR")?.Value;
-                        return val != null ? bool.Parse(val) : true;
-                    }
-                }
-                public static bool TitleOfTheDayVisible
-                {
-                    get
-                    {
-                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_TITLE_OF_THE_DAY")?.Value;
-                        return val != null ? bool.Parse(val) : true;
-                    }
-                }
-                public static bool StatisticsOverviewVisible
-                {
-                    get
-                    {
-                        var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "VISIBILITY_STATISTICS_OVERVIEW")?.Value;
-                        return val != null ? bool.Parse(val) : true;
-                    }
-                }
+                public static int ResultListLength { get => GetSettingsValue("RESULT_LIST_LENGTH", int.Parse, 20); }
+                public static bool PlaylistEditorVisible { get => GetSettingsValue("VISIBILITY_PLAYLIST_EDITOR", bool.Parse, true); }
+                public static bool TitleOfTheDayVisible { get => GetSettingsValue("VISIBILITY_TITLE_OF_THE_DAY", bool.Parse, true); }
+                public static bool StatisticsOverviewVisible { get => GetSettingsValue("VISIBILITY_STATISTICS_OVERVIEW", bool.Parse, true); }
             }
         }
         public static class Writer
@@ -246,6 +224,20 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Playlists.Find(playlistId).Parts.Remove(DBCONNECTION.Parts.Find(partId));
                 DBCONNECTION.SaveChanges();
+            }
+            public static class Settings
+            {
+                private static void SaveSetting(string settingsName, string value)
+                {
+                    var original = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName);
+                    if (original != null) original.Value = value;
+                    else DBCONNECTION.Settings.Add(new Setting { Key = settingsName, Value = value });
+                    DBCONNECTION.SaveChanges();
+                }
+                public static int ResultListLength { set => SaveSetting("RESULT_LIST_LENGTH", value.ToString()); }
+                public static bool PlaylistEditorVisible { set => SaveSetting("VISIBILITY_PLAYLIST_EDITOR", value.ToString()); }
+                public static bool TitleOfTheDayVisible { set => SaveSetting("VISIBILITY_TITLE_OF_THE_DAY", value.ToString()); }
+                public static bool StatisticsOverviewVisible { set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString()); }
             }
         }
     }

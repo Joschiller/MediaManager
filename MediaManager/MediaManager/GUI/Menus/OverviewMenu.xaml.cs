@@ -43,7 +43,11 @@ namespace MediaManager.GUI.Menus
         private void btnAddTagClick(object sender, RoutedEventArgs e) => new EditTagDialog(null).ShowDialog();
         private void btnTagsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new TagMenu());
         private void btnCatalogsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new CatalogMenu());
-        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
+        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu(), () =>
+        {
+            Show();
+            multiUseTabs.ReloadGUI();
+        });
         private void btnAnalyzeClick(object sender, RoutedEventArgs e) => OpenWindow(this, new AnalyzeMenu());
         #endregion
 

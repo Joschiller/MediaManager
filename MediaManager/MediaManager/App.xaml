@@ -39,6 +39,7 @@
         <!--#endregion-->
         <!--#endregion-->
         <!--#region Style Definitions -->
+        <GridLength x:Key="settingsLabelWidth">300</GridLength>
         <!--#region Window -->
         <Style TargetType="Window" x:Key="baseWindow">
             <Setter Property="Title" Value="Media Manager"/>

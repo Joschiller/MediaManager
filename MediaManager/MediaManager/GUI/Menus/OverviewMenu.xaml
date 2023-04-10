@@ -34,7 +34,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <multiusetabs:MultiUseTabs Grid.Column="0">
+            <multiusetabs:MultiUseTabs x:Name="multiUseTabs" Grid.Column="0">
                 <multiusetabs:PlaylistEditor/>
                 <multiusetabs:TitleOfTheDay/>
                 <multiusetabs:StatisticsOverview/>

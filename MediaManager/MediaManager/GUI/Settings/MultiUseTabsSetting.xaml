@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MediaManager.GUI.Settings.MultiUseTabsSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Settings"
+             mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource settingsLabelWidth}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="playlistLabel" Grid.Row="0" Grid.Column="0"/>
+        <CheckBox x:Name="playlistVisible" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:Name="titleOfTheDayLabel" Grid.Row="1" Grid.Column="0"/>
+        <CheckBox x:Name="titleOfTheDayVisible" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock x:Name="statisticsLabel" Grid.Row="2" Grid.Column="0"/>
+        <CheckBox x:Name="statisticsVisible" Grid.Row="2" Grid.Column="1"/>
+    </Grid>
+</UserControl>
