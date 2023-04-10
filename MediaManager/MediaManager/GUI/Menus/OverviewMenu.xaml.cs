@@ -14,6 +14,7 @@ namespace MediaManager.GUI.Menus
         #region Setup
         public OverviewMenu()
         {
+            Globals.Init.Initialize();
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
