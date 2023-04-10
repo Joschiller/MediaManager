@@ -18,7 +18,7 @@
                 <atoms:ImageButton EnabledIconSource="../../Resources/add_catalog.png" ToolTip="{DynamicResource btnAddCatalog}" Click="btnAddTagClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditCatalog}" Click="btnEditTagClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/export.png" ToolTip="{DynamicResource btnExportCatalog}" Click="btnExportCatalogClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/delete_tag.png" ToolTip="{DynamicResource btnDeleteCatalog}" Click="btnDeleteTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_catalog.png" ToolTip="{DynamicResource btnDeleteCatalog}" Click="btnDeleteTagClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
         <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
