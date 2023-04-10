@@ -1,6 +1,7 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
 using System.Windows;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
 {
@@ -23,6 +24,7 @@ namespace MediaManager.GUI.Menus
             Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.EditCatalog");
             Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ExportCatalog");
             Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.DeleteCatalog");
+            Resources["btnSettings"] = LanguageProvider.getString("Menus.Catalog.ToolTip.Settings");
         }
         #endregion
 
@@ -48,6 +50,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
+        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion
     }
 }

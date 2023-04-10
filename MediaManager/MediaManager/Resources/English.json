@@ -89,7 +89,8 @@
         "Catalogs": "Open catalog menu",
         "Settings": "Open settings menu",
         "Analyze": "Open analyze menu"
-      }
+      },
+      "CloseHint": "As no catalog exists yet, the application will be closed!"
     },
     "Edit": {
       "ToolTip": {
@@ -109,7 +110,8 @@
         "AddCatalog": "Add catalog",
         "EditCatalog": "Edit catalog",
         "ExportCatalog": "Export catalog",
-        "DeleteCatalog": "Delete catalog"
+        "DeleteCatalog": "Delete catalog",
+        "Settings": "Open settings menu"
       }
     },
     "Settings": {

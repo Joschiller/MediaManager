@@ -87,9 +87,10 @@
         "AddTag": "Kategorie hinzufügen",
         "Tags": "Kategoriemenü öffnen",
         "Catalogs": "Katalogmenü öffnen",
-        "Settings": "Einschellungsmenü öffnen",
+        "Settings": "Einstellungsmenü öffnen",
         "Analyze": "Analysemenü öffnen"
-      }
+      },
+      "CloseHint": "Da noch kein Katalog existiert, wird die Anwendung beendet!"
     },
     "Edit": {
       "ToolTip": {
@@ -109,7 +110,8 @@
         "AddCatalog": "Katalog hinzufügen",
         "EditCatalog": "Katalog bearbeiten",
         "ExportCatalog": "Katalog exportieren",
-        "DeleteCatalog": "Katalog löschen"
+        "DeleteCatalog": "Katalog löschen",
+        "Settings": "Einstellungsmenü öffnen"
       }
     },
     "Settings": {

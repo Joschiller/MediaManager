@@ -18,7 +18,15 @@ namespace MediaManager.GUI.Menus
             Globals.Init.Initialize();
             InitializeComponent();
             RegisterAtLanguageProvider();
-            if (!AnyCatalogExists()) OpenWindow(this, new CatalogMenu());
+            if (!AnyCatalogExists()) OpenWindow(this, new CatalogMenu(), () =>
+            {
+                if (!AnyCatalogExists())
+                {
+                    ShowDefaultDialog(LanguageProvider.getString("Menus.Overview.CloseHint"));
+                    Close();
+                }
+                else Show();
+            });
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
