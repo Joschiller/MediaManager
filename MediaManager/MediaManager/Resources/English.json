@@ -78,6 +78,9 @@
         "Label": "Items per page of the search result",
         "Validation": "insert a result list length between 1 and 50"
       }
+    },
+    "CatalogList": {
+      "ActiveString": "Current catalog"
     }
   },
   "Menus": {

@@ -78,6 +78,9 @@
         "Label": "Elemente je Suchergebnisseite",
         "Validation": "eine Suchergebnislistenlänge zwischen 1 und 50 eingeben"
       }
+    },
+    "CatalogList": {
+      "ActiveString": "Aktueller Katalog"
     }
   },
   "Menus": {

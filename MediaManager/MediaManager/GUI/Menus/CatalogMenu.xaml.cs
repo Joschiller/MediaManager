@@ -37,6 +37,7 @@ namespace MediaManager.GUI.Menus
         private void btnAddTagClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+            //catalogList.LoadCatalogs();
         }
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {
@@ -45,12 +46,20 @@ namespace MediaManager.GUI.Menus
         private void btnEditTagClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+            //catalogList.LoadCatalogs();
         }
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+            //catalogList.LoadCatalogs();
         }
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion
+
+        private void catalogList_SelectionChanged(Catalogue catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
+        private void catalogList_CurrentCatalogChanged(Catalogue catalog)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

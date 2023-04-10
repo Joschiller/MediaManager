@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:list="clr-namespace:MediaManager.GUI.Controls.List"
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}">
     <Window.Resources>
@@ -12,11 +12,14 @@
         <system:String x:Key="btnExportCatalog">Export catalog</system:String>
         <system:String x:Key="btnDeleteCatalog">Delete catalog</system:String>
         <system:String x:Key="btnSettings">Open settings menu</system:String>
+        <Visibility x:Key="catalogDependentVisibility">Collapsed</Visibility>
     </Window.Resources>
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
                 <atoms:ImageButton EnabledIconSource="../../Resources/add_catalog.png" ToolTip="{DynamicResource btnAddCatalog}" Click="btnAddTagClick"/>
+            </atoms:NavigationButtonGroup>
+            <atoms:NavigationButtonGroup Visibility="{DynamicResource catalogDependentVisibility}">
                 <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditCatalog}" Click="btnEditTagClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/export.png" ToolTip="{DynamicResource btnExportCatalog}" Click="btnExportCatalogClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/delete_catalog.png" ToolTip="{DynamicResource btnDeleteCatalog}" Click="btnDeleteTagClick"/>
@@ -32,5 +35,6 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
+        <list:CatalogList x:Name="catalogList" SelectionChanged="catalogList_SelectionChanged" CurrentCatalogChanged="catalogList_CurrentCatalogChanged"/>
     </DockPanel>
 </Window>

@@ -9,13 +9,26 @@ namespace MediaManager.Globals
     {
         private static MediaDBEntities DBCONNECTION = new MediaDBEntities();
 
+        /// <summary>
+        /// The currently active <see cref="Catalogue"/>.
+        /// 
+        /// Can be cleared by setting the value to <c>null</c>.
+        /// </summary>
         public static Catalogue CURRENT_CATALOGUE
         {
             get
             {
-                var id = DBCONNECTION.Settings.Where(s => s.Key == "CURRENT_CATALOGUE_ID").FirstOrDefault()?.Value;
+                var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOGUE_ID")?.Value;
                 if (id == null || int.Parse(id) == -1) return null;
                 return DBCONNECTION.Catalogues.Find(int.Parse(id));
+            }
+            set
+            {
+                var newId = (value == null ? -1 : value.Id).ToString();
+                var originalSetting = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOGUE_ID");
+                if (originalSetting != null) originalSetting.Value = newId;
+                else DBCONNECTION.Settings.Add(new Setting { Key = "CURRENT_CATALOGUE_ID", Value = newId });
+                DBCONNECTION.SaveChanges();
             }
         }
         // TODO put all requests that are based on a catalogue inside common static class
@@ -40,6 +53,7 @@ namespace MediaManager.Globals
                 }
                 return result;
             }
+            public static List<Catalogue> Catalogs { get => DBCONNECTION.Catalogues.ToList() ?? new List<Catalogue>(); }
             public static List<Medium> Media { get => CURRENT_CATALOGUE?.Media.ToList() ?? new List<Medium>(); }
             public static int CountOfMedia { get => CURRENT_CATALOGUE?.Media.Count() ?? 0; }
             public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
