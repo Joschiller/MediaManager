@@ -2,6 +2,7 @@
 using MediaManager.GUI.Dialogs;
 using System;
 using System.Windows;
+using static MediaManager.Globals.DataConnector.Reader;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -17,6 +18,7 @@ namespace MediaManager.GUI.Menus
             Globals.Init.Initialize();
             InitializeComponent();
             RegisterAtLanguageProvider();
+            if (!AnyCatalogExists()) OpenWindow(this, new CatalogMenu());
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);

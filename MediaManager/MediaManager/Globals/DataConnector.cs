@@ -22,6 +22,7 @@ namespace MediaManager.Globals
 
         public static class Reader
         {
+            public static bool AnyCatalogExists() => DBCONNECTION.Catalogues.Count() > 0;
             public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
             public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
             public static List<ValuedTag> GetTagsForMedium(int id)
