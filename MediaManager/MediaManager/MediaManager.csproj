@@ -140,6 +140,10 @@
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\List\MediaTagList.xaml.cs">
+      <DependentUpon>MediaTagList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\List\MediaTagListElement.cs" />
     <Compile Include="GUI\Controls\List\PartList.xaml.cs">
       <DependentUpon>PartList.xaml</DependentUpon>
     </Compile>
@@ -269,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Controls\Edit\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\List\MediaTagList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

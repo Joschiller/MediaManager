@@ -48,6 +48,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
+        // TODO: save button => enabled, if anything changed => shown in separate group
         #endregion
 
         private void LoadTags()
