@@ -1,7 +1,9 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using MediaManager.GUI.Dialogs;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Menus
 {
@@ -10,14 +12,16 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class TagMenu : Window, UpdatedLanguageUser
     {
-        // TODO: add lists
-        // TODO: only show edit/delete button for tag, if a tag is selected
+        public ObservableCollection<Tag> Tags { get; set; } = new ObservableCollection<Tag>();
+        public Tag SelectedTag { get; set; }
 
         #region Setup
         public TagMenu()
         {
             InitializeComponent();
+            DataContext = this;
             RegisterAtLanguageProvider();
+            LoadTags();
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -45,5 +49,12 @@ namespace MediaManager.GUI.Menus
             throw new NotImplementedException();
         }
         #endregion
+
+        private void LoadTags()
+        {
+            Tags.Clear();
+            Reader.Tags.ForEach(Tags.Add);
+        }
+        private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) => Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
     }
 }
