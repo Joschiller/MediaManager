@@ -1,5 +1,4 @@
 ﻿using MediaManager.Globals.LanguageProvider;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -63,7 +62,6 @@ namespace MediaManager.GUI.Components
         {
             prev.ToolTip = LanguageProvider.getString("Component.Pager.Previous");
             next.ToolTip = LanguageProvider.getString("Component.Pager.Next");
-            throw new NotImplementedException();
         }
         ~Pager() => LanguageProvider.Unregister(this);
     }

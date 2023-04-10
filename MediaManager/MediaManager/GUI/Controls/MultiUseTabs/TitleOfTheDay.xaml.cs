@@ -68,6 +68,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         public void LoadTexts(string language)
         {
             next.Tooltip = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
+            ShowCurrentItem();
         }
     }
 }
