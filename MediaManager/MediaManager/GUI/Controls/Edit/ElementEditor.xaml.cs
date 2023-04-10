@@ -80,6 +80,7 @@ namespace MediaManager.GUI.Controls.Edit
 
         public void saveChanges()
         {
+            // TODO: add validation => Title cannot be empty
             if (Mode == ElementMode.Medium) SaveMedium(new Medium
             {
                 Id = CurrentId,

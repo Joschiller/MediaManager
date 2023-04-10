@@ -11,9 +11,9 @@
     <ListView x:Name="list" ItemsSource="{Binding Catalogs}" SelectionChanged="list_SelectionChanged">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
-                    <TextBlock Text="{Binding Catalog.Title}"/>
-                    <TextBlock Text="{DynamicResource activeString}" Visibility="{Binding IsActiveMarkVisible}" FontStyle="Italic"/>
+                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="Item_MouseLeftButtonDown">
+                    <TextBlock Text="{Binding Catalog.Title}" MouseLeftButtonDown="Item_MouseLeftButtonDown"/>
+                    <TextBlock Text="{DynamicResource activeString}" Visibility="{Binding IsActiveMarkVisible}" FontStyle="Italic" Margin="4,0,0,0" MouseLeftButtonDown="Item_MouseLeftButtonDown"/>
                 </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>

@@ -173,6 +173,9 @@
     </Compile>
     <Compile Include="GUI\Controls\Search\SearchParameters.cs" />
     <Compile Include="GUI\Controls\Search\SearchResultMode.cs" />
+    <Compile Include="GUI\Dialogs\EditCatalogDialog.xaml.cs">
+      <DependentUpon>EditCatalogDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Dialogs\EditTagDialog.xaml.cs">
       <DependentUpon>EditTagDialog.xaml</DependentUpon>
     </Compile>
@@ -313,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Controls\Search\SearchPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialogs\EditCatalogDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

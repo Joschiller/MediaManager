@@ -17,12 +17,12 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_catalog.png" ToolTip="{DynamicResource btnAddCatalog}" Click="btnAddTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_catalog.png" ToolTip="{DynamicResource btnAddCatalog}" Click="btnAddCatalogClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup Visibility="{DynamicResource catalogDependentVisibility}">
-                <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditCatalog}" Click="btnEditTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditCatalog}" Click="btnEditCatalogClick"/>
                 <atoms:ImageButton EnabledIconSource="../../Resources/export.png" ToolTip="{DynamicResource btnExportCatalog}" Click="btnExportCatalogClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/delete_catalog.png" ToolTip="{DynamicResource btnDeleteCatalog}" Click="btnDeleteTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_catalog.png" ToolTip="{DynamicResource btnDeleteCatalog}" Click="btnDeleteCatalogClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup>
                 <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
@@ -35,6 +35,6 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <list:CatalogList x:Name="catalogList" SelectionChanged="catalogList_SelectionChanged" CurrentCatalogChanged="catalogList_CurrentCatalogChanged"/>
+        <list:CatalogList x:Name="catalogList" SelectionChanged="catalogList_SelectionChanged" CatalogDoubleClick="catalogList_CatalogDoubleClick"/>
     </DockPanel>
 </Window>

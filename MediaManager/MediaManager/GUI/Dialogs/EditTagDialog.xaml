@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Dialogs"
         mc:Ignorable="d"
-        Style="{StaticResource defaultDialog}" Height="100" Width="300" MinHeight="100" MaxWidth="300">
+        Style="{StaticResource defaultDialog}" Height="100" Width="300" MinHeight="100" MinWidth="300" MouseDown="Window_MouseDown">
     <StackPanel Orientation="Vertical">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,7 +19,7 @@
             <TextBlock x:Name="labelOldTag" Grid.Row="0" Grid.Column="0" FontWeight="Bold" TextAlignment="Right" Margin="4"/>
             <TextBlock x:Name="oldTag" Grid.Row="0" Grid.Column="1" Margin="4"/>
             <TextBlock x:Name="labelNewTag" Grid.Row="1" Grid.Column="0" FontWeight="Bold" TextAlignment="Right" Margin="4"/>
-            <TextBox x:Name="newTag" Grid.Row="1" Grid.Column="1" Text="{Binding Title}" Margin="4" TextChanged="newTag_TextChanged"/>
+            <TextBox x:Name="newTag" Grid.Row="1" Grid.Column="1" Text="{Binding Title}" MaxLength="128" Margin="4" TextChanged="newTag_TextChanged"/>
         </Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button x:Name="submit" IsDefault="True" Background="Lime" Click="submit_Click" Margin="4">_Ok</Button>

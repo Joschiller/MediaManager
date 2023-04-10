@@ -36,6 +36,7 @@ namespace MediaManager.Globals
         public static class Reader
         {
             public static bool AnyCatalogExists() => DBCONNECTION.Catalogues.Count() > 0;
+            public static Catalogue GetCatalog(int id) => DBCONNECTION.Catalogues.Find(id);
             public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
             public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
             public static List<ValuedTag> GetTagsForMedium(int id)
@@ -53,8 +54,14 @@ namespace MediaManager.Globals
                 }
                 return result;
             }
-            public static List<Catalogue> Catalogs { get => DBCONNECTION.Catalogues.ToList() ?? new List<Catalogue>(); }
-            public static List<Medium> Media { get => CURRENT_CATALOGUE?.Media.ToList() ?? new List<Medium>(); }
+            /// <summary>
+            /// Catalogs ordered by title.
+            /// </summary>
+            public static List<Catalogue> Catalogs { get => DBCONNECTION.Catalogues.OrderBy(c => c.Title).ToList() ?? new List<Catalogue>(); }
+            /// <summary>
+            /// Media ordered by title.
+            /// </summary>
+            public static List<Medium> Media { get => CURRENT_CATALOGUE?.Media.OrderBy(m => m.Title).ToList() ?? new List<Medium>(); }
             public static int CountOfMedia { get => CURRENT_CATALOGUE?.Media.Count() ?? 0; }
             public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
             public static List<ValuedTag> GetTagsForPart(int id)
@@ -135,6 +142,11 @@ namespace MediaManager.Globals
         }
         public static class Writer
         {
+            public static void DeleteCatalog(int id)
+            {
+                DBCONNECTION.Catalogues.Remove(DBCONNECTION.Catalogues.Find(id));
+                DBCONNECTION.SaveChanges();
+            }
             public static void DeleteTag(int id)
             {
                 DBCONNECTION.Tags.Remove(DBCONNECTION.Tags.Find(id));
@@ -156,6 +168,11 @@ namespace MediaManager.Globals
                 DBCONNECTION.SaveChanges();
             }
 
+            public static void CreateCatalog(Catalogue catalog)
+            {
+                DBCONNECTION.Catalogues.Add(catalog);
+                DBCONNECTION.SaveChanges();
+            }
             public static void CreateTag(Tag tag)
             {
                 DBCONNECTION.Tags.Add(tag);
@@ -174,6 +191,18 @@ namespace MediaManager.Globals
                 return DBCONNECTION.Parts.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
             }
 
+            public static void SaveCatalog(Catalogue catalog)
+            {
+                var original = DBCONNECTION.Catalogues.Find(catalog.Id);
+                original.Title = catalog.Title;
+                original.Description = catalog.Description;
+                original.DeletionConfirmationMedium = catalog.DeletionConfirmationMedium;
+                original.DeletionConfirmationPart = catalog.DeletionConfirmationPart;
+                original.DeletionConfirmationPlaylist = catalog.DeletionConfirmationPlaylist;
+                original.DeletionConfirmationTag = catalog.DeletionConfirmationTag;
+                original.ShowTitleOfTheDayAsMedium = catalog.ShowTitleOfTheDayAsMedium;
+                DBCONNECTION.SaveChanges();
+            }
             public static void SaveTag(Tag tag)
             {
                 var original = DBCONNECTION.Tags.Find(tag.Id);

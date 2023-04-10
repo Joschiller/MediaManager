@@ -1,8 +1,6 @@
 ﻿using MediaManager.Globals.LanguageProvider;
-using System;
 using System.Windows;
-using static MediaManager.Globals.DataConnector.Reader;
-using static MediaManager.Globals.DataConnector.Writer;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Dialogs
 {
@@ -17,10 +15,10 @@ namespace MediaManager.GUI.Dialogs
         public EditTagDialog(int? id)
         {
             EditedTagId = id;
-            EditedTag = EditedTagId.HasValue ? GetTag(EditedTagId.Value) : new Tag { Title = "" };
+            EditedTag = EditedTagId.HasValue ? Reader.GetTag(EditedTagId.Value) : new Tag { CatalogueId = CURRENT_CATALOGUE.Id, Title = "" };
 
             InitializeComponent();
-            LoadTexts(LanguageProvider.CurrentLanguage);
+            LoadTexts(null);
             DataContext = EditedTag;
 
             labelOldTag.Visibility = id == null ? Visibility.Hidden : Visibility.Visible;
@@ -36,13 +34,14 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 
         private void newTag_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) => submit.IsEnabled = newTag.Text.Length > 0;
         private void submit_Click(object sender, RoutedEventArgs e)
         {
+            if (EditedTagId != null) Writer.SaveTag(EditedTag);
+            else Writer.CreateTag(EditedTag);
             DialogResult = true;
-            if (EditedTagId != null) SaveTag(EditedTag);
-            else CreateTag(EditedTag);
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
     }

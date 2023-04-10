@@ -115,7 +115,8 @@
         "ExportCatalog": "Export catalog",
         "DeleteCatalog": "Delete catalog",
         "Settings": "Open settings menu"
-      }
+      },
+      "CatalogDeletion": "the selected catalog"
     },
     "Settings": {
       "ToolTip": {
@@ -135,6 +136,17 @@
     "EditTag": {
       "LabelOld": "Old tag",
       "LabelNew": "New tag"
+    },
+    "EditCatalog": {
+      "LabelOldTitle": "Old title",
+      "LabelNewTitle": "New title",
+      "LabelDescription": "Description",
+      "HeadingSettings": "Settings",
+      "LabelDeletionConfirmationMedium": "Show deletion confirmation for media",
+      "LabelDeletionConfirmationPart": "Show deletion confirmation for media parts",
+      "LabelDeletionConfirmationPlaylist": "Show deletion confirmation for playlists",
+      "LabelDeletionConfirmationTag": "Show deletion confirmation for tags",
+      "LabelShowTitleOfTheDayAsMedium": "Show whole medium for title of the day"
     }
   }
 }

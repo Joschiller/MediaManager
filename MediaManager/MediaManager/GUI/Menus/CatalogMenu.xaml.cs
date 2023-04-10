@@ -1,6 +1,8 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using MediaManager.GUI.Dialogs;
 using System;
 using System.Windows;
+using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -34,32 +36,37 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        private void btnAddCatalogClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            //catalogList.LoadCatalogs();
+            new EditCatalogDialog(null).ShowDialog();
+            catalogList.LoadCatalogs();
         }
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
-        private void btnEditTagClick(object sender, RoutedEventArgs e)
+        private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            //catalogList.LoadCatalogs();
+            new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
+            catalogList.LoadCatalogs();
         }
-        private void btnDeleteTagClick(object sender, RoutedEventArgs e)
+        private void btnDeleteCatalogClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            //catalogList.LoadCatalogs();
+            if (catalogList.SelectedCatalog == null) return;
+
+            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Catalog.CatalogDeletion"));
+            if (confirmation.HasValue && confirmation.Value) Writer.DeleteCatalog(catalogList.SelectedCatalog.Id);
+            if (CURRENT_CATALOGUE == null && Reader.AnyCatalogExists()) CURRENT_CATALOGUE = Reader.Catalogs[0];
+            catalogList.LoadCatalogs();
         }
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion
 
         private void catalogList_SelectionChanged(Catalogue catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
-        private void catalogList_CurrentCatalogChanged(Catalogue catalog)
+        private void catalogList_CatalogDoubleClick(Catalogue catalog)
         {
-            throw new NotImplementedException();
+            CURRENT_CATALOGUE = catalog;
+            catalogList.LoadCatalogs();
         }
     }
 }

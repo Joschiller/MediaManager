@@ -115,7 +115,8 @@
         "ExportCatalog": "Katalog exportieren",
         "DeleteCatalog": "Katalog löschen",
         "Settings": "Einstellungsmenü öffnen"
-      }
+      },
+      "CatalogDeletion": "der gewählte Katalog"
     },
     "Settings": {
       "ToolTip": {
@@ -135,6 +136,17 @@
     "EditTag": {
       "LabelOld": "Alte Kategorie",
       "LabelNew": "Neue Kategorie"
+    },
+    "EditCatalog": {
+      "LabelOldTitle": "Alter Titel",
+      "LabelNewTitle": "Neuer Titel",
+      "LabelDescription": "Beschreibung",
+      "HeadingSettings": "Einstellungen",
+      "LabelDeletionConfirmationMedium": "Löschbestätigung für Medien anzeigen",
+      "LabelDeletionConfirmationPart": "Löschbestätigung für Medienteile anzeigen",
+      "LabelDeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
+      "LabelDeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
+      "LabelShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
     }
   }
 }
