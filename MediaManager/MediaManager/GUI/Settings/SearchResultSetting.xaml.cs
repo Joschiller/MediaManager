@@ -36,14 +36,11 @@ namespace MediaManager.GUI.Settings
             LoadTexts(null);
         }
         public void SaveData() => Writer.Settings.ResultListLength = (int)searchResultValue.Value;
-        public bool ValidateData()
-        {
-            // validation is already ensured by to the input mechanism itself
-            return RunValidation(new List<System.Func<string>>
+        // validation is already ensured by to the input mechanism itself
+        public bool ValidateData() => RunValidation(new List<System.Func<string>>
             {
                 () => searchResultValue.Value <= 0 && searchResultValue.Value > 50 ? LanguageProvider.getString("Controls.Settings.SearchResult.Validation") : null, // value is valid
             });
-        }
         #endregion
     }
 }

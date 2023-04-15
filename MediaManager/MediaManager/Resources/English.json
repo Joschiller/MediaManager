@@ -53,7 +53,8 @@
       "Minute": "Minute",
       "Minutes": "Minutes",
       "MediaDeletion": "the selected medium",
-      "PartDeletion": "the selected media part"
+      "PartDeletion": "the selected media part",
+      "ValidationFailed": "insert a title"
     },
     "MultiUseTabs": {
       "StatisticsOverview": {

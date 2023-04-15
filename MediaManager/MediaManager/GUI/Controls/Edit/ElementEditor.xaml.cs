@@ -1,10 +1,12 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using static MediaManager.Globals.DataConnector.Reader;
 using static MediaManager.Globals.DataConnector.Writer;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Controls.Edit
 {
@@ -97,9 +99,17 @@ namespace MediaManager.GUI.Controls.Edit
         private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
         private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
 
-        public void saveChanges()
+        private bool validateData() => RunValidation(new List<Func<string>>
+            {
+                () => title.Text.Trim().Length == 0 ? LanguageProvider.getString("Controls.Edit.ValidationFailed") : null
+            });
+        /// <summary>
+        /// Saves the changes, if the data is valid.
+        /// </summary>
+        /// <returns>Whether saving was successful</returns>
+        public bool saveChanges()
         {
-            // TODO: add validation => Title cannot be empty
+            if (!validateData()) return false;
             if (Mode == ElementMode.Medium) SaveMedium(new Medium
             {
                 Id = CurrentId,
@@ -117,11 +127,11 @@ namespace MediaManager.GUI.Controls.Edit
                 Publication_Year = (int)publication.Value,
                 // TODO image
             }, new System.Collections.Generic.List<ValuedTag>(tags.Tags));
+            return true;
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            saveChanges();
-            QuitEditing?.Invoke(Mode, CurrentId);
+            if (saveChanges()) QuitEditing?.Invoke(Mode, CurrentId);
         }
         private void discardButton_Click(object sender, RoutedEventArgs e) => QuitEditing?.Invoke(Mode, CurrentId);
 

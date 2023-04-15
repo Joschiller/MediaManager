@@ -48,13 +48,10 @@ namespace MediaManager.GUI.Settings
             LoadTexts(null);
         }
         public void SaveData() => LanguageProvider.CurrentLanguage = (selectedLanguage.SelectedItem as string) ?? LanguageProvider.CurrentLanguage;
-        public bool ValidateData()
-        {
-            return RunValidation(new List<Func<string>>
+        public bool ValidateData() => RunValidation(new List<Func<string>>
             {
                 () => selectedLanguage.SelectedItem == null ? LanguageProvider.getString("Controls.Settings.Language.Validation") : null
             });
-        }
         #endregion
     }
 }

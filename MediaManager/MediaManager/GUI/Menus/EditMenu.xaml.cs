@@ -54,13 +54,12 @@ namespace MediaManager.GUI.Menus
                 return;
             }
 
-            // there are possibly unsaved changes
+            // there are possibly unsaved changes => ask user
             var confirmation = ShowUnsavedChangesDialog();
-            if (confirmation.HasValue)
-            {
-                if (confirmation.Value) editor.saveChanges();
-                Close();
-            }
+            // no value => discard
+            // false => close
+            // true => try saving => close, if successful
+            if (confirmation.HasValue && (!confirmation.Value || (confirmation.Value && editor.saveChanges()))) Close();
         }
         private void NavigationBar_HelpClicked(object sender, EventArgs e)
         {
