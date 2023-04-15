@@ -34,11 +34,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <multiusetabs:MultiUseTabs x:Name="multiUseTabs" Grid.Column="0">
-                <multiusetabs:PlaylistEditor/>
-                <multiusetabs:TitleOfTheDay/>
-                <multiusetabs:StatisticsOverview/>
-            </multiusetabs:MultiUseTabs>
+            <DockPanel  Grid.Column="0">
+                <TextBlock x:Name="catalogTitle" DockPanel.Dock="Top" TextAlignment="Center" FontSize="{StaticResource fontSize_windowTitle}"/>
+                <multiusetabs:MultiUseTabs x:Name="multiUseTabs">
+                    <multiusetabs:PlaylistEditor/>
+                    <multiusetabs:TitleOfTheDay/>
+                    <multiusetabs:StatisticsOverview/>
+                </multiusetabs:MultiUseTabs>
+            </DockPanel>
             <search:SearchPanel Grid.Column="1" MediumSelected="SearchPanel_MediumSelected"/>
         </Grid>
     </DockPanel>
