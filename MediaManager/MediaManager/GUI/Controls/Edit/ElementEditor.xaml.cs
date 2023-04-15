@@ -35,7 +35,8 @@ namespace MediaManager.GUI.Controls.Edit
             {
                 var media = GetMedium(id);
 
-                favoriteButton.Visibility = Visibility.Collapsed;
+                favoriteButtonEnabled.Visibility = Visibility.Collapsed;
+                favoriteButtonDisabled.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Visible;
                 integerMeta.Visibility = Visibility.Collapsed;
                 image.Visibility = Visibility.Collapsed;
@@ -49,14 +50,15 @@ namespace MediaManager.GUI.Controls.Edit
             {
                 var part = GetPart(id);
 
-                favoriteButton.Visibility = Visibility.Visible;
+                favoriteButtonEnabled.Visibility = Visibility.Collapsed;
+                favoriteButtonDisabled.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Collapsed;
                 integerMeta.Visibility = Visibility.Visible;
                 image.Visibility = Visibility.Visible;
 
                 title.Text = part.Title;
                 IsCurrentlyFavorite = part.Favourite;
-                favoriteButton.EnabledIconSource = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
+                updateFavoriteButtonVisibility();
                 description.Text = part.Description;
                 length.SetValue((uint)part.Length);
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
@@ -67,11 +69,22 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        private void favoriteButton_Click(object sender, RoutedEventArgs e)
+        private void favoriteEnableButton_Click(object sender, RoutedEventArgs e)
         {
-            IsCurrentlyFavorite = !IsCurrentlyFavorite;
-            favoriteButton.EnabledIconSource = new BitmapImage(new Uri(IsCurrentlyFavorite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
+            IsCurrentlyFavorite = true;
             saveButton.Enabled = true;
+            updateFavoriteButtonVisibility();
+        }
+        private void favoriteDisableButton_Click(object sender, RoutedEventArgs e)
+        {
+            IsCurrentlyFavorite = false;
+            saveButton.Enabled = true;
+            updateFavoriteButtonVisibility();
+        }
+        private void updateFavoriteButtonVisibility()
+        {
+            favoriteButtonEnabled.Visibility = IsCurrentlyFavorite ? Visibility.Visible : Visibility.Collapsed;
+            favoriteButtonDisabled.Visibility = IsCurrentlyFavorite ? Visibility.Collapsed : Visibility.Visible;
         }
         private void textChanged(object sender, TextChangedEventArgs e) => saveButton.Enabled = true;
         private void numericValueChanged(uint newVal) => saveButton.Enabled = true;

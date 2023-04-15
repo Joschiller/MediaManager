@@ -7,7 +7,8 @@
              mc:Ignorable="d">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <atoms:ImageButton x:Name="favoriteButton" DockPanel.Dock="Right" Size="48" Click="favoriteButton_Click"/>
+            <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="48" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
+            <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="48" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
         <TextBox x:Name="location" DockPanel.Dock="Top" MaxLength="128" TextChanged="textChanged"/>
