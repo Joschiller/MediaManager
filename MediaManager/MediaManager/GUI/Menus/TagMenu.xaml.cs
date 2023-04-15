@@ -42,22 +42,29 @@ namespace MediaManager.GUI.Menus
         }
         private void btnAddTagClick(object sender, RoutedEventArgs e)
         {
-            new EditTagDialog(null).ShowDialog();
-            LoadTags();
+            var result = new EditTagDialog(null).ShowDialog();
+            if (result.HasValue && result.Value) LoadTags();
         }
         private void btnEditTagClick(object sender, RoutedEventArgs e)
         {
             if (SelectedTag == null) return;
-            new EditTagDialog(SelectedTag.Id).ShowDialog();
-            LoadTags();
+            var result = new EditTagDialog(SelectedTag.Id).ShowDialog();
+            if (result.HasValue && result.Value) LoadTags();
         }
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             if (SelectedTag == null) return;
-
-            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
-            if (confirmation.HasValue && confirmation.Value) Writer.DeleteTag(SelectedTag.Id);
-            LoadTags();
+            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationTag;
+            if (!performDeletion)
+            {
+                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
+                performDeletion = confirmation.HasValue && confirmation.Value;
+            }
+            if (performDeletion)
+            {
+                Writer.DeleteTag(SelectedTag.Id);
+                LoadTags();
+            }
         }
         // TODO: save button => enabled, if anything changed => shown in separate group
         #endregion

@@ -38,8 +38,8 @@ namespace MediaManager.GUI.Menus
         }
         private void btnAddCatalogClick(object sender, RoutedEventArgs e)
         {
-            new EditCatalogDialog(null).ShowDialog();
-            catalogList.LoadCatalogs();
+            var result = new EditCatalogDialog(null).ShowDialog();
+            if (result.HasValue && result.Value) catalogList.LoadCatalogs();
         }
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {
@@ -47,17 +47,21 @@ namespace MediaManager.GUI.Menus
         }
         private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {
-            new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
-            catalogList.LoadCatalogs();
+            var result = new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
+            if (result.HasValue && result.Value) catalogList.LoadCatalogs();
         }
         private void btnDeleteCatalogClick(object sender, RoutedEventArgs e)
         {
             if (catalogList.SelectedCatalog == null) return;
 
+            // deletion confirmation must always be shown
             var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Catalog.CatalogDeletion"));
-            if (confirmation.HasValue && confirmation.Value) Writer.DeleteCatalog(catalogList.SelectedCatalog.Id);
-            if (CURRENT_CATALOGUE == null && Reader.AnyCatalogExists()) CURRENT_CATALOGUE = Reader.Catalogs[0];
-            catalogList.LoadCatalogs();
+            if (confirmation.HasValue && confirmation.Value)
+            {
+                Writer.DeleteCatalog(catalogList.SelectedCatalog.Id);
+                if (CURRENT_CATALOGUE == null && Reader.AnyCatalogExists()) CURRENT_CATALOGUE = Reader.Catalogs[0];
+                catalogList.LoadCatalogs();
+            }
         }
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion

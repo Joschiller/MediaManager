@@ -22,7 +22,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <GroupBox x:Name="editGroup">
+            <GroupBox x:Name="editGroup" Grid.Column="1">
                 <Grid>
                     <StackPanel x:Name="addPanel" Orientation="Vertical">
                         <TextBlock x:Name="titleLabel"/>

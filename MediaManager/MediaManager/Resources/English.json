@@ -61,7 +61,8 @@
       "PlaylistEditor": {
         "Title": "Playlist Name",
         "Length": "Playlist Length",
-        "Tag": "Playlist Theme"
+        "Tag": "Playlist Theme",
+        "PlaylistDeletion": "the selected playlist"
       }
     },
     "Settings": {

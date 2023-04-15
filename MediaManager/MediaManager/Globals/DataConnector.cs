@@ -188,7 +188,7 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Parts.Add(new Part { MediumId = mediumId, Title = "", Favourite = false, Description = "", Length = 0, Publication_Year = 0 });
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
             }
 
             public static void SaveCatalog(Catalogue catalog)

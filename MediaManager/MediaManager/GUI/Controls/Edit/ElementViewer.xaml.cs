@@ -3,8 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using static MediaManager.Globals.DataConnector.Reader;
-using static MediaManager.Globals.DataConnector.Writer;
+using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Controls.Edit
@@ -32,7 +31,7 @@ namespace MediaManager.GUI.Controls.Edit
             CurrentId = id;
             if (Mode == ElementMode.Medium)
             {
-                var media = GetMedium(id);
+                var media = Reader.GetMedium(id);
 
                 favoriteIcon.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Visible;
@@ -42,11 +41,11 @@ namespace MediaManager.GUI.Controls.Edit
                 title.Text = media.Title;
                 location.Text = media.Location;
                 description.Text = media.Description;
-                tags.SetTagList(GetTagsForMedium(id));
+                tags.SetTagList(Reader.GetTagsForMedium(id));
             }
             else
             {
-                var part = GetPart(id);
+                var part = Reader.GetPart(id);
 
                 favoriteIcon.Visibility = Visibility.Visible;
                 location.Visibility = Visibility.Collapsed;
@@ -60,19 +59,40 @@ namespace MediaManager.GUI.Controls.Edit
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 publication.Text = part.Length.ToString();
                 // TODO image
-                tags.SetTagList(GetTagsForPart(id));
+                tags.SetTagList(Reader.GetTagsForPart(id));
             }
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e) => EditClicked?.Invoke(Mode, CurrentId);
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString(Mode == ElementMode.Medium ? "Controls.Edit.MediaDeletion" : "Controls.Edit.PartDeletion"));
-            if (confirmation.HasValue && confirmation.Value)
+            if (Mode == ElementMode.Medium)
             {
-                if (Mode == ElementMode.Medium) DeleteMedium(CurrentId);
-                else DeletePart(CurrentId);
-                DeleteClicked?.Invoke(Mode, CurrentId);
+                var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationMedium;
+                if (!performDeletion)
+                {
+                    var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.MediaDeletion"));
+                    performDeletion = confirmation.HasValue && confirmation.Value;
+                }
+                if (performDeletion)
+                {
+                    Writer.DeleteMedium(CurrentId);
+                    DeleteClicked?.Invoke(Mode, CurrentId);
+                }
+            }
+            else
+            {
+                var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationPart;
+                if (!performDeletion)
+                {
+                    var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.PartDeletion"));
+                    performDeletion = confirmation.HasValue && confirmation.Value;
+                }
+                if (performDeletion)
+                {
+                    Writer.DeletePart(CurrentId);
+                    DeleteClicked?.Invoke(Mode, CurrentId);
+                }
             }
         }
 
