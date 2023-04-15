@@ -77,6 +77,14 @@
       "SearchResult": {
         "Label": "Items per page of the search result",
         "Validation": "insert a result list length between 1 and 50"
+      },
+      "Catalog": {
+        "TabName": "Catalog specific settings",
+        "DeletionConfirmationMedium": "Show deletion confirmation for media",
+        "DeletionConfirmationPart": "Show deletion confirmation for media parts",
+        "DeletionConfirmationPlaylist": "Show deletion confirmation for playlists",
+        "DeletionConfirmationTag": "Show deletion confirmation for tags",
+        "ShowTitleOfTheDayAsMedium": "Show whole medium for title of the day"
       }
     },
     "CatalogList": {
@@ -125,7 +133,7 @@
       },
       "Saved": "The settings were successfully saved.",
       "ValidationFailed": "There are invalid settings. Please check the inserted values and try saving again.",
-      "TabName": "Settings"
+      "TabName": "Global settings"
     }
   },
   "Dialog": {

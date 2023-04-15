@@ -77,6 +77,14 @@
       "SearchResult": {
         "Label": "Elemente je Suchergebnisseite",
         "Validation": "eine Suchergebnislistenlänge zwischen 1 und 50 eingeben"
+      },
+      "Catalog": {
+        "TabName": "Katalogspezifische Einstellungen",
+        "DeletionConfirmationMedium": "Löschbestätigung für Medien anzeigen",
+        "DeletionConfirmationPart": "Löschbestätigung für Medienteile anzeigen",
+        "DeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
+        "DeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
+        "ShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
       }
     },
     "CatalogList": {
@@ -125,7 +133,7 @@
       },
       "Saved": "Die Einstellungen wurden erfolgreich gespeichert.",
       "ValidationFailed": "Einige Einstellungen weisen invalide Werte auf. Versuchen Sie, die Werte zu korrigieren und erneut zu speichen.",
-      "TabName": "Einstellungen"
+      "TabName": "Globale Einstellungen"
     }
   },
   "Dialog": {

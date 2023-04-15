@@ -197,6 +197,9 @@
     <Compile Include="GUI\Menus\TagMenu.xaml.cs">
       <DependentUpon>TagMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Settings\CatalogSettings.xaml.cs">
+      <DependentUpon>CatalogSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Settings\LanguageSetting.xaml.cs">
       <DependentUpon>LanguageSetting.xaml</DependentUpon>
     </Compile>
@@ -348,6 +351,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Menus\TagMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\CatalogSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
