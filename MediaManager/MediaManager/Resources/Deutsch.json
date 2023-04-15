@@ -36,14 +36,22 @@
       "Search": "_Suchen"
     },
     "Edit": {
-      "Length": "Länge",
+      "Label": {
+        "Title": "Titel",
+        "Description": "Beschreibung",
+        "Tags": "Kategorien",
+        "Location": "Aufbewahrungsort",
+        "Length": "Länge",
+        "Publication": "Veröffentlichungsjahr"
+      },
+      "Button": {
+        "Edit": "Bearbeiten",
+        "Delete": "Löschen",
+        "Save": "Änderungen speichern",
+        "Discard": "Änderungen verwerfen"
+      },
       "Minute": "Minute",
       "Minutes": "Minuten",
-      "Publication": "Veröffentlichung",
-      "Edit": "Bearbeiten",
-      "Delete": "Löschen",
-      "Save": "Änderungen speichern",
-      "Discard": "Änderungen verwerfen",
       "MediaDeletion": "das gewählte Medium",
       "PartDeletion": "der gewählte Medienteil"
     },

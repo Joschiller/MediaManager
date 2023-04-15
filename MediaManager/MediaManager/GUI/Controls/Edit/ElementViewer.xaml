@@ -5,34 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="48" Width="48"/>
-            <TextBlock x:Name="title"/>
+            <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}"/>
         </DockPanel>
-        <TextBlock x:Name="location" DockPanel.Dock="Top"/>
-        <TextBlock x:Name="description" DockPanel.Dock="Top"/>
-        <DockPanel DockPanel.Dock="Bottom">
-            <Grid x:Name="integerMeta">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBlock x:Name="length" Grid.Column="1" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center"/>
-                <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
-            </Grid>
+        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False"/>
+        <Image x:Name="image" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <TextBlock x:Name="location" Grid.Row="4" Grid.Column="1"/>
+        <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                 <atoms:ImageButton x:Name="editButton" DockPanel.Dock="Right" Size="48" Click="editButton_Click" EnabledIconSource="../../../Resources/edit_blue.png"/>
                 <atoms:ImageButton x:Name="deleteButton" DockPanel.Dock="Right" Size="48" Click="deleteButton_Click" EnabledIconSource="../../../Resources/delete.png"/>
             </StackPanel>
+            <Grid x:Name="integerMeta">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+                <TextBlock x:Name="length" Grid.Column="1" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
+                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+                <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
+            </Grid>
         </DockPanel>
-        <Image x:Name="image" DockPanel.Dock="Bottom"/>
-        <components:TagList x:Name="tags" IsEnabled="False"/>
-    </DockPanel>
+    </Grid>
 </UserControl>

@@ -37,6 +37,7 @@ namespace MediaManager.GUI.Controls.Edit
 
                 favoriteButtonEnabled.Visibility = Visibility.Collapsed;
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
+                textLocation.Visibility = Visibility.Visible;
                 location.Visibility = Visibility.Visible;
                 integerMeta.Visibility = Visibility.Collapsed;
                 image.Visibility = Visibility.Collapsed;
@@ -52,6 +53,7 @@ namespace MediaManager.GUI.Controls.Edit
 
                 favoriteButtonEnabled.Visibility = Visibility.Collapsed;
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
+                textLocation.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Collapsed;
                 integerMeta.Visibility = Visibility.Visible;
                 image.Visibility = Visibility.Visible;
@@ -62,7 +64,7 @@ namespace MediaManager.GUI.Controls.Edit
                 description.Text = part.Description;
                 length.SetValue((uint)part.Length);
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
-                publication.SetValue((uint)part.Length);
+                publication.SetValue((uint)part.Publication_Year);
                 // TODO image
                 tags.SetTagList(GetTagsForPart(id));
                 // TODO disable tags that are set by parent medium
@@ -87,7 +89,11 @@ namespace MediaManager.GUI.Controls.Edit
             favoriteButtonDisabled.Visibility = IsCurrentlyFavorite ? Visibility.Collapsed : Visibility.Visible;
         }
         private void textChanged(object sender, TextChangedEventArgs e) => saveButton.Enabled = true;
-        private void numericValueChanged(uint newVal) => saveButton.Enabled = true;
+        private void numericValueChanged(uint newVal)
+        {
+            saveButton.Enabled = true;
+            textMinute.Text = LanguageProvider.getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
+        }
         private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
         private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
 
@@ -122,10 +128,14 @@ namespace MediaManager.GUI.Controls.Edit
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            textLength.Text = LanguageProvider.getString("Controls.Edit.Length");
-            textPublication.Text = LanguageProvider.getString("Controls.Edit.Publication");
-            saveButton.ToolTip = LanguageProvider.getString("Controls.Edit.Save");
-            discardButton.ToolTip = LanguageProvider.getString("Controls.Edit.Discard");
+            textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
+            textDescription.Text = LanguageProvider.getString("Controls.Edit.Label.Description") + ":";
+            textTags.Text = LanguageProvider.getString("Controls.Edit.Label.Tags") + ":";
+            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
+            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
+            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
+            saveButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Save");
+            discardButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Discard");
         }
     }
 }

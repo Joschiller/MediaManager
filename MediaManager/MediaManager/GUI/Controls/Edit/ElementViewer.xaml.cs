@@ -34,6 +34,7 @@ namespace MediaManager.GUI.Controls.Edit
                 var media = Reader.GetMedium(id);
 
                 favoriteIcon.Visibility = Visibility.Collapsed;
+                textLocation.Visibility = Visibility.Visible;
                 location.Visibility = Visibility.Visible;
                 integerMeta.Visibility = Visibility.Collapsed;
                 image.Visibility = Visibility.Collapsed;
@@ -48,6 +49,7 @@ namespace MediaManager.GUI.Controls.Edit
                 var part = Reader.GetPart(id);
 
                 favoriteIcon.Visibility = Visibility.Visible;
+                textLocation.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Collapsed;
                 integerMeta.Visibility = Visibility.Visible;
                 image.Visibility = Visibility.Visible;
@@ -57,7 +59,12 @@ namespace MediaManager.GUI.Controls.Edit
                 description.Text = part.Description;
                 length.Text = part.Length.ToString();
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
-                publication.Text = part.Length.ToString();
+                textLength.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+                length.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+                textMinute.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+                publication.Text = part.Publication_Year.ToString();
+                textPublication.Visibility = part.Publication_Year > 0 ? Visibility.Visible : Visibility.Collapsed;
+                publication.Visibility = part.Publication_Year > 0 ? Visibility.Visible : Visibility.Collapsed;
                 // TODO image
                 tags.SetTagList(Reader.GetTagsForPart(id));
             }
@@ -99,10 +106,11 @@ namespace MediaManager.GUI.Controls.Edit
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            textLength.Text = LanguageProvider.getString("Controls.Edit.Length");
-            textPublication.Text = LanguageProvider.getString("Controls.Edit.Publication");
-            editButton.ToolTip = LanguageProvider.getString("Controls.Edit.Edit");
-            deleteButton.ToolTip = LanguageProvider.getString("Controls.Edit.Delete");
+            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
+            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
+            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
+            editButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Edit");
+            deleteButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Delete");
         }
     }
 }

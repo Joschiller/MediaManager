@@ -5,35 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="textTitle" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <DockPanel Grid.Row="0" Grid.Column="1">
             <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="48" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
             <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="48" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
-        <TextBox x:Name="location" DockPanel.Dock="Top" MaxLength="128" TextChanged="textChanged"/>
-        <TextBox x:Name="description" DockPanel.Dock="Top" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged"/>
-        <DockPanel DockPanel.Dock="Bottom">
-            <Grid x:Name="integerMeta">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center"/>
-                <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
-                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center"/>
-                <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
-            </Grid>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
-                <atoms:ImageButton x:Name="discardButton" DockPanel.Dock="Right" Size="48" Click="discardButton_Click" EnabledIconSource="../../../Resources/undo.png"/>
-            </StackPanel>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom">
+        <TextBlock x:Name="textDescription" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <TextBox x:Name="description" Grid.Row="1" Grid.Column="1" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged"/>
+        <TextBlock x:Name="textTags" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="1"/>
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Right" Orientation="Vertical">
                 <Button x:Name="selectImage" Click="selectImage_Click"/>
                 <Button x:Name="removeImage" Click="removeImage_Click"/>
@@ -41,6 +36,27 @@
             </StackPanel>
             <Image x:Name="image"/>
         </DockPanel>
-        <components:TagList x:Name="tags"/>
-    </DockPanel>
+        <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <TextBox x:Name="location" Grid.Row="4" Grid.Column="1" MaxLength="128" TextChanged="textChanged"/>
+        <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
+                <atoms:ImageButton x:Name="discardButton" DockPanel.Dock="Right" Size="48" Click="discardButton_Click" EnabledIconSource="../../../Resources/undo.png"/>
+            </StackPanel>
+            <Grid x:Name="integerMeta">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+                <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
+                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+                <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+            </Grid>
+        </DockPanel>
+    </Grid>
 </UserControl>

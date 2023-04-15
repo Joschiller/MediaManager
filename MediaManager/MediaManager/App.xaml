@@ -39,7 +39,7 @@
         <!--#endregion-->
         <!--#endregion-->
         <!--#region Style Definitions -->
-        <GridLength x:Key="settingsLabelWidth">300</GridLength>
+        <GridLength x:Key="settingsLabelWidth">350</GridLength>
         <!--#region Window -->
         <Style TargetType="Window" x:Key="baseWindow">
             <Setter Property="Title" Value="Media Manager"/>
@@ -61,6 +61,9 @@
             <Setter Property="BorderBrush" Value="{StaticResource accent_border_brush}"/>
         </Style>
         <!--#endregion-->
+        <Style TargetType="TextBlock" x:Key="leftsideLabel">
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
         <!--#endregion-->
     </Application.Resources>
 </Application>

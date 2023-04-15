@@ -36,14 +36,22 @@
       "Search": "Search"
     },
     "Edit": {
-      "Length": "Length",
+      "Label": {
+        "Title": "Title",
+        "Description": "Description",
+        "Tags": "Tags",
+        "Location": "Location",
+        "Length": "Length",
+        "Publication": "Publication year"
+      },
+      "Button": {
+        "Edit": "Edit",
+        "Delete": "Delete",
+        "Save": "Save Changes",
+        "Discard": "Discard Changes"
+      },
       "Minute": "Minute",
       "Minutes": "Minutes",
-      "Publication": "Publication",
-      "Edit": "Edit",
-      "Delete": "Delete",
-      "Save": "Save Changes",
-      "Discard": "Discard Changes",
       "MediaDeletion": "the selected medium",
       "PartDeletion": "the selected media part"
     },
