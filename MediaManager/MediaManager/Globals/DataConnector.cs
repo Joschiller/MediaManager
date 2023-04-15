@@ -93,35 +93,31 @@ namespace MediaManager.Globals
                     ? fittingTitle.Union(DBCONNECTION.Parts.Where(p => p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
                     : fittingTitle;
 
+                /* TODO: filtering by tags currently causes an exception due to the custom type of ValuedTag
                 var fittingTags = parameters.ExactMode
                     ? fittingSearchString.Where(p => parameters.SearchTags.All(t => !t.Value.HasValue || p.PT_Relation.Any(r => r.TagId == t.Tag.Id && r.Value == t.Value.Value)))
                     : fittingSearchString.Where(p => !parameters.SearchTags.Any(t => p.PT_Relation.Any(r => t.Value.HasValue && r.TagId == t.Tag.Id && r.Value == !t.Value.Value)));
+                */
 
                 var fittingFavourites = parameters.OnlySearchWithinFavourites
-                    ? fittingTags.Where(p => p.Favourite)
-                    : fittingTags;
+                    ? fittingSearchString.Where(p => p.Favourite)
+                    : fittingSearchString;
 
                 if (parameters.SearchResult == SearchResultMode.MediaList)
                 {
-                    foreach(var item in fittingFavourites.Select(p => p.Medium).Distinct().OrderBy(m => m.Title))
+                    foreach (var item in fittingFavourites.Select(p => new SearchResultItem
                     {
-                        result.Add(new SearchResultItem
-                        {
-                            Id = item.Id,
-                            Text = item.Title
-                        });
-                    }
+                        Id = p.Medium.Id,
+                        Text = p.Medium.Title,
+                    }).Distinct().OrderBy(m => m.Text)) result.Add(item);
                 }
                 else
                 {
-                    foreach (var item in fittingFavourites)
+                    foreach (var item in fittingFavourites.Select(p => new SearchResultItem
                     {
-                        result.Add(new SearchResultItem
-                        {
-                            Id = item.Id,
-                            Text = item.Title + " (" + item.Medium.Title + ")"
-                        });
-                    }
+                        Id = p.Id,
+                        Text = p.Title + " (" + p.Medium.Title + ")"
+                    }).OrderBy(p => p.Text)) result.Add(item);
                 }
 
                 return result;

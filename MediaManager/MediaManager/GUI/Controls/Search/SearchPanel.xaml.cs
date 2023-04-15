@@ -25,6 +25,7 @@ namespace MediaManager.GUI.Controls.Search
         {
             InitializeComponent();
             DataContext = this;
+            CurrentSearchParameters = input.CurrentSearchParameters;
         }
 
         private void input_SearchParametersChanged(SearchParameters parameters)
@@ -46,6 +47,7 @@ namespace MediaManager.GUI.Controls.Search
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // TODO: double click does not work properly
             if (e.ClickCount == 2)
             {
                 var id = (int)((TextBlock)sender).Tag;
@@ -53,5 +55,7 @@ namespace MediaManager.GUI.Controls.Search
                 else MediumSelected?.Invoke(GetPart(id).MediumId, id);
             }
         }
+
+        public void ReloadResultList() => input_SearchParametersChanged(CurrentSearchParameters);
     }
 }

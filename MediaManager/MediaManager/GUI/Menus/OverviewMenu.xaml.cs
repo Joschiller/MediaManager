@@ -69,9 +69,9 @@ namespace MediaManager.GUI.Menus
         {
             catalogTitle.Text = CURRENT_CATALOGUE.Title;
             multiUseTabs.ReloadGUI();
-            // TODO: reload search Panel, without clearing search or changing page
+            searchPanel.ReloadResultList();
         }
 
-        private void SearchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId));
+        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId));
     }
 }

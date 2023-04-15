@@ -42,7 +42,7 @@
                     <multiusetabs:StatisticsOverview/>
                 </multiusetabs:MultiUseTabs>
             </DockPanel>
-            <search:SearchPanel Grid.Column="1" MediumSelected="SearchPanel_MediumSelected"/>
+            <search:SearchPanel x:Name="searchPanel" Grid.Column="1" MediumSelected="searchPanel_MediumSelected"/>
         </Grid>
     </DockPanel>
 </Window>
