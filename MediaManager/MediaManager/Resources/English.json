@@ -114,7 +114,8 @@
         "AddTag": "Add tag",
         "EditTag": "Edit tag",
         "DeleteTag": "Delete tag"
-      }
+      },
+      "TagDeletion": "the selected tag"
     },
     "Catalog": {
       "ToolTip": {

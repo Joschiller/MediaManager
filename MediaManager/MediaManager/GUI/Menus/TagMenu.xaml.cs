@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
 {
@@ -39,14 +40,24 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void btnAddTagClick(object sender, RoutedEventArgs e) => new EditTagDialog(null).ShowDialog();
+        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        {
+            new EditTagDialog(null).ShowDialog();
+            LoadTags();
+        }
         private void btnEditTagClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (SelectedTag == null) return;
+            new EditTagDialog(SelectedTag.Id).ShowDialog();
+            LoadTags();
         }
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (SelectedTag == null) return;
+
+            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
+            if (confirmation.HasValue && confirmation.Value) Writer.DeleteTag(SelectedTag.Id);
+            LoadTags();
         }
         // TODO: save button => enabled, if anything changed => shown in separate group
         #endregion

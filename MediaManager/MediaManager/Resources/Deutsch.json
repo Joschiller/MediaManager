@@ -114,7 +114,8 @@
         "AddTag": "Kategorie hinzufügen",
         "EditTag": "Kategorie bearbeiten",
         "DeleteTag": "Kategorie löschen"
-      }
+      },
+      "TagDeletion": "die gewählte Kategorie"
     },
     "Catalog": {
       "ToolTip": {
