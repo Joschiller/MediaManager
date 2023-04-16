@@ -5,6 +5,12 @@ using System.Windows;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
 
+/* TODO:
+ * Alternate design idea:
+ * - the view/edit mode is set for the whole menu
+ * - the menu stores all data (medium and parts) temporarly and overhands them to the sub controls
+ * - when saving, new media/parts are generated and old ones are updated/deleted
+ */
 namespace MediaManager.GUI.Menus
 {
     /// <summary>
@@ -20,11 +26,12 @@ namespace MediaManager.GUI.Menus
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
+            updateElementChangeOptions(true);
 
             MediumId = mediumId ?? Writer.CreateMedium();
             SelectedPartId = mediumId != null ? partId : null;
             reloadData();
-            startEditing();
+            if (!mediumId.HasValue) startEditing(); // directly edit new medium
         }
         private void reloadData()
         {
@@ -35,6 +42,11 @@ namespace MediaManager.GUI.Menus
                 Title = m.Title
             }).ToList());
             list.SelectItem(SelectedPartId);
+        }
+        private void updateElementChangeOptions(bool available)
+        {
+            Resources["btnAddPartVisible"] = available ? Visibility.Visible : Visibility.Collapsed;
+            list.IsEnabled = available;
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -59,7 +71,11 @@ namespace MediaManager.GUI.Menus
             // no value => discard
             // false => close
             // true => try saving => close, if successful
-            if (confirmation.HasValue && (!confirmation.Value || (confirmation.Value && editor.saveChanges()))) Close();
+            if (confirmation.HasValue && (!confirmation.Value || (confirmation.Value && editor.saveChanges())))
+            {
+                Close();
+                Writer.CleanupEmptyMediaAndParts();
+            }
         }
         private void NavigationBar_HelpClicked(object sender, EventArgs e)
         {
@@ -107,6 +123,7 @@ namespace MediaManager.GUI.Menus
                 SelectedPartId.HasValue ? Controls.Edit.ElementMode.Part : Controls.Edit.ElementMode.Medium,
                 SelectedPartId.HasValue ? SelectedPartId.Value : MediumId
                 );
+            updateElementChangeOptions(false);
         }
 
         private void viewer_EditClicked(Controls.Edit.ElementMode mode, int id)
@@ -114,6 +131,7 @@ namespace MediaManager.GUI.Menus
             viewer.Visibility = Visibility.Collapsed;
             editor.Visibility = Visibility.Visible;
             editor.LoadElement(mode, id);
+            updateElementChangeOptions(false);
         }
         private void viewer_DeleteClicked(Controls.Edit.ElementMode mode, int id)
         {
@@ -123,6 +141,7 @@ namespace MediaManager.GUI.Menus
                 list.SelectItem(null);
                 reloadData();
             }
+            updateElementChangeOptions(true);
         }
         private void editor_QuitEditing(Controls.Edit.ElementMode mode, int id)
         {
@@ -131,6 +150,7 @@ namespace MediaManager.GUI.Menus
             viewer.LoadElement(mode, id);
             var medium = Reader.GetMedium(MediumId);
             reloadData();
+            updateElementChangeOptions(true);
         }
         #endregion
     }

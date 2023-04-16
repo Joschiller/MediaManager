@@ -40,8 +40,8 @@
         <TextBox x:Name="location" Grid.Row="4" Grid.Column="1" MaxLength="128" TextChanged="textChanged"/>
         <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
-                <atoms:ImageButton x:Name="discardButton" DockPanel.Dock="Right" Size="48" Click="discardButton_Click" EnabledIconSource="../../../Resources/undo.png"/>
+                <atoms:ImageButton x:Name="discardButton" Size="48" Click="discardButton_Click" EnabledIconSource="../../../Resources/undo.png"/>
+                <atoms:ImageButton x:Name="saveButton" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
             </StackPanel>
             <Grid x:Name="integerMeta">
                 <Grid.ColumnDefinitions>

@@ -29,8 +29,8 @@
         <TextBlock x:Name="location" Grid.Row="4" Grid.Column="1"/>
         <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <atoms:ImageButton x:Name="editButton" DockPanel.Dock="Right" Size="48" Click="editButton_Click" EnabledIconSource="../../../Resources/edit_blue.png"/>
-                <atoms:ImageButton x:Name="deleteButton" DockPanel.Dock="Right" Size="48" Click="deleteButton_Click" EnabledIconSource="../../../Resources/delete.png"/>
+                <atoms:ImageButton x:Name="deleteButton" Size="48" Click="deleteButton_Click" EnabledIconSource="../../../Resources/delete.png"/>
+                <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click" EnabledIconSource="../../../Resources/edit_blue.png"/>
             </StackPanel>
             <Grid x:Name="integerMeta">
                 <Grid.ColumnDefinitions>

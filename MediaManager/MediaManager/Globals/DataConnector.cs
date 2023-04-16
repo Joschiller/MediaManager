@@ -158,6 +158,12 @@ namespace MediaManager.Globals
                 DBCONNECTION.Parts.Remove(DBCONNECTION.Parts.Find(id));
                 DBCONNECTION.SaveChanges();
             }
+            public static void CleanupEmptyMediaAndParts()
+            {
+                DBCONNECTION.Parts.RemoveRange(DBCONNECTION.Parts.Where(p => p.Title.Length == 0));
+                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Media.Where(m => m.Title.Length == 0));
+                DBCONNECTION.SaveChanges();
+            }
             public static void DeletePlaylist(int id)
             {
                 DBCONNECTION.Playlists.Remove(DBCONNECTION.Playlists.Find(id));

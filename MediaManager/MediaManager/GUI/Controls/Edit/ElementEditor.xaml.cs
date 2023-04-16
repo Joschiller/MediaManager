@@ -71,6 +71,8 @@ namespace MediaManager.GUI.Controls.Edit
                 tags.SetTagList(GetTagsForPart(id));
                 // TODO disable tags that are set by parent medium
             }
+            // cannot only to old value, if old value is valid
+            discardButton.Visibility = title.Text.Trim().Length == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void favoriteEnableButton_Click(object sender, RoutedEventArgs e)
