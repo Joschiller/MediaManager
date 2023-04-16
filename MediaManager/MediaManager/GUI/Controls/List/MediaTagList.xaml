@@ -14,7 +14,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <components:Pager x:Name="pager" Grid.Row="0" Grid.Column="0" PageChanged="pager_PageChanged"/>
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="48" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
+            <components:Pager x:Name="pager" PageChanged="pager_PageChanged"/>
+        </DockPanel>
         <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -27,14 +30,18 @@
             <atoms:TagCheckbox x:Name="mediumTag" TagValueChanged="mediumTag_TagValueChanged"/>
         </DockPanel>
         <ListBox x:Name="partList" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Parts}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="1"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <atoms:TagCheckbox Tag="{Binding Part.Id}" TagName="{Binding Part.Title}" Value="{Binding TagValue}" TagValueChanged="TagCheckbox_TagValueChanged"/>
+                    <Grid Tag="{Binding Part.Id}" MouseUp="Grid_MouseUp" Height="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Background="{StaticResource control_background_brush}" Margin="8" VerticalAlignment="Center">
+                            <Image x:Name="checkbox" Width="48" Height="48" Margin="-8" Source="{Binding Icon}"/>
+                        </Grid>
+                        <TextBlock Grid.Column="1" Text="{Binding Part.Title}" VerticalAlignment="Center" Margin="8" TextWrapping="WrapWithOverflow"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

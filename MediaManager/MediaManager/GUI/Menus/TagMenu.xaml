@@ -35,7 +35,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <list:MediaTagList Grid.Column="1" Visibility="{DynamicResource tagDependentVisibility}"/>
+            <list:MediaTagList x:Name="mediaTagList" Grid.Column="1" Visibility="{DynamicResource tagDependentVisibility}"/>
         </Grid>
     </DockPanel>
 </Window>

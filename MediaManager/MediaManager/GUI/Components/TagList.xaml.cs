@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using static MediaManager.TagUtils;
 
 namespace MediaManager.GUI.Components
 {
@@ -43,13 +41,6 @@ namespace MediaManager.GUI.Components
                 });
             });
             return list;
-        }
-
-        private ImageSource GetIconForTagValue(bool? value)
-        {
-            if (!value.HasValue) return new BitmapImage(new Uri("/Resources/checkbox_neutral.png", UriKind.Relative));
-            else if (value.Value) return new BitmapImage(new Uri("/Resources/checkbox_positive.png", UriKind.Relative));
-            else return new BitmapImage(new Uri("/Resources/checkbox_negative.png", UriKind.Relative));
         }
 
         public TagList()

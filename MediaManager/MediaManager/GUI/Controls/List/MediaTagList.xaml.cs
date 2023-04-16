@@ -1,15 +1,18 @@
-﻿using System;
+﻿using MediaManager.Globals.LanguageProvider;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.TagUtils;
 
 namespace MediaManager.GUI.Controls.List
 {
     /// <summary>
     /// Interaction logic for MediaTagList.xaml
     /// </summary>
-    public partial class MediaTagList : UserControl
+    public partial class MediaTagList : UserControl, UpdatedLanguageUser
     {
         public ObservableCollection<Medium> Media { get; set; } = new ObservableCollection<Medium>();
         public ObservableCollection<MediaTagListElement> Parts { get; set; } = new ObservableCollection<MediaTagListElement>();
@@ -20,8 +23,10 @@ namespace MediaManager.GUI.Controls.List
         public MediaTagList()
         {
             InitializeComponent();
+            DataContext = this;
             pager.CurrentPage = 1;
             pager.TotalPages = Reader.CountOfMedia / ItemsPerPage + (Reader.CountOfMedia % ItemsPerPage == 0 ? 0 : 1);
+            LoadTagsOfSelectedMedium();
         }
 
         public void setCurrentTag(Tag tag)
@@ -51,36 +56,114 @@ namespace MediaManager.GUI.Controls.List
             {
                 mediumTag.Visibility = Visibility.Visible;
                 partList.Visibility = Visibility.Visible;
+                saveButton.Visibility = Visibility.Visible;
                 var currentMedium = mediaList.SelectedItem as Medium;
                 foreach (var p in currentMedium.Parts)
                 {
+                    var value = Reader.GetTagsForPart(p.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                     Parts.Add(new MediaTagListElement
                     {
-                        TagValue = Reader.GetTagsForPart(p.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value,
-                        Part = p
+                        Part = p,
+                        Value = value,
+                        Icon = GetIconForTagValue(value)
                     });
                 }
                 mediumTag.Value = Reader.GetTagsForMedium(currentMedium.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                 mediumTag.TagName = currentMedium.Title;
+                saveButton.Enabled = false;
             }
             else
             {
                 mediumTag.Visibility = Visibility.Hidden;
                 partList.Visibility = Visibility.Hidden;
+                saveButton.Visibility = Visibility.Hidden;
+                saveButton.Enabled = false;
             }
         }
 
         private void mediumTag_TagValueChanged(Atoms.TagCheckbox sender, bool? newValue)
         {
-            throw new NotImplementedException();
-            // TODO: store current value within component
-            // TODO: trigger onchange
+            if (mediaList.SelectedItem == null) return;
+
+            saveButton.Enabled = true;
         }
-        private void TagCheckbox_TagValueChanged(Atoms.TagCheckbox sender, bool? newValue)
+        private void Grid_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
-            // TODO: store current value within component
-            // TODO: trigger onchange
+            if (mediaList.SelectedItem == null) return;
+
+            var partId = (int)((Grid)sender).Tag;
+            var currentTags = Parts.ToList();
+            var tagToEdit = currentTags.FirstOrDefault(p => p.Part.Id == partId);
+            if (tagToEdit == null) return;
+
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                if (!tagToEdit.Value.HasValue)
+                {
+                    tagToEdit.Value = true;
+                    tagToEdit.Icon = GetIconForTagValue(true);
+                }
+                else if (tagToEdit.Value.Value)
+                {
+                    tagToEdit.Value = false;
+                    tagToEdit.Icon = GetIconForTagValue(false);
+                }
+                else if (!tagToEdit.Value.Value)
+                {
+                    tagToEdit.Value = null;
+                    tagToEdit.Icon = GetIconForTagValue(null);
+                }
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                if (!tagToEdit.Value.HasValue)
+                {
+                    tagToEdit.Value = false;
+                    tagToEdit.Icon = GetIconForTagValue(false);
+                }
+                else if (tagToEdit.Value.Value)
+                {
+                    tagToEdit.Value = null;
+                    tagToEdit.Icon = GetIconForTagValue(null);
+                }
+                else if (!tagToEdit.Value.Value)
+                {
+                    tagToEdit.Value = true;
+                    tagToEdit.Icon = GetIconForTagValue(true);
+                }
+            }
+
+            Parts.Clear();
+            currentTags.ForEach(Parts.Add);
+
+            saveButton.Enabled = true;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaList.SelectedItem == null) return;
+
+            var currentMedium = mediaList.SelectedItem as Medium;
+            // update medium
+            var mediumTags = Reader.GetTagsForMedium(currentMedium.Id);
+            mediumTags.FirstOrDefault(t => t.Tag.Id == CurrentTag.Id).Value = mediumTag.Value;
+            Writer.SaveMedium(Reader.GetMedium(currentMedium.Id), mediumTags);
+
+            // update parts
+            foreach (var p in Parts)
+            {
+                var partTags = Reader.GetTagsForPart(p.Part.Id);
+                partTags.FirstOrDefault(t => t.Tag.Id == CurrentTag.Id).Value = p.Value;
+                Writer.SavePart(Reader.GetPart(p.Part.Id), partTags);
+            }
+
+            LoadTagsOfSelectedMedium();
+        }
+
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void LoadTexts(string language)
+        {
+            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
         }
     }
 }

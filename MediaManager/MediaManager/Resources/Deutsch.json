@@ -99,6 +99,9 @@
     },
     "CatalogList": {
       "ActiveString": "Aktueller Katalog"
+    },
+    "MediaTagList": {
+      "Save": "Geänderte Kategorien speichern"
     }
   },
   "Menus": {

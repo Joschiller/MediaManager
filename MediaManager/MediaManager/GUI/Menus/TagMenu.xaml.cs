@@ -66,7 +66,6 @@ namespace MediaManager.GUI.Menus
                 LoadTags();
             }
         }
-        // TODO: save button => enabled, if anything changed => shown in separate group
         #endregion
 
         private void LoadTags()
@@ -74,6 +73,10 @@ namespace MediaManager.GUI.Menus
             Tags.Clear();
             Reader.Tags.ForEach(Tags.Add);
         }
-        private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) => Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
+        private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
+            mediaTagList.setCurrentTag(SelectedTag);
+        }
     }
 }
