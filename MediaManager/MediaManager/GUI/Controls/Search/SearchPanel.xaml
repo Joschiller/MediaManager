@@ -5,15 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:components="clr-namespace:MediaManager.GUI.Components"
              mc:Ignorable="d">
-    <DockPanel>
-        <local:SearchInput x:Name="input" DockPanel.Dock="Top" SearchParametersChanged="input_SearchParametersChanged"/>
-        <components:Pager x:Name="pager" DockPanel.Dock="Top" HorizontalAlignment="Right" PageChanged="pager_PageChanged"/>
-        <ListView x:Name="resultList" ItemsSource="{Binding SearchResult}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:SearchInput x:Name="input" Grid.Row="0" SearchParametersChanged="input_SearchParametersChanged"/>
+        <components:Pager x:Name="pager" Grid.Row="1" HorizontalAlignment="Right" PageChanged="pager_PageChanged"/>
+        <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tag="{Binding Id}" Text="{Binding Text}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </DockPanel>
+    </Grid>
 </UserControl>
