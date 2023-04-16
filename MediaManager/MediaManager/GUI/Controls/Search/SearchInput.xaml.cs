@@ -1,4 +1,6 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -30,6 +32,18 @@ namespace MediaManager.GUI.Controls.Search
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
+        }
+
+        public void reloadTagList()
+        {
+            var tags = new List<ValuedTag>();
+            var currentFilter = tagList.GetTagList();
+            MediaManager.Globals.DataConnector.Reader.Tags.ForEach(t => tags.Add(new ValuedTag
+            {
+                Tag = t,
+                Value = currentFilter.FirstOrDefault(f => f.Tag.Id == t.Id)?.Value ?? null
+            }));
+            tagList.SetTagList(tags);
         }
 
         private void searchText_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

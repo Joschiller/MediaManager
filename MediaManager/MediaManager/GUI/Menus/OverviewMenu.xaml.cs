@@ -44,7 +44,11 @@ namespace MediaManager.GUI.Menus
             throw new NotImplementedException();
         }
         private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null), ShowAndReload);
-        private void btnAddTagClick(object sender, RoutedEventArgs e) => new EditTagDialog(null).ShowDialog();
+        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        {
+            var result = new EditTagDialog(null).ShowDialog();
+            if (result.HasValue && result.Value) Reload();
+        }
         private void btnTagsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new TagMenu(), ShowAndReload);
         private void btnCatalogsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu(), ShowAndReload);
@@ -69,6 +73,7 @@ namespace MediaManager.GUI.Menus
         {
             catalogTitle.Text = CURRENT_CATALOGUE.Title;
             multiUseTabs.ReloadGUI();
+            searchPanel.ReloadTags();
             searchPanel.ReloadResultList();
         }
 

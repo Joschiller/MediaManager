@@ -56,6 +56,7 @@ namespace MediaManager.GUI.Controls.Search
             }
         }
 
+        public void ReloadTags() => input.reloadTagList();
         public void ReloadResultList() => input_SearchParametersChanged(CurrentSearchParameters);
     }
 }
