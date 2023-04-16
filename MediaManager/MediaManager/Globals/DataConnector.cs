@@ -88,10 +88,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<SearchResultItem>();
 
-                var fittingTitle = DBCONNECTION.Parts.Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString));
-                var fittingSearchString = parameters.SearchWithinDescriptions
-                    ? fittingTitle.Union(DBCONNECTION.Parts.Where(p => p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
-                    : fittingTitle;
+                var fittingSearchString = DBCONNECTION.Parts.Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
 
                 var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
                 var negativeTags = parameters.SearchTags.Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList();
