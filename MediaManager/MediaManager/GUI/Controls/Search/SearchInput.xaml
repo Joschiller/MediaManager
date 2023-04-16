@@ -11,19 +11,27 @@
         </Style>
     </UserControl.Resources>
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-            <atoms:ImageButton x:Name="reset" DockPanel.Dock="Right" Size="48" Click="reset_Click"  EnabledIconSource="../../../Resources/undo.png"/>
-            <DockPanel DockPanel.Dock="Top">
-                <Button x:Name="startSearch" DockPanel.Dock="Right" Click="startSearch_Click">Search</Button>
-                <TextBox x:Name="searchText" KeyDown="searchText_KeyDown"/>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="searchText" Grid.Row="0" Grid.Column="0" KeyDown="searchText_KeyDown"/>
+            <Button x:Name="startSearch" Grid.Row="0" Grid.Column="1" Click="startSearch_Click">Search</Button>
+            <atoms:ImageButton x:Name="reset" Grid.Row="1" Grid.Column="1" Size="24" Click="reset_Click"  EnabledIconSource="../../../Resources/undo.png" VerticalAlignment="Bottom"/>
+            <DockPanel Grid.Row="1" Grid.Column="0">
+                <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click" VerticalAlignment="Top">_Show Media</Button>
+                <WrapPanel Orientation="Horizontal">
+                    <CheckBox x:Name="exactMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search _Exact</CheckBox>
+                    <CheckBox x:Name="searchDescriptionMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search in _Description</CheckBox>
+                    <CheckBox x:Name="favouriteOnlyMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search only within _Favourites</CheckBox>
+                </WrapPanel>
             </DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <CheckBox x:Name="exactMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search _Exact</CheckBox>
-                <CheckBox x:Name="searchDescriptionMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search in _Description</CheckBox>
-                <CheckBox x:Name="favouriteOnlyMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search only within _Favourites</CheckBox>
-            </StackPanel>
-            <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click">_Show Media</Button>
-        </DockPanel>
+        </Grid>
         <components:TagList x:Name="tagList" TagValueChanged="tagList_TagValueChanged"/>
     </DockPanel>
 </UserControl>
