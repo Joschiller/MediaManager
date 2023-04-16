@@ -1,6 +1,7 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -68,8 +69,7 @@ namespace MediaManager.GUI.Controls.Edit
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 publication.SetValue((uint)part.Publication_Year);
                 // TODO image
-                tags.SetTagList(GetTagsForPart(id));
-                // TODO disable tags that are set by parent medium
+                tags.SetTagList(GetTagsForPart(id), GetTagsForMedium(GetPart(id).MediumId).Where(t => t.Value.HasValue).Select(t => t.Tag.Id).ToList());
             }
             // cannot only to old value, if old value is valid
             discardButton.Visibility = title.Text.Trim().Length == 0 ? Visibility.Collapsed : Visibility.Visible;

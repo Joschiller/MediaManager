@@ -190,7 +190,12 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Parts.Add(new Part { MediumId = mediumId, Title = "", Favourite = false, Description = "", Length = 0, Publication_Year = 0 });
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
+                // set media tags for part
+                var newId = DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
+                var mediaTags = Reader.GetTagsForMedium(mediumId);
+                var part = Reader.GetPart(newId);
+                SavePart(part, mediaTags);
+                return newId;
             }
 
             public static void SaveCatalog(Catalogue catalog)
@@ -229,6 +234,15 @@ namespace MediaManager.Globals
                     });
                 }
                 DBCONNECTION.SaveChanges();
+                // overwrite relevant part tags
+                var mediumTags = Reader.GetTagsForMedium(medium.Id).Where(t => t.Value.HasValue).ToList();
+                var mediumTagsIds = mediumTags.Select(t => t.Tag.Id).ToList();
+                Reader.GetMedium(medium.Id).Parts.ToList().ForEach(p =>
+                {
+                    var partTags = Reader.GetTagsForPart(p.Id).Where(t => !mediumTagsIds.Contains(t.Tag.Id)).ToList();
+                    partTags.AddRange(mediumTags);
+                    SavePart(p, partTags);
+                });
             }
             public static void SavePart(Part part, List<ValuedTag> tags)
             {

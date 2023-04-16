@@ -13,7 +13,7 @@
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <Grid Tag="{Binding Tag.Id}" MouseUp="Grid_MouseUp" Height="Auto">
+                <Grid Tag="{Binding Tag.Id}" MouseUp="Grid_MouseUp" Height="Auto" IsEnabled="{Binding Enabled}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*"/>

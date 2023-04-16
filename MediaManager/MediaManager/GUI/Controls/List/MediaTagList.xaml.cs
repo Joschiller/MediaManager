@@ -85,6 +85,19 @@ namespace MediaManager.GUI.Controls.List
         {
             if (mediaList.SelectedItem == null) return;
 
+            if (newValue.HasValue)
+            {
+                // overwrite part tags
+                var currentPartTags = Parts.ToList();
+                var newIcon = GetIconForTagValue(newValue);
+                currentPartTags.ForEach(p =>
+                {
+                    p.Value = newValue;
+                    p.Icon = newIcon;
+                });
+                Parts.Clear();
+                currentPartTags.ForEach(Parts.Add);
+            }
             saveButton.Enabled = true;
         }
         private void Grid_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -96,45 +109,27 @@ namespace MediaManager.GUI.Controls.List
             var tagToEdit = currentTags.FirstOrDefault(p => p.Part.Id == partId);
             if (tagToEdit == null) return;
 
+            bool? newValue = null;
             if (e.ChangedButton == MouseButton.Left)
             {
-                if (!tagToEdit.Value.HasValue)
-                {
-                    tagToEdit.Value = true;
-                    tagToEdit.Icon = GetIconForTagValue(true);
-                }
-                else if (tagToEdit.Value.Value)
-                {
-                    tagToEdit.Value = false;
-                    tagToEdit.Icon = GetIconForTagValue(false);
-                }
-                else if (!tagToEdit.Value.Value)
-                {
-                    tagToEdit.Value = null;
-                    tagToEdit.Icon = GetIconForTagValue(null);
-                }
+                if (!tagToEdit.Value.HasValue) newValue = true;
+                else if (tagToEdit.Value.Value) newValue = false;
+                else if (!tagToEdit.Value.Value) newValue = null;
             }
             else if (e.ChangedButton == MouseButton.Right)
             {
-                if (!tagToEdit.Value.HasValue)
-                {
-                    tagToEdit.Value = false;
-                    tagToEdit.Icon = GetIconForTagValue(false);
-                }
-                else if (tagToEdit.Value.Value)
-                {
-                    tagToEdit.Value = null;
-                    tagToEdit.Icon = GetIconForTagValue(null);
-                }
-                else if (!tagToEdit.Value.Value)
-                {
-                    tagToEdit.Value = true;
-                    tagToEdit.Icon = GetIconForTagValue(true);
-                }
+                if (!tagToEdit.Value.HasValue) newValue = false;
+                else if (tagToEdit.Value.Value) newValue = null;
+                else if (!tagToEdit.Value.Value) newValue = true;
             }
+            tagToEdit.Value = newValue;
+            tagToEdit.Icon = GetIconForTagValue(newValue);
 
             Parts.Clear();
             currentTags.ForEach(Parts.Add);
+
+            // reset media tag
+            mediumTag.Value = null;
 
             saveButton.Enabled = true;
         }

@@ -7,5 +7,6 @@ namespace MediaManager.GUI.Components
         public Tag Tag { get; set; }
         public bool? Value { get; set; }
         public ImageSource Icon { get; set; }
+        public bool Enabled { get; set; }
     }
 }

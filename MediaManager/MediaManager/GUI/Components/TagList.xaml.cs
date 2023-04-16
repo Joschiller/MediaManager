@@ -16,7 +16,8 @@ namespace MediaManager.GUI.Components
         public event TagValueChangeHandler TagValueChanged;
 
         public ObservableCollection<TagListElement> Tags { get; private set; } = new ObservableCollection<TagListElement>();
-        public void SetTagList(List<ValuedTag> tags)
+        public void SetTagList(List<ValuedTag> tags) => SetTagList(tags, new List<int>());
+        public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds)
         {
             Tags.Clear();
             tags.OrderBy(tag => tag.Tag.Title).ToList().ForEach(t =>
@@ -25,7 +26,8 @@ namespace MediaManager.GUI.Components
                 {
                     Tag = t.Tag,
                     Value = t.Value,
-                    Icon = GetIconForTagValue(t.Value)
+                    Icon = GetIconForTagValue(t.Value),
+                    Enabled = !disabledTagIds.Contains(t.Tag.Id)
                 });
             });
         }
