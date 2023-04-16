@@ -3,21 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:analyze="clr-namespace:MediaManager.GUI.Controls.Analyze"
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}">
     <DockPanel>
-        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked">
-            <atoms:NavigationButtonGroup>
-
-            </atoms:NavigationButtonGroup>
-        </components:NavigationBar>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked"/>
         <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0">
+                <analyze:AnalyzeModeSelector DockPanel.Dock="Top" ModeChanged="AnalyzeModeSelector_ModeChanged"/>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>

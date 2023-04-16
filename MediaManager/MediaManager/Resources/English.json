@@ -103,6 +103,54 @@
     },
     "MediaTagList": {
       "Save": "Save changed tags"
+    },
+    "Analyze": {
+      "Empty": {
+        "Radio": "Empty medium",
+        "Description": "The medium does not contain any parts. That way it will never show up in the search results."
+      },
+      "Duplicate": {
+        "Radio": "Doubled medium",
+        "Description": "The medium has the same name as another medium."
+      },
+      "MediaAttribute": {
+        "Radio": "Missing media attribute",
+        "Description": {
+          "Select": "Description",
+          "Description": "The medium is missing a description."
+        },
+        "Tags": {
+          "Select": "Tags",
+          "Description": "The medium does not have any tags."
+        },
+        "Location": {
+          "Select": "Location",
+          "Description": "The medium is missing a location."
+        }
+      },
+      "PartAttribute": {
+        "Radio": "Missing media part attribute",
+        "Description": {
+          "Select": "Description",
+          "Description": "The media part is missing a description."
+        },
+        "Tags": {
+          "Select": "Tags",
+          "Description": "The media part does not have any tags."
+        },
+        "Length": {
+          "Select": "Length",
+          "Description": "The media part is missing the length value."
+        },
+        "Publication": {
+          "Select": "Publication year",
+          "Description": "The media part is missing the publication year value."
+        },
+        "Image": {
+          "Select": "Image",
+          "Description": "The media part is missing an image."
+        }
+      }
     }
   },
   "Menus": {

@@ -30,7 +30,7 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         #endregion
 
@@ -41,5 +41,10 @@ namespace MediaManager.GUI.Menus
             throw new NotImplementedException();
         }
         #endregion
+
+        private void AnalyzeModeSelector_ModeChanged(Controls.Analyze.AnalyzeMode mode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

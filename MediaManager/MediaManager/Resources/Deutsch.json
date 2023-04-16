@@ -103,6 +103,54 @@
     },
     "MediaTagList": {
       "Save": "Geänderte Kategorien speichern"
+    },
+    "Analyze": {
+      "Empty": {
+        "Radio": "Leeres Medium",
+        "Description": "Das Medium enthält keine Medienteile. Deshalb wird das Medium nicht in den Suchergebnissen aufgeführt."
+      },
+      "Duplicate": {
+        "Radio": "Doppeltes Medium",
+        "Description": "Das Medium hat den gleichen Namen wie ein anderes Medium."
+      },
+      "MediaAttribute": {
+        "Radio": "Fehlendes Medienattribut",
+        "Description": {
+          "Select": "Beschreibung",
+          "Description": "Das Medium hat keine Beschreibung."
+        },
+        "Tags": {
+          "Select": "Kategorien",
+          "Description": "Das Medium hat keine Kategorien."
+        },
+        "Location": {
+          "Select": "Aufbefahrungsort",
+          "Description": "Das Medium hat keinen Standort."
+        }
+      },
+      "PartAttribute": {
+        "Radio": "Missing media part attribute",
+        "Description": {
+          "Select": "Beschreibung",
+          "Description": "Der Medienteil hat keine Beschreibung."
+        },
+        "Tags": {
+          "Select": "Kategorien",
+          "Description": "Der Medienteil hat keine Kategorien."
+        },
+        "Length": {
+          "Select": "Länge",
+          "Description": "Der Medienteil hat keine Länge."
+        },
+        "Publication": {
+          "Select": "Veröffentlichungsjahr",
+          "Description": "Der Medienteil hat kein Veröffentlichungsjahr."
+        },
+        "Image": {
+          "Select": "Bild",
+          "Description": "Der Medienteil hat kein Bild."
+        }
+      }
     }
   },
   "Menus": {
