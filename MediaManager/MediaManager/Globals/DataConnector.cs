@@ -93,15 +93,15 @@ namespace MediaManager.Globals
                     ? fittingTitle.Union(DBCONNECTION.Parts.Where(p => p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
                     : fittingTitle;
 
-                /* TODO: filtering by tags currently causes an exception due to the custom type of ValuedTag
+                var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
+                var negativeTags = parameters.SearchTags.Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList();
                 var fittingTags = parameters.ExactMode
-                    ? fittingSearchString.Where(p => parameters.SearchTags.All(t => !t.Value.HasValue || p.PT_Relation.Any(r => r.TagId == t.Tag.Id && r.Value == t.Value.Value)))
-                    : fittingSearchString.Where(p => !parameters.SearchTags.Any(t => p.PT_Relation.Any(r => t.Value.HasValue && r.TagId == t.Tag.Id && r.Value == !t.Value.Value)));
-                */
+                    ? fittingSearchString.Where(p => positiveTags.All(t => p.PT_Relation.Any(r => r.TagId == t && r.Value)) && negativeTags.All(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value)))
+                    : fittingSearchString.Where(p => (positiveTags.Count == 0 || !positiveTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value))) && (negativeTags.Count == 0 || !negativeTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && r.Value))));
 
                 var fittingFavourites = parameters.OnlySearchWithinFavourites
-                    ? fittingSearchString.Where(p => p.Favourite)
-                    : fittingSearchString;
+                    ? fittingTags.Where(p => p.Favourite)
+                    : fittingTags;
 
                 if (parameters.SearchResult == SearchResultMode.MediaList)
                 {
