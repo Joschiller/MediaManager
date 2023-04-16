@@ -19,7 +19,8 @@ namespace MediaManager.GUI.Atoms
             get => (string)GetValue(TagNameProperty);
             set => SetValue(TagNameProperty, value);
         }
-        public static readonly DependencyProperty TagNameProperty = DependencyProperty.Register("TagName", typeof(string), typeof(TagCheckbox));
+        public static readonly DependencyProperty TagNameProperty = DependencyProperty.Register("TagName", typeof(string), typeof(TagCheckbox), new PropertyMetadata(string.Empty));
+        //public static void OnTagNamePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((TextBlock)d).Text = (string)e.NewValue;
         public bool? Value
         {
             get => (bool?)GetValue(TagValueProperty);

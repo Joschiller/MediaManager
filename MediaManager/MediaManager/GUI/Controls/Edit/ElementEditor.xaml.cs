@@ -116,7 +116,7 @@ namespace MediaManager.GUI.Controls.Edit
                 Title = title.Text.Trim(),
                 Location = location.Text.Trim(),
                 Description = description.Text.Trim(),
-            }, new System.Collections.Generic.List<ValuedTag>(tags.Tags));
+            }, new System.Collections.Generic.List<ValuedTag>(tags.GetTagList()));
             else SavePart(new Part
             {
                 Id = CurrentId,
@@ -126,7 +126,7 @@ namespace MediaManager.GUI.Controls.Edit
                 Length = (int)length.Value,
                 Publication_Year = (int)publication.Value,
                 // TODO image
-            }, new System.Collections.Generic.List<ValuedTag>(tags.Tags));
+            }, new System.Collections.Generic.List<ValuedTag>(tags.GetTagList()));
             return true;
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)

@@ -13,7 +13,16 @@
         </ListBox.ItemsPanel>
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <atoms:TagCheckbox Tag="{Binding Tag.Id}" TagName="{Binding Tag.Title}" Value="{Binding Value}" TagValueChanged="TagCheckbox_TagValueChanged"/>
+                <Grid Tag="{Binding Tag.Id}" MouseUp="Grid_MouseUp" Height="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Background="{StaticResource control_background_brush}" Margin="8" VerticalAlignment="Center">
+                        <Image x:Name="checkbox" Width="48" Height="48" Margin="-8" Source="{Binding Icon}"/>
+                    </Grid>
+                    <TextBlock Grid.Column="1" Text="{Binding Tag.Title}" VerticalAlignment="Center" Margin="8" TextWrapping="WrapWithOverflow"/>
+                </Grid>
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>

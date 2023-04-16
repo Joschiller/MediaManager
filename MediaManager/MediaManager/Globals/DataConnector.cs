@@ -43,7 +43,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var mediaTags = GetMedium(id).MT_Relation;
-                foreach (var t in CURRENT_CATALOGUE?.Tags ?? new List<Tag>())
+                foreach (var t in Tags)
                 {
                     var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -68,7 +68,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var partTags = GetPart(id).PT_Relation;
-                foreach (var t in CURRENT_CATALOGUE?.Tags ?? new List<Tag>())
+                foreach (var t in Tags)
                 {
                     var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag

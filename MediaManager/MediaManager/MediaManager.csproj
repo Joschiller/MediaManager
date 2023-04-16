@@ -132,6 +132,7 @@
     <Compile Include="GUI\Components\TagList.xaml.cs">
       <DependentUpon>TagList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Components\TagListElement.cs" />
     <Compile Include="GUI\Controls\Edit\ElementEditor.xaml.cs">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
