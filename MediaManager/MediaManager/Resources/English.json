@@ -33,7 +33,8 @@
       "FavouriteOnlyMode": "Search only within _Favourites",
       "ShowMedia": "_Show Media",
       "ShowParts": "_Show Parts",
-      "Search": "Search"
+      "Search": "Search",
+      "Reset": "Reset Search"
     },
     "Edit": {
       "Label": {
