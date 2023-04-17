@@ -133,6 +133,10 @@
       <DependentUpon>TagList.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Components\TagListElement.cs" />
+    <Compile Include="GUI\Controls\Analyze\AnalyzeList.xaml.cs">
+      <DependentUpon>AnalyzeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Analyze\AnalyzeListElement.cs" />
     <Compile Include="GUI\Controls\Analyze\AnalyzeMode.cs" />
     <Compile Include="GUI\Controls\Analyze\AnalyzeModeSelector.xaml.cs">
       <DependentUpon>AnalyzeModeSelector.xaml</DependentUpon>
@@ -280,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Components\TagList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Analyze\AnalyzeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

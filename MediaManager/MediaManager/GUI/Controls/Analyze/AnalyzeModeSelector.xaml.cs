@@ -25,6 +25,7 @@ namespace MediaManager.GUI.Controls.Analyze
             RegisterAtLanguageProvider();
 
             rbEmpty.IsChecked = true;
+            afterRadioChanged();
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);

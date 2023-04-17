@@ -1,17 +1,10 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using MediaManager.GUI.Controls.Analyze;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Menus
 {
@@ -20,11 +13,15 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class AnalyzeMenu : Window, UpdatedLanguageUser
     {
+        private List<AnalyzeListElement> allItems;
+        private int itemsPerPage = Reader.Settings.ResultListLength;
+
         #region Setup
         public AnalyzeMenu()
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
+            mode_ModeChanged(mode.Mode);
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -42,9 +39,16 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
-        private void AnalyzeModeSelector_ModeChanged(Controls.Analyze.AnalyzeMode mode)
+        private void mode_ModeChanged(Controls.Analyze.AnalyzeMode mode)
         {
-            throw new NotImplementedException();
+            allItems = Reader.LoadAnalyzeResult(mode);
+            pager.CurrentPage = 1;
+            pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
+        }
+        private void pager_PageChanged(int newPage) => list.setItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
+        private void list_SelectionChanged(AnalyzeListElement element)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

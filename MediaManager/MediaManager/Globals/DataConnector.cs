@@ -88,7 +88,9 @@ namespace MediaManager.Globals
             {
                 var result = new List<SearchResultItem>();
 
-                var fittingSearchString = DBCONNECTION.Parts.Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
+                var fittingSearchString = DBCONNECTION.Parts
+                    .Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id)
+                    .Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
 
                 var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
                 var negativeTags = parameters.SearchTags.Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList();
@@ -118,6 +120,40 @@ namespace MediaManager.Globals
                 }
 
                 return result;
+            }
+
+            private static List<GUI.Controls.Analyze.AnalyzeListElement> MapMediumToAnalyzeListElement(List<Medium> list) => list.Select(m => new GUI.Controls.Analyze.AnalyzeListElement
+            {
+                Id = m.Id,
+                Text = m.Title
+            }).ToList();
+            private static List<GUI.Controls.Analyze.AnalyzeListElement> MapPartToAnalyzeListElement(List<Part> list) => list.Select(p => new GUI.Controls.Analyze.AnalyzeListElement
+            {
+                Id = p.Id,
+                Text = p.Title + " (" + p.Medium.Title + ")"
+            }).ToList();
+            public static List<GUI.Controls.Analyze.AnalyzeListElement> LoadAnalyzeResult(GUI.Controls.Analyze.AnalyzeMode mode)
+            {
+                switch(mode)
+                {
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Parts.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => CURRENT_CATALOGUE.Media.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Description.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.MT_Relation.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Location.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Description.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.PT_Relation.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Publication_Year == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartImage:
+                        var filteredParts = new List<Part>();
+                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).ToList().ForEach(p =>
+                        {
+                            if (p.Image == null || p.Image.Length == 0) filteredParts.Add(p);
+                        });
+                        return MapPartToAnalyzeListElement(filteredParts);
+                    default: return new List<GUI.Controls.Analyze.AnalyzeListElement>();
+                }
             }
 
             public static class Settings
