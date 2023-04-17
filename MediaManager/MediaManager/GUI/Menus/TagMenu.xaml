@@ -13,7 +13,7 @@
         <Visibility x:Key="tagDependentVisibility">Collapsed</Visibility>
     </Window.Resources>
     <DockPanel>
-        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked">
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
                 <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
             </atoms:NavigationButtonGroup>
