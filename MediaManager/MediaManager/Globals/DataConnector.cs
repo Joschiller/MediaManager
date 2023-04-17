@@ -138,6 +138,12 @@ namespace MediaManager.Globals
                 {
                     case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Parts.Count == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => CURRENT_CATALOGUE.Media.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumCommonTags:
+                        var allTagIds = Tags.Select(t => t.Id).ToList();
+                        return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m =>
+                            allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != true)
+                            || allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != false)
+                            ).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Description.Trim().Length == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.MT_Relation.Count == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Location.Trim().Length == 0).ToList());

@@ -105,13 +105,17 @@
       "Save": "Save changed tags"
     },
     "Analyze": {
-      "Empty": {
+      "MediumEmpty": {
         "Radio": "Empty medium",
         "Description": "The medium does not contain any parts. That way it will never show up in the search results."
       },
-      "Duplicate": {
+      "MediumDuplicate": {
         "Radio": "Doubled medium",
         "Description": "The medium has the same name as another medium."
+      },
+      "MediumCommonTags": {
+        "Radio": "Missing medium tag",
+        "Description": "All parts of the medium share a specific tag, but the common tag for the whole medium is not set."
       },
       "MediaAttribute": {
         "Radio": "Missing media attribute",

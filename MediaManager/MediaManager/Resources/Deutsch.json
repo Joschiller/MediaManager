@@ -105,13 +105,17 @@
       "Save": "Geänderte Kategorien speichern"
     },
     "Analyze": {
-      "Empty": {
+      "MediumEmpty": {
         "Radio": "Leeres Medium",
         "Description": "Das Medium enthält keine Medienteile. Deshalb wird das Medium nicht in den Suchergebnissen aufgeführt."
       },
-      "Duplicate": {
+      "MediumDuplicate": {
         "Radio": "Doppeltes Medium",
         "Description": "Das Medium hat den gleichen Namen wie ein anderes Medium."
+      },
+      "MediumCommonTags": {
+        "Radio": "Fehlende Medienkategorie",
+        "Description": "Alle Medienteile weisen den gleichen Wert für eine Kategorie auf, aber die allgemeine Medienkategorie ist nicht gesetzt."
       },
       "MediaAttribute": {
         "Radio": "Fehlendes Medienattribut",

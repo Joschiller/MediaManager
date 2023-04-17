@@ -4,6 +4,7 @@
     {
         MediumEmpty,
         MediumDoubled,
+        MediumCommonTags,
         MediumDescription,
         MediumTags,
         MediumLocation,

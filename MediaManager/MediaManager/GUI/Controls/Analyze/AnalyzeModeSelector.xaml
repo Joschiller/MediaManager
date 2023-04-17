@@ -11,8 +11,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
-            <RadioButton x:Name="rbEmpty" Click="rbEmpty_Click"/>
-            <RadioButton x:Name="rbDuplicate" Click="rbDuplicate_Click"/>
+            <RadioButton x:Name="rbMediumEmpty" Click="rbMediumEmpty_Click"/>
+            <RadioButton x:Name="rbMediumDuplicate" Click="rbMediumDuplicate_Click"/>
+            <RadioButton x:Name="rbMediumCommonTags" Click="rbMediumCommonTags_Click"/>
             <RadioButton x:Name="rbMediaAttribute" Click="rbMediaAttribute_Click"/>
             <RadioButton x:Name="rbPartAttribute" Click="rbPartAttribute_Click"/>
         </StackPanel>

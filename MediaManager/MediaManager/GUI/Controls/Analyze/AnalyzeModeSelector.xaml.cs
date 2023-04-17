@@ -24,15 +24,16 @@ namespace MediaManager.GUI.Controls.Analyze
             DataContext = this;
             RegisterAtLanguageProvider();
 
-            rbEmpty.IsChecked = true;
+            rbMediumEmpty.IsChecked = true;
             afterRadioChanged();
         }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            rbEmpty.Content = LanguageProvider.getString("Controls.Analyze.Empty.Radio");
-            rbDuplicate.Content = LanguageProvider.getString("Controls.Analyze.Duplicate.Radio");
+            rbMediumEmpty.Content = LanguageProvider.getString("Controls.Analyze.MediumEmpty.Radio");
+            rbMediumDuplicate.Content = LanguageProvider.getString("Controls.Analyze.MediumDuplicate.Radio");
+            rbMediumCommonTags.Content = LanguageProvider.getString("Controls.Analyze.MediumCommonTags.Radio");
             rbMediaAttribute.Content = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Radio");
             rbPartAttribute.Content = LanguageProvider.getString("Controls.Analyze.PartAttribute.Radio");
             SetupComboBox();
@@ -45,6 +46,7 @@ namespace MediaManager.GUI.Controls.Analyze
             {
                 case AnalyzeMode.MediumEmpty:
                 case AnalyzeMode.MediumDoubled:
+                case AnalyzeMode.MediumCommonTags:
                     attributeSelection.Visibility = Visibility.Collapsed;
                     break;
                 case AnalyzeMode.MediumDescription:
@@ -79,8 +81,9 @@ namespace MediaManager.GUI.Controls.Analyze
         {
             switch (Mode)
             {
-                case AnalyzeMode.MediumEmpty: description.Text = LanguageProvider.getString("Controls.Analyze.Empty.Description"); break;
-                case AnalyzeMode.MediumDoubled: description.Text = LanguageProvider.getString("Controls.Analyze.Duplicate.Description"); break;
+                case AnalyzeMode.MediumEmpty: description.Text = LanguageProvider.getString("Controls.Analyze.MediumEmpty.Description"); break;
+                case AnalyzeMode.MediumDoubled: description.Text = LanguageProvider.getString("Controls.Analyze.MediumDuplicate.Description"); break;
+                case AnalyzeMode.MediumCommonTags: description.Text = LanguageProvider.getString("Controls.Analyze.MediumCommonTags.Description"); break;
                 case AnalyzeMode.MediumDescription: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Description.Description"); break;
                 case AnalyzeMode.MediumTags: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Tags.Description"); break;
                 case AnalyzeMode.MediumLocation: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Location.Description"); break;
@@ -92,14 +95,19 @@ namespace MediaManager.GUI.Controls.Analyze
             }
         }
 
-        private void rbEmpty_Click(object sender, RoutedEventArgs e)
+        private void rbMediumEmpty_Click(object sender, RoutedEventArgs e)
         {
             Mode = AnalyzeMode.MediumEmpty;
             afterRadioChanged();
         }
-        private void rbDuplicate_Click(object sender, RoutedEventArgs e)
+        private void rbMediumDuplicate_Click(object sender, RoutedEventArgs e)
         {
             Mode = AnalyzeMode.MediumDoubled;
+            afterRadioChanged();
+        }
+        private void rbMediumCommonTags_Click(object sender, RoutedEventArgs e)
+        {
+            Mode = AnalyzeMode.MediumCommonTags;
             afterRadioChanged();
         }
         private void rbMediaAttribute_Click(object sender, RoutedEventArgs e)
