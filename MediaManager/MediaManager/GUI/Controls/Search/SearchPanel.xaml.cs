@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
@@ -38,11 +39,7 @@ namespace MediaManager.GUI.Controls.Search
         private void pager_PageChanged(int newPage)
         {
             SearchResult.Clear();
-            for (int i = 0; i < ItemsPerPage; i++)
-            {
-                if ((newPage - 1) * ItemsPerPage + i >= CompleteResultList.Count) break;
-                SearchResult.Add(CompleteResultList[(newPage - 1) * ItemsPerPage + i]);
-            }
+            CompleteResultList.Skip((newPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList().ForEach(SearchResult.Add);
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -57,6 +54,10 @@ namespace MediaManager.GUI.Controls.Search
         }
 
         public void ReloadTags() => input.reloadTagList();
-        public void ReloadResultList() => input_SearchParametersChanged(CurrentSearchParameters);
+        public void ReloadResultList()
+        {
+            ItemsPerPage = Reader.Settings.ResultListLength;
+            input_SearchParametersChanged(CurrentSearchParameters);
+        }
     }
 }
