@@ -197,6 +197,9 @@
       "Saved": "Die Einstellungen wurden erfolgreich gespeichert.",
       "ValidationFailed": "Einige Einstellungen weisen invalide Werte auf. Versuchen Sie, die Werte zu korrigieren und erneut zu speichen.",
       "TabName": "Globale Einstellungen"
+    },
+    "Analyze": {
+      "Mode": "Analysemodus"
     }
   },
   "Dialog": {

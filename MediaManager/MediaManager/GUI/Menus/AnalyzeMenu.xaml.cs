@@ -27,7 +27,7 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            //throw new NotImplementedException();
+            modeGroup.Header = LanguageProvider.getString("Menus.Analyze.Mode");
         }
         #endregion
 

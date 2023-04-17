@@ -197,6 +197,9 @@
       "Saved": "The settings were successfully saved.",
       "ValidationFailed": "There are invalid settings. Please check the inserted values and try saving again.",
       "TabName": "Global settings"
+    },
+    "Analyze": {
+      "Mode": "Analysis mode"
     }
   },
   "Dialog": {

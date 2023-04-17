@@ -15,7 +15,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
-                <analyze:AnalyzeModeSelector x:Name="mode" DockPanel.Dock="Top" ModeChanged="mode_ModeChanged"/>
+                <GroupBox x:Name="modeGroup" DockPanel.Dock="Top">
+                    <analyze:AnalyzeModeSelector x:Name="mode" ModeChanged="mode_ModeChanged"/>
+                </GroupBox>
                 <components:Pager x:Name="pager" DockPanel.Dock="Top" PageChanged="pager_PageChanged"/>
                 <analyze:AnalyzeList x:Name="list" SelectionChanged="list_SelectionChanged"/>
             </DockPanel>
