@@ -8,5 +8,6 @@ namespace MediaManager.GUI.Components
         public bool? Value { get; set; }
         public ImageSource Icon { get; set; }
         public bool Enabled { get; set; }
+        public SolidColorBrush Background { get; set; }
     }
 }

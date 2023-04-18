@@ -161,6 +161,15 @@ namespace MediaManager.Globals
                     default: return new List<GUI.Controls.Analyze.AnalyzeListElement>();
                 }
             }
+            public static List<Medium> GetDoubledMediaToMediumTitle(string title) => CURRENT_CATALOGUE.Media.Where(m => m.Title == title).ToList();
+            public static List<int> GetNonCommonTagsOfMedium(int mediumId)
+            {
+                var m = GetMedium(mediumId);
+                return Tags.Where(t =>
+                    (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != true)
+                    || (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != false)
+                ).Select(t => t.Id).ToList();
+            }
 
             public static class Settings
             {

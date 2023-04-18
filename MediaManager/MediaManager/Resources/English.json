@@ -154,6 +154,11 @@
           "Select": "Image",
           "Description": "The media part is missing an image."
         }
+      },
+      "AnalyzePreview": {
+        "MediumSelection": "Doubled media",
+        "MediaTagListLabel": "Tags of the medium",
+        "PartListLabel": "Parts on the medium"
       }
     }
   },

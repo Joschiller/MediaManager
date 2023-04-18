@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using static MediaManager.TagUtils;
 
 namespace MediaManager.GUI.Components
@@ -17,7 +18,8 @@ namespace MediaManager.GUI.Components
 
         public ObservableCollection<TagListElement> Tags { get; private set; } = new ObservableCollection<TagListElement>();
         public void SetTagList(List<ValuedTag> tags) => SetTagList(tags, new List<int>());
-        public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds)
+        public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds) => SetTagList(tags, disabledTagIds, new List<int>());
+        public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds, List<int> highlightedTagIds)
         {
             Tags.Clear();
             tags.OrderBy(tag => tag.Tag.Title).ToList().ForEach(t =>
@@ -27,7 +29,8 @@ namespace MediaManager.GUI.Components
                     Tag = t.Tag,
                     Value = t.Value,
                     Icon = GetIconForTagValue(t.Value),
-                    Enabled = !disabledTagIds.Contains(t.Tag.Id)
+                    Enabled = !disabledTagIds.Contains(t.Tag.Id),
+                    Background = new SolidColorBrush(highlightedTagIds.Contains(t.Tag.Id) ? Color.FromArgb(255, 229, 103, 34) : Color.FromArgb(0, 0, 0, 0))
                 });
             });
         }

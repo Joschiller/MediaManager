@@ -141,6 +141,9 @@
     <Compile Include="GUI\Controls\Analyze\AnalyzeModeSelector.xaml.cs">
       <DependentUpon>AnalyzeModeSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Analyze\AnalyzePreview.xaml.cs">
+      <DependentUpon>AnalyzePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\Edit\ElementEditor.xaml.cs">
       <DependentUpon>ElementEditor.xaml</DependentUpon>
     </Compile>
@@ -292,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Controls\Analyze\AnalyzeModeSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Analyze\AnalyzePreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

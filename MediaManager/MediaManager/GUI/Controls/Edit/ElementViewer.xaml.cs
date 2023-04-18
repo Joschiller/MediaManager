@@ -25,8 +25,9 @@ namespace MediaManager.GUI.Controls.Edit
             RegisterAtLanguageProvider();
         }
 
-        public void LoadElement(ElementMode mode, int id)
+        public void LoadElement(ElementMode mode, int id, bool hideDeleteButton = false)
         {
+            deleteButton.Visibility = hideDeleteButton ? Visibility.Collapsed : Visibility.Visible;
             Mode = mode;
             CurrentId = id;
             if (Mode == ElementMode.Medium)

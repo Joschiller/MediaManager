@@ -154,6 +154,11 @@
           "Select": "Bild",
           "Description": "Der Medienteil hat kein Bild."
         }
+      },
+      "AnalyzePreview": {
+        "MediumSelection": "Doppelte Medien",
+        "MediaTagListLabel": "Kategorien des Mediums",
+        "PartListLabel": "Medienteile"
       }
     }
   },

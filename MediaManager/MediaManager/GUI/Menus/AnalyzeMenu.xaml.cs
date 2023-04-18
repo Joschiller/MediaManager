@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
 {
@@ -21,8 +22,9 @@ namespace MediaManager.GUI.Menus
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
-            mode_ModeChanged(mode.Mode);
+            reload();
         }
+        private void reload() => mode_ModeChanged(mode.Mode);
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
@@ -46,9 +48,37 @@ namespace MediaManager.GUI.Menus
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
         }
         private void pager_PageChanged(int newPage) => list.setItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
-        private void list_SelectionChanged(AnalyzeListElement element)
+        private void list_SelectionChanged(AnalyzeListElement element) => preview.LoadPreview(mode.Mode, element);
+        private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element)
         {
-            //throw new NotImplementedException();
+            switch (mode)
+            {
+                case AnalyzeMode.MediumDoubled:
+                    // TODO open merge editor and reload on back navigation
+                    break;
+                case AnalyzeMode.MediumEmpty:
+                case AnalyzeMode.MediumCommonTags:
+                case AnalyzeMode.MediumDescription:
+                case AnalyzeMode.MediumTags:
+                case AnalyzeMode.MediumLocation:
+                    OpenWindow(this, new EditMenu(element.Id, null), () =>
+                    {
+                        Show();
+                        reload();
+                    });
+                    break;
+                case AnalyzeMode.PartDescription:
+                case AnalyzeMode.PartTags:
+                case AnalyzeMode.PartLength:
+                case AnalyzeMode.PartPublication:
+                case AnalyzeMode.PartImage:
+                    OpenWindow(this, new EditMenu(Reader.GetPart(element.Id).MediumId, element.Id), () =>
+                    {
+                        Show();
+                        reload();
+                    });
+                    break;
+            }
         }
     }
 }
