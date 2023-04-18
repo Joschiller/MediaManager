@@ -1,0 +1,21 @@
+﻿<Window x:Class="MediaManager.GUI.Menus.MergeMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components"
+        mc:Ignorable="d"
+        Style="{StaticResource defaultWindow}">
+    <DockPanel>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked"/>
+        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <TabControl>
+            <TabItem>
+                <!-- First Tab -> Selection of media to merge -> Selection of media information to use (one description, one tag list, one location, ...; but can be taken from different media) -> list of all parts (grouped by medium) -->
+            </TabItem>
+            <TabItem>
+                <!-- Second Tab -> Preview of the newly generated medium as a List like in the EditMenu -> Elements can be selected and viewed in more detail -->
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

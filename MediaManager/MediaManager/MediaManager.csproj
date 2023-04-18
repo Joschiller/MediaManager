@@ -200,6 +200,9 @@
     <Compile Include="GUI\Menus\EditMenu.xaml.cs">
       <DependentUpon>EditMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Menus\MergeMenu.xaml.cs">
+      <DependentUpon>MergeMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Menus\OverviewMenu.xaml.cs">
       <DependentUpon>OverviewMenu.xaml</DependentUpon>
     </Compile>
@@ -363,6 +366,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Menus\EditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Menus\MergeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

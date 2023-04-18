@@ -54,7 +54,11 @@ namespace MediaManager.GUI.Menus
             switch (mode)
             {
                 case AnalyzeMode.MediumDoubled:
-                    // TODO open merge editor and reload on back navigation
+                    OpenWindow(this, new MergeMenu(element.Text), () =>
+                    {
+                        Show();
+                        reload();
+                    });
                     break;
                 case AnalyzeMode.MediumEmpty:
                 case AnalyzeMode.MediumCommonTags:
