@@ -27,6 +27,12 @@ namespace MediaManager.GUI.Controls.List
             SelectionChanged?.Invoke(id);
         }
 
+        public int? GetSelectedItem()
+        {
+            if (list.SelectedItem == null) return null;
+            return (list.SelectedItem as PartListElement).Id;
+        }
+
         public PartList()
         {
             InitializeComponent();
@@ -38,10 +44,6 @@ namespace MediaManager.GUI.Controls.List
             list.SelectedItem = null;
             SelectionChanged?.Invoke(null);
         }
-        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selection = list.SelectedItem as PartListElement;
-            if (selection != null) SelectionChanged?.Invoke(selection.Id);
-        }
+        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(GetSelectedItem());
     }
 }

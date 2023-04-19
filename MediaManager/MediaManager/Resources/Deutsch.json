@@ -46,8 +46,13 @@
         "Length": "Länge",
         "Publication": "Veröffentlichungsjahr"
       },
+      "Button": {
+        "AddPart": "Einen neuen Medienteil hinzufügen",
+        "DeletePart": "Gewählten Medienteil löschen"
+      },
       "Minute": "Minute",
       "Minutes": "Minuten",
+      "PartDeletion": "der gewählte Medienteil"
     },
     "MultiUseTabs": {
       "StatisticsOverview": {
@@ -172,7 +177,6 @@
         "DeleteMedium": "Medium löschen"
       },
       "MediaDeletion": "das gewählte Medium",
-      "PartDeletion": "der gewählte Medienteil"
     },
     "Tag": {
       "ToolTip": {

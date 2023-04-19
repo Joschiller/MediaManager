@@ -152,6 +152,12 @@
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Edit\MediaEditor.xaml.cs">
+      <DependentUpon>MediaEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\Edit\MediaViewer.xaml.cs">
+      <DependentUpon>MediaViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\Edit\ViewerClasses.cs" />
     <Compile Include="GUI\Controls\List\CatalogList.xaml.cs">
       <DependentUpon>CatalogList.xaml</DependentUpon>
@@ -311,6 +317,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Controls\Edit\ElementViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Edit\MediaEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Controls\Edit\MediaViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

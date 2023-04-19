@@ -11,11 +11,8 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementViewer : UserControl, UpdatedLanguageUser
     {
-        public event ElementEventHandler EditClicked;
-        public event ElementEventHandler DeleteClicked;
-
-        private MediumWithTags medium;
-        private PartWithTags part;
+        private EditableMedium medium;
+        private EditablePart part;
 
         public ElementViewer()
         {
@@ -23,7 +20,7 @@ namespace MediaManager.GUI.Controls.Edit
             RegisterAtLanguageProvider();
         }
 
-        public MediumWithTags Medium
+        public EditableMedium Medium
         {
             get => medium;
             set
@@ -43,7 +40,7 @@ namespace MediaManager.GUI.Controls.Edit
                 tags.SetTagList(medium.Tags);
             }
         }
-        public PartWithTags Part
+        public EditablePart Part
         {
             get => part;
             set
@@ -73,12 +70,13 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
             textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
             textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
         }
+        ~ElementViewer() => LanguageProvider.Unregister(this);
     }
 }

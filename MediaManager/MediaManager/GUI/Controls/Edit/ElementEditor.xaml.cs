@@ -11,13 +11,13 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementEditor : UserControl, UpdatedLanguageUser
     {
-        public delegate void MediumHandler(MediumWithTags medium);
+        public delegate void MediumHandler(EditableMedium medium);
         public event MediumHandler MediumEdited;
-        public delegate void PartHandler(PartWithTags medium);
+        public delegate void PartHandler(EditablePart part);
         public event PartHandler PartEdited;
 
-        private MediumWithTags medium;
-        private PartWithTags part;
+        private EditableMedium medium;
+        private EditablePart part;
         private bool IsCurrentlyFavorite;
 
         public ElementEditor()
@@ -28,9 +28,9 @@ namespace MediaManager.GUI.Controls.Edit
             RegisterAtLanguageProvider();
         }
 
-        public MediumWithTags Medium
+        public EditableMedium Medium
         {
-            get => new MediumWithTags
+            get => new EditableMedium
             {
                 Id = medium.Id,
                 CatalogueId = medium.CatalogueId,
@@ -57,9 +57,9 @@ namespace MediaManager.GUI.Controls.Edit
                 tags.SetTagList(medium.Tags);
             }
         }
-        public PartWithTags Part
+        public EditablePart Part
         {
-            get => new PartWithTags
+            get => new EditablePart
             {
                 Id = part.Id,
                 MediumId = part.MediumId,
@@ -128,7 +128,7 @@ namespace MediaManager.GUI.Controls.Edit
         private void selectImage_Click(object sender, RoutedEventArgs e) => onEdited();
         private void removeImage_Click(object sender, RoutedEventArgs e) => onEdited();
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
@@ -138,5 +138,6 @@ namespace MediaManager.GUI.Controls.Edit
             textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
             textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
         }
+        ~ElementEditor() => LanguageProvider.Unregister(this);
     }
 }
