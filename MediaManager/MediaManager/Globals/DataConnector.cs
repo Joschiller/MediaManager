@@ -228,22 +228,37 @@ namespace MediaManager.Globals
                 DBCONNECTION.Tags.Add(tag);
                 DBCONNECTION.SaveChanges();
             }
-            public static int CreateMedium()
+            public static int CreateMedium(Medium medium, List<ValuedTag> tags)
             {
-                CURRENT_CATALOGUE.Media.Add(new Medium { Title = "", Location = "", Description = "" });
+                CURRENT_CATALOGUE.Media.Add(medium);
+                foreach (var t in tags)
+                {
+                    if (!t.Value.HasValue) continue;
+                    DBCONNECTION.MT_Relation.Add(new MT_Relation
+                    {
+                        MediaId = medium.Id,
+                        TagId = t.Tag.Id,
+                        Value = t.Value.Value
+                    });
+                }
                 DBCONNECTION.SaveChanges();
                 return CURRENT_CATALOGUE.Media.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
             }
-            public static int CreatePart(int mediumId)
+            public static int CreatePart(Part part, List<ValuedTag> tags)
             {
-                DBCONNECTION.Parts.Add(new Part { MediumId = mediumId, Title = "", Favourite = false, Description = "", Length = 0, Publication_Year = 0 });
+                DBCONNECTION.Parts.Add(part);
+                foreach (var t in tags)
+                {
+                    if (!t.Value.HasValue) continue;
+                    DBCONNECTION.PT_Relation.Add(new PT_Relation
+                    {
+                        PartId = part.Id,
+                        TagId = t.Tag.Id,
+                        Value = t.Value.Value
+                    });
+                }
                 DBCONNECTION.SaveChanges();
-                // set media tags for part
-                var newId = DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
-                var mediaTags = Reader.GetTagsForMedium(mediumId);
-                var part = Reader.GetPart(newId);
-                SavePart(part, mediaTags);
-                return newId;
+                return DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
             }
 
             public static void SaveCatalog(Catalogue catalog)

@@ -177,6 +177,11 @@
         "DeleteMedium": "Delete medium"
       },
       "MediaDeletion": "the selected medium",
+      "Validation": {
+        "MediaTitle": "insert a media title",
+        "PartTitle": "insert a title for every media part",
+        "PartTags": "check the tags of all parts for contradictions with the media tags"
+      }
     },
     "Tag": {
       "ToolTip": {

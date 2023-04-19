@@ -177,6 +177,11 @@
         "DeleteMedium": "Medium löschen"
       },
       "MediaDeletion": "das gewählte Medium",
+      "Validation": {
+        "MediaTitle": "einen Medientitel eingeben",
+        "PartTitle": "einen Titel für jeden Medienteil eingeben",
+        "PartTags": "die Kategorien der Medienteile auf Widersprüche mit den Medienkategorien prüfen"
+      }
     },
     "Tag": {
       "ToolTip": {

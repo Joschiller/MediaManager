@@ -87,7 +87,7 @@ namespace MediaManager.GUI.Controls.Edit
 
         private void addPart_Click(object sender, RoutedEventArgs e)
         {
-            var newId = medium.Parts.Count > 0 ? medium.Parts.Select(p => p.Id).Max() + 1 : 1
+            var newId = -medium.Parts.Count - 1;
             var newPart = new PartWithTags
             {
                 Id = newId,
