@@ -43,7 +43,7 @@ namespace MediaManager.GUI.Menus
         {
             throw new NotImplementedException();
         }
-        private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null), ShowAndReload);
+        private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null, true), ShowAndReload);
         private void btnAddTagClick(object sender, RoutedEventArgs e)
         {
             var result = new EditTagDialog(null).ShowDialog();
@@ -77,6 +77,6 @@ namespace MediaManager.GUI.Menus
             searchPanel.ReloadResultList();
         }
 
-        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId));
+        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false));
     }
 }
