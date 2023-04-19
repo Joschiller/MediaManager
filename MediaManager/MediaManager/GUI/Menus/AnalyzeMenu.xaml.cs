@@ -65,7 +65,7 @@ namespace MediaManager.GUI.Menus
                 case AnalyzeMode.MediumDescription:
                 case AnalyzeMode.MediumTags:
                 case AnalyzeMode.MediumLocation:
-                    OpenWindow(this, new EditMenu(element.Id, null), () =>
+                    OpenWindow(this, new EditMenu(element.Id, null, true), () =>
                     {
                         Show();
                         reload();
@@ -76,7 +76,7 @@ namespace MediaManager.GUI.Menus
                 case AnalyzeMode.PartLength:
                 case AnalyzeMode.PartPublication:
                 case AnalyzeMode.PartImage:
-                    OpenWindow(this, new EditMenu(Reader.GetPart(element.Id).MediumId, element.Id), () =>
+                    OpenWindow(this, new EditMenu(Reader.GetPart(element.Id).MediumId, element.Id, true), () =>
                     {
                         Show();
                         reload();
