@@ -209,6 +209,7 @@ namespace MediaManager.GUI.Menus
             editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
             Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
             Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["saveEnabled"] = AnyChangeMade;
         }
         private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
         {
@@ -244,6 +245,10 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
-        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium) => AnyChangeMade = true;
+        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
+        {
+            AnyChangeMade = true;
+            updateVisibility(true);
+        }
     }
 }
