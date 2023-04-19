@@ -73,10 +73,10 @@ namespace MediaManager.GUI.Controls.Analyze
         public void LoadTexts(string language)
         {
             labelMediumSelection.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
-            editButtonDoubled.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Edit");
+            editButtonDoubled.ToolTip = LanguageProvider.getString("Common.Button.Edit");
             labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
             labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
-            editButtonTag.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Edit");
+            editButtonTag.ToolTip = LanguageProvider.getString("Common.Button.Edit");
         }
     }
 }

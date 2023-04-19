@@ -6,6 +6,7 @@
       "Cancel": "Abbrechen",
       "Create": "Erstellen",
       "Delete": "Löschen",
+      "Edit": "Bearbeiten",
       "No": "Nein",
       "Ok": "Ok",
       "Yes": "Ja"
@@ -45,17 +46,8 @@
         "Length": "Länge",
         "Publication": "Veröffentlichungsjahr"
       },
-      "Button": {
-        "Edit": "Bearbeiten",
-        "Delete": "Löschen",
-        "Save": "Änderungen speichern",
-        "Discard": "Änderungen verwerfen"
-      },
       "Minute": "Minute",
       "Minutes": "Minuten",
-      "MediaDeletion": "das gewählte Medium",
-      "PartDeletion": "der gewählte Medienteil",
-      "ValidationFailed": "einen Titel eingeben"
     },
     "MultiUseTabs": {
       "StatisticsOverview": {
@@ -178,7 +170,9 @@
       "ToolTip": {
         "AddPart": "Teil hinzufügen",
         "DeleteMedium": "Medium löschen"
-      }
+      },
+      "MediaDeletion": "das gewählte Medium",
+      "PartDeletion": "der gewählte Medienteil"
     },
     "Tag": {
       "ToolTip": {

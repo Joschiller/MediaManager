@@ -27,25 +27,19 @@
         <Image x:Name="image" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <TextBlock x:Name="location" Grid.Row="4" Grid.Column="1"/>
-        <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <atoms:ImageButton x:Name="deleteButton" Size="48" Click="deleteButton_Click" EnabledIconSource="../../../Resources/delete.png"/>
-                <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click" EnabledIconSource="../../../Resources/edit_blue.png"/>
-            </StackPanel>
-            <Grid x:Name="integerMeta">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-                <TextBlock x:Name="length" Grid.Column="1" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
-                <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-                <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
-            </Grid>
-        </DockPanel>
+        <Grid x:Name="integerMeta" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="length" Grid.Column="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
+            <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </UserControl>

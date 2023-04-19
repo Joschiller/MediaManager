@@ -152,6 +152,7 @@
     <Compile Include="GUI\Controls\Edit\ElementViewer.xaml.cs">
       <DependentUpon>ElementViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Edit\ViewerClasses.cs" />
     <Compile Include="GUI\Controls\List\CatalogList.xaml.cs">
       <DependentUpon>CatalogList.xaml</DependentUpon>
     </Compile>

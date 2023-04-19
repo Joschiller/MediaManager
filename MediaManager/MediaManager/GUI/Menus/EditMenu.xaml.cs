@@ -93,7 +93,7 @@ namespace MediaManager.GUI.Menus
             var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationMedium;
             if (!performDeletion)
             {
-                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.MediaDeletion"));
+                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Edit.MediaDeletion"));
                 performDeletion = confirmation.HasValue && confirmation.Value;
             }
             if (performDeletion)

@@ -1,13 +1,8 @@
 ﻿using MediaManager.Globals.LanguageProvider;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using static MediaManager.Globals.DataConnector.Reader;
-using static MediaManager.Globals.DataConnector.Writer;
-using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Controls.Edit
 {
@@ -16,10 +11,13 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementEditor : UserControl, UpdatedLanguageUser
     {
-        public event ElementEventHandler QuitEditing;
+        public delegate void MediumHandler(MediumWithTags medium);
+        public event MediumHandler MediumEdited;
+        public delegate void PartHandler(PartWithTags medium);
+        public event PartHandler PartEdited;
 
-        private ElementMode Mode;
-        private int CurrentId;
+        private MediumWithTags medium;
+        private PartWithTags part;
         private bool IsCurrentlyFavorite;
 
         public ElementEditor()
@@ -30,13 +28,21 @@ namespace MediaManager.GUI.Controls.Edit
             RegisterAtLanguageProvider();
         }
 
-        public void LoadElement(ElementMode mode, int id)
+        public MediumWithTags Medium
         {
-            Mode = mode;
-            CurrentId = id;
-            if (Mode == ElementMode.Medium)
+            get => new MediumWithTags
             {
-                var media = GetMedium(id);
+                Id = medium.Id,
+                CatalogueId = medium.CatalogueId,
+                Title = title.Text.Trim(),
+                Description = description.Text.Trim(),
+                Location = location.Text.Trim(),
+                Tags = new List<ValuedTag>(tags.GetTagList())
+            };
+            set
+            {
+                medium = value;
+                part = null;
 
                 favoriteButtonEnabled.Visibility = Visibility.Collapsed;
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
@@ -45,14 +51,31 @@ namespace MediaManager.GUI.Controls.Edit
                 integerMeta.Visibility = Visibility.Collapsed;
                 image.Visibility = Visibility.Collapsed;
 
-                title.Text = media.Title;
-                location.Text = media.Location;
-                description.Text = media.Description;
-                tags.SetTagList(GetTagsForMedium(id));
+                title.Text = medium.Title;
+                location.Text = medium.Location;
+                description.Text = medium.Description;
+                tags.SetTagList(medium.Tags);
             }
-            else
+        }
+        public PartWithTags Part
+        {
+            get => new PartWithTags
             {
-                var part = GetPart(id);
+                Id = part.Id,
+                MediumId = part.MediumId,
+                Title = title.Text.Trim(),
+                Favourite = IsCurrentlyFavorite,
+                Description = description.Text.Trim(),
+                Length = (int)length.Value,
+                Publication_Year = (int)publication.Value,
+                // TODO image
+                Tags = new List<ValuedTag>(tags.GetTagList()),
+                TagsBlockedByMedium = part.TagsBlockedByMedium
+            };
+            set
+            {
+                medium = null;
+                part = value;
 
                 favoriteButtonEnabled.Visibility = Visibility.Collapsed;
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
@@ -69,73 +92,41 @@ namespace MediaManager.GUI.Controls.Edit
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 publication.SetValue((uint)part.Publication_Year);
                 // TODO image
-                tags.SetTagList(GetTagsForPart(id), GetTagsForMedium(GetPart(id).MediumId).Where(t => t.Value.HasValue).Select(t => t.Tag.Id).ToList());
+                tags.SetTagList(part.Tags, part.TagsBlockedByMedium);
             }
-            // cannot only to old value, if old value is valid
-            discardButton.Visibility = title.Text.Trim().Length == 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void onEdited()
+        {
+            if (medium != null) MediumEdited?.Invoke(Medium);
+            if (part != null) PartEdited?.Invoke(Part);
         }
 
         private void favoriteEnableButton_Click(object sender, RoutedEventArgs e)
         {
             IsCurrentlyFavorite = true;
-            saveButton.Enabled = true;
             updateFavoriteButtonVisibility();
+            onEdited();
         }
         private void favoriteDisableButton_Click(object sender, RoutedEventArgs e)
         {
             IsCurrentlyFavorite = false;
-            saveButton.Enabled = true;
             updateFavoriteButtonVisibility();
+            onEdited();
         }
         private void updateFavoriteButtonVisibility()
         {
             favoriteButtonEnabled.Visibility = IsCurrentlyFavorite ? Visibility.Visible : Visibility.Collapsed;
             favoriteButtonDisabled.Visibility = IsCurrentlyFavorite ? Visibility.Collapsed : Visibility.Visible;
         }
-        private void textChanged(object sender, TextChangedEventArgs e) => saveButton.Enabled = true;
+        private void textChanged(object sender, TextChangedEventArgs e) => onEdited();
         private void numericValueChanged(uint newVal)
         {
-            saveButton.Enabled = true;
             textMinute.Text = LanguageProvider.getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
+            onEdited();
         }
-        private void selectImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
-        private void removeImage_Click(object sender, RoutedEventArgs e) => saveButton.Enabled = true;
-
-        private bool validateData() => RunValidation(new List<Func<string>>
-            {
-                () => title.Text.Trim().Length == 0 ? LanguageProvider.getString("Controls.Edit.ValidationFailed") : null
-            });
-        /// <summary>
-        /// Saves the changes, if the data is valid.
-        /// </summary>
-        /// <returns>Whether saving was successful</returns>
-        public bool saveChanges()
-        {
-            if (!validateData()) return false;
-            if (Mode == ElementMode.Medium) SaveMedium(new Medium
-            {
-                Id = CurrentId,
-                Title = title.Text.Trim(),
-                Location = location.Text.Trim(),
-                Description = description.Text.Trim(),
-            }, new System.Collections.Generic.List<ValuedTag>(tags.GetTagList()));
-            else SavePart(new Part
-            {
-                Id = CurrentId,
-                Title = title.Text.Trim(),
-                Favourite = IsCurrentlyFavorite,
-                Description = description.Text.Trim(),
-                Length = (int)length.Value,
-                Publication_Year = (int)publication.Value,
-                // TODO image
-            }, new System.Collections.Generic.List<ValuedTag>(tags.GetTagList()));
-            return true;
-        }
-        private void saveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (saveChanges()) QuitEditing?.Invoke(Mode, CurrentId);
-        }
-        private void discardButton_Click(object sender, RoutedEventArgs e) => QuitEditing?.Invoke(Mode, CurrentId);
+        private void selectImage_Click(object sender, RoutedEventArgs e) => onEdited();
+        private void removeImage_Click(object sender, RoutedEventArgs e) => onEdited();
 
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
@@ -146,8 +137,6 @@ namespace MediaManager.GUI.Controls.Edit
             textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
             textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
             textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
-            saveButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Save");
-            discardButton.ToolTip = LanguageProvider.getString("Controls.Edit.Button.Discard");
         }
     }
 }
