@@ -7,6 +7,7 @@
       "Create": "Create",
       "Delete": "Delete",
       "Edit": "Edit",
+      "Next": "Next",
       "No": "No",
       "Ok": "Ok",
       "Yes": "Yes"
@@ -212,6 +213,29 @@
     },
     "Analyze": {
       "Mode": "Analysis mode"
+    },
+    "Merge": {
+      "Tabs": {
+        "Merge": "Merge Media",
+        "Preview": "Preview"
+      },
+      "Dialog": {
+        "MissingMediaSelection": "Please select at least two media to merge!",
+        "MissingMediaData": "Please select a medium for every media attribute!",
+        "NoPartSelected": "No parts were selected. Therefore all listed parts would be deleted when merging the media. Do you want to proceed to the preview anyway?",
+        "SubmitMerge": "Do you really want to submit the merge? By this, the merged media and ignored parts will be deleted and a new merged medium will be created.\nYou can cancel the merge process by using the back button in the navigation bar.",
+        "UnfinishedMerge": "The merge was not completed yet. Do you really want to discard the draft?",
+        "Success": "The merge was successfully completed."
+      },
+      "mediaSelectionSection": "Select the media to merge",
+      "mediaDataSection": "Media data for the new medium",
+      "labelMediaDataPreviewSelection": "Preview medium",
+      "labelMediaDataDescriptionSelection": "Use description of",
+      "labelMediaDataTagSelection": "Use tags of",
+      "labelMediaDataLocationSelection": "Use location of",
+      "partSelectionSection": "Select the parts for the merged medium",
+      "mergeButton": "Merge and view preview",
+      "submitButton": "Save merged medium"
     }
   },
   "Dialog": {

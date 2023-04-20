@@ -1,4 +1,5 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,7 +92,7 @@ namespace MediaManager.GUI.Controls.Analyze
                     break;
             }
         }
-        private void mediumSelection_SelectionChanged(object sender, SelectionChangedEventArgs e) => mediaPartListDoubled.ItemsSource = (mediumSelection.SelectedItem as Medium).Parts;
+        private void mediumSelection_SelectionChanged(object sender, SelectionChangedEventArgs e) => mediaPartListDoubled.ItemsSource = mediumSelection.SelectedItem != null ? (mediumSelection.SelectedItem as Medium).Parts : new List<Part>();
 
         private void elementViewer_EditClicked(Edit.ElementMode mode, int id) => StartEditing(this.mode, element);
         private void editButton_Click(object sender, RoutedEventArgs e) => StartEditing(mode, element);

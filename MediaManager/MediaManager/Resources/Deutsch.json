@@ -7,6 +7,7 @@
       "Create": "Erstellen",
       "Delete": "Löschen",
       "Edit": "Bearbeiten",
+      "Next": "Weiter",
       "No": "Nein",
       "Ok": "Ok",
       "Yes": "Ja"
@@ -212,6 +213,29 @@
     },
     "Analyze": {
       "Mode": "Analysemodus"
+    },
+    "Merge": {
+      "Tabs": {
+        "Merge": "Medien zusammenführen",
+        "Preview": "Vorschau"
+      },
+      "Dialog": {
+        "MissingMediaSelection": "Bitte mindestens zwei Medien zum Zusammenführen wählen!",
+        "MissingMediaData": "Bitte ein Medium für jedes der Attribute auswählen!",
+        "NoPartSelected": "Es wurden keine Medienteile ausgewählt. Deshalb würden alle aufgelisteten Medienteile beim Zusammenführen der Medien gelöscht. Soll dennoch zur Vorschau fortgefahren werden?",
+        "SubmitMerge": "Soll das Zusammenführen wirklich bestätigt werden? Dadurch werden die zusammengeführten Medien und nicht übernommenen Teile gelöscht und ein einzelnes neues Medium erstellt\nDas Zusammenführen kann jederzeit über den Zurück-Button in der Navigationsleiste abgebrochen werden.",
+        "UnfinishedMerge": "Das Zusammenführen wurde noch nicht abgeschlossen. Soll der Entwurf wirklich verworfen werden?",
+        "Success": "Das Zusammenführen wurde erfolgreich abgeschlossen."
+      },
+      "mediaSelectionSection": "Medien zum Zusammenführen wählen",
+      "mediaDataSection": "Mediendaten für das neue Medien",
+      "labelMediaDataPreviewSelection": "Vorschaumedium",
+      "labelMediaDataDescriptionSelection": "Beschreibung verwenden von",
+      "labelMediaDataTagSelection": "Kategorien verwenden von",
+      "labelMediaDataLocationSelection": "Aufbewahrungsort wählen von",
+      "partSelectionSection": "Medienteile für das zusammengeführte Medium wählen",
+      "mergeButton": "Zusammenführen und Vorschau ansehen",
+      "submitButton": "Zusammengeführtes Medium speichern"
     }
   },
   "Dialog": {
