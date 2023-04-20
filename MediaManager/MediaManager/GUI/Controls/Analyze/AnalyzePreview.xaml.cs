@@ -52,7 +52,16 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.MediumTags:
                 case AnalyzeMode.MediumLocation:
                     elementViewer.Visibility = Visibility.Visible;
-                    elementViewer.LoadElement(Edit.ElementMode.Medium, element.Id, true);
+                    var medium = GetMedium(element.Id);
+                    elementViewer.Medium = new Edit.EditableMedium
+                    {
+                        Id = medium.Id,
+                        CatalogueId = medium.CatalogueId,
+                        Title = medium.Title,
+                        Description = medium.Description,
+                        Location = medium.Location,
+                        Tags = GetTagsForMedium(element.Id)
+                    };
                     break;
                 case AnalyzeMode.PartDescription:
                 case AnalyzeMode.PartTags:
@@ -60,7 +69,20 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.PartPublication:
                 case AnalyzeMode.PartImage:
                     elementViewer.Visibility = Visibility.Visible;
-                    elementViewer.LoadElement(Edit.ElementMode.Part, element.Id, true);
+                    var part = GetPart(element.Id);
+                    elementViewer.Part = new Edit.EditablePart
+                    {
+                        Id = part.Id,
+                        MediumId = part.MediumId,
+                        Title = part.Title,
+                        Description = part.Description,
+                        Favourite = part.Favourite,
+                        Length = part.Length,
+                        Publication_Year = part.Publication_Year,
+                        Image = part.Image,
+                        Tags = GetTagsForPart(element.Id),
+                        TagsBlockedByMedium = GetTagsForMedium(part.MediumId).Where(t => t.Value.HasValue).Select(t => t.Tag.Id).ToList()
+                    };
                     break;
             }
         }
@@ -72,11 +94,10 @@ namespace MediaManager.GUI.Controls.Analyze
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
+            editButton.ToolTip = LanguageProvider.getString("Common.Button.Edit");
             labelMediumSelection.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
-            editButtonDoubled.ToolTip = LanguageProvider.getString("Common.Button.Edit");
             labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
             labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
-            editButtonTag.ToolTip = LanguageProvider.getString("Common.Button.Edit");
         }
     }
 }

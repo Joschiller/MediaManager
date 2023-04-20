@@ -5,54 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Analyze" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
-    <Grid>
-        <Grid x:Name="doubled">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0"/>
-            <ComboBox x:Name="mediumSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediumSelection_SelectionChanged" Margin="16,0,0,0">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="#"/>
-                            <TextBlock Text="{Binding Id}"/>
-                            <TextBlock Text=": &quot;"/>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <Grid>
+            <Grid x:Name="doubled">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox x:Name="mediumSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediumSelection_SelectionChanged" Margin="16,0,0,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="#"/>
+                                <TextBlock Text="{Binding Id}"/>
+                                <TextBlock Text=": &quot;"/>
+                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="&quot;"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ListView x:Name="mediaPartListDoubled" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,16,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
                             <TextBlock Text="{Binding Title}"/>
-                            <TextBlock Text="&quot;"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ListView x:Name="mediaPartListDoubled" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,16,0,0">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <atoms:ImageButton x:Name="editButtonDoubled" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid x:Name="tagHighlight">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="labelMediaTagList" Grid.Row="0"/>
+                <components:TagList x:Name="highlightedTagList" Grid.Row="1" IsEnabled="False"/>
+                <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
+                <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
+            </Grid>
+            <edit:ElementViewer x:Name="elementViewer"/>
         </Grid>
-        <Grid x:Name="tagHighlight">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="labelMediaTagList" Grid.Row="0"/>
-            <components:TagList x:Name="highlightedTagList" Grid.Row="1" IsEnabled="False"/>
-            <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
-            <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
-            <atoms:ImageButton x:Name="editButtonTag" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="4" HorizontalAlignment="Right"/>
-        </Grid>
-        <edit:ElementViewer x:Name="elementViewer" EditClicked="elementViewer_EditClicked" Visibility="Collapsed"/>
-    </Grid>
+    </DockPanel>
 </UserControl>
