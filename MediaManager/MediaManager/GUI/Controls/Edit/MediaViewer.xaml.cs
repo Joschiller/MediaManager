@@ -8,14 +8,13 @@ namespace MediaManager.GUI.Controls.Edit
     /// <summary>
     /// Interaction logic for MediaViewer.xaml
     /// </summary>
-    public partial class MediaViewer : UserControl, UpdatedLanguageUser
+    public partial class MediaViewer : UserControl
     {
         private MediumWithTags medium;
 
         public MediaViewer()
         {
             InitializeComponent();
-            RegisterAtLanguageProvider();
         }
 
         public MediumWithTags Medium
@@ -72,12 +71,5 @@ namespace MediaManager.GUI.Controls.Edit
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            throw new NotImplementedException();
-        }
-        ~MediaViewer() => LanguageProvider.Unregister(this);
     }
 }

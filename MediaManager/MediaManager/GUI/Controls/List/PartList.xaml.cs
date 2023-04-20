@@ -24,7 +24,7 @@ namespace MediaManager.GUI.Controls.List
         public void SelectItem(int? id)
         {
             list.SelectedItem = Parts.FirstOrDefault(p => p.Id == id);
-            SelectionChanged?.Invoke(id);
+            //SelectionChanged?.Invoke(id);
         }
 
         public int? GetSelectedItem()

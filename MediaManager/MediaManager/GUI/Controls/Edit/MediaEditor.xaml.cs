@@ -17,6 +17,7 @@ namespace MediaManager.GUI.Controls.Edit
         public event MediumHandler MediumEdited;
 
         private MediumWithTags medium;
+        private bool needsListReload;
 
         public MediaEditor()
         {
@@ -35,11 +36,15 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        private void reloadList() => list.SetPartList(medium.Title, medium.Parts.Select(p => new List.PartListElement
+        private void reloadList()
         {
-            Id = p.Id,
-            Title = p.Title
-        }).ToList());
+            list.SetPartList(medium.Title, medium.Parts.Select(p => new List.PartListElement
+            {
+                Id = p.Id,
+                Title = p.Title
+            }).ToList());
+            needsListReload = false;
+        }
 
         private void onChange() => MediumEdited?.Invoke(medium);
 
@@ -81,6 +86,11 @@ namespace MediaManager.GUI.Controls.Edit
 
         private void list_SelectionChanged(int? id)
         {
+            if (needsListReload)
+            {
+                reloadList();
+                list.SelectItem(id);
+            }
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
@@ -99,8 +109,9 @@ namespace MediaManager.GUI.Controls.Edit
                 Image = null,
                 Tags = medium.Tags.Select(t => new ValuedTag { Tag = t.Tag, Value = t.Value }).ToList()
             };
+            medium.Parts.Add(newPart);
             reloadList();
-            list.SelectItem(newId);
+            OpenPartTab(newId);
             onChange();
         }
         private void deletePart_Click(object sender, RoutedEventArgs e)
@@ -122,6 +133,7 @@ namespace MediaManager.GUI.Controls.Edit
 
         private void viewer_MediumEdited(EditableMedium medium)
         {
+            needsListReload = this.medium.Title != medium.Title;
             this.medium.Title = medium.Title;
             this.medium.Description = medium.Description;
             this.medium.Location = medium.Location;
@@ -131,6 +143,7 @@ namespace MediaManager.GUI.Controls.Edit
         private void viewer_PartEdited(EditablePart part)
         {
             var internalPart = medium.Parts.FirstOrDefault(p => p.Id == part.Id);
+            needsListReload = internalPart.Title != part.Title;
             internalPart.Title = part.Title;
             internalPart.Description = part.Description;
             internalPart.Favourite = part.Favourite;
@@ -146,7 +159,6 @@ namespace MediaManager.GUI.Controls.Edit
         {
             addPart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.AddPart");
             deletePart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.DeletePart");
-            throw new NotImplementedException();
         }
         ~MediaEditor() => LanguageProvider.Unregister(this);
     }

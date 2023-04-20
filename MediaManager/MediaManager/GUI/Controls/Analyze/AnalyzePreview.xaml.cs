@@ -27,6 +27,7 @@ namespace MediaManager.GUI.Controls.Analyze
         {
             this.mode = mode;
             this.element = element;
+            editButton.Visibility = Visibility.Collapsed;
             doubled.Visibility = Visibility.Collapsed;
             tagHighlight.Visibility = Visibility.Collapsed;
             elementViewer.Visibility = Visibility.Collapsed;
@@ -36,11 +37,13 @@ namespace MediaManager.GUI.Controls.Analyze
             switch(mode)
             {
                 case AnalyzeMode.MediumDoubled:
+                    editButton.Visibility = Visibility.Visible;
                     doubled.Visibility = Visibility.Visible;
                     mediumSelection.ItemsSource = GetDoubledMediaToMediumTitle(element.Text);
                     mediumSelection.SelectedIndex = 0;
                     break;
                 case AnalyzeMode.MediumCommonTags:
+                    editButton.Visibility = Visibility.Visible;
                     tagHighlight.Visibility = Visibility.Visible;
                     var nonCommonTags = GetNonCommonTagsOfMedium(element.Id);
                     var tagsOfMedium = GetTagsForMedium(element.Id);
@@ -51,6 +54,7 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.MediumDescription:
                 case AnalyzeMode.MediumTags:
                 case AnalyzeMode.MediumLocation:
+                    editButton.Visibility = Visibility.Visible;
                     elementViewer.Visibility = Visibility.Visible;
                     var medium = GetMedium(element.Id);
                     elementViewer.Medium = new Edit.EditableMedium
@@ -68,6 +72,7 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.PartLength:
                 case AnalyzeMode.PartPublication:
                 case AnalyzeMode.PartImage:
+                    editButton.Visibility = Visibility.Visible;
                     elementViewer.Visibility = Visibility.Visible;
                     var part = GetPart(element.Id);
                     elementViewer.Part = new Edit.EditablePart

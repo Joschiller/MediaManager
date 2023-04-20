@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Analyze" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
-        </StackPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
+        </Grid>
         <Grid>
-            <Grid x:Name="doubled">
+            <Grid x:Name="doubled" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -41,7 +41,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            <Grid x:Name="tagHighlight">
+            <Grid x:Name="tagHighlight" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -53,7 +53,7 @@
                 <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
                 <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
             </Grid>
-            <edit:ElementViewer x:Name="elementViewer"/>
+            <edit:ElementViewer x:Name="elementViewer" Visibility="Collapsed"/>
         </Grid>
     </DockPanel>
 </UserControl>

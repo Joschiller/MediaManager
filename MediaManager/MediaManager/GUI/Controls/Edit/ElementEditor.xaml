@@ -27,7 +27,7 @@
         <TextBlock x:Name="textDescription" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <TextBox x:Name="description" Grid.Row="1" Grid.Column="1" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged"/>
         <TextBlock x:Name="textTags" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="1"/>
+        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="1" TagValueChanged="tags_TagValueChanged"/>
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Right" Orientation="Vertical">
                 <Button x:Name="selectImage" Click="selectImage_Click"/>

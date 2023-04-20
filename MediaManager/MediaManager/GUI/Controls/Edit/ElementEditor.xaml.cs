@@ -68,7 +68,7 @@ namespace MediaManager.GUI.Controls.Edit
                 Description = description.Text.Trim(),
                 Length = (int)length.Value,
                 Publication_Year = (int)publication.Value,
-                // TODO image
+                Image = part.Image,
                 Tags = new List<ValuedTag>(tags.GetTagList()),
                 TagsBlockedByMedium = part.TagsBlockedByMedium
             };
@@ -125,8 +125,17 @@ namespace MediaManager.GUI.Controls.Edit
             textMinute.Text = LanguageProvider.getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
             onEdited();
         }
-        private void selectImage_Click(object sender, RoutedEventArgs e) => onEdited();
-        private void removeImage_Click(object sender, RoutedEventArgs e) => onEdited();
+        private void tags_TagValueChanged(List<ValuedTag> tags) => onEdited();
+        private void selectImage_Click(object sender, RoutedEventArgs e) => onEdited(); // TODO: dialog => set image of part and imagePath
+        private void removeImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (part != null)
+            {
+                part.Image = null;
+                imagePath.Text = "";
+            }
+            onEdited();
+        }
 
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)

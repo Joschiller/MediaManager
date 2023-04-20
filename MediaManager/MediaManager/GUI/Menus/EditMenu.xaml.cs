@@ -153,7 +153,7 @@ namespace MediaManager.GUI.Menus
                 }
                 else
                 {
-                    var mediumId = Writer.CreateMedium(new Medium
+                    MediumId = Writer.CreateMedium(new Medium
                     {
                         CatalogueId = data.CatalogueId,
                         Title = data.Title,
@@ -162,7 +162,7 @@ namespace MediaManager.GUI.Menus
                     }, data.Tags);
                     data.Parts.ForEach(p => Writer.CreatePart(new Part
                     {
-                        MediumId = mediumId,
+                        MediumId = MediumId,
                         Title = p.Title,
                         Description = p.Description,
                         Favourite = p.Favourite,
@@ -233,6 +233,7 @@ namespace MediaManager.GUI.Menus
         private void btnUndoChangesClick(object sender, RoutedEventArgs e)
         {
             if (!IsExistingMedium) Close();
+            editor.Medium = viewer.Medium;
             AnyChangeMade = false;
             updateVisibility(false);
         }

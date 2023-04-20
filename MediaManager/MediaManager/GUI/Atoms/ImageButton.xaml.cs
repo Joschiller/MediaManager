@@ -15,9 +15,11 @@ namespace MediaManager.GUI.Atoms
         public ImageSource DisabledIconSource { get; set; } = null;
         public bool Enabled
         {
-            get => btn.Visibility == Visibility.Visible;
-            set => RefreshGUI(value);
+            get => (bool)GetValue(EnabledProperty);
+            set => SetValue(EnabledProperty, value);
         }
+        public static readonly DependencyProperty EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(ImageButton), new PropertyMetadata(true, OnEnabledPropertyChanged));
+        public static void OnEnabledPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((ImageButton)d).RefreshGUI((bool)e.NewValue);
         public event RoutedEventHandler Click;
 
         private void RefreshGUI(bool enabled)
