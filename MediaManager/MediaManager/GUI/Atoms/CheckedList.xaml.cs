@@ -35,12 +35,12 @@ namespace MediaManager.GUI.Atoms
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            checkedItemIds.RemoveAll(i => i == (int)((CheckBox)sender).Tag);
+            checkedItemIds.Add((int)((CheckBox)sender).Tag);
             CheckedChanged?.Invoke(GetCheckedItems());
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            checkedItemIds.Add((int)((CheckBox)sender).Tag);
+            checkedItemIds.RemoveAll(i => i == (int)((CheckBox)sender).Tag);
             CheckedChanged?.Invoke(GetCheckedItems());
         }
 
