@@ -38,17 +38,12 @@ namespace MediaManager.GUI.Atoms
             checkedItemIds.RemoveAll(i => i == (int)((CheckBox)sender).Tag);
             CheckedChanged?.Invoke(GetCheckedItems());
         }
-
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             checkedItemIds.Add((int)((CheckBox)sender).Tag);
             CheckedChanged?.Invoke(GetCheckedItems());
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var id = (int)((CheckBox)sender).Tag;
-            SelectionChanged?.Invoke(Items.FirstOrDefault(i => i.Id == id));
-        }
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke((CheckedListItem)((ListView)sender).SelectedItem);
     }
 }

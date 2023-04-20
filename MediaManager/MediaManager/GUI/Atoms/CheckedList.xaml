@@ -10,7 +10,7 @@
             <DataTemplate>
                 <StackPanel Orientation="Horizontal">
                     <CheckBox Tag="{Binding Id}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-                    <TextBlock Text="{Binding Text}"/>
+                    <TextBlock Text="{Binding Text}" Margin="8,0,0,0"/>
                 </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>
