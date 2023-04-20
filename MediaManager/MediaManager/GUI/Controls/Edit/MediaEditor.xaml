@@ -17,6 +17,6 @@
             </StackPanel>
             <list:PartList x:Name="list" SelectionChanged="list_SelectionChanged"/>
         </DockPanel>
-        <local:ElementEditor x:Name="viewer" Grid.Column="1" MediumEdited="viewer_MediumEdited" PartEdited="viewer_PartEdited"/>
+        <local:ElementEditor x:Name="editor" Grid.Column="1" MediumEdited="editor_MediumEdited" PartEdited="editor_PartEdited"/>
     </Grid>
 </UserControl>

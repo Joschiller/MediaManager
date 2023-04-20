@@ -16,6 +16,7 @@ namespace MediaManager.GUI.Controls.Edit
         public delegate void PartHandler(EditablePart part);
         public event PartHandler PartEdited;
 
+        private bool skipOnChange = false;
         private EditableMedium medium;
         private EditablePart part;
         private bool IsCurrentlyFavorite;
@@ -41,6 +42,7 @@ namespace MediaManager.GUI.Controls.Edit
             };
             set
             {
+                skipOnChange = true;
                 medium = value;
                 part = null;
 
@@ -55,6 +57,7 @@ namespace MediaManager.GUI.Controls.Edit
                 location.Text = medium.Location;
                 description.Text = medium.Description;
                 tags.SetTagList(medium.Tags);
+                skipOnChange = false;
             }
         }
         public EditablePart Part
@@ -74,6 +77,7 @@ namespace MediaManager.GUI.Controls.Edit
             };
             set
             {
+                skipOnChange = true;
                 medium = null;
                 part = value;
 
@@ -93,11 +97,13 @@ namespace MediaManager.GUI.Controls.Edit
                 publication.SetValue((uint)part.Publication_Year);
                 // TODO image
                 tags.SetTagList(part.Tags, part.TagsBlockedByMedium);
+                skipOnChange = false;
             }
         }
 
         private void onEdited()
         {
+            if (skipOnChange) return;
             if (medium != null) MediumEdited?.Invoke(Medium);
             if (part != null) PartEdited?.Invoke(Part);
         }

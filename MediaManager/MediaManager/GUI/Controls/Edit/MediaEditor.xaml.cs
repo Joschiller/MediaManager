@@ -51,7 +51,7 @@ namespace MediaManager.GUI.Controls.Edit
         public void OpenMediumTab()
         {
             deletePart.Visibility = Visibility.Collapsed;
-            viewer.Medium = new EditableMedium
+            editor.Medium = new EditableMedium
             {
                 Id = medium.Id,
                 CatalogueId = medium.CatalogueId,
@@ -68,7 +68,7 @@ namespace MediaManager.GUI.Controls.Edit
             var part = medium.Parts.FirstOrDefault(p => p.Id == id);
             if (part != null)
             {
-                viewer.Part = new EditablePart
+                editor.Part = new EditablePart
                 {
                     Id = part.Id,
                     MediumId = medium.Id,
@@ -131,16 +131,29 @@ namespace MediaManager.GUI.Controls.Edit
             }
         }
 
-        private void viewer_MediumEdited(EditableMedium medium)
+        private void editor_MediumEdited(EditableMedium medium)
         {
             needsListReload = this.medium.Title != medium.Title;
             this.medium.Title = medium.Title;
             this.medium.Description = medium.Description;
             this.medium.Location = medium.Location;
             this.medium.Tags = medium.Tags;
+            foreach (var t in this.medium.Tags.Where(t => t.Value.HasValue).ToList())
+            {
+                foreach (var p in this.medium.Parts)
+                {
+                    var newTags = p.Tags.Where(pt => pt.Tag.Id != t.Tag.Id).ToList();
+                    newTags.Add(new ValuedTag
+                    {
+                        Tag = t.Tag,
+                        Value = t.Value
+                    });
+                    p.Tags = newTags;
+                }
+            }
             onChange();
         }
-        private void viewer_PartEdited(EditablePart part)
+        private void editor_PartEdited(EditablePart part)
         {
             var internalPart = medium.Parts.FirstOrDefault(p => p.Id == part.Id);
             needsListReload = internalPart.Title != part.Title;
