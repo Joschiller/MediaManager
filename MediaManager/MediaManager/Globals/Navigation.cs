@@ -23,21 +23,20 @@ namespace MediaManager.Globals
         }
         private static void CurrentHelpMenu_Closing(object sender, System.ComponentModel.CancelEventArgs e) => CurrentHelpMenu = null;
 
-        // TODO: these values must be adjusted
         public static GeneralButtonBasedDialogStyle GeneralButtonBasedDialogStyle = new GeneralButtonBasedDialogStyle
         {
-            HeaderBackground = new System.Windows.Media.SolidColorBrush(Color.FromRgb(255, 255, 255)),
-            Background = new System.Windows.Media.SolidColorBrush(Color.FromRgb(255, 255, 255)),
+            HeaderBackground = new System.Windows.Media.SolidColorBrush(Color.FromRgb(88, 88, 89)),
+            Background = new System.Windows.Media.SolidColorBrush(Color.FromRgb(247, 249, 250)),
             HeaderFontFamily = new FontFamily("Consolas"),
             FontFamily = new FontFamily("Consolas"),
-            HeaderFontSize = 20,
-            FontSize = 14,
-            HeaderBorderColor = new System.Windows.Media.SolidColorBrush(Color.FromRgb(0, 0, 0)),
+            HeaderFontSize = 25,
+            FontSize = 16,
+            HeaderBorderColor = new System.Windows.Media.SolidColorBrush(Color.FromRgb(20, 20, 20)),
             HeaderBorderThickness = 1,
-            NegativeColor = Color.FromRgb(255, 0, 0),
-            NeutralColor = Color.FromRgb(150, 150, 150),
-            PositiveColor = Color.FromRgb(0, 255, 0),
-            CancelButtonBackground = Color.FromRgb(255, 0, 0)
+            NegativeColor = Color.FromRgb(229, 103, 34),
+            NeutralColor = Color.FromRgb(215, 232, 255),
+            PositiveColor = Color.FromRgb(118, 221, 0),
+            CancelButtonBackground = Color.FromRgb(229, 103, 34)
         };
         public static void OpenWindow(Window w1, Window w2, Action doOnClose = null)
         {
