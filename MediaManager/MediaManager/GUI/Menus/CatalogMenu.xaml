@@ -18,6 +18,7 @@
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
                 <atoms:ImageButton EnabledIconSource="../../Resources/add_catalog.png" ToolTip="{DynamicResource btnAddCatalog}" Click="btnAddCatalogClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/import.png" ToolTip="{DynamicResource btnImportCatalog}" Click="btnImportCatalogClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup Visibility="{DynamicResource catalogDependentVisibility}">
                 <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditCatalog}" Click="btnEditCatalogClick"/>

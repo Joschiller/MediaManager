@@ -23,6 +23,7 @@ namespace MediaManager.GUI.Menus
         public void LoadTexts(string language)
         {
             Resources["btnAddCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.AddCatalog");
+            Resources["btnImportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ImportCatalog");
             Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.EditCatalog");
             Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ExportCatalog");
             Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.DeleteCatalog");
@@ -37,6 +38,10 @@ namespace MediaManager.GUI.Menus
         {
             var result = new EditCatalogDialog(null).ShowDialog();
             if (result.HasValue && result.Value) catalogList.LoadCatalogs();
+        }
+        private void btnImportCatalogClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {

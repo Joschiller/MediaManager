@@ -195,6 +195,7 @@
     "Catalog": {
       "ToolTip": {
         "AddCatalog": "Katalog hinzufügen",
+        "ImportCatalog": "Katalog importieren",
         "EditCatalog": "Katalog bearbeiten",
         "ExportCatalog": "Katalog exportieren",
         "DeleteCatalog": "Katalog löschen",

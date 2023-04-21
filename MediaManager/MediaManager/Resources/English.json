@@ -195,6 +195,7 @@
     "Catalog": {
       "ToolTip": {
         "AddCatalog": "Add catalog",
+        "ImportCatalog": "Import catalog",
         "EditCatalog": "Edit catalog",
         "ExportCatalog": "Export catalog",
         "DeleteCatalog": "Delete catalog",
