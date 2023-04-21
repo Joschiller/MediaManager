@@ -1,4 +1,5 @@
 ﻿using MediaManager.Globals.DefaultDialogs;
+using MediaManager.GUI.Menus;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,19 @@ namespace MediaManager.Globals
 {
     public static class Navigation
     {
+        public static Window CurrentHelpMenu;
+        public static void OpenHelpMenu()
+        {
+            if (CurrentHelpMenu == null)
+            {
+                CurrentHelpMenu = new HelpMenu();
+                CurrentHelpMenu.Closing += CurrentHelpMenu_Closing;
+            }
+            CurrentHelpMenu.Show();
+            CurrentHelpMenu.Focus();
+        }
+        private static void CurrentHelpMenu_Closing(object sender, System.ComponentModel.CancelEventArgs e) => CurrentHelpMenu = null;
+
         // TODO: these values must be adjusted
         public static GeneralButtonBasedDialogStyle GeneralButtonBasedDialogStyle = new GeneralButtonBasedDialogStyle
         {

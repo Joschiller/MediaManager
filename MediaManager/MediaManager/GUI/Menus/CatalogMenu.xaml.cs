@@ -32,10 +32,7 @@ namespace MediaManager.GUI.Menus
 
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
-        private void NavigationBar_HelpClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         private void btnAddCatalogClick(object sender, RoutedEventArgs e)
         {
             var result = new EditCatalogDialog(null).ShowDialog();

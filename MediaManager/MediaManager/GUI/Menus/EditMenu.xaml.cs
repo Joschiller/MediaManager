@@ -198,10 +198,7 @@ namespace MediaManager.GUI.Menus
             }
             if (confirmation) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
 
         private void updateVisibility(bool editMode)
         {

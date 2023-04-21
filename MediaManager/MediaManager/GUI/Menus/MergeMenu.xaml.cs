@@ -316,10 +316,7 @@ namespace MediaManager.GUI.Menus
                 .ShowForResult() as bool?;
             if (result.HasValue && result.Value) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         #endregion
     }
 }
