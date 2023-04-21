@@ -45,10 +45,6 @@ namespace MediaManager.GUI.Controls.List
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(SelectedCatalog);
-        private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // TODO: double click is not working properly
-            if (e.ClickCount == 2) CatalogDoubleClick?.Invoke(SelectedCatalog);
-        }
+        private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e) => CatalogDoubleClick?.Invoke(SelectedCatalog);
     }
 }

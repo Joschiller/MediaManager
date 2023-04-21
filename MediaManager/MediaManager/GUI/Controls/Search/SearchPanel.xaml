@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
         <local:SearchInput x:Name="input" Grid.Row="0" SearchParametersChanged="input_SearchParametersChanged"/>
         <components:Pager x:Name="pager" Grid.Row="1" HorizontalAlignment="Right" PageChanged="pager_PageChanged"/>
-        <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}">
+        <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}" MouseDoubleClick="resultList_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Tag="{Binding Id}" Text="{Binding Text}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                    <TextBlock Tag="{Binding Id}" Text="{Binding Text}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

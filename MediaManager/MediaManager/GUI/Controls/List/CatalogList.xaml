@@ -8,12 +8,12 @@
     <UserControl.Resources>
         <system:String x:Key="activeString">Current catalog</system:String>
     </UserControl.Resources>
-    <ListView x:Name="list" ItemsSource="{Binding Catalogs}" SelectionChanged="list_SelectionChanged">
+    <ListView x:Name="list" ItemsSource="{Binding Catalogs}" SelectionChanged="list_SelectionChanged" MouseDoubleClick="list_MouseDoubleClick">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="Item_MouseLeftButtonDown">
-                    <TextBlock Text="{Binding Catalog.Title}" MouseLeftButtonDown="Item_MouseLeftButtonDown"/>
-                    <TextBlock Text="{DynamicResource activeString}" Visibility="{Binding IsActiveMarkVisible}" FontStyle="Italic" Margin="4,0,0,0" MouseLeftButtonDown="Item_MouseLeftButtonDown"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Catalog.Title}"/>
+                    <TextBlock Text="{DynamicResource activeString}" Visibility="{Binding IsActiveMarkVisible}" FontStyle="Italic" Margin="4,0,0,0"/>
                 </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>

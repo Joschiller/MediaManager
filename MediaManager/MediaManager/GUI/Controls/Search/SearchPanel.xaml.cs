@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.DataConnector.Reader;
@@ -42,14 +44,13 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList.Skip((newPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList().ForEach(SearchResult.Add);
         }
 
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // TODO: double click does not work properly
-            if (e.ClickCount == 2)
+            var item = ((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem;
+            if (item != null)
             {
-                var id = (int)((TextBlock)sender).Tag;
-                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(id, null);
-                else MediumSelected?.Invoke(GetPart(id).MediumId, id);
+                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
+                else MediumSelected?.Invoke(GetPart(item.Id).MediumId, item.Id);
             }
         }
 
