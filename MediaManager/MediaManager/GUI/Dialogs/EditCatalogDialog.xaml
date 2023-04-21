@@ -37,8 +37,8 @@
             <CheckBox x:Name="cbShowTitleOfTheDayAsMedium" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="4" IsChecked="{Binding ShowTitleOfTheDayAsMedium}"/>
         </Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button x:Name="submit" IsDefault="True" Background="Lime" Click="submit_Click"  Margin="4">_Ok</Button>
-            <Button x:Name="cancel" IsCancel="True" Background="Red" Click="cancel_Click"  Margin="4">_Cancel</Button>
+            <Button x:Name="submit" IsDefault="True" Background="{StaticResource button_green}" Click="submit_Click"  Margin="4">_Ok</Button>
+            <Button x:Name="cancel" IsCancel="True" Background="{StaticResource button_red}" Click="cancel_Click"  Margin="4">_Cancel</Button>
         </StackPanel>
     </StackPanel>
 </Window>
