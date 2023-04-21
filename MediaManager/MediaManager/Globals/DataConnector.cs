@@ -188,6 +188,7 @@ namespace MediaManager.Globals
         {
             public static void DeleteCatalog(int id)
             {
+                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Catalogues.Find(id).Media); // must be deleted explicitly
                 DBCONNECTION.Catalogues.Remove(DBCONNECTION.Catalogues.Find(id));
                 DBCONNECTION.SaveChanges();
             }

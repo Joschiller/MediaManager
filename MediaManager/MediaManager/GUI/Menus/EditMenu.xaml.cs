@@ -5,12 +5,6 @@ using System.Windows;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
 
-/* TODO:
- * Alternate design idea:
- * - the view/edit mode is set for the whole menu
- * - the menu stores all data (medium and parts) temporarly and overhands them to the sub controls
- * - when saving, new media/parts are generated and old ones are updated/deleted
- */
 namespace MediaManager.GUI.Menus
 {
     /// <summary>
