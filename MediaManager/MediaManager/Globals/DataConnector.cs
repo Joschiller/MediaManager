@@ -366,6 +366,8 @@ namespace MediaManager.Globals
                 public static bool StatisticsOverviewVisible { set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString()); }
             }
         }
+        private static string CurrentExportVersion = "1.0.0";
+        private static string MinimumImportVersion = "1.0.0";
         public class CatalogExportThread : ExportThread
         {
             private Catalogue catalogToExport;
@@ -381,6 +383,8 @@ namespace MediaManager.Globals
                 if (catalogToExport == null) throw new Exception();
                 CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.0"));
                 var xmlData = new XElement("MediaManagerCatalog");
+                xmlData.Add(new XAttribute("ExportVersion", CurrentExportVersion));
+                xmlData.Add(new XAttribute("DownwardsCompatibleTo", MinimumImportVersion));
                 xmlData.Add(new XAttribute("Title", catalogToExport.Title));
                 xmlData.Add(new XAttribute("Description", catalogToExport.Description));
                 xmlData.Add(new XAttribute("DeletionConfirmationMedium", catalogToExport.DeletionConfirmationMedium));
