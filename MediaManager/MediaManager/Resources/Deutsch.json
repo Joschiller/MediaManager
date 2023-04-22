@@ -79,7 +79,7 @@
         "Validation": "eine Sprache wählen"
       },
       "MultiUseTabs": {
-        "PlaylistLabel": "Playlists anzeigen",
+        "PlaylistLabel": "Playlisten anzeigen",
         "TitleOfTheDayLabel": "Titel des Tages anzeigen",
         "StatisticsLabel": "Statistiken anzeigen"
       },
@@ -258,6 +258,22 @@
       "LabelDeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
       "LabelDeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
       "LabelShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
+    },
+    "Export": {
+      "DialogTitle": "Export",
+      "FinishButton": "Abschließen",
+      "exportFailedStep": "Export fehlgeschlagen",
+      "exportFailedMessage": "Der Export ist fehlgeschlagen!",
+      "DefaultExportFileName": "Katalog",
+      "ExportFileType": "Media Manager Datei",
+      "Steps": {
+        "0": "Export gestartet",
+        "1": "Exportiere Kategorien",
+        "2": "Exportiere Medien",
+        "3": "Exportiere Playlisten",
+        "4": "Generiere Export",
+        "5": "Export vollständig"
+      }
     }
   }
 }

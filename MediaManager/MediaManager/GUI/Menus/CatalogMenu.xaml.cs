@@ -1,5 +1,7 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using MediaManager.Globals.XMLImportExport;
 using MediaManager.GUI.Dialogs;
+using Microsoft.Win32;
 using System;
 using System.Windows;
 using static MediaManager.Globals.DataConnector;
@@ -41,11 +43,34 @@ namespace MediaManager.GUI.Menus
         }
         private void btnImportCatalogClick(object sender, RoutedEventArgs e)
         {
+            // TODO show file selection
             throw new NotImplementedException();
+        }
+        private string showSaveFileDialog()
+        {
+            var sfd = new SaveFileDialog();
+            sfd.FileName = LanguageProvider.getString("Dialog.Export.DefaultExportFileName");
+            sfd.Filter = LanguageProvider.getString("Dialog.Export.ExportFileType") + " (*.mmf)|*.mmf";
+            var res = sfd.ShowDialog();
+            if (!res.HasValue || !res.Value) return "";
+            return sfd.FileName;
         }
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (catalogList.SelectedCatalog == null) return;
+            var fileName = showSaveFileDialog();
+            if (fileName == null || fileName == "") return;
+            new ThreadProcessViewer(
+                new CatalogExportThread(
+                    fileName,
+                    LanguageProvider.getString("Dialog.Export.exportFailedStep"),
+                    LanguageProvider.getString("Dialog.Export.exportFailedMessage"),
+                    catalogList.SelectedCatalog.Id), new ThreadProcessViewerConfig
+                    {
+                        Title = LanguageProvider.getString("Dialog.Export.DialogTitle"),
+                        FinishButtonCaption = LanguageProvider.getString("Dialog.Export.FinishButton"),
+                        Style = InternalThreadProcessViewerStyle
+                    }).ShowDialog();
         }
         private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {

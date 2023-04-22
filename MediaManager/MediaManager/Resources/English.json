@@ -258,6 +258,22 @@
       "LabelDeletionConfirmationPlaylist": "Show deletion confirmation for playlists",
       "LabelDeletionConfirmationTag": "Show deletion confirmation for tags",
       "LabelShowTitleOfTheDayAsMedium": "Show whole medium for title of the day"
+    },
+    "Export": {
+      "DialogTitle": "Export",
+      "FinishButton": "Finish",
+      "exportFailedStep": "Export failed",
+      "exportFailedMessage": "The export has failed!",
+      "DefaultExportFileName": "Catalog",
+      "ExportFileType": "Media Manager File",
+      "Steps": {
+        "0": "Export started",
+        "1": "Exporting tags",
+        "2": "Exporting media",
+        "3": "Exporting playlists",
+        "4": "Generating export",
+        "5": "Export finished"
+      }
     }
   }
 }

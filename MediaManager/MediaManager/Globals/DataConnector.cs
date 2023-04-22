@@ -1,7 +1,9 @@
-﻿using MediaManager.GUI.Controls.Search;
+﻿using MediaManager.Globals.XMLImportExport;
+using MediaManager.GUI.Controls.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MediaManager.Globals
 {
@@ -43,7 +45,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var mediaTags = GetMedium(id).MT_Relation;
-                foreach (var t in Tags)
+                foreach (var t in DBCONNECTION.Tags)
                 {
                     var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -68,7 +70,7 @@ namespace MediaManager.Globals
             {
                 var result = new List<ValuedTag>();
                 var partTags = GetPart(id).PT_Relation;
-                foreach (var t in Tags)
+                foreach (var t in DBCONNECTION.Tags)
                 {
                     var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -362,6 +364,122 @@ namespace MediaManager.Globals
                 public static bool PlaylistEditorVisible { set => SaveSetting("VISIBILITY_PLAYLIST_EDITOR", value.ToString()); }
                 public static bool TitleOfTheDayVisible { set => SaveSetting("VISIBILITY_TITLE_OF_THE_DAY", value.ToString()); }
                 public static bool StatisticsOverviewVisible { set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString()); }
+            }
+        }
+        public class CatalogExportThread : ExportThread
+        {
+            private Catalogue catalogToExport;
+            private int currentStep = 0;
+            private int maxSteps = 5;
+            public CatalogExportThread(string fileDestination, string exportFailedStep, string exportFailedMessage, int catalogId) : base(fileDestination, exportFailedStep, exportFailedMessage)
+            {
+                catalogToExport = DBCONNECTION.Catalogues.Find(catalogId);
+            }
+
+            protected override void runExport()
+            {
+                if (catalogToExport == null) throw new Exception();
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.0"));
+                var xmlData = new XElement("MediaManagerCatalog");
+                xmlData.Add(new XAttribute("Title", catalogToExport.Title));
+                xmlData.Add(new XAttribute("Description", catalogToExport.Description));
+                xmlData.Add(new XAttribute("DeletionConfirmationMedium", catalogToExport.DeletionConfirmationMedium));
+                xmlData.Add(new XAttribute("DeletionConfirmationPart", catalogToExport.DeletionConfirmationPart));
+                xmlData.Add(new XAttribute("DeletionConfirmationTag", catalogToExport.DeletionConfirmationTag));
+                xmlData.Add(new XAttribute("DeletionConfirmationPlaylist", catalogToExport.DeletionConfirmationPlaylist));
+                xmlData.Add(new XAttribute("ShowTitleOfTheDayAsMedium", catalogToExport.ShowTitleOfTheDayAsMedium));
+
+                #region Export Tags
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.1"));
+                if (catalogToExport.Tags.Count > 0)
+                {
+                    xmlData.Add(XMLExport.ExportDataFromTable(
+                        DBCONNECTION.Tags,
+                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        columns: new List<string> { "Id", "Title" }
+                        ));
+                }
+                #endregion
+                #region Export Media and Parts
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.2"));
+                if (catalogToExport.Media.Count > 0)
+                {
+                    xmlData.Add(XMLExport.ExportDataFromTable(
+                        DBCONNECTION.Media,
+                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        columns: new List<string> { "Title", "Description", "Location", "PositiveTags", "NegativeTags" },
+                        additionalComputedProperties: new Dictionary<string, Func<Medium, object>>
+                        {
+                        { "PositiveTags", (i) => "[" + string.Join(",", Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
+                        { "NegativeTags", (i) => "[" + string.Join(",", Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
+                        },
+                        computeChildren: (i) =>
+                        {
+                            var mediaTags = Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue).Select(t => t.Tag.Id);
+                            var list = new List<XElement>();
+                            foreach (var p in i.Parts)
+                            {
+                                var xmlPart = new XElement("Part");
+                                xmlPart.Add(new XAttribute("Id", p.Id));
+                                xmlPart.Add(new XAttribute("Title", p.Title));
+                                xmlPart.Add(new XAttribute("Description", p.Description));
+                                xmlPart.Add(new XAttribute("Favourite", p.Favourite));
+                                xmlPart.Add(new XAttribute("Length", p.Length));
+                                xmlPart.Add(new XAttribute("Publication_Year", p.Publication_Year));
+                                if (p.Image != null) xmlPart.Add(new XAttribute("Image", p.Image.ToString()));
+                                var relevantPartTags = Reader.GetTagsForPart(p.Id).Where(t => !mediaTags.Contains(t.Tag.Id) && t.Value.HasValue);
+                                xmlPart.Add(new XAttribute("PositiveTags", "[" + string.Join(",", relevantPartTags.Where(t => t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
+                                xmlPart.Add(new XAttribute("NegativeTags", "[" + string.Join(",", relevantPartTags.Where(t => !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
+                                list.Add(xmlPart);
+                            }
+                            return list;
+                        }
+                        ));
+                }
+                #endregion
+                #region Export Playlists
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.3"));
+                if (catalogToExport.Playlists.Count > 0)
+                {
+                    xmlData.Add(XMLExport.ExportDataFromTable(
+                        DBCONNECTION.Playlists,
+                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        columns: new List<string> { "Title", "Parts" },
+                        additionalComputedProperties: new Dictionary<string, Func<Playlist, object>>
+                        {
+                        { "Parts", (i) => "[" + string.Join(",", i.Parts.Select(p => p.Id).ToList()) + "]" },
+                        }
+                        ));
+                }
+                #endregion
+
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.4"));
+                new XDocument(xmlData).Save(fileDestination);
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.5"));
+                CallFinished();
+            }
+        }
+        public class CatalogImportThread : ImportThread
+        {
+            public CatalogImportThread(string fileSource, string importFailedStep, string importFailedMessage, string formatExceptionHeader, string dbConstraintExceptionHeader, Dictionary<string, string> dbConstraintMessages) : base(fileSource, importFailedStep, importFailedMessage, formatExceptionHeader, dbConstraintExceptionHeader, dbConstraintMessages) { }
+
+            protected override void runImport()
+            {
+                // catalog: no id, title is needed, description and settings can be set to default values if not found
+                // tag list is optional
+                    // tag: id and title is needed
+                // media list is optional
+                    // media: no id, title is needed, other data can default
+                    // parts are optional (can be empty list)
+                        // part: no id, title needed every thing else can default
+                // playlists are not needed and may contain no parts
+                    // playlist: title is needed
+                throw new NotImplementedException();
             }
         }
     }

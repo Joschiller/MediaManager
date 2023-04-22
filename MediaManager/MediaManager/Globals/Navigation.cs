@@ -1,4 +1,5 @@
 ﻿using MediaManager.Globals.DefaultDialogs;
+using MediaManager.Globals.XMLImportExport;
 using MediaManager.GUI.Menus;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,17 @@ namespace MediaManager.Globals
             NeutralColor = Color.FromRgb(215, 232, 255),
             PositiveColor = Color.FromRgb(118, 221, 0),
             CancelButtonBackground = Color.FromRgb(229, 103, 34)
+        };
+        public static ThreadProcessViewerStyle InternalThreadProcessViewerStyle = new ThreadProcessViewerStyle
+        {
+            HeaderBackground = GeneralButtonBasedDialogStyle.HeaderBackground,
+            Background = GeneralButtonBasedDialogStyle.Background,
+            HeaderFontFamily = GeneralButtonBasedDialogStyle.HeaderFontFamily,
+            FontFamily = GeneralButtonBasedDialogStyle.FontFamily,
+            HeaderFontSize = GeneralButtonBasedDialogStyle.HeaderFontSize,
+            FontSize = GeneralButtonBasedDialogStyle.FontSize,
+            HeaderBorderColor = GeneralButtonBasedDialogStyle.HeaderBorderColor,
+            HeaderBorderThickness = GeneralButtonBasedDialogStyle.HeaderBorderThickness
         };
         public static void OpenWindow(Window w1, Window w2, Action doOnClose = null)
         {

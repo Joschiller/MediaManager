@@ -24,7 +24,6 @@ namespace MediaManager.Globals.XMLImportExport
         /// <br/>
         /// - <b>additional children</b>: An optional function that takes the table entry as an input and computs additional children.
         /// </summary>
-        /// <typeparam name="DB">Type of the database connection</typeparam>
         /// <typeparam name="T">Type of the table entries; <b>the actual table must have the same name as the entry type but with an s at the end</b></typeparam>
         /// <param name="dbConnection">Database connection to use</param>
         /// <param name="columns">List of columns that should be exported</param>
@@ -33,7 +32,7 @@ namespace MediaManager.Globals.XMLImportExport
         /// <param name="mappings">Mappings to apply for certain columns</param>
         /// <param name="computeChildren">Function to use for computing the children</param>
         /// <returns>XML-Representation of the whole table</returns>
-        public static XElement ExportDataFromTable<DB, T>(DB dbConnection, List<string> columns, Dictionary<string, Func<T, object>> additionalComputedProperties = null, Func<T, bool> filter = null, Dictionary<string, Func<object, object>> mappings = null, Func<T, List<XElement>> computeChildren = null) where T : class where DB : System.Data.Entity.DbContext
+        public static XElement ExportDataFromTable<T>(System.Data.Entity.DbSet<T> table, List<string> columns, Dictionary<string, Func<T, object>> additionalComputedProperties = null, Func<T, bool> filter = null, Dictionary<string, Func<object, object>> mappings = null, Func<T, List<XElement>> computeChildren = null) where T : class
         {
             // prepare parameters
             filter = filter ?? ((t) => true);
@@ -42,7 +41,6 @@ namespace MediaManager.Globals.XMLImportExport
 
             // retrieve variables
             var tType = typeof(T);
-            var table = dbConnection.GetType().GetProperty(tType.Name + "s").GetValue(dbConnection) as System.Data.Entity.DbSet<T>;
             var xmlList = new XElement(tType.Name + "s");
 
             // translate data
