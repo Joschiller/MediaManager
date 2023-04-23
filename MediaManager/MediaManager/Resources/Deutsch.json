@@ -20,7 +20,8 @@
       "Intro": "Bitte ",
       "Concat": " und "
     },
-    "DispatcherUnhandledException": "Es ist ein unerwarteter Fehler aufgetreten. Bitte schließen und starten Sie die Anwendung neu!\nSie können einen Screenshot aufnehmen, um Ihre Daten später wiederherzustellen oder den Fehler zu melden."
+    "DispatcherUnhandledException": "Es ist ein unerwarteter Fehler aufgetreten. Bitte schließen und starten Sie die Anwendung neu!\nSie können einen Screenshot aufnehmen, um Ihre Daten später wiederherzustellen oder den Fehler zu melden.",
+    "ExportFileType": "Media Manager Datei"
   },
   "Component": {
     "Pager": {
@@ -265,7 +266,6 @@
       "exportFailedStep": "Export fehlgeschlagen",
       "exportFailedMessage": "Der Export ist fehlgeschlagen!",
       "DefaultExportFileName": "Katalog",
-      "ExportFileType": "Media Manager Datei",
       "Steps": {
         "0": "Export gestartet",
         "1": "Exportiere Kategorien",
@@ -273,6 +273,63 @@
         "3": "Exportiere Playlisten",
         "4": "Generiere Export",
         "5": "Export vollständig"
+      }
+    },
+    "Import": {
+      "DialogTitle": "Import",
+      "FinishButton": "Abschließen",
+      "importFailedStep": "Import fehlgeschlagen",
+      "importFailedMessage": "Der Import ist fehlgeschlagen!",
+      "formatExceptionHeader": "Die XML-Datei hat ein falsches Format",
+      "dbConstraintExceptionHeader": "Folgende Daten konnten nicht gespeichert werden",
+      "Version": {
+        "Missing": "Die Datei weist keine Versionsinformationen auf.",
+        "IncompatibleStep": "Datei nicht kompatibel",
+        "IncompatibleMessage": "Die Version der gewählten Datei kann mit der aktuellen Version der Anwendung nicht importiert werden."
+      },
+      "Exceptions": {
+        "Common": {
+          "Missing": "konnte nicht gefunden werden",
+          "WithID": "mit der Id {0}",
+          "WithTitle": "mit dem Titel {0}",
+          "MissingId": "weist keine valide Id auf",
+          "MissingTitle": "weist keinen Titel auf",
+          "WrongFormat": "folgt nicht dem korrekten Format"
+        },
+        "Catalog": {
+          "MissingTitle": "Katalogtitel ${Dialog.Import.Exceptions.Common.Missing}.",
+          "WrongFormat": "Der Katalog ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "Der Katalog"
+        },
+        "Tag": {
+          "MissingId": "Eine Kategorie ${Dialog.Import.Exceptions.Common.MissingId}.",
+          "MissingTitle": "Die Kategorie ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "Writing": "Die Kategorie ${Dialog.Import.Exceptions.Common.WithID}"
+        },
+        "Medium": {
+          "MissingTitle": "Ein Medium ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "Das Medium ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "Das Medium ${Dialog.Import.Exceptions.Common.WithTitle}"
+        },
+        "Part": {
+          "MissingId": "Ein Medienteil ${Dialog.Import.Exceptions.Common.MissingId}.",
+          "MissingTitle": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID}"
+        },
+        "Playlist": {
+          "MissingTitle": "Eine Playlist ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "Die Playlist ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "Die Playlist ${Dialog.Import.Exceptions.Common.WithTitle}"
+        }
+      },
+      "Steps": {
+        "0": "Import gestartet",
+        "1": "Importiere Katalogdaten",
+        "2": "Importiere Kategorien",
+        "3": "Importiere Medien",
+        "4": "Importiere Playlisten",
+        "5": "Import vollständig"
       }
     }
   }

@@ -41,16 +41,42 @@ namespace MediaManager.GUI.Menus
             var result = new EditCatalogDialog(null).ShowDialog();
             if (result.HasValue && result.Value) catalogList.LoadCatalogs();
         }
+        private string showLoadFileDialog()
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*.mmf.xml)|*.mmf.xml";
+            ofd.ShowDialog();
+            return ofd.FileName;
+        }
         private void btnImportCatalogClick(object sender, RoutedEventArgs e)
         {
-            // TODO show file selection
-            throw new NotImplementedException();
+            var fileName = showLoadFileDialog();
+            if (fileName == null || fileName == "") return;
+            new ThreadProcessViewer(
+                new CatalogImportThread(
+                    fileName,
+                    LanguageProvider.getString("Dialog.Import.importFailedStep"),
+                    LanguageProvider.getString("Dialog.Import.importFailedMessage"),
+                    LanguageProvider.getString("Dialog.Import.formatExceptionHeader"),
+                    LanguageProvider.getString("Dialog.Import.dbConstraintExceptionHeader"),
+                    new System.Collections.Generic.Dictionary<string, string>
+                    {
+                        // TODO check if any constraints need to be mapped
+                    }),
+                new ThreadProcessViewerConfig
+                {
+                    Title = LanguageProvider.getString("Dialog.Import.DialogTitle"),
+                    FinishButtonCaption = LanguageProvider.getString("Dialog.Import.FinishButton"),
+                    Style = InternalThreadProcessViewerStyle
+                }).ShowDialog();
+            if (Reader.Catalogs.Count == 1) CURRENT_CATALOGUE = Reader.Catalogs[0]; // activate imported catalog if it is the only existing one
+            catalogList.LoadCatalogs();
         }
         private string showSaveFileDialog()
         {
             var sfd = new SaveFileDialog();
             sfd.FileName = LanguageProvider.getString("Dialog.Export.DefaultExportFileName");
-            sfd.Filter = LanguageProvider.getString("Dialog.Export.ExportFileType") + " (*.mmf)|*.mmf";
+            sfd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*.mmf.xml)|*.mmf.xml";
             var res = sfd.ShowDialog();
             if (!res.HasValue || !res.Value) return "";
             return sfd.FileName;
@@ -65,12 +91,13 @@ namespace MediaManager.GUI.Menus
                     fileName,
                     LanguageProvider.getString("Dialog.Export.exportFailedStep"),
                     LanguageProvider.getString("Dialog.Export.exportFailedMessage"),
-                    catalogList.SelectedCatalog.Id), new ThreadProcessViewerConfig
-                    {
-                        Title = LanguageProvider.getString("Dialog.Export.DialogTitle"),
-                        FinishButtonCaption = LanguageProvider.getString("Dialog.Export.FinishButton"),
-                        Style = InternalThreadProcessViewerStyle
-                    }).ShowDialog();
+                    catalogList.SelectedCatalog.Id),
+                new ThreadProcessViewerConfig
+                {
+                    Title = LanguageProvider.getString("Dialog.Export.DialogTitle"),
+                    FinishButtonCaption = LanguageProvider.getString("Dialog.Export.FinishButton"),
+                    Style = InternalThreadProcessViewerStyle
+                }).ShowDialog();
         }
         private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {

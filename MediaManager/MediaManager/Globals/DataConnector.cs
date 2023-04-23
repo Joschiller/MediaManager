@@ -221,31 +221,35 @@ namespace MediaManager.Globals
                 DBCONNECTION.SaveChanges();
             }
 
-            public static void CreateCatalog(Catalogue catalog)
+            public static int CreateCatalog(Catalogue catalog)
             {
                 DBCONNECTION.Catalogues.Add(catalog);
                 DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Catalogues.ToList().LastOrDefault()?.Id ?? 0;
             }
-            public static void CreateTag(Tag tag)
+            public static int CreateTag(Tag tag)
             {
                 DBCONNECTION.Tags.Add(tag);
                 DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Tags.ToList().LastOrDefault()?.Id ?? 0;
             }
             public static int CreateMedium(Medium medium, List<ValuedTag> tags)
             {
                 CURRENT_CATALOGUE.Media.Add(medium);
+                DBCONNECTION.SaveChanges();
+                var mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
                 foreach (var t in tags)
                 {
                     if (!t.Value.HasValue) continue;
                     DBCONNECTION.MT_Relation.Add(new MT_Relation
                     {
-                        MediaId = medium.Id,
+                        MediaId = mediumId,
                         TagId = t.Tag.Id,
                         Value = t.Value.Value
                     });
                 }
                 DBCONNECTION.SaveChanges();
-                return CURRENT_CATALOGUE.Media.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
+                return mediumId;
             }
             public static int CreatePart(Part part, List<ValuedTag> tags)
             {
@@ -261,7 +265,7 @@ namespace MediaManager.Globals
                     });
                 }
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.ToList().OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
             }
 
             public static void SaveCatalog(Catalogue catalog)
@@ -371,17 +375,22 @@ namespace MediaManager.Globals
         public class CatalogExportThread : ExportThread
         {
             private Catalogue catalogToExport;
-            private int currentStep = 0;
+            private int currentStep = -1;
             private int maxSteps = 5;
             public CatalogExportThread(string fileDestination, string exportFailedStep, string exportFailedMessage, int catalogId) : base(fileDestination, exportFailedStep, exportFailedMessage)
             {
                 catalogToExport = DBCONNECTION.Catalogues.Find(catalogId);
             }
 
+            private void step()
+            {
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps." + currentStep.ToString()));
+            }
             protected override void runExport()
             {
                 if (catalogToExport == null) throw new Exception();
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.0"));
+                step();
                 var xmlData = new XElement("MediaManagerCatalog");
                 xmlData.Add(new XAttribute("ExportVersion", CurrentExportVersion));
                 xmlData.Add(new XAttribute("DownwardsCompatibleTo", MinimumImportVersion));
@@ -394,8 +403,7 @@ namespace MediaManager.Globals
                 xmlData.Add(new XAttribute("ShowTitleOfTheDayAsMedium", catalogToExport.ShowTitleOfTheDayAsMedium));
 
                 #region Export Tags
-                currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.1"));
+                step();
                 if (catalogToExport.Tags.Count > 0)
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
@@ -406,8 +414,7 @@ namespace MediaManager.Globals
                 }
                 #endregion
                 #region Export Media and Parts
-                currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.2"));
+                step();
                 if (catalogToExport.Media.Count > 0)
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
@@ -444,8 +451,7 @@ namespace MediaManager.Globals
                 }
                 #endregion
                 #region Export Playlists
-                currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.3"));
+                step();
                 if (catalogToExport.Playlists.Count > 0)
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
@@ -460,30 +466,263 @@ namespace MediaManager.Globals
                 }
                 #endregion
 
-                currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.4"));
+                step();
                 new XDocument(xmlData).Save(fileDestination);
-                currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps.5"));
+                step();
                 CallFinished();
             }
         }
         public class CatalogImportThread : ImportThread
         {
+            private int currentStep = -1;
+            private int maxSteps = 5;
             public CatalogImportThread(string fileSource, string importFailedStep, string importFailedMessage, string formatExceptionHeader, string dbConstraintExceptionHeader, Dictionary<string, string> dbConstraintMessages) : base(fileSource, importFailedStep, importFailedMessage, formatExceptionHeader, dbConstraintExceptionHeader, dbConstraintMessages) { }
 
+            public string importVersion
+            {
+                get
+                {
+                    try { return XDocument.Load(fileSource).Root.Attribute("ExportVersion").Value; }
+                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.Missing"), null); }
+                }
+            }
+            public string downwardsCompatibleTo
+            {
+                get
+                {
+                    try { return XDocument.Load(fileSource).Root.Attribute("DownwardsCompatibleTo").Value; }
+                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.Missing"), null); }
+                }
+            }
+
+            private List<int> stringToIntList(string xmlList)
+            {
+                xmlList = xmlList.EndsWith("]") ? xmlList.Substring(0, xmlList.Length - 1) : xmlList;
+                xmlList = xmlList.StartsWith("[") ? xmlList.Substring(1) : xmlList;
+                return xmlList.Length == 0 ? new List<int>() : xmlList.Split(',').Select(t => int.Parse(t)).ToList();
+            }
+            private List<ValuedTag> tagIdListToTagList(List<int> ids, bool tagValue) => ids.Select(t => new ValuedTag
+            {
+                Tag = Reader.GetTag(t),
+                Value = tagValue
+            }).ToList();
+            private void step()
+            {
+                currentStep++;
+                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Import.Steps." + currentStep.ToString()));
+            }
             protected override void runImport()
             {
-                // catalog: no id, title is needed, description and settings can be set to default values if not found
-                // tag list is optional
-                    // tag: id and title is needed
-                // media list is optional
-                    // media: no id, title is needed, other data can default
-                    // parts are optional (can be empty list)
-                        // part: no id, title needed every thing else can default
-                // playlists are not needed and may contain no parts
-                    // playlist: title is needed
-                throw new NotImplementedException();
+                step();
+                if (!CheckVersionImportable(downwardsCompatibleTo, CurrentExportVersion) || !CheckVersionImportable(MinimumImportVersion, importVersion))
+                {
+                    CallStep(1, LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.IncompatibleStep"));
+                    CallFinished(new Exception(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.IncompatibleMessage")));
+                    return;
+                }
+
+                var xmlData = XDocument.Load(fileSource).Root;
+                var catalogId = -1;
+
+                #region Import Catalog
+                step();
+                var importedCatalog = new Catalogue { };
+                try
+                {
+                    importedCatalog.Title = xmlData.Attribute("Title").Value;
+                }
+                catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.MissingTitle"), null); }
+                try
+                {
+                    importedCatalog.Description = xmlData.Attribute("Description")?.Value ?? "";
+                    importedCatalog.DeletionConfirmationMedium = !(xmlData.Attribute("DeletionConfirmationMedium")?.Value ?? "true").ToLower().Equals("false");
+                    importedCatalog.DeletionConfirmationPart = !(xmlData.Attribute("DeletionConfirmationPart")?.Value ?? "true").ToLower().Equals("false");
+                    importedCatalog.DeletionConfirmationTag = !(xmlData.Attribute("DeletionConfirmationTag")?.Value ?? "true").ToLower().Equals("false");
+                    importedCatalog.DeletionConfirmationPlaylist = !(xmlData.Attribute("DeletionConfirmationPlaylist")?.Value ?? "true").ToLower().Equals("false");
+                    importedCatalog.ShowTitleOfTheDayAsMedium = (xmlData.Attribute("ShowTitleOfTheDayAsMedium")?.Value ?? "false").ToLower().Equals("true");
+                }
+                catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.WrongFormat"), null); }
+                try
+                {
+                    catalogId = Writer.CreateCatalog(importedCatalog);
+                }
+                catch (Exception) { throw ParseDBConstraintException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.Writing"), null); }
+                #endregion
+
+                var tagIdMappings = new Dictionary<int, int>();
+                var partIdMappings = new Dictionary<int, int>();
+
+                var tagList = xmlData.Element("Tags")?.Elements().ToList() ?? new List<XElement>();
+                var mediaList = xmlData.Element("Mediums")?.Elements().ToList() ?? new List<XElement>();
+                var playlistList = xmlData.Element("Playlists")?.Elements().ToList() ?? new List<XElement>();
+
+                #region Import Tags
+                step();
+                foreach (var xmlTag in tagList)
+                {
+                    var xmlId = -1;
+                    var xmlTitle = "";
+
+                    try
+                    {
+                        xmlId = int.Parse(xmlTag.Attribute("Id").Value);
+                    }
+                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.MissingId"), null); }
+                    try
+                    {
+                        xmlTitle = xmlTag.Attribute("Title").Value;
+                    }
+                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.MissingTitle"), xmlId), null); }
+                    try
+                    {
+                        tagIdMappings.Add(xmlId, Writer.CreateTag(new Tag
+                        {
+                            CatalogueId = catalogId,
+                            Title = xmlTitle
+                        }));
+                    }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.Writing"), xmlId), null); }
+                }
+                #endregion
+                #region Import Media
+                step();
+                foreach(var xmlMedium in mediaList)
+                {
+                    var xmlMediumTitle = "";
+                    var xmlMediumDescription = "";
+                    var xmlMediumLocation = "";
+                    var xmlMediumTags = new List<ValuedTag>();
+
+                    try
+                    {
+                        xmlMediumTitle = xmlMedium.Attribute("Title").Value;
+                    }
+                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.MissingTitle"), null); }
+                    try
+                    {
+                        xmlMediumDescription = xmlMedium.Attribute("Description")?.Value ?? "";
+                        xmlMediumLocation = xmlMedium.Attribute("Location")?.Value ?? "";
+                        var positiveTagsString = xmlMedium.Attribute("PositiveTags")?.Value ?? "[]";
+                        var negativeTagsString = xmlMedium.Attribute("NegativeTags")?.Value ?? "[]";
+                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
+                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                    }
+                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), null); }
+                    var mediumId = -1;
+                    try
+                    {
+                        DBCONNECTION.Media.Add(new Medium
+                        {
+                            CatalogueId = catalogId,
+                            Title = xmlMediumTitle,
+                            Description = xmlMediumDescription,
+                            Location = xmlMediumLocation,
+                        });
+                        DBCONNECTION.SaveChanges();
+                        mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
+                        foreach (var t in xmlMediumTags)
+                        {
+                            if (!t.Value.HasValue) continue;
+                            DBCONNECTION.MT_Relation.Add(new MT_Relation
+                            {
+                                MediaId = mediumId,
+                                TagId = t.Tag.Id,
+                                Value = t.Value.Value
+                            });
+                        }
+                        DBCONNECTION.SaveChanges();
+                    }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.Writing"), xmlMediumTitle), null); }
+
+                    var partList = xmlMedium.Elements()?.ToList() ?? new List<XElement>();
+
+                    foreach (var xmlPart in partList)
+                    {
+                        var xmlPartId = -1;
+                        var xmlPartTitle = "";
+                        var xmlPartDescription = "";
+                        var xmlPartFavourite = false;
+                        var xmlPartLength = 0;
+                        var xmlPartPublication_Year = 0;
+                        byte[] xmlPartImage = null;
+                        var xmlPartTags = new List<ValuedTag>();
+                        xmlPartTags.AddRange(xmlMediumTags);
+
+                        try
+                        {
+                            xmlPartId = int.Parse(xmlPart.Attribute("Id").Value);
+                        }
+                        catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingId"), null); }
+                        try
+                        {
+                            xmlPartTitle = xmlPart.Attribute("Title").Value;
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingTitle"), xmlPartId), null); }
+                        try
+                        {
+                            xmlPartDescription = xmlPart.Attribute("Description")?.Value ?? "";
+                            xmlPartFavourite = (xmlPart.Attribute("Favourite")?.Value ?? "false").ToLower().Equals("true");
+                            xmlPartLength = int.Parse(xmlPart.Attribute("Length")?.Value ?? "0");
+                            xmlPartPublication_Year = int.Parse(xmlPart.Attribute("Publication_Year")?.Value ?? "0");
+                            // TODO image => only read, if existent => must be null otherwise
+                            var positiveTagsString = xmlPart.Attribute("PositiveTags")?.Value ?? "[]";
+                            var negativeTagsString = xmlPart.Attribute("NegativeTags")?.Value ?? "[]";
+                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
+                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), null); }
+                        try
+                        {
+                            partIdMappings.Add(xmlPartId, Writer.CreatePart(new Part
+                            {
+                                MediumId = mediumId,
+                                Title = xmlPartTitle,
+                                Description = xmlPartDescription,
+                                Favourite = xmlPartFavourite,
+                                Length = xmlPartLength,
+                                Publication_Year = xmlPartPublication_Year,
+                                Image = xmlPartImage,
+                            }, xmlPartTags));
+                        }
+                        catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.Writing"), xmlPartId), null); }
+                    }
+                }
+                #endregion
+                #region Import Playlists
+                step();
+                foreach(var xmlPlaylist in playlistList)
+                {
+                    var xmlTitle = "";
+                    var xmlPlaylistParts = new List<int>();
+
+                    try
+                    {
+                        xmlTitle = xmlPlaylist.Attribute("Title").Value;
+                    }
+                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
+                    try
+                    {
+                        var partsString = xmlPlaylist.Attribute("Parts")?.Value ?? "[]";
+                        xmlPlaylistParts = stringToIntList(partsString).Select(p => partIdMappings[p]).ToList();
+                    }
+                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), null); }
+                    try
+                    {
+                        DBCONNECTION.Playlists.Add(new Playlist
+                        {
+                            CatalogueId = catalogId,
+                            Title = xmlTitle
+                        });
+                        DBCONNECTION.SaveChanges();
+                        var playlistId = DBCONNECTION.Playlists.ToList().Last().Id;
+                        xmlPlaylistParts.ForEach(p => Writer.AddPartToPlaylist(playlistId, p));
+                    }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
+                }
+                #endregion
+
+                step();
+                CallFinished();
             }
         }
     }

@@ -20,7 +20,8 @@
       "Intro": "Please ",
       "Concat": " and "
     },
-    "DispatcherUnhandledException": "An unexpected error occurred. Please close and restart the application!\nYou can take a screenshot to restore your data later on or to report the error."
+    "DispatcherUnhandledException": "An unexpected error occurred. Please close and restart the application!\nYou can take a screenshot to restore your data later on or to report the error.",
+    "ExportFileType": "Media Manager File"
   },
   "Component": {
     "Pager": {
@@ -265,7 +266,6 @@
       "exportFailedStep": "Export failed",
       "exportFailedMessage": "The export has failed!",
       "DefaultExportFileName": "Catalog",
-      "ExportFileType": "Media Manager File",
       "Steps": {
         "0": "Export started",
         "1": "Exporting tags",
@@ -273,6 +273,63 @@
         "3": "Exporting playlists",
         "4": "Generating export",
         "5": "Export finished"
+      }
+    },
+    "Import": {
+      "DialogTitle": "Import",
+      "FinishButton": "Finish",
+      "importFailedStep": "Import failed",
+      "importFailedMessage": "The import has failed!",
+      "formatExceptionHeader": "The XML-file has a wrong format",
+      "dbConstraintExceptionHeader": "The following data could not be stored",
+      "Version": {
+        "Missing": "The file is missing version information.",
+        "IncompatibleStep": "File not compatible",
+        "IncompatibleMessage": "The given version of the selected file cannot be imported by the current version of the application."
+      },
+      "Exceptions": {
+        "Common": {
+          "Missing": "Could not find",
+          "WithID": "with id {0}",
+          "WithTitle": "with title {0}",
+          "MissingId": "is missing a valid id",
+          "MissingTitle": "is missing a title",
+          "WrongFormat": "does not follow the correct format"
+        },
+        "Catalog": {
+          "MissingTitle": "${Dialog.Import.Exceptions.Common.Missing} catalog title.",
+          "WrongFormat": "The catalog ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "The catalog"
+        },
+        "Tag": {
+          "MissingId": "A tag ${Dialog.Import.Exceptions.Common.MissingId}.",
+          "MissingTitle": "The tag ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "Writing": "The tag ${Dialog.Import.Exceptions.Common.WithID}"
+        },
+        "Medium": {
+          "MissingTitle": "A medium ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "The medium ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "The medium ${Dialog.Import.Exceptions.Common.WithTitle}"
+        },
+        "Part": {
+          "MissingId": "A part ${Dialog.Import.Exceptions.Common.MissingId}.",
+          "MissingTitle": "The part ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "The part ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "The part ${Dialog.Import.Exceptions.Common.WithID}"
+        },
+        "Playlist": {
+          "MissingTitle": "A playlist ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "WrongFormat": "The playlist ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
+          "Writing": "The playlist ${Dialog.Import.Exceptions.Common.WithTitle}"
+        }
+      },
+      "Steps": {
+        "0": "Import started",
+        "1": "Importing catalog data",
+        "2": "Importing tags",
+        "3": "Importing media",
+        "4": "Importing playlists",
+        "5": "Import finished"
       }
     }
   }
