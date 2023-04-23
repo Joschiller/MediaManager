@@ -52,7 +52,7 @@ namespace MediaManager.GUI.Menus
         {
             var fileName = showLoadFileDialog();
             if (fileName == null || fileName == "") return;
-            new ThreadProcessViewer(
+            var viewer = new ThreadProcessViewer(
                 new CatalogImportThread(
                     fileName,
                     LanguageProvider.getString("Dialog.Import.importFailedStep"),
@@ -68,7 +68,9 @@ namespace MediaManager.GUI.Menus
                     Title = LanguageProvider.getString("Dialog.Import.DialogTitle"),
                     FinishButtonCaption = LanguageProvider.getString("Dialog.Import.FinishButton"),
                     Style = InternalThreadProcessViewerStyle
-                }).ShowDialog();
+                });
+            viewer.ProcessFailed += Viewer_ProcessFailed;
+            viewer.ShowDialog();
             if (Reader.Catalogs.Count == 1) CURRENT_CATALOGUE = Reader.Catalogs[0]; // activate imported catalog if it is the only existing one
             catalogList.LoadCatalogs();
         }
@@ -86,7 +88,7 @@ namespace MediaManager.GUI.Menus
             if (catalogList.SelectedCatalog == null) return;
             var fileName = showSaveFileDialog();
             if (fileName == null || fileName == "") return;
-            new ThreadProcessViewer(
+            var viewer = new ThreadProcessViewer(
                 new CatalogExportThread(
                     fileName,
                     LanguageProvider.getString("Dialog.Export.exportFailedStep"),
@@ -97,8 +99,11 @@ namespace MediaManager.GUI.Menus
                     Title = LanguageProvider.getString("Dialog.Export.DialogTitle"),
                     FinishButtonCaption = LanguageProvider.getString("Dialog.Export.FinishButton"),
                     Style = InternalThreadProcessViewerStyle
-                }).ShowDialog();
+                });
+            viewer.ProcessFailed += Viewer_ProcessFailed;
+            viewer.ShowDialog();
         }
+        private void Viewer_ProcessFailed(string message) => ShowDefaultDialog(message, Globals.DefaultDialogs.SuccessMode.Error);
         private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {
             var result = new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
