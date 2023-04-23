@@ -457,10 +457,10 @@ namespace MediaManager.Globals
                     xmlData.Add(XMLExport.ExportDataFromTable(
                         DBCONNECTION.Playlists,
                         filter: (i) => i.CatalogueId == catalogToExport.Id,
-                        columns: new List<string> { "Title", "Parts" },
+                        columns: new List<string> { "Title", "PlaylistParts" },
                         additionalComputedProperties: new Dictionary<string, Func<Playlist, object>>
                         {
-                        { "Parts", (i) => "[" + string.Join(",", i.Parts.Select(p => p.Id).ToList()) + "]" },
+                            { "PlaylistParts", (i) => "[" + string.Join(",", i.Parts.Select(p => p.Id).ToList()) + "]" },
                         }
                         ));
                 }
@@ -702,7 +702,7 @@ namespace MediaManager.Globals
                     catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
                     try
                     {
-                        var partsString = xmlPlaylist.Attribute("Parts")?.Value ?? "[]";
+                        var partsString = xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]";
                         xmlPlaylistParts = stringToIntList(partsString).Select(p => partIdMappings[p]).ToList();
                     }
                     catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), null); }
