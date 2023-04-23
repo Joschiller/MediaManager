@@ -71,7 +71,8 @@
         "Title": "Playlist Name",
         "Length": "Playlist Length",
         "Tag": "Playlist Theme",
-        "PlaylistDeletion": "the selected playlist"
+        "PlaylistDeletion": "the selected playlist",
+        "EditGroup": "Edit Playlist"
       }
     },
     "Settings": {

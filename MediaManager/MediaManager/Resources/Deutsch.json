@@ -71,7 +71,8 @@
         "Title": "Playlistname",
         "Length": "Playlistlänge",
         "Tag": "Playlistthema",
-        "PlaylistDeletion": "die gewählte Playlist"
+        "PlaylistDeletion": "die gewählte Playlist",
+        "EditGroup": "Playlist bearbeiten"
       }
     },
     "Settings": {

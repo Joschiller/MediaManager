@@ -6,5 +6,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     {
         ImageSource GetHeader();
         bool GetIsVisible();
+        void ReloadGUI();
     }
 }

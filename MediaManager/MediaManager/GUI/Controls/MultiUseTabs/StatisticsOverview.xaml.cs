@@ -16,18 +16,18 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         public StatisticsOverview()
         {
             InitializeComponent();
-            Reload();
+            ReloadGUI();
             RegisterAtLanguageProvider();
         }
 
-        public void Reload()
+
+        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
+        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
+        public void ReloadGUI()
         {
             valueMediaCount.Text = CountOfMedia.ToString();
             valuePartCount.Text = CountOfParts.ToString();
         }
-
-        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {

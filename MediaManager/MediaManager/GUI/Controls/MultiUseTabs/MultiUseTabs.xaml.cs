@@ -1,5 +1,4 @@
-﻿using MediaManager.Globals.LanguageProvider;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,6 +47,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
                         Header = header,
                         Content = elem
                     });
+                    elem.ReloadGUI();
                 }
 
                 if (tabs.SelectedIndex < 0) tabs.SelectedIndex = 0;

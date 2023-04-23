@@ -64,6 +64,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
 
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
         public bool GetIsVisible() => Reader.Settings.TitleOfTheDayVisible;
+        public void ReloadGUI() => ShowNextRandomItem();
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
