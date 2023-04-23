@@ -230,10 +230,12 @@ namespace MediaManager.GUI.Menus
         }
         private void btnSaveMediumClick(object sender, RoutedEventArgs e)
         {
-            save();
-            reloadData();
-            AnyChangeMade = false;
-            updateVisibility(false);
+            if (save())
+            {
+                reloadData();
+                AnyChangeMade = false;
+                updateVisibility(false);
+            }
         }
         #endregion
 
