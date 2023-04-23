@@ -72,5 +72,11 @@ namespace MediaManager.GUI.Menus
         }
 
         private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false));
+
+        private void searchPanel_PlaylistAdditionRequested(int id, Controls.Search.SearchResultMode mode)
+        {
+            var result = new PlaylistAdditionDialog(id, mode).ShowDialog();
+            if (result.HasValue && result.Value) Reload();
+        }
     }
 }

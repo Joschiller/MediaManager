@@ -88,16 +88,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         #endregion
 
-        public void AddPartToCurrentPlaylist(int partId)
-        {
-            var selectedPlaylist = playlists.SelectedItem as Playlist;
-            if (selectedPlaylist != null)
-            {
-                Writer.AddPartToPlaylist(selectedPlaylist.Id, partId);
-                ReloadData();
-                playlists.SelectedItem = Reader.Playlists.Find(pl => pl.Id == selectedPlaylist.Id);
-            }
-        }
         private void remove_Click(object sender, RoutedEventArgs e)
         {
             var selectedPlaylist = playlists.SelectedItem as Playlist;

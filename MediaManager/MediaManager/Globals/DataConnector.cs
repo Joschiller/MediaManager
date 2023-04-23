@@ -551,6 +551,7 @@ namespace MediaManager.Globals
 
                 var tagIdMappings = new Dictionary<int, int>();
                 var partIdMappings = new Dictionary<int, int>();
+                // TODO: add explicit exceptions if one of the mappings fails due to a non existent id
 
                 var tagList = xmlData.Element("Tags")?.Elements().ToList() ?? new List<XElement>();
                 var mediaList = xmlData.Element("Mediums")?.Elements().ToList() ?? new List<XElement>();

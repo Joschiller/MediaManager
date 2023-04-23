@@ -49,6 +49,8 @@ namespace MediaManager.GUI.Dialogs
             cbDeletionConfirmationPlaylist.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationPlaylist");
             cbDeletionConfirmationTag.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationTag");
             cbShowTitleOfTheDayAsMedium.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelShowTitleOfTheDayAsMedium");
+            submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
+            cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
 

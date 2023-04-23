@@ -37,7 +37,9 @@
       "ShowMedia": "_Show Media",
       "ShowParts": "_Show Parts",
       "Search": "Search",
-      "Reset": "Reset Search"
+      "Reset": "Reset Search",
+      "AddPartToPlaylist": "Add part to playlist",
+      "AddMediumToPlaylist": "Add all parts of the medium to playlist"
     },
     "Edit": {
       "Label": {
@@ -260,6 +262,13 @@
       "LabelDeletionConfirmationPlaylist": "Show deletion confirmation for playlists",
       "LabelDeletionConfirmationTag": "Show deletion confirmation for tags",
       "LabelShowTitleOfTheDayAsMedium": "Show whole medium for title of the day"
+    },
+    "PlaylistAddition": {
+      "HeaderMedium": "Select the playlist to add the parts of the medium to or create a new one:",
+      "HeaderPart": "Select the playlist to add the part to or create a new one:",
+      "LabelPlaylists": "Select playlist",
+      "LabelTitle": "Playlist title",
+      "New": "<New playlist>"
     },
     "Export": {
       "DialogTitle": "Export",

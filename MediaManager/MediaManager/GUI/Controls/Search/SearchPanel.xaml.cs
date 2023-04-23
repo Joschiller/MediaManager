@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MediaManager.Globals.LanguageProvider;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.DataConnector.Reader;
@@ -13,10 +13,13 @@ namespace MediaManager.GUI.Controls.Search
     /// <summary>
     /// Interaction logic for SearchPanel.xaml
     /// </summary>
-    public partial class SearchPanel : UserControl
+    public partial class SearchPanel : UserControl, UpdatedLanguageUser
     {
         public delegate void MediumSelectionHandler(int mediumId, int? partId);
         public event MediumSelectionHandler MediumSelected;
+
+        public delegate void PlaylistAdditionHandler(int id, SearchResultMode mode);
+        public event PlaylistAdditionHandler PlaylistAdditionRequested;
 
         private SearchParameters CurrentSearchParameters;
         private List<SearchResultItem> CompleteResultList = new List<SearchResultItem>();
@@ -28,6 +31,7 @@ namespace MediaManager.GUI.Controls.Search
         {
             InitializeComponent();
             DataContext = this;
+            RegisterAtLanguageProvider();
             CurrentSearchParameters = input.CurrentSearchParameters;
         }
 
@@ -37,6 +41,7 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList = SearchUsingParameters(parameters);
             pager.CurrentPage = 1;
             pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
+            LoadTexts(null);
         }
         private void pager_PageChanged(int newPage)
         {
@@ -53,6 +58,22 @@ namespace MediaManager.GUI.Controls.Search
                 else MediumSelected?.Invoke(GetPart(item.Id).MediumId, item.Id);
             }
         }
+        private int? rightClickPivotId = null;
+        private void resultList_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = resultList.SelectedItem as SearchResultItem;
+            if (item != null)
+            {
+                rightClickPivotId = item.Id;
+                ContextMenu cm = FindResource("contextMenu") as ContextMenu;
+                cm.PlacementTarget = (FrameworkElement)e.OriginalSource;
+                cm.IsOpen = true;
+            }
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (rightClickPivotId.HasValue) PlaylistAdditionRequested?.Invoke(rightClickPivotId.Value, CurrentSearchParameters.SearchResult);
+        }
 
         public void ReloadTags() => input.reloadTagList();
         public void ReloadResultList()
@@ -60,5 +81,12 @@ namespace MediaManager.GUI.Controls.Search
             ItemsPerPage = Reader.Settings.ResultListLength;
             input_SearchParametersChanged(CurrentSearchParameters);
         }
+
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
+        }
+        ~SearchPanel() => LanguageProvider.Unregister(this);
     }
 }

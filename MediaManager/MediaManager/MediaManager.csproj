@@ -203,6 +203,9 @@
     <Compile Include="GUI\Dialogs\EditTagDialog.xaml.cs">
       <DependentUpon>EditTagDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Dialogs\PlaylistAdditionDialog.xaml.cs">
+      <DependentUpon>PlaylistAdditionDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Menus\AnalyzeMenu.xaml.cs">
       <DependentUpon>AnalyzeMenu.xaml</DependentUpon>
     </Compile>
@@ -381,6 +384,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Dialogs\EditTagDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Dialogs\PlaylistAdditionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

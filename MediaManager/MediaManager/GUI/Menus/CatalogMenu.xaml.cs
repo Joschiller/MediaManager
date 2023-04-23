@@ -59,10 +59,7 @@ namespace MediaManager.GUI.Menus
                     LanguageProvider.getString("Dialog.Import.importFailedMessage"),
                     LanguageProvider.getString("Dialog.Import.formatExceptionHeader"),
                     LanguageProvider.getString("Dialog.Import.dbConstraintExceptionHeader"),
-                    new System.Collections.Generic.Dictionary<string, string>
-                    {
-                        // TODO check if any constraints need to be mapped
-                    }),
+                    new System.Collections.Generic.Dictionary<string, string>()),
                 new ThreadProcessViewerConfig
                 {
                     Title = LanguageProvider.getString("Dialog.Import.DialogTitle"),

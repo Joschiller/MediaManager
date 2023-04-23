@@ -37,7 +37,9 @@
       "ShowMedia": "Medien _anzeigen",
       "ShowParts": "Teile _anzeigen",
       "Search": "_Suchen",
-      "Reset": "Suche zurücksetzen"
+      "Reset": "Suche zurücksetzen",
+      "AddPartToPlaylist": "Medienteil zu Playlist hinzufügen",
+      "AddMediumToPlaylist": "Alle Teile des Mediums zu Playlist hinzufügen"
     },
     "Edit": {
       "Label": {
@@ -260,6 +262,13 @@
       "LabelDeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
       "LabelDeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
       "LabelShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
+    },
+    "PlaylistAddition": {
+      "HeaderMedium": "Playlist zum Hinzufügen der Titel des Mediums auswählen oder eine neue erstellen:",
+      "HeaderPart": "Playlist zum Hinzufügen des Titels auswählen oder eine neue erstellen:",
+      "LabelPlaylists": "Playlist auswählen",
+      "LabelTitle": "Playlisttitel",
+      "New": "<Neue Playlist>"
     },
     "Export": {
       "DialogTitle": "Export",
