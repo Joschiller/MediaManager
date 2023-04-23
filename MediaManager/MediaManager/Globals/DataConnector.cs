@@ -439,7 +439,7 @@ namespace MediaManager.Globals
                                 xmlPart.Add(new XAttribute("Favourite", p.Favourite));
                                 xmlPart.Add(new XAttribute("Length", p.Length));
                                 xmlPart.Add(new XAttribute("Publication_Year", p.Publication_Year));
-                                if (p.Image != null) xmlPart.Add(new XAttribute("Image", p.Image.ToString()));
+                                if (p.Image != null) xmlPart.Add(new XAttribute("Image", Convert.ToBase64String(p.Image)));
                                 var relevantPartTags = Reader.GetTagsForPart(p.Id).Where(t => !mediaTags.Contains(t.Tag.Id) && t.Value.HasValue);
                                 xmlPart.Add(new XAttribute("PositiveTags", "[" + string.Join(",", relevantPartTags.Where(t => t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
                                 xmlPart.Add(new XAttribute("NegativeTags", "[" + string.Join(",", relevantPartTags.Where(t => !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
@@ -664,7 +664,8 @@ namespace MediaManager.Globals
                             xmlPartFavourite = (xmlPart.Attribute("Favourite")?.Value ?? "false").ToLower().Equals("true");
                             xmlPartLength = int.Parse(xmlPart.Attribute("Length")?.Value ?? "0");
                             xmlPartPublication_Year = int.Parse(xmlPart.Attribute("Publication_Year")?.Value ?? "0");
-                            // TODO image => only read, if existent => must be null otherwise
+                            var imgAttribute = xmlPart.Attribute("Image")?.Value;
+                            xmlPartImage = imgAttribute != null ? Convert.FromBase64String(imgAttribute) : null;
                             var positiveTagsString = xmlPart.Attribute("PositiveTags")?.Value ?? "[]";
                             var negativeTagsString = xmlPart.Attribute("NegativeTags")?.Value ?? "[]";
                             xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
