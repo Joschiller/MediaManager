@@ -15,11 +15,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="playlistLabel" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock x:Name="playlistLabel" Grid.Row="0" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="playlistVisible" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:Name="titleOfTheDayLabel" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock x:Name="titleOfTheDayLabel" Grid.Row="1" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="titleOfTheDayVisible" Grid.Row="1" Grid.Column="1"/>
-        <TextBlock x:Name="statisticsLabel" Grid.Row="2" Grid.Column="0"/>
+        <TextBlock x:Name="statisticsLabel" Grid.Row="2" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="statisticsVisible" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </UserControl>

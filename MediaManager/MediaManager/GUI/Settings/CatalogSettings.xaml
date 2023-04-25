@@ -17,15 +17,15 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="labelDeletionConfirmationMedium" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="labelDeletionConfirmationMedium" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="cbDeletionConfirmationMedium" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:Name="labelDeletionConfirmationPart" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="labelDeletionConfirmationPart" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="cbDeletionConfirmationPart" Grid.Row="1" Grid.Column="1"/>
-        <TextBlock x:Name="labelDeletionConfirmationPlaylist" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="labelDeletionConfirmationPlaylist" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="cbDeletionConfirmationPlaylist" Grid.Row="2" Grid.Column="1"/>
-        <TextBlock x:Name="labelDeletionConfirmationTag" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="labelDeletionConfirmationTag" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="cbDeletionConfirmationTag" Grid.Row="3" Grid.Column="1"/>
-        <TextBlock x:Name="labelShowTitleOfTheDayAsMedium" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="labelShowTitleOfTheDayAsMedium" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <CheckBox x:Name="cbShowTitleOfTheDayAsMedium" Grid.Row="4" Grid.Column="1"/>
     </Grid>
 </UserControl>

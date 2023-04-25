@@ -14,9 +14,9 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="labelMediaCount" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBlock x:Name="labelMediaCount" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
         <TextBlock x:Name="valueMediaCount" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:Name="labelPartCount" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+        <TextBlock x:Name="labelPartCount" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
         <TextBlock x:Name="valuePartCount" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </UserControl>

@@ -10,7 +10,7 @@
             <ColumnDefinition Width="{StaticResource settingsLabelWidth}"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="searchResultLabel" Grid.Column="0"/>
+        <TextBlock x:Name="searchResultLabel" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
         <atoms:NumericUpDown x:Name="searchResultValue" Grid.Column="1"/>
     </Grid>
 </UserControl>

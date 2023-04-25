@@ -8,7 +8,7 @@
         Style="{StaticResource defaultWindow}">
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked"/>
-        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

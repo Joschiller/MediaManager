@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="48" Width="48"/>
+            <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="{StaticResource imageButtonSize}" Width="{StaticResource imageButtonSize}"/>
             <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}"/>
         </DockPanel>
         <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>

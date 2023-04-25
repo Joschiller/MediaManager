@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <DockPanel>
-        <Image x:Name="icon1" DockPanel.Dock="Left" VerticalAlignment="Center" Source="../../Resources/icon.png" Height="40" Margin="8" Visibility="Collapsed" MouseUp="icon_MouseUp"/>
-        <atoms:ImageButton x:Name="back" DockPanel.Dock="Left" VerticalAlignment="Center" EnabledIconSource="../../Resources/back.png" Margin="8" Visibility="Collapsed" Click="back_Click"/>
-        <atoms:ImageButton x:Name="help" DockPanel.Dock="Right" VerticalAlignment="Center" EnabledIconSource="../../Resources/help.png" Margin="8" Visibility="Collapsed" Click="help_Click"/>
-        <Image x:Name="icon2" DockPanel.Dock="Right" VerticalAlignment="Center" Source="../../Resources/icon.png" Height="40" Margin="8" Visibility="Collapsed" MouseUp="icon_MouseUp"/>
-        <StackPanel x:Name="container" Orientation="Horizontal" VerticalAlignment="Center" Margin="8"/>
+        <Image x:Name="icon1" DockPanel.Dock="Left" Source="../../Resources/icon.png" Height="{StaticResource imageButtonSize}" Visibility="Collapsed" MouseUp="icon_MouseUp" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <atoms:ImageButton x:Name="back" DockPanel.Dock="Left" EnabledIconSource="../../Resources/back.png" Visibility="Collapsed" Click="back_Click" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <atoms:ImageButton x:Name="help" DockPanel.Dock="Right" EnabledIconSource="../../Resources/help.png" Visibility="Collapsed" Click="help_Click" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <Image x:Name="icon2" DockPanel.Dock="Right" Source="../../Resources/icon.png" Height="{StaticResource imageButtonSize}" Visibility="Collapsed" MouseUp="icon_MouseUp" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <StackPanel x:Name="container" Orientation="Horizontal" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
     </DockPanel>
 </UserControl>

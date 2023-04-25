@@ -16,14 +16,14 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="labelOldTag" Grid.Row="0" Grid.Column="0" FontWeight="Bold" TextAlignment="Right" Margin="4"/>
-            <TextBlock x:Name="oldTag" Grid.Row="0" Grid.Column="1" Margin="4"/>
-            <TextBlock x:Name="labelNewTag" Grid.Row="1" Grid.Column="0" FontWeight="Bold" TextAlignment="Right" Margin="4"/>
-            <TextBox x:Name="newTag" Grid.Row="1" Grid.Column="1" Text="{Binding Title}" MaxLength="128" Margin="4" TextChanged="newTag_TextChanged"/>
+            <TextBlock x:Name="labelOldTag" Grid.Row="0" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+            <TextBlock x:Name="oldTag" Grid.Row="0" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}"/>
+            <TextBlock x:Name="labelNewTag" Grid.Row="1" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+            <TextBox x:Name="newTag" Grid.Row="1" Grid.Column="1" Text="{Binding Title}" MaxLength="128" Margin="{StaticResource defaultMarginSmall}" TextChanged="newTag_TextChanged"/>
         </Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button x:Name="submit" IsDefault="True" Background="{StaticResource button_green}" Click="submit_Click" Margin="4">_Ok</Button>
-            <Button x:Name="cancel" IsCancel="True" Background="{StaticResource button_red}" Click="cancel_Click" Margin="4">_Cancel</Button>
+            <Button x:Name="submit" IsDefault="True" Background="{StaticResource button_green}" Click="submit_Click" Margin="{StaticResource defaultMarginSmall}">_Ok</Button>
+            <Button x:Name="cancel" IsCancel="True" Background="{StaticResource button_red}" Click="cancel_Click" Margin="{StaticResource defaultMarginSmall}">_Cancel</Button>
         </StackPanel>
     </StackPanel>
 </Window>

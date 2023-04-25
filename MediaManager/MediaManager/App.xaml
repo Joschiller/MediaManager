@@ -42,6 +42,9 @@
         <!--#endregion-->
         <!--#endregion-->
         <!--#region Style Definitions -->
+        <Thickness x:Key="defaultMargin">8</Thickness>
+        <Thickness x:Key="defaultMarginSmall">4</Thickness>
+        <system:Double x:Key="imageButtonSize">48</system:Double>
         <GridLength x:Key="settingsLabelWidth">350</GridLength>
         <!--#region Window -->
         <Style TargetType="Window" x:Key="baseWindow">
@@ -66,6 +69,21 @@
         <!--#endregion-->
         <Style TargetType="TextBlock" x:Key="leftsideLabel">
             <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="rightsideLabel">
+            <Setter Property="Margin" Value="8,0,0,0"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="dialogLabel">
+            <Setter Property="Margin" Value="{StaticResource defaultMarginSmall}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="defaultBorder">
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource accent_border_brush}"/>
         </Style>
         <!--#endregion-->
     </Application.Resources>

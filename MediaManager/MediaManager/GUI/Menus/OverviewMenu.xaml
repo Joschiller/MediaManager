@@ -18,17 +18,17 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_medium.png" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
-        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

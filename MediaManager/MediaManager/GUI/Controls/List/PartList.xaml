@@ -9,7 +9,7 @@
         <Button DockPanel.Dock="Top" Click="Button_Click">
             <TextBlock x:Name="title" />
         </Button>
-        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
         <ListView x:Name="list" ItemsSource="{Binding Parts}" SelectionChanged="list_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>

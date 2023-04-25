@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Dialogs"
         mc:Ignorable="d"
-        Style="{StaticResource defaultDialog}" Height="110" Width="400" MinHeight="110" MinWidth="400" MouseDown="Window_MouseDown" Padding="12">
+        Style="{StaticResource defaultDialog}" Height="120" Width="400" MinHeight="120" MinWidth="400" MouseDown="Window_MouseDown" Padding="12">
     <StackPanel Orientation="Vertical" Margin="4">
         <TextBlock x:Name="headline" TextAlignment="Justify" TextWrapping="WrapWithOverflow"/>
         <Grid>
@@ -17,20 +17,20 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="labelPlaylists" Grid.Row="0" Grid.Column="0"/>
-            <ComboBox x:Name="playlists" Grid.Row="0" Grid.Column="1" SelectionChanged="playlists_SelectionChanged">
+            <TextBlock x:Name="labelPlaylists" Grid.Row="0" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+            <ComboBox x:Name="playlists" Grid.Row="0" Grid.Column="1" SelectionChanged="playlists_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBlock x:Name="labelPlaylistName" Grid.Row="1" Grid.Column="0"/>
-            <TextBox x:Name="playlistName" Grid.Row="1" Grid.Column="1" MaxLength="128" TextChanged="playlistName_TextChanged"/>
+            <TextBlock x:Name="labelPlaylistName" Grid.Row="1" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+            <TextBox x:Name="playlistName" Grid.Row="1" Grid.Column="1" MaxLength="128" TextChanged="playlistName_TextChanged" Margin="{StaticResource defaultMarginSmall}"/>
         </Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button x:Name="submit" IsDefault="True" Background="{StaticResource button_green}" Click="submit_Click"  Margin="4">_Ok</Button>
-            <Button x:Name="cancel" IsCancel="True" Background="{StaticResource button_red}" Click="cancel_Click"  Margin="4">_Cancel</Button>
+            <Button x:Name="submit" IsDefault="True" Background="{StaticResource button_green}" Click="submit_Click" Margin="{StaticResource defaultMarginSmall}">_Ok</Button>
+            <Button x:Name="cancel" IsCancel="True" Background="{StaticResource button_red}" Click="cancel_Click" Margin="{StaticResource defaultMarginSmall}">_Cancel</Button>
         </StackPanel>
     </StackPanel>
 </Window>

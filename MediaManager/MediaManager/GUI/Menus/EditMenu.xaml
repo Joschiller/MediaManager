@@ -9,15 +9,15 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup Visibility="{DynamicResource viewerButtonsVisibility}">
-                <atoms:ImageButton Size="48" EnabledIconSource="../../Resources/delete_medium.png" ToolTip="{DynamicResource btnDeleteMedium}" Click="btnDeleteMediumClick"/>
-                <atoms:ImageButton Size="48" EnabledIconSource="../../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditMedium}" Click="btnEditMediumClick" />
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDeleteMedium}" Click="btnDeleteMediumClick"/>
+                <atoms:ImageButton EnabledIconSource="../../../Resources/edit_blue.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnEditMedium}" Click="btnEditMediumClick" />
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup Visibility="{DynamicResource editorButtonsVisibility}">
-                <atoms:ImageButton Size="48" EnabledIconSource="../../Resources/undo.png" ToolTip="{DynamicResource btnUndoChanges}" Click="btnUndoChangesClick"/>
-                <atoms:ImageButton Size="48" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png" ToolTip="{DynamicResource btnSaveMedium}" Click="btnSaveMediumClick" Enabled="{DynamicResource saveEnabled}" />
+                <atoms:ImageButton EnabledIconSource="../../Resources/undo.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnUndoChanges}" Click="btnUndoChangesClick"/>
+                <atoms:ImageButton EnabledIconSource="../../../Resources/save.png" Size="{StaticResource imageButtonSize}" DisabledIconSource="../../../Resources/nosave.png" ToolTip="{DynamicResource btnSaveMedium}" Click="btnSaveMediumClick" Enabled="{DynamicResource saveEnabled}" />
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
-        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
         <Grid>
             <edit:MediaViewer x:Name="viewer"/>
             <edit:MediaEditor x:Name="editor" MediumEdited="editor_MediumEdited"/>

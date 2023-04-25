@@ -20,8 +20,8 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="textTitle" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <DockPanel Grid.Row="0" Grid.Column="1">
-            <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="48" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
-            <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="48" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
+            <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
+            <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
         <TextBlock x:Name="textDescription" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>

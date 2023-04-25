@@ -15,14 +15,14 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup Visibility="{DynamicResource tagDependentVisibility}">
-                <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" ToolTip="{DynamicResource btnEditTag}" Click="btnEditTagClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/delete_tag.png" ToolTip="{DynamicResource btnDeleteTag}" Click="btnDeleteTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnEditTag}" Click="btnEditTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDeleteTag}" Click="btnDeleteTagClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
-        <Border DockPanel.Dock="Top" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

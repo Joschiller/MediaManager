@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
     <StackPanel Orientation="{Binding Orientation}">
-        <Border BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border Style="{StaticResource defaultBorder}"/>
         <StackPanel x:Name="container" Orientation="{Binding Orientation}"/>
-        <Border BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
+        <Border Style="{StaticResource defaultBorder}"/>
     </StackPanel>
 </UserControl>

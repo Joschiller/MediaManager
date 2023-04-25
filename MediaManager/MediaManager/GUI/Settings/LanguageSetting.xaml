@@ -10,7 +10,7 @@
             <ColumnDefinition Width="{StaticResource settingsLabelWidth}"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="languageText" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="languageText" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <ComboBox x:Name="selectedLanguage" Grid.Column="1" ItemsSource="{Binding LanguageList}" SelectionChanged="selectedLanguage_SelectionChanged"/>
     </Grid>
 </UserControl>

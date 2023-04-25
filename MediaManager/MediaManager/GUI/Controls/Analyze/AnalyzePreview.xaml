@@ -7,7 +7,7 @@
              mc:Ignorable="d">
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
-            <atoms:ImageButton x:Name="editButton" Size="48" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
+            <atoms:ImageButton x:Name="editButton" Size="{StaticResource imageButtonSize}" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
         </Grid>
         <Grid>
             <Grid x:Name="doubled" Visibility="Collapsed">

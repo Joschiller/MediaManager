@@ -10,7 +10,7 @@ namespace MediaManager.GUI.Atoms
     public partial class ImageButton : UserControl
     {
         public object Tooltip { get; set; } = null;
-        public int Size { get; set; } = 48;
+        public double Size { get; set; } = 48;
         public ImageSource EnabledIconSource { get; set; }
         public ImageSource DisabledIconSource { get; set; } = null;
         public bool Enabled
