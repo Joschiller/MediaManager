@@ -25,6 +25,7 @@ namespace MediaManager.Globals.DefaultDialogs
         private Color NeutralColor;
         private Color PositiveColor;
         private Color CancelColor;
+        private Thickness ButtonMargin;
 
         /// <summary>
         /// Create a new <see cref="GeneralButtonBasedDialog"/>.
@@ -50,6 +51,7 @@ namespace MediaManager.Globals.DefaultDialogs
             NeutralColor = style.NeutralColor;
             PositiveColor = style.PositiveColor;
             CancelColor = style.CancelButtonBackground;
+            ButtonMargin = style.ButtonMargin;
 
             BorderBrush = new SolidColorBrush(NeutralColor);
         }
@@ -82,6 +84,7 @@ namespace MediaManager.Globals.DefaultDialogs
             AddButton(new Button()
             {
                 IsDefault = true,
+                Margin = ButtonMargin,
                 Content = text,
             }, action);
             return this;
@@ -97,6 +100,7 @@ namespace MediaManager.Globals.DefaultDialogs
             {
                 IsDefault = isDefault,
                 IsCancel = isCancel,
+                Margin = ButtonMargin,
                 Content = text,
             }, action);
             return this;
@@ -111,6 +115,7 @@ namespace MediaManager.Globals.DefaultDialogs
             AddButton(new Button()
             {
                 IsCancel = true,
+                Margin = ButtonMargin,
                 Content = text,
                 Background = new SolidColorBrush(CancelColor),
             }, action);
@@ -128,6 +133,7 @@ namespace MediaManager.Globals.DefaultDialogs
             AddButton(new Button()
             {
                 IsDefault = true,
+                Margin = ButtonMargin,
                 Content = text,
             }, () => Result = result);
             return this;
@@ -145,6 +151,7 @@ namespace MediaManager.Globals.DefaultDialogs
             {
                 IsDefault = isDefault,
                 IsCancel = isCancel,
+                Margin = ButtonMargin,
                 Content = text,
             }, () => Result = result);
             return this;
@@ -161,6 +168,7 @@ namespace MediaManager.Globals.DefaultDialogs
             AddButton(new Button()
             {
                 IsCancel = true,
+                Margin = ButtonMargin,
                 Content = text,
                 Background = new SolidColorBrush(CancelColor),
             }, () => Result = result);

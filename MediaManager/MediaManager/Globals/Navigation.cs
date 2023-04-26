@@ -37,7 +37,8 @@ namespace MediaManager.Globals
             NegativeColor = Color.FromRgb(229, 103, 34),
             NeutralColor = Color.FromRgb(215, 232, 255),
             PositiveColor = Color.FromRgb(118, 221, 0),
-            CancelButtonBackground = Color.FromRgb(229, 103, 34)
+            CancelButtonBackground = Color.FromRgb(229, 103, 34),
+            ButtonMargin = new Thickness(4)
         };
         public static ThreadProcessViewerStyle InternalThreadProcessViewerStyle = new ThreadProcessViewerStyle
         {

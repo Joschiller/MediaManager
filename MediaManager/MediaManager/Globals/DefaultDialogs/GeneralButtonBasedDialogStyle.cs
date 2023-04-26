@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace MediaManager.Globals.DefaultDialogs
 {
@@ -55,5 +56,9 @@ namespace MediaManager.Globals.DefaultDialogs
         /// Background color of cancel buttons
         /// </summary>
         public Color CancelButtonBackground { get; set; }
+        /// <summary>
+        /// Margin of the buttons
+        /// </summary>
+        public Thickness ButtonMargin { get; set; }
     }
 }
