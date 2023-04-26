@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Globals\DataConnector.cs" />
     <Compile Include="Globals\Init.cs" />
+    <Compile Include="Globals\XamlPartConcatenator.cs" />
     <Compile Include="Globals\XamlValueAdder.cs" />
     <Compile Include="GUI\Atoms\CheckedList.xaml.cs">
       <DependentUpon>CheckedList.xaml</DependentUpon>

@@ -7,6 +7,7 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <globals:XamlValueAdder x:Key="WidthCalculator" Pad="-11"/>
+        <globals:XamlPartConcatenator x:Key="PartConcatenator"/>
     </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
@@ -47,12 +48,7 @@
                             <DataTemplate>
                                 <DockPanel Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}, Converter={StaticResource WidthCalculator}}">
                                     <Button x:Name="remove" DockPanel.Dock="Right" Tag="{Binding Id}" Click="remove_Click" Padding="{StaticResource defaultMarginSmall}">X</Button>
-                                    <StackPanel Orientation="Horizontal" Margin="{StaticResource defaultMarginSmall}">
-                                        <TextBlock Text="{Binding Title}"/>
-                                        <TextBlock Text=" ("/>
-                                        <TextBlock Text="{Binding Medium.Title}"/>
-                                        <TextBlock Text=")"/>
-                                    </StackPanel>
+                                    <TextBlock Text="{Binding BindsDirectlyToSource=True, Converter={StaticResource PartConcatenator}}" TextWrapping="WrapWithOverflow" VerticalAlignment="Center"/>
                                 </DockPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
