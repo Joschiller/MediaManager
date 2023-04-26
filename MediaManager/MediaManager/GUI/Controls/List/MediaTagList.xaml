@@ -14,14 +14,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0">
+        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False">
             <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
-            <components:Pager x:Name="pager" PageChanged="pager_PageChanged"/>
+            <components:Pager x:Name="pager" PageChanged="pager_PageChanged" DockPanel.Dock="Left"/>
         </DockPanel>
         <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Tag="{Binding Id}" Text="{Binding Title}"/>
+                    <TextBlock Tag="{Binding Id}" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

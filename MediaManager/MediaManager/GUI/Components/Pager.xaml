@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="page" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="page" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Bottom"/>
         <atoms:ImageButton x:Name="prev" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Size="24" Click="prev_Click" EnabledIconSource="../../Resources/previous.png" DisabledIconSource="../../Resources/noprevious.png"/>
         <atoms:ImageButton x:Name="next" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Size="24" Click="next_Click" EnabledIconSource="../../Resources/next.png" DisabledIconSource="../../Resources/nonext.png"/>
     </Grid>

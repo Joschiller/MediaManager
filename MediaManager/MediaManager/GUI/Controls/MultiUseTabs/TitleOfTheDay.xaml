@@ -5,17 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="title" Grid.Row="0" Grid.Column="0" FontSize="{StaticResource fontSize_subTitle}" TextWrapping="WrapWithOverflow"/>
-        <atoms:ImageButton x:Name="next" Grid.Row="0" Grid.Column="1" EnabledIconSource="../../../Resources/next_random.png" Click="next_Click" Size="32"/>
-        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow"/>
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="title" Grid.Row="0" Grid.Column="0" FontSize="{StaticResource fontSize_subTitle}" TextWrapping="WrapWithOverflow"/>
+            <atoms:ImageButton x:Name="next" Grid.Row="0" Grid.Column="1" EnabledIconSource="../../../Resources/next_random.png" Click="next_Click" Size="32" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="description" TextWrapping="WrapWithOverflow"/>
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
 </UserControl>

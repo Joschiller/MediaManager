@@ -17,6 +17,8 @@
             </StackPanel>
             <list:PartList x:Name="list" SelectionChanged="list_SelectionChanged"/>
         </DockPanel>
-        <local:ElementEditor x:Name="editor" Grid.Column="1" MediumEdited="editor_MediumEdited" PartEdited="editor_PartEdited"/>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <local:ElementEditor x:Name="editor" MediumEdited="editor_MediumEdited" PartEdited="editor_PartEdited"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -10,8 +10,8 @@
     </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Button x:Name="add" Click="add_Click"/>
-            <Button x:Name="delete" Click="delete_Click"/>
+            <Button x:Name="add" Click="add_Click" Margin="{StaticResource defaultMarginSmall}"/>
+            <Button x:Name="delete" Click="delete_Click" Margin="{StaticResource defaultMarginSmall}"/>
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,33 +21,33 @@
             <ListView x:Name="playlists" Grid.Column="0" SelectionChanged="playlists_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <GroupBox x:Name="editGroup" Grid.Column="1">
                 <Grid>
                     <StackPanel x:Name="addPanel" Orientation="Vertical">
-                        <TextBlock x:Name="titleLabel"/>
-                        <TextBox x:Name="titleInput" MaxLength="128" TextChanged="titleInput_TextChanged"/>
-                        <TextBlock x:Name="lengthLabel"/>
-                        <atoms:NumericUpDown x:Name="lengthInput"/>
-                        <TextBlock x:Name="tagLabel"/>
-                        <ComboBox x:Name="tagInput">
+                        <TextBlock x:Name="titleLabel" Margin="{StaticResource defaultMarginSmall}"/>
+                        <TextBox x:Name="titleInput" MaxLength="128" TextChanged="titleInput_TextChanged" Margin="{StaticResource defaultMarginSmall}"/>
+                        <TextBlock x:Name="lengthLabel" Margin="{StaticResource defaultMarginSmall}"/>
+                        <atoms:NumericUpDown x:Name="lengthInput" Margin="{StaticResource defaultMarginSmall}"/>
+                        <TextBlock x:Name="tagLabel" Margin="{StaticResource defaultMarginSmall}"/>
+                        <ComboBox x:Name="tagInput" Margin="{StaticResource defaultMarginSmall}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Title}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button x:Name="create" Click="create_Click"/>
+                        <Button x:Name="create" Click="create_Click" Margin="{StaticResource defaultMarginSmall}"/>
                     </StackPanel>
                     <ListView x:Name="playlistEntries" ItemsSource="{Binding SelectedItem.Parts, ElementName=playlists}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}, Converter={StaticResource WidthCalculator}}">
-                                    <Button x:Name="remove" DockPanel.Dock="Right" Tag="{Binding Id}" Click="remove_Click">X</Button>
-                                    <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="remove" DockPanel.Dock="Right" Tag="{Binding Id}" Click="remove_Click" Padding="{StaticResource defaultMarginSmall}">X</Button>
+                                    <StackPanel Orientation="Horizontal" Margin="{StaticResource defaultMarginSmall}">
                                         <TextBlock Text="{Binding Title}"/>
                                         <TextBlock Text=" ("/>
                                         <TextBlock Text="{Binding Medium.Title}"/>

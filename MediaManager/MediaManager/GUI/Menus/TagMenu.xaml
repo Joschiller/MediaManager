@@ -31,7 +31,7 @@
             <ListView x:Name="tagList" Grid.Column="0" ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" SelectionChanged="tagList_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

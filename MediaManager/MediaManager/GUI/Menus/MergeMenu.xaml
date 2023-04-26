@@ -20,8 +20,8 @@
                         <DockPanel LastChildFill="False">
                             <GroupBox x:Name="mediaSelectionSection" DockPanel.Dock="Top" Margin="4">
                                 <DockPanel>
-                                    <atoms:CheckedList x:Name="mediaSelection" DockPanel.Dock="Top" SelectionChanged="mediaSelection_SelectionChanged"/>
-                                    <Button x:Name="nextButton1" DockPanel.Dock="Top" Click="nextButton1_Click"/>
+                                    <atoms:CheckedList x:Name="mediaSelection" DockPanel.Dock="Top" SelectionChanged="mediaSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}"/>
+                                    <Button x:Name="nextButton1" DockPanel.Dock="Top" Click="nextButton1_Click" Margin="{StaticResource defaultMarginSmall}"/>
                                 </DockPanel>
                             </GroupBox>
                             <GroupBox x:Name="mediaDataSection" DockPanel.Dock="Top" Margin="4">
@@ -37,8 +37,8 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock x:Name="labelMediaDataPreviewSelection" Grid.Row="0" Grid.Column="0" Margin="4"/>
-                                        <ComboBox x:Name="mediaDataPreviewSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediaDataPreviewSelection_SelectionChanged" Margin="4">
+                                        <TextBlock x:Name="labelMediaDataPreviewSelection" Grid.Row="0" Grid.Column="0" Margin="{StaticResource defaultMarginSmall}"/>
+                                        <ComboBox x:Name="mediaDataPreviewSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediaDataPreviewSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -51,8 +51,8 @@
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
-                                        <TextBlock x:Name="labelMediaDataDescriptionSelection" Grid.Row="1" Grid.Column="0" Margin="4"/>
-                                        <ComboBox x:Name="mediaDataDescriptionSelection" Grid.Row="1" Grid.Column="1" SelectionChanged="mediaDataDescriptionSelection_SelectionChanged" Margin="4">
+                                        <TextBlock x:Name="labelMediaDataDescriptionSelection" Grid.Row="1" Grid.Column="0" Margin="{StaticResource defaultMarginSmall}"/>
+                                        <ComboBox x:Name="mediaDataDescriptionSelection" Grid.Row="1" Grid.Column="1" SelectionChanged="mediaDataDescriptionSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -65,8 +65,8 @@
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
-                                        <TextBlock x:Name="labelMediaDataTagSelection" Grid.Row="2" Grid.Column="0" Margin="4"/>
-                                        <ComboBox x:Name="mediaDataTagSelection" Grid.Row="2" Grid.Column="1" SelectionChanged="mediaDataTagSelection_SelectionChanged" Margin="4">
+                                        <TextBlock x:Name="labelMediaDataTagSelection" Grid.Row="2" Grid.Column="0" Margin="{StaticResource defaultMarginSmall}"/>
+                                        <ComboBox x:Name="mediaDataTagSelection" Grid.Row="2" Grid.Column="1" SelectionChanged="mediaDataTagSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -79,8 +79,8 @@
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
-                                        <TextBlock x:Name="labelMediaDataLocationSelection" Grid.Row="3" Grid.Column="0" Margin="4"/>
-                                        <ComboBox x:Name="mediaDataLocationSelection" Grid.Row="3" Grid.Column="1" SelectionChanged="mediaDataLocationSelection_SelectionChanged" Margin="4">
+                                        <TextBlock x:Name="labelMediaDataLocationSelection" Grid.Row="3" Grid.Column="0" Margin="{StaticResource defaultMarginSmall}"/>
+                                        <ComboBox x:Name="mediaDataLocationSelection" Grid.Row="3" Grid.Column="1" SelectionChanged="mediaDataLocationSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -94,20 +94,20 @@
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
                                     </Grid>
-                                    <Button x:Name="nextButton2" DockPanel.Dock="Top" Click="nextButton2_Click"/>
+                                    <Button x:Name="nextButton2" DockPanel.Dock="Top" Click="nextButton2_Click" Margin="{StaticResource defaultMarginSmall}"/>
                                 </DockPanel>
                             </GroupBox>
                             <GroupBox x:Name="partSelectionSection" DockPanel.Dock="Top" Margin="4">
                                 <DockPanel>
-                                    <atoms:CheckedList x:Name="partSelection" DockPanel.Dock="Top" SelectionChanged="partSelection_SelectionChanged"/>
-                                    <Button x:Name="mergeButton" DockPanel.Dock="Top" Click="mergeButton_Click"/>
+                                    <atoms:CheckedList x:Name="partSelection" DockPanel.Dock="Top" SelectionChanged="partSelection_SelectionChanged" Margin="{StaticResource defaultMarginSmall}"/>
+                                    <Button x:Name="mergeButton" DockPanel.Dock="Top" Click="mergeButton_Click" Margin="{StaticResource defaultMarginSmall}"/>
                                 </DockPanel>
                             </GroupBox>
                         </DockPanel>
                     </ScrollViewer>
-                    <Grid Grid.Column="1">
+                    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <edit:ElementViewer x:Name="details"/>
-                    </Grid>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem x:Name="previewTab">

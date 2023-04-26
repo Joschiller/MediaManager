@@ -23,6 +23,7 @@ namespace MediaManager.GUI.Dialogs
 
             labelOldTag.Visibility = id == null ? Visibility.Hidden : Visibility.Visible;
             oldTag.Visibility = id == null ? Visibility.Hidden : Visibility.Visible;
+            oldTag.ToolTip = EditedTag.Title;
             oldTag.Text = EditedTag.Title;
             submit.IsEnabled = newTag.Text.Length > 0;
         }

@@ -16,6 +16,17 @@ namespace MediaManager.GUI.Components
         public delegate void TagValueChangeHandler(List<ValuedTag> tags);
         public event TagValueChangeHandler TagValueChanged;
 
+        private bool _Enabled = true;
+        public bool Enabled
+        {
+            get => _Enabled;
+            set
+            {
+                _Enabled = value;
+                SetTagList(GetTagList());
+            }
+        }
+
         public ObservableCollection<TagListElement> Tags { get; private set; } = new ObservableCollection<TagListElement>();
         public void SetTagList(List<ValuedTag> tags) => SetTagList(tags, new List<int>());
         public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds) => SetTagList(tags, disabledTagIds, new List<int>());
@@ -29,7 +40,7 @@ namespace MediaManager.GUI.Components
                     Tag = t.Tag,
                     Value = t.Value,
                     Icon = GetIconForTagValue(t.Value),
-                    Enabled = !disabledTagIds.Contains(t.Tag.Id),
+                    Enabled = !disabledTagIds.Contains(t.Tag.Id) && Enabled,
                     Background = new SolidColorBrush(highlightedTagIds.Contains(t.Tag.Id) ? Color.FromArgb(255, 229, 103, 34) : Color.FromArgb(0, 0, 0, 0))
                 });
             });

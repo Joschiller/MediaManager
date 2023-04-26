@@ -20,12 +20,12 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="{StaticResource imageButtonSize}" Width="{StaticResource imageButtonSize}"/>
-            <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}"/>
+            <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}" TextWrapping="WrapWithOverflow"/>
         </DockPanel>
-        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False"/>
+        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow"/>
+        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Enabled="False"/>
         <Image x:Name="image" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+        <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
         <TextBlock x:Name="location" Grid.Row="4" Grid.Column="1"/>
         <Grid x:Name="integerMeta" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -35,10 +35,10 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="textLength" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
             <TextBlock x:Name="length" Grid.Column="1" VerticalAlignment="Center"/>
             <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
-            <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="textPublication" Grid.Column="3" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
             <TextBlock x:Name="publication" Grid.Column="4" VerticalAlignment="Center"/>
         </Grid>
     </Grid>

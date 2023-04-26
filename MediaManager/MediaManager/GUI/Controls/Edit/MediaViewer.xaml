@@ -11,6 +11,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <list:PartList x:Name="list" Grid.Column="0" SelectionChanged="list_SelectionChanged"/>
-        <local:ElementViewer x:Name="viewer" Grid.Column="1"/>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <local:ElementViewer x:Name="viewer"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

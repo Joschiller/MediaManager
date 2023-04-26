@@ -5,18 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="labelMediaCount" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
-        <TextBlock x:Name="valueMediaCount" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:Name="labelPartCount" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
-        <TextBlock x:Name="valuePartCount" Grid.Row="1" Grid.Column="1"/>
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="labelMediaCount" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="valueMediaCount" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock x:Name="labelPartCount" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="valuePartCount" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </DockPanel>
 </UserControl>

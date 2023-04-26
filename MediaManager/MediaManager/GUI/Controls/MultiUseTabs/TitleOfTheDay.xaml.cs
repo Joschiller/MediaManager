@@ -37,10 +37,10 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             {
                 title.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
                 description.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium
-                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ":" + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
+                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
                     + CurrentItem.Medium.Description)
-                    : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ":" + CurrentItem.Medium.Title + "\n" + "\n"
-                    + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ":" + getTagsString(Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
+                    : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ": " + CurrentItem.Medium.Title + "\n" + "\n"
+                    + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
                     + CurrentItem.Description);
             }
             else

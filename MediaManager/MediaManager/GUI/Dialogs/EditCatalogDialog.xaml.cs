@@ -34,6 +34,7 @@ namespace MediaManager.GUI.Dialogs
             DataContext = EditedCatalog;
             labelOldTitle.Visibility = id == null ? Visibility.Hidden : Visibility.Visible;
             oldTitle.Visibility = id == null ? Visibility.Hidden : Visibility.Visible;
+            oldTitle.ToolTip = EditedCatalog.Title;
             oldTitle.Text = EditedCatalog.Title;
             submit.IsEnabled = newTitle.Text.Length > 0;
         }

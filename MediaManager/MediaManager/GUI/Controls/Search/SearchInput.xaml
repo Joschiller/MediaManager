@@ -20,12 +20,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="searchText" Grid.Row="0" Grid.Column="0" KeyDown="searchText_KeyDown"/>
-            <Button x:Name="startSearch" Grid.Row="0" Grid.Column="1" Click="startSearch_Click">Search</Button>
-            <atoms:ImageButton x:Name="reset" Grid.Row="1" Grid.Column="1" Size="24" Click="reset_Click"  EnabledIconSource="../../../Resources/undo.png" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="searchText" Grid.Row="0" Grid.Column="0" KeyDown="searchText_KeyDown" Margin="{StaticResource defaultMarginSmall}"/>
+            <Button x:Name="startSearch" Grid.Row="0" Grid.Column="1" Click="startSearch_Click" Margin="{StaticResource defaultMarginSmall}">Search</Button>
+            <atoms:ImageButton x:Name="reset" Grid.Row="1" Grid.Column="1" Size="24" Click="reset_Click"  EnabledIconSource="../../../Resources/undo.png" VerticalAlignment="Bottom" Margin="{StaticResource defaultMarginSmall}"/>
             <DockPanel Grid.Row="1" Grid.Column="0">
-                <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click" VerticalAlignment="Top">_Show Media</Button>
-                <WrapPanel Orientation="Horizontal">
+                <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click" VerticalAlignment="Top" Margin="{StaticResource defaultMarginSmall}">_Show Media</Button>
+                <WrapPanel Orientation="Horizontal" Margin="{StaticResource defaultMarginSmall}">
                     <CheckBox x:Name="exactMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search _Exact</CheckBox>
                     <CheckBox x:Name="searchDescriptionMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search in _Description</CheckBox>
                     <CheckBox x:Name="favouriteOnlyMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search only within _Favourites</CheckBox>

@@ -8,10 +8,10 @@
     <ListView ItemsSource="{Binding Items}" SelectionChanged="ListView_SelectionChanged">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Horizontal">
-                    <CheckBox Tag="{Binding Id}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-                    <TextBlock Text="{Binding Text}" Style="{StaticResource rightsideLabel}"/>
-                </StackPanel>
+                <DockPanel>
+                    <CheckBox Tag="{Binding Id}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" DockPanel.Dock="Left"/>
+                    <TextBlock Text="{Binding Text}" Style="{StaticResource rightsideLabel}" TextWrapping="WrapWithOverflow"/>
+                </DockPanel>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

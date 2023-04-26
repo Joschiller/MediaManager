@@ -49,7 +49,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="labelMediaTagList" Grid.Row="0"/>
-                <components:TagList x:Name="highlightedTagList" Grid.Row="1" IsEnabled="False"/>
+                <components:TagList x:Name="highlightedTagList" Grid.Row="1" Enabled="False"/>
                 <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
                 <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
             </Grid>

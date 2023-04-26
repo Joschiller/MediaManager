@@ -21,7 +21,7 @@
         <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}" MouseDoubleClick="resultList_MouseDoubleClick" MouseRightButtonDown="resultList_MouseRightButtonDown">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Tag="{Binding Id}" Text="{Binding Text}"/>
+                    <TextBlock Tag="{Binding Id}" Text="{Binding Text}" TextWrapping="WrapWithOverflow"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

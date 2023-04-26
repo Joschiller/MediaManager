@@ -8,7 +8,7 @@
     <ListView ItemsSource="{Binding Items}" SelectionChanged="ListView_SelectionChanged">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextBlock Text="{Binding Text}"/>
+                <TextBlock Text="{Binding Text}" TextWrapping="WrapWithOverflow"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
