@@ -224,9 +224,12 @@ namespace MediaManager.GUI.Menus
         private void btnUndoChangesClick(object sender, RoutedEventArgs e)
         {
             if (!IsExistingMedium) Close();
-            editor.Medium = viewer.Medium;
-            AnyChangeMade = false;
-            updateVisibility(false);
+            else
+            {
+                editor.Medium = viewer.Medium;
+                AnyChangeMade = false;
+                updateVisibility(false);
+            }
         }
         private void btnSaveMediumClick(object sender, RoutedEventArgs e)
         {
