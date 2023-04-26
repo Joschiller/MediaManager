@@ -71,7 +71,7 @@ namespace MediaManager.GUI.Menus
             searchPanel.ReloadResultList();
         }
 
-        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false));
+        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false), ShowAndReload);
 
         private void searchPanel_PlaylistAdditionRequested(int id, Controls.Search.SearchResultMode mode)
         {
