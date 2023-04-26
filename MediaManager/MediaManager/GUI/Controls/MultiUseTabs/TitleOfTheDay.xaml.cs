@@ -1,6 +1,7 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -50,9 +51,10 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         private void ShowNextRandomItem()
         {
-            if (Reader.CountOfMedia > 0)
+            var possibleMedia = Reader.Media.Where(m => m.Parts.Count > 0).ToList();
+            if (possibleMedia.Count > 0)
             {
-                var randomMedium = Reader.Media[new Random().Next(Reader.CountOfMedia)];
+                var randomMedium = possibleMedia[new Random().Next(possibleMedia.Count)];
                 CurrentItem = new List<Part>(randomMedium.Parts)[new Random().Next(randomMedium.Parts.Count)];
             }
             else
