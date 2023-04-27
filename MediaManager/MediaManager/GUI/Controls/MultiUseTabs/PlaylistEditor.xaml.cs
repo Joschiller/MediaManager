@@ -1,6 +1,5 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -107,7 +106,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             ReloadData();
             showDataForSelection();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             add.Content = LanguageProvider.getString("Common.Button.Add");
@@ -118,5 +117,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             create.Content = LanguageProvider.getString("Common.Button.Create");
             editGroup.Header = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.EditGroup");
         }
+        ~PlaylistEditor() => LanguageProvider.Unregister(this);
     }
 }

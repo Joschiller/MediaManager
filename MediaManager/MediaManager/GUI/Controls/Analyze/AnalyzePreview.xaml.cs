@@ -97,7 +97,7 @@ namespace MediaManager.GUI.Controls.Analyze
         private void elementViewer_EditClicked(Edit.ElementMode mode, int id) => StartEditing(this.mode, element);
         private void editButton_Click(object sender, RoutedEventArgs e) => StartEditing(mode, element);
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             editButton.ToolTip = LanguageProvider.getString("Common.Button.Edit");
@@ -105,5 +105,6 @@ namespace MediaManager.GUI.Controls.Analyze
             labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
             labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
         }
+        ~AnalyzePreview() => LanguageProvider.Unregister(this);
     }
 }

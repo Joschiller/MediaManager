@@ -27,11 +27,12 @@ namespace MediaManager.GUI.Controls.List
             LoadCatalogs();
         }
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             Resources["activeString"] = "(" + LanguageProvider.getString("Controls.CatalogList.ActiveString") + ")";
         }
+        ~CatalogList() => LanguageProvider.Unregister(this);
 
         public void LoadCatalogs()
         {

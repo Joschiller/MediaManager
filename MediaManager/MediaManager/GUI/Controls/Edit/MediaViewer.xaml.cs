@@ -1,6 +1,4 @@
-﻿using MediaManager.Globals.LanguageProvider;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Controls;
 
 namespace MediaManager.GUI.Controls.Edit

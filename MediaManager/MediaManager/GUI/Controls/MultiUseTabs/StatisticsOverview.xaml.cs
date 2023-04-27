@@ -28,11 +28,12 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             valueMediaCount.Text = CountOfMedia.ToString();
             valuePartCount.Text = CountOfParts.ToString();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             labelMediaCount.Text = LanguageProvider.getString("Controls.MultiUseTabs.StatisticsOverview.CountMedia") + ":";
             labelPartCount.Text = LanguageProvider.getString("Controls.MultiUseTabs.StatisticsOverview.CountParts") + ":";
         }
+        ~StatisticsOverview() => LanguageProvider.Unregister(this);
     }
 }

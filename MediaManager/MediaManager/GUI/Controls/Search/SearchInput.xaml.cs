@@ -60,7 +60,7 @@ namespace MediaManager.GUI.Controls.Search
         }
         private void tagList_TagValueChanged(System.Collections.Generic.List<ValuedTag> tags) => SearchParametersChanged?.Invoke(CurrentSearchParameters);
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             exactMode.Content = LanguageProvider.getString("Controls.Search.ExactMode");
@@ -70,6 +70,7 @@ namespace MediaManager.GUI.Controls.Search
             startSearch.Content = LanguageProvider.getString("Controls.Search.Search");
             reset.Tooltip = LanguageProvider.getString("Controls.Search.Reset");
         }
+        ~SearchInput() => LanguageProvider.Unregister(this);
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {

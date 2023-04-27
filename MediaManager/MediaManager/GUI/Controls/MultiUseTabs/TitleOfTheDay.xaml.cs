@@ -67,11 +67,12 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
         public bool GetIsVisible() => Reader.Settings.TitleOfTheDayVisible;
         public void ReloadGUI() => ShowNextRandomItem();
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             next.Tooltip = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
             ShowCurrentItem();
         }
+        ~TitleOfTheDay() => LanguageProvider.Unregister(this);
     }
 }

@@ -155,10 +155,11 @@ namespace MediaManager.GUI.Controls.List
             LoadTagsOfSelectedMedium();
         }
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
         }
+        ~MediaTagList() => LanguageProvider.Unregister(this);
     }
 }

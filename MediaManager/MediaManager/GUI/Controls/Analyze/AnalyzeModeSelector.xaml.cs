@@ -28,7 +28,7 @@ namespace MediaManager.GUI.Controls.Analyze
             afterRadioChanged();
         }
 
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
             rbMediumEmpty.Content = LanguageProvider.getString("Controls.Analyze.MediumEmpty.Radio");
@@ -39,6 +39,7 @@ namespace MediaManager.GUI.Controls.Analyze
             SetupComboBox();
             LoadDescription();
         }
+        ~AnalyzeModeSelector() => LanguageProvider.Unregister(this);
         private void SetupComboBox()
         {
             Attributes.Clear();
