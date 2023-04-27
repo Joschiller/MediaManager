@@ -12,18 +12,13 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class MediaEditor : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void MediumHandler(MediumWithTags medium);
         public event MediumHandler MediumEdited;
+        #endregion
 
+        #region Properties
         private MediumWithTags medium;
-        private bool needsListReload;
-
-        public MediaEditor()
-        {
-            InitializeComponent();
-            RegisterAtLanguageProvider();
-        }
-
         public MediumWithTags Medium
         {
             get => medium;
@@ -34,7 +29,22 @@ namespace MediaManager.GUI.Controls.Edit
                 OpenMediumTab();
             }
         }
+        #endregion
 
+        #region Setup
+        private bool needsListReload;
+        public MediaEditor()
+        {
+            InitializeComponent();
+            RegisterAtLanguageProvider();
+        }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            addPart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.AddPart");
+            deletePart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.DeletePart");
+        }
+        ~MediaEditor() => LanguageProvider.Unregister(this);
         private void reloadList()
         {
             list.SetPartList(medium.Title, medium.Parts.Select(p => new List.PartListElement
@@ -44,9 +54,9 @@ namespace MediaManager.GUI.Controls.Edit
             }).ToList());
             needsListReload = false;
         }
+        #endregion
 
-        private void onChange() => MediumEdited?.Invoke(medium);
-
+        #region Getter/Setter
         public void OpenMediumTab()
         {
             deletePart.Visibility = Visibility.Collapsed;
@@ -82,6 +92,10 @@ namespace MediaManager.GUI.Controls.Edit
                 };
             }
         }
+        #endregion
+
+        #region Handler
+        private void onChange() => MediumEdited?.Invoke(medium);
 
         private void list_SelectionChanged(int? id)
         {
@@ -93,7 +107,6 @@ namespace MediaManager.GUI.Controls.Edit
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
-
         private void addPart_Click(object sender, RoutedEventArgs e)
         {
             var newId = -medium.Parts.Count - 1;
@@ -165,13 +178,6 @@ namespace MediaManager.GUI.Controls.Edit
             internalPart.Tags = part.Tags;
             onChange();
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            addPart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.AddPart");
-            deletePart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.DeletePart");
-        }
-        ~MediaEditor() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

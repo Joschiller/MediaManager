@@ -15,18 +15,21 @@ namespace MediaManager.GUI.Controls.Search
     /// </summary>
     public partial class SearchPanel : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void MediumSelectionHandler(int mediumId, int? partId);
         public event MediumSelectionHandler MediumSelected;
-
         public delegate void PlaylistAdditionHandler(int id, SearchResultMode mode);
         public event PlaylistAdditionHandler PlaylistAdditionRequested;
+        #endregion
 
+        #region Bindings
+        public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
+        public int ItemsPerPage { get; set; } = Reader.Settings.ResultListLength;
+        #endregion
+
+        #region Setup
         private SearchParameters CurrentSearchParameters;
         private List<SearchResultItem> CompleteResultList = new List<SearchResultItem>();
-        public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
-
-        public int ItemsPerPage { get; set; } = Reader.Settings.ResultListLength;
-
         public SearchPanel()
         {
             InitializeComponent();
@@ -34,7 +37,21 @@ namespace MediaManager.GUI.Controls.Search
             RegisterAtLanguageProvider();
             CurrentSearchParameters = input.CurrentSearchParameters;
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
+        }
+        ~SearchPanel() => LanguageProvider.Unregister(this);
+        public void ReloadTags() => input.reloadTagList();
+        public void ReloadResultList()
+        {
+            ItemsPerPage = Reader.Settings.ResultListLength;
+            input_SearchParametersChanged(CurrentSearchParameters);
+        }
+        #endregion
 
+        #region Handler
         private void input_SearchParametersChanged(SearchParameters parameters)
         {
             CurrentSearchParameters = parameters;
@@ -74,19 +91,6 @@ namespace MediaManager.GUI.Controls.Search
         {
             if (rightClickPivotId.HasValue) PlaylistAdditionRequested?.Invoke(rightClickPivotId.Value, CurrentSearchParameters.SearchResult);
         }
-
-        public void ReloadTags() => input.reloadTagList();
-        public void ReloadResultList()
-        {
-            ItemsPerPage = Reader.Settings.ResultListLength;
-            input_SearchParametersChanged(CurrentSearchParameters);
-        }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
-        }
-        ~SearchPanel() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

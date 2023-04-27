@@ -13,8 +13,10 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class TagMenu : Window, UpdatedLanguageUser
     {
+        #region Bindings
         public ObservableCollection<Tag> Tags { get; set; } = new ObservableCollection<Tag>();
         public Tag SelectedTag { get; set; }
+        #endregion
 
         #region Setup
         public TagMenu()
@@ -24,7 +26,6 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             LoadTags();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
@@ -34,6 +35,7 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
+        #region Handler
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
@@ -64,7 +66,6 @@ namespace MediaManager.GUI.Menus
             }
         }
         #endregion
-
         private void LoadTags()
         {
             Tags.Clear();
@@ -75,5 +76,6 @@ namespace MediaManager.GUI.Menus
             Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
             mediaTagList.setCurrentTag(SelectedTag);
         }
+        #endregion
     }
 }

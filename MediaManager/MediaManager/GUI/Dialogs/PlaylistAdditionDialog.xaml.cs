@@ -11,10 +11,10 @@ namespace MediaManager.GUI.Dialogs
     /// </summary>
     public partial class PlaylistAdditionDialog : Window, LanguageUser
     {
+        #region Setup
         private Playlist selectedPlaylist;
         private int referencedId;
         private Controls.Search.SearchResultMode mode;
-
         public PlaylistAdditionDialog(int id, Controls.Search.SearchResultMode mode)
         {
             referencedId = id;
@@ -39,8 +39,10 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
-        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+        #endregion
 
+        #region Handler
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
         private void playlists_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPlaylist = (sender as ComboBox).SelectedItem as Playlist;
@@ -56,7 +58,6 @@ namespace MediaManager.GUI.Dialogs
         {
             submit.IsEnabled = selectedPlaylist?.Id >= 0 || playlistName.Text.Trim().Length > 0;
         }
-
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             var playlistId = selectedPlaylist.Id;
@@ -67,5 +68,6 @@ namespace MediaManager.GUI.Dialogs
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        #endregion
     }
 }

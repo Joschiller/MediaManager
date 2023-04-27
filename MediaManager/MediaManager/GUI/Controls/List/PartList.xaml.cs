@@ -11,10 +11,24 @@ namespace MediaManager.GUI.Controls.List
     /// </summary>
     public partial class PartList : UserControl
     {
+        #region Events
         public delegate void SelectionHandler(int? id);
         public event SelectionHandler SelectionChanged;
+        #endregion
 
+        #region Bindings
         public ObservableCollection<PartListElement> Parts { get; private set; } = new ObservableCollection<PartListElement>();
+        #endregion
+
+        #region Setup
+        public PartList()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+        #endregion
+
+        #region Getter/Setter
         public void SetPartList(string mediaTitle, List<PartListElement> parts)
         {
             title.Text = mediaTitle;
@@ -32,18 +46,15 @@ namespace MediaManager.GUI.Controls.List
             if (list.SelectedItem == null) return null;
             return (list.SelectedItem as PartListElement).Id;
         }
+        #endregion
 
-        public PartList()
-        {
-            InitializeComponent();
-            DataContext = this;
-        }
-
+        #region Handler
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             list.SelectedItem = null;
             SelectionChanged?.Invoke(null);
         }
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(GetSelectedItem());
+        #endregion
     }
 }

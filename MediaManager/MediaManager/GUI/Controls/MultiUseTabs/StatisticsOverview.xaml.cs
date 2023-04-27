@@ -13,20 +13,12 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     /// </summary>
     public partial class StatisticsOverview : UserControl, MultiUseTabsControl, UpdatedLanguageUser
     {
+        #region Setup
         public StatisticsOverview()
         {
             InitializeComponent();
-            ReloadGUI();
             RegisterAtLanguageProvider();
-        }
-
-
-        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
-        public void ReloadGUI()
-        {
-            valueMediaCount.Text = CountOfMedia.ToString();
-            valuePartCount.Text = CountOfParts.ToString();
+            ReloadGUI();
         }
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
@@ -35,5 +27,13 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             labelPartCount.Text = LanguageProvider.getString("Controls.MultiUseTabs.StatisticsOverview.CountParts") + ":";
         }
         ~StatisticsOverview() => LanguageProvider.Unregister(this);
+        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
+        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
+        public void ReloadGUI()
+        {
+            valueMediaCount.Text = CountOfMedia.ToString();
+            valuePartCount.Text = CountOfParts.ToString();
+        }
+        #endregion
     }
 }

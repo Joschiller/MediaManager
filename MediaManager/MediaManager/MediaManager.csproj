@@ -132,6 +132,7 @@
     <Compile Include="GUI\Components\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Components\NavigationBarMode.cs" />
     <Compile Include="GUI\Components\Pager.xaml.cs">
       <DependentUpon>Pager.xaml</DependentUpon>
     </Compile>

@@ -17,10 +17,9 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class MergeMenu : Window, UpdatedLanguageUser
     {
+        #region Setup
         private List<MediumWithTags> mediaToMerge;
         private MediumWithTags mergedMedium;
-
-        #region Setup
         public MergeMenu(string mediumTitle)
         {
             InitializeComponent();
@@ -38,7 +37,6 @@ namespace MediaManager.GUI.Menus
             }).ToList());
             prepareMediumSelection();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {

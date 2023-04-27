@@ -10,14 +10,21 @@ namespace MediaManager.GUI.Controls.Analyze
     /// </summary>
     public partial class AnalyzeModeSelector : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void ModeHandler(AnalyzeMode mode);
         public event ModeHandler ModeChanged;
+        #endregion
 
+        #region Properties
         public AnalyzeMode Mode { get; set; } = AnalyzeMode.MediumEmpty;
+        #endregion
 
+        #region Bindings
         public ObservableCollection<string> Attributes { get; set; } = new ObservableCollection<string>();
         private int ComboBoxMode = 0;
+        #endregion
 
+        #region Setup
         public AnalyzeModeSelector()
         {
             InitializeComponent();
@@ -27,7 +34,6 @@ namespace MediaManager.GUI.Controls.Analyze
             rbMediumEmpty.IsChecked = true;
             afterRadioChanged();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
@@ -95,7 +101,9 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.PartImage: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Image.Description"); break;
             }
         }
+        #endregion
 
+        #region Handler
         private void rbMediumEmpty_Click(object sender, RoutedEventArgs e)
         {
             Mode = AnalyzeMode.MediumEmpty;
@@ -155,5 +163,6 @@ namespace MediaManager.GUI.Controls.Analyze
             LoadDescription();
             ModeChanged?.Invoke(Mode);
         }
+        #endregion
     }
 }

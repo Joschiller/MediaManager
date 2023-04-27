@@ -15,7 +15,6 @@ namespace MediaManager.GUI.Menus
         #region Setup
         private int MediumId;
         private bool AnyChangeMade = false;
-
         /// <summary>
         /// Opens the editor or viewer for the given medium.
         /// </summary>
@@ -57,6 +56,11 @@ namespace MediaManager.GUI.Menus
                 updateVisibility(true); // start editing
             }
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void LoadTexts(string language)
+        {
+            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
+        }
         private bool IsExistingMedium { get => MediumId >= 0; }
         private void reloadData()
         {
@@ -87,14 +91,9 @@ namespace MediaManager.GUI.Menus
                 editor.Medium = mediaData;
             }
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
-        public void LoadTexts(string language)
-        {
-            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
-        }
         #endregion
 
+        #region Handler
         private bool validate() => RunValidation(new System.Collections.Generic.List<Func<string>>
         {
             () => editor.Medium.Title.Trim().Length == 0 ? LanguageProvider.getString("Menus.Edit.Validation.MediaTitle") : null,
@@ -172,7 +171,6 @@ namespace MediaManager.GUI.Menus
                 return false;
             }
         }
-
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e)
         {
@@ -241,11 +239,11 @@ namespace MediaManager.GUI.Menus
             }
         }
         #endregion
-
         private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
         {
             AnyChangeMade = true;
             updateVisibility(true);
         }
+        #endregion
     }
 }

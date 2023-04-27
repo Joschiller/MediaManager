@@ -14,16 +14,36 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     /// </summary>
     public partial class PlaylistEditor : UserControl, MultiUseTabsControl, UpdatedLanguageUser
     {
+        #region Setup
         public PlaylistEditor()
         {
             InitializeComponent();
             DataContext = this;
+            RegisterAtLanguageProvider();
             lengthInput.SetMin(0);
             lengthInput.SetValue(0);
             create.IsEnabled = false;
 
             ReloadGUI();
-            RegisterAtLanguageProvider();
+        }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            add.Content = LanguageProvider.getString("Common.Button.Add");
+            delete.Content = LanguageProvider.getString("Common.Button.Delete");
+            titleLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Title") + ":";
+            lengthLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Length") + ":";
+            tagLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Tag") + ":";
+            create.Content = LanguageProvider.getString("Common.Button.Create");
+            editGroup.Header = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.EditGroup");
+        }
+        ~PlaylistEditor() => LanguageProvider.Unregister(this);
+        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/playlist.png", UriKind.Relative));
+        public bool GetIsVisible() => Reader.Settings.PlaylistEditorVisible;
+        public void ReloadGUI()
+        {
+            ReloadData();
+            showDataForSelection();
         }
         public void ReloadData()
         {
@@ -32,7 +52,9 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             tagInput.ItemsSource = null;
             tagInput.ItemsSource = Reader.Tags;
         }
+        #endregion
 
+        #region Handler
         #region Playlist List
         private void add_Click(object sender, RoutedEventArgs e)
         {
@@ -85,8 +107,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             lengthInput.SetValue(0);
             ReloadData();
         }
-        #endregion
-
         private void remove_Click(object sender, RoutedEventArgs e)
         {
             var selectedPlaylist = playlists.SelectedItem as Playlist;
@@ -98,25 +118,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
                 playlists.SelectedItem = Reader.Playlists.Find(pl => pl.Id == selectedPlaylist.Id);
             }
         }
-
-        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/playlist.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.PlaylistEditorVisible;
-        public void ReloadGUI()
-        {
-            ReloadData();
-            showDataForSelection();
-        }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            add.Content = LanguageProvider.getString("Common.Button.Add");
-            delete.Content = LanguageProvider.getString("Common.Button.Delete");
-            titleLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Title") + ":";
-            lengthLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Length") + ":";
-            tagLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Tag") + ":";
-            create.Content = LanguageProvider.getString("Common.Button.Create");
-            editGroup.Header = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.EditGroup");
-        }
-        ~PlaylistEditor() => LanguageProvider.Unregister(this);
+        #endregion
+        #endregion
     }
 }

@@ -14,30 +14,28 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class AnalyzeMenu : Window, UpdatedLanguageUser
     {
+        #region Setup
         private List<AnalyzeListElement> allItems;
         private int itemsPerPage = Reader.Settings.ResultListLength;
-
-        #region Setup
         public AnalyzeMenu()
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
             reload();
         }
-        private void reload() => mode_ModeChanged(mode.Mode);
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
             modeGroup.Header = LanguageProvider.getString("Menus.Analyze.Mode");
         }
+        private void reload() => mode_ModeChanged(mode.Mode);
         #endregion
 
+        #region Handler
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         #endregion
-
         private void mode_ModeChanged(Controls.Analyze.AnalyzeMode mode)
         {
             allItems = Reader.LoadAnalyzeResult(mode);
@@ -81,5 +79,6 @@ namespace MediaManager.GUI.Menus
                     break;
             }
         }
+        #endregion
     }
 }

@@ -11,24 +11,15 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class ElementEditor : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void MediumHandler(EditableMedium medium);
         public event MediumHandler MediumEdited;
         public delegate void PartHandler(EditablePart part);
         public event PartHandler PartEdited;
+        #endregion
 
-        private bool skipOnChange = false;
+        #region Properties
         private EditableMedium medium;
-        private EditablePart part;
-        private bool IsCurrentlyFavorite;
-
-        public ElementEditor()
-        {
-            InitializeComponent();
-            length.SetMin(0);
-            publication.SetMin(0);
-            RegisterAtLanguageProvider();
-        }
-
         public EditableMedium Medium
         {
             get => new EditableMedium
@@ -60,6 +51,7 @@ namespace MediaManager.GUI.Controls.Edit
                 skipOnChange = false;
             }
         }
+        private EditablePart part;
         public EditablePart Part
         {
             get => new EditablePart
@@ -100,12 +92,42 @@ namespace MediaManager.GUI.Controls.Edit
                 skipOnChange = false;
             }
         }
+        #endregion
 
+        #region Setup
+        private bool skipOnChange = false;
+        private bool IsCurrentlyFavorite;
+        public ElementEditor()
+        {
+            InitializeComponent();
+            RegisterAtLanguageProvider();
+            length.SetMin(0);
+            publication.SetMin(0);
+        }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
+            textDescription.Text = LanguageProvider.getString("Controls.Edit.Label.Description") + ":";
+            textTags.Text = LanguageProvider.getString("Controls.Edit.Label.Tags") + ":";
+            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
+            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
+            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
+        }
+        ~ElementEditor() => LanguageProvider.Unregister(this);
+        #endregion
+
+        #region Handler
         private void onEdited()
         {
             if (skipOnChange) return;
             if (medium != null) MediumEdited?.Invoke(Medium);
             if (part != null) PartEdited?.Invoke(Part);
+        }
+        private void updateFavoriteButtonVisibility()
+        {
+            favoriteButtonEnabled.Visibility = IsCurrentlyFavorite ? Visibility.Visible : Visibility.Collapsed;
+            favoriteButtonDisabled.Visibility = IsCurrentlyFavorite ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void favoriteEnableButton_Click(object sender, RoutedEventArgs e)
@@ -119,11 +141,6 @@ namespace MediaManager.GUI.Controls.Edit
             IsCurrentlyFavorite = false;
             updateFavoriteButtonVisibility();
             onEdited();
-        }
-        private void updateFavoriteButtonVisibility()
-        {
-            favoriteButtonEnabled.Visibility = IsCurrentlyFavorite ? Visibility.Visible : Visibility.Collapsed;
-            favoriteButtonDisabled.Visibility = IsCurrentlyFavorite ? Visibility.Collapsed : Visibility.Visible;
         }
         private void textChanged(object sender, TextChangedEventArgs e) => onEdited();
         private void numericValueChanged(uint newVal)
@@ -142,17 +159,6 @@ namespace MediaManager.GUI.Controls.Edit
             }
             onEdited();
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
-            textDescription.Text = LanguageProvider.getString("Controls.Edit.Label.Description") + ":";
-            textTags.Text = LanguageProvider.getString("Controls.Edit.Label.Tags") + ":";
-            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
-            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
-            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
-        }
-        ~ElementEditor() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

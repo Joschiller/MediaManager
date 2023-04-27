@@ -12,7 +12,9 @@ namespace MediaManager.GUI.Settings
     /// </summary>
     public partial class LanguageSetting : UserControl, LanguageUser, SettingsEditorItem
     {
+        #region Bindings
         public List<string> LanguageList { get; set; } = LanguageProvider.LanguageList;
+        #endregion
 
         #region Setup
         public LanguageSetting()
@@ -20,7 +22,6 @@ namespace MediaManager.GUI.Settings
             InitializeComponent();
             DataContext = this;
         }
-
         public void LoadTexts(string language)
         {
             languageText.Text = LanguageProvider.getString(language ?? LanguageProvider.CurrentLanguage, "Controls.Settings.Language.Label") + ":";

@@ -10,9 +10,9 @@ namespace MediaManager.GUI.Dialogs
     /// </summary>
     public partial class EditCatalogDialog : Window, LanguageUser
     {
-        int? EditedCatalogId;
-        Catalogue EditedCatalog;
-
+        #region Setup
+        private int? EditedCatalogId;
+        private Catalogue EditedCatalog;
         public EditCatalogDialog(int? id)
         {
             EditedCatalogId = id;
@@ -38,7 +38,6 @@ namespace MediaManager.GUI.Dialogs
             oldTitle.Text = EditedCatalog.Title;
             submit.IsEnabled = newTitle.Text.Length > 0;
         }
-
         public void LoadTexts(string language)
         {
             labelOldTitle.Text = LanguageProvider.getString("Dialog.EditCatalog.LabelOldTitle") + ":";
@@ -53,10 +52,11 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
+        #endregion
+
+        #region Handler
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
-
         private void newTitle_TextChanged(object sender, TextChangedEventArgs e) => submit.IsEnabled = newTitle.Text.Length > 0;
-
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             if (EditedCatalogId != null) Writer.SaveCatalog(EditedCatalog);
@@ -65,5 +65,6 @@ namespace MediaManager.GUI.Dialogs
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        #endregion
     }
 }

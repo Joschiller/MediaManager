@@ -11,9 +11,12 @@ namespace MediaManager.GUI.Atoms
     /// </summary>
     public partial class TagCheckbox : UserControl
     {
+        #region Events
         public delegate void TagValueChangeHandler(TagCheckbox sender, bool? newValue);
         public event TagValueChangeHandler TagValueChanged;
+        #endregion
 
+        #region Properties
         public string TagName
         {
             get => (string)GetValue(TagNameProperty);
@@ -34,13 +37,17 @@ namespace MediaManager.GUI.Atoms
             else if (value.Value) ((TagCheckbox)d).checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_positive.png", UriKind.Relative));
             else ((TagCheckbox)d).checkbox.Source = new BitmapImage(new Uri("/Resources/checkbox_negative.png", UriKind.Relative));
         }
+        #endregion
 
+        #region Setup
         public TagCheckbox()
         {
             InitializeComponent();
             DataContext = this;
         }
+        #endregion
 
+        #region Handler
         private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -57,5 +64,6 @@ namespace MediaManager.GUI.Atoms
             }
             TagValueChanged?.Invoke(this, Value);
         }
+        #endregion
     }
 }

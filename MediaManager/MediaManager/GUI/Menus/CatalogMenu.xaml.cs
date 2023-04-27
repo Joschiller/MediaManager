@@ -20,7 +20,6 @@ namespace MediaManager.GUI.Menus
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
@@ -33,6 +32,7 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
+        #region Handler
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
@@ -121,12 +121,12 @@ namespace MediaManager.GUI.Menus
         }
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion
-
         private void catalogList_SelectionChanged(Catalogue catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
         private void catalogList_CatalogDoubleClick(Catalogue catalog)
         {
             CURRENT_CATALOGUE = catalog;
             catalogList.LoadCatalogs();
         }
+        #endregion
     }
 }

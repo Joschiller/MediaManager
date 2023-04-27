@@ -11,8 +11,12 @@ namespace MediaManager.GUI.Controls.Search
     /// </summary>
     public partial class SearchInput : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void SearchParametersChangeHandler(SearchParameters parameters);
         public event SearchParametersChangeHandler SearchParametersChanged;
+        #endregion
+
+        #region Properties
         public SearchParameters CurrentSearchParameters
         {
             get => new SearchParameters
@@ -25,15 +29,26 @@ namespace MediaManager.GUI.Controls.Search
                 SearchTags = new System.Collections.Generic.List<ValuedTag>(tagList.GetTagList())
             };
         }
+        #endregion
 
+        #region Setup
         private SearchResultMode CurrentSearchResultMode = SearchResultMode.MediaList;
-
         public SearchInput()
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            exactMode.Content = LanguageProvider.getString("Controls.Search.ExactMode");
+            searchDescriptionMode.Content = LanguageProvider.getString("Controls.Search.SearchDescriptionMode");
+            favouriteOnlyMode.Content = LanguageProvider.getString("Controls.Search.FavouriteOnlyMode");
+            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? LanguageProvider.getString("Controls.Search.ShowParts") : LanguageProvider.getString("Controls.Search.ShowMedia");
+            startSearch.Content = LanguageProvider.getString("Controls.Search.Search");
+            reset.Tooltip = LanguageProvider.getString("Controls.Search.Reset");
+        }
+        ~SearchInput() => LanguageProvider.Unregister(this);
         public void reloadTagList()
         {
             var tags = new List<ValuedTag>();
@@ -45,7 +60,9 @@ namespace MediaManager.GUI.Controls.Search
             }));
             tagList.SetTagList(tags);
         }
+        #endregion
 
+        #region Handler
         private void searchText_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter) SearchParametersChanged?.Invoke(CurrentSearchParameters);
@@ -59,19 +76,6 @@ namespace MediaManager.GUI.Controls.Search
             SearchParametersChanged?.Invoke(CurrentSearchParameters);
         }
         private void tagList_TagValueChanged(System.Collections.Generic.List<ValuedTag> tags) => SearchParametersChanged?.Invoke(CurrentSearchParameters);
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            exactMode.Content = LanguageProvider.getString("Controls.Search.ExactMode");
-            searchDescriptionMode.Content = LanguageProvider.getString("Controls.Search.SearchDescriptionMode");
-            favouriteOnlyMode.Content = LanguageProvider.getString("Controls.Search.FavouriteOnlyMode");
-            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? LanguageProvider.getString("Controls.Search.ShowParts") : LanguageProvider.getString("Controls.Search.ShowMedia");
-            startSearch.Content = LanguageProvider.getString("Controls.Search.Search");
-            reset.Tooltip = LanguageProvider.getString("Controls.Search.Reset");
-        }
-        ~SearchInput() => LanguageProvider.Unregister(this);
-
         private void reset_Click(object sender, RoutedEventArgs e)
         {
             searchText.Text = "";
@@ -89,5 +93,6 @@ namespace MediaManager.GUI.Controls.Search
             tagList.SetTagList(tags);
             SearchParametersChanged?.Invoke(CurrentSearchParameters);
         }
+        #endregion
     }
 }

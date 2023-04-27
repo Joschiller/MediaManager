@@ -14,13 +14,26 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     /// </summary>
     public partial class TitleOfTheDay : UserControl, MultiUseTabsControl, UpdatedLanguageUser
     {
+        #region Setup
         public TitleOfTheDay()
         {
             InitializeComponent();
-            ShowNextRandomItem();
             RegisterAtLanguageProvider();
+            ShowNextRandomItem();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            next.Tooltip = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
+            ShowCurrentItem();
+        }
+        ~TitleOfTheDay() => LanguageProvider.Unregister(this);
+        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
+        public bool GetIsVisible() => Reader.Settings.TitleOfTheDayVisible;
+        public void ReloadGUI() => ShowNextRandomItem();
+        #endregion
 
+        #region Handler
         private void next_Click(object sender, System.Windows.RoutedEventArgs e) => ShowNextRandomItem();
         private string getTagsString(List<ValuedTag> tags)
         {
@@ -63,16 +76,6 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             }
             ShowCurrentItem();
         }
-
-        public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.TitleOfTheDayVisible;
-        public void ReloadGUI() => ShowNextRandomItem();
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            next.Tooltip = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
-            ShowCurrentItem();
-        }
-        ~TitleOfTheDay() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

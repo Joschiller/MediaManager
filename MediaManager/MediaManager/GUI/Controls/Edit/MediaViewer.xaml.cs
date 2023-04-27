@@ -8,13 +8,8 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class MediaViewer : UserControl
     {
+        #region Properties
         private MediumWithTags medium;
-
-        public MediaViewer()
-        {
-            InitializeComponent();
-        }
-
         public MediumWithTags Medium
         {
             get => medium;
@@ -29,7 +24,16 @@ namespace MediaManager.GUI.Controls.Edit
                 OpenMediumTab();
             }
         }
+        #endregion
 
+        #region Setup
+        public MediaViewer()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region Getter/setter
         public void OpenMediumTab()
         {
             viewer.Medium = new EditableMedium
@@ -63,11 +67,14 @@ namespace MediaManager.GUI.Controls.Edit
                 };
             }
         }
+        #endregion
 
+        #region Handler
         private void list_SelectionChanged(int? id)
         {
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
+        #endregion
     }
 }

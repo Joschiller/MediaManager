@@ -14,12 +14,14 @@ namespace MediaManager.GUI.Controls.List
     /// </summary>
     public partial class MediaTagList : UserControl, UpdatedLanguageUser
     {
+        #region Bindings
         public ObservableCollection<Medium> Media { get; set; } = new ObservableCollection<Medium>();
         public ObservableCollection<MediaTagListElement> Parts { get; set; } = new ObservableCollection<MediaTagListElement>();
+        #endregion
 
+        #region Setup
         private Tag CurrentTag;
         private int ItemsPerPage = Reader.Settings.ResultListLength;
-
         public MediaTagList()
         {
             InitializeComponent();
@@ -28,13 +30,23 @@ namespace MediaManager.GUI.Controls.List
             pager.TotalPages = Reader.CountOfMedia / ItemsPerPage + (Reader.CountOfMedia % ItemsPerPage == 0 ? 0 : 1);
             LoadTagsOfSelectedMedium();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
+        }
+        ~MediaTagList() => LanguageProvider.Unregister(this);
+        #endregion
 
+        #region Getter/Setter
         public void setCurrentTag(Tag tag)
         {
             CurrentTag = tag;
             LoadTagsOfSelectedMedium();
         }
+        #endregion
 
+        #region Handler
         #region Navigation
         private void pager_PageChanged(int newPage)
         {
@@ -154,12 +166,6 @@ namespace MediaManager.GUI.Controls.List
 
             LoadTagsOfSelectedMedium();
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
-        }
-        ~MediaTagList() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

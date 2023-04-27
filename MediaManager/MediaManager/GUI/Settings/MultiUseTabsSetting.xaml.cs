@@ -15,7 +15,6 @@ namespace MediaManager.GUI.Settings
         {
             InitializeComponent();
         }
-
         public void LoadTexts(string language)
         {
             playlistLabel.Text = LanguageProvider.getString("Controls.Settings.MultiUseTabs.PlaylistLabel") + ":";

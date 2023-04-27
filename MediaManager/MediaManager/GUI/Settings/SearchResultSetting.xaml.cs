@@ -20,7 +20,6 @@ namespace MediaManager.GUI.Settings
             searchResultValue.SetMax(50);
             searchResultValue.MaxLength = 512;
         }
-
         public void LoadTexts(string language)
         {
             searchResultLabel.Text = LanguageProvider.getString("Controls.Settings.SearchResult.Label") + ":";

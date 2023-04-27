@@ -13,10 +13,17 @@ namespace MediaManager.GUI.Components
     /// </summary>
     public partial class TagList : UserControl
     {
+        #region Events
         public delegate void TagValueChangeHandler(List<ValuedTag> tags);
         public event TagValueChangeHandler TagValueChanged;
+        #endregion
 
+        #region Properties
         private bool _Enabled = true;
+        /// <summary>
+        /// This property should be used to correctly update the appearance of the image button if it gets enabled or disabled.<br/>
+        /// Default: <c>true</c>
+        /// </summary>
         public bool Enabled
         {
             get => _Enabled;
@@ -26,8 +33,21 @@ namespace MediaManager.GUI.Components
                 SetTagList(GetTagList());
             }
         }
+        #endregion
 
+        #region Bindings
         public ObservableCollection<TagListElement> Tags { get; private set; } = new ObservableCollection<TagListElement>();
+        #endregion
+
+        #region Setup
+        public TagList()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+        #endregion
+
+        #region Getter/Setter
         public void SetTagList(List<ValuedTag> tags) => SetTagList(tags, new List<int>());
         public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds) => SetTagList(tags, disabledTagIds, new List<int>());
         public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds, List<int> highlightedTagIds)
@@ -58,13 +78,9 @@ namespace MediaManager.GUI.Components
             });
             return list;
         }
+        #endregion
 
-        public TagList()
-        {
-            InitializeComponent();
-            DataContext = this;
-        }
-
+        #region Handler
         private void Grid_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tagId = (int)((Grid)sender).Tag;
@@ -90,5 +106,6 @@ namespace MediaManager.GUI.Components
             SetTagList(currentTags);
             TagValueChanged?.Invoke(currentTags);
         }
+        #endregion
     }
 }
