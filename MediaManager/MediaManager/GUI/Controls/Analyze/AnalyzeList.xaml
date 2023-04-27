@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.Analyze"
              mc:Ignorable="d">
-    <ListView ItemsSource="{Binding Items}" SelectionChanged="ListView_SelectionChanged">
+    <ListView x:Name="listView" ItemsSource="{Binding Items}" SelectionChanged="listView_SelectionChanged">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding Text}" TextWrapping="WrapWithOverflow"/>

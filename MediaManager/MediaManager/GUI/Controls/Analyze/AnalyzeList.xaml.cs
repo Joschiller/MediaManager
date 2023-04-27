@@ -14,18 +14,19 @@ namespace MediaManager.GUI.Controls.Analyze
 
         public ObservableCollection<AnalyzeListElement> Items { get; set; } = new ObservableCollection<AnalyzeListElement>();
 
-        public void setItems(List<AnalyzeListElement> items)
-        {
-            Items.Clear();
-            items.ForEach(Items.Add);
-        }
-
         public AnalyzeList()
         {
             InitializeComponent();
             DataContext = this;
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(((ListView)sender).SelectedItem as AnalyzeListElement);
+        public void SetItems(List<AnalyzeListElement> items)
+        {
+            Items.Clear();
+            items.ForEach(Items.Add);
+            if (items.Count > 0) listView.SelectedIndex = 0;
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(((ListView)sender).SelectedItem as AnalyzeListElement);
     }
 }

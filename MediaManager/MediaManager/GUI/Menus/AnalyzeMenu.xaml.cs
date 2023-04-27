@@ -44,7 +44,7 @@ namespace MediaManager.GUI.Menus
             pager.CurrentPage = 1;
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
         }
-        private void pager_PageChanged(int newPage) => list.setItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
+        private void pager_PageChanged(int newPage) => list.SetItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
         private void list_SelectionChanged(AnalyzeListElement element) => preview.LoadPreview(mode.Mode, element);
         private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element)
         {
