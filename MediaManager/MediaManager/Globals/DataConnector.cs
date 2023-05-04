@@ -16,13 +16,13 @@ namespace MediaManager.Globals
         /// 
         /// Can be cleared by setting the value to <c>null</c>.
         /// </summary>
-        public static Catalogue CURRENT_CATALOGUE
+        public static Catalog CURRENT_CATALOGUE
         {
             get
             {
                 var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOGUE_ID")?.Value;
                 if (id == null || int.Parse(id) == -1) return null;
-                return DBCONNECTION.Catalogues.Find(int.Parse(id));
+                return DBCONNECTION.Catalogs.Find(int.Parse(id));
             }
             set
             {
@@ -37,8 +37,8 @@ namespace MediaManager.Globals
 
         public static class Reader
         {
-            public static bool AnyCatalogExists() => DBCONNECTION.Catalogues.Count() > 0;
-            public static Catalogue GetCatalog(int id) => DBCONNECTION.Catalogues.Find(id);
+            public static bool AnyCatalogExists() => DBCONNECTION.Catalogs.Count() > 0;
+            public static Catalog GetCatalog(int id) => DBCONNECTION.Catalogs.Find(id);
             public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
             public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
             public static List<ValuedTag> GetTagsForMedium(int id)
@@ -46,7 +46,7 @@ namespace MediaManager.Globals
                 var result = new List<ValuedTag>();
                 var medium = GetMedium(id);
                 var mediaTags = medium.MT_Relation;
-                foreach (var t in medium.Catalogue.Tags)
+                foreach (var t in medium.Catalog.Tags)
                 {
                     var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -60,7 +60,7 @@ namespace MediaManager.Globals
             /// <summary>
             /// Catalogs ordered by title.
             /// </summary>
-            public static List<Catalogue> Catalogs { get => DBCONNECTION.Catalogues.OrderBy(c => c.Title).ToList() ?? new List<Catalogue>(); }
+            public static List<Catalog> Catalogs { get => DBCONNECTION.Catalogs.OrderBy(c => c.Title).ToList() ?? new List<Catalog>(); }
             /// <summary>
             /// Media ordered by title.
             /// </summary>
@@ -72,7 +72,7 @@ namespace MediaManager.Globals
                 var result = new List<ValuedTag>();
                 var part = GetPart(id);
                 var partTags = part.PT_Relation;
-                foreach (var t in part.Medium.Catalogue.Tags)
+                foreach (var t in part.Medium.Catalog.Tags)
                 {
                     var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
                     result.Add(new ValuedTag
@@ -93,7 +93,7 @@ namespace MediaManager.Globals
                 var result = new List<SearchResultItem>();
 
                 var fittingSearchString = DBCONNECTION.Parts
-                    .Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id)
+                    .Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id)
                     .Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
 
                 var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
@@ -152,13 +152,13 @@ namespace MediaManager.Globals
                     case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Description.Trim().Length == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.MT_Relation.Count == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Location.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Description.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.PT_Relation.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).Where(p => p.Publication_Year == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Description.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.PT_Relation.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Publication_Year == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.PartImage:
                         var filteredParts = new List<Part>();
-                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogueId == CURRENT_CATALOGUE.Id).ToList().ForEach(p =>
+                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).ToList().ForEach(p =>
                         {
                             if (p.Image == null || p.Image.Length == 0) filteredParts.Add(p);
                         });
@@ -193,8 +193,8 @@ namespace MediaManager.Globals
         {
             public static void DeleteCatalog(int id)
             {
-                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Catalogues.Find(id).Media); // must be deleted explicitly
-                DBCONNECTION.Catalogues.Remove(DBCONNECTION.Catalogues.Find(id));
+                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Catalogs.Find(id).Media); // must be deleted explicitly
+                DBCONNECTION.Catalogs.Remove(DBCONNECTION.Catalogs.Find(id));
                 DBCONNECTION.SaveChanges();
             }
             public static void DeleteTag(int id)
@@ -224,11 +224,11 @@ namespace MediaManager.Globals
                 DBCONNECTION.SaveChanges();
             }
 
-            public static int CreateCatalog(Catalogue catalog)
+            public static int CreateCatalog(Catalog catalog)
             {
-                DBCONNECTION.Catalogues.Add(catalog);
+                DBCONNECTION.Catalogs.Add(catalog);
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Catalogues.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Catalogs.ToList().LastOrDefault()?.Id ?? 0;
             }
             public static int CreateTag(Tag tag)
             {
@@ -271,9 +271,9 @@ namespace MediaManager.Globals
                 return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
             }
 
-            public static void SaveCatalog(Catalogue catalog)
+            public static void SaveCatalog(Catalog catalog)
             {
-                var original = DBCONNECTION.Catalogues.Find(catalog.Id);
+                var original = DBCONNECTION.Catalogs.Find(catalog.Id);
                 original.Title = catalog.Title;
                 original.Description = catalog.Description;
                 original.DeletionConfirmationMedium = catalog.DeletionConfirmationMedium;
@@ -342,7 +342,7 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Playlists.Add(new Playlist
                 {
-                    CatalogueId = CURRENT_CATALOGUE.Id,
+                    CatalogId = CURRENT_CATALOGUE.Id,
                     Title = title
                 });
                 DBCONNECTION.SaveChanges();
@@ -377,12 +377,12 @@ namespace MediaManager.Globals
         private static string MinimumImportVersion = "1.0.0";
         public class CatalogExportThread : ExportThread
         {
-            private Catalogue catalogToExport;
+            private Catalog catalogToExport;
             private int currentStep = -1;
             private int maxSteps = 5;
             public CatalogExportThread(string fileDestination, string exportFailedStep, string exportFailedMessage, int catalogId) : base(fileDestination, exportFailedStep, exportFailedMessage)
             {
-                catalogToExport = DBCONNECTION.Catalogues.Find(catalogId);
+                catalogToExport = DBCONNECTION.Catalogs.Find(catalogId);
             }
 
             private void step()
@@ -411,7 +411,7 @@ namespace MediaManager.Globals
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
                         DBCONNECTION.Tags,
-                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        filter: (i) => i.CatalogId == catalogToExport.Id,
                         columns: new List<string> { "Id", "Title" }
                         ));
                 }
@@ -422,7 +422,7 @@ namespace MediaManager.Globals
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
                         DBCONNECTION.Media,
-                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        filter: (i) => i.CatalogId == catalogToExport.Id,
                         columns: new List<string> { "Title", "Description", "Location", "PositiveTags", "NegativeTags" },
                         additionalComputedProperties: new Dictionary<string, Func<Medium, object>>
                         {
@@ -459,7 +459,7 @@ namespace MediaManager.Globals
                 {
                     xmlData.Add(XMLExport.ExportDataFromTable(
                         DBCONNECTION.Playlists,
-                        filter: (i) => i.CatalogueId == catalogToExport.Id,
+                        filter: (i) => i.CatalogId == catalogToExport.Id,
                         columns: new List<string> { "Title", "PlaylistParts" },
                         additionalComputedProperties: new Dictionary<string, Func<Playlist, object>>
                         {
@@ -529,7 +529,7 @@ namespace MediaManager.Globals
 
                 #region Import Catalog
                 step();
-                var importedCatalog = new Catalogue { };
+                var importedCatalog = new Catalog { };
                 try
                 {
                     importedCatalog.Title = xmlData.Attribute("Title").Value;
@@ -581,7 +581,7 @@ namespace MediaManager.Globals
                     {
                         tagIdMappings.Add(xmlId, Writer.CreateTag(new Tag
                         {
-                            CatalogueId = catalogId,
+                            CatalogId = catalogId,
                             Title = xmlTitle
                         }));
                     }
@@ -617,7 +617,7 @@ namespace MediaManager.Globals
                     {
                         DBCONNECTION.Media.Add(new Medium
                         {
-                            CatalogueId = catalogId,
+                            CatalogId = catalogId,
                             Title = xmlMediumTitle,
                             Description = xmlMediumDescription,
                             Location = xmlMediumLocation,
@@ -715,7 +715,7 @@ namespace MediaManager.Globals
                     {
                         DBCONNECTION.Playlists.Add(new Playlist
                         {
-                            CatalogueId = catalogId,
+                            CatalogId = catalogId,
                             Title = xmlTitle
                         });
                         DBCONNECTION.SaveChanges();

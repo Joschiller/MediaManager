@@ -70,7 +70,7 @@ namespace MediaManager.GUI.Menus
                 var mediaData = new Controls.Edit.MediumWithTags
                 {
                     Id = medium.Id,
-                    CatalogueId = medium.CatalogueId,
+                    CatalogueId = medium.CatalogId,
                     Title = medium.Title,
                     Description = medium.Description,
                     Location = medium.Location,
@@ -111,7 +111,7 @@ namespace MediaManager.GUI.Menus
                     Writer.SaveMedium(new Medium
                     {
                         Id = MediumId,
-                        CatalogueId = data.CatalogueId,
+                        CatalogId = data.CatalogueId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location
@@ -148,7 +148,7 @@ namespace MediaManager.GUI.Menus
                 {
                     MediumId = Writer.CreateMedium(new Medium
                     {
-                        CatalogueId = data.CatalogueId,
+                        CatalogId = data.CatalogueId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location

@@ -15,7 +15,7 @@ namespace MediaManager.GUI.Dialogs
         public EditTagDialog(int? id)
         {
             EditedTagId = id;
-            EditedTag = EditedTagId.HasValue ? Reader.GetTag(EditedTagId.Value) : new Tag { CatalogueId = CURRENT_CATALOGUE.Id, Title = "" };
+            EditedTag = EditedTagId.HasValue ? Reader.GetTag(EditedTagId.Value) : new Tag { CatalogId = CURRENT_CATALOGUE.Id, Title = "" };
 
             InitializeComponent();
             LoadTexts(null);

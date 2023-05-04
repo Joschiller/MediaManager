@@ -121,8 +121,8 @@ namespace MediaManager.GUI.Menus
         }
         private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
         #endregion
-        private void catalogList_SelectionChanged(Catalogue catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
-        private void catalogList_CatalogDoubleClick(Catalogue catalog)
+        private void catalogList_SelectionChanged(Catalog catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
+        private void catalogList_CatalogDoubleClick(Catalog catalog)
         {
             CURRENT_CATALOGUE = catalog;
             catalogList.LoadCatalogs();

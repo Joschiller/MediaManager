@@ -13,13 +13,13 @@ namespace MediaManager.GUI.Controls.List
     public partial class CatalogList : UserControl, UpdatedLanguageUser
     {
         #region Events
-        public delegate void CatalogSelectionHandler(Catalogue catalog);
+        public delegate void CatalogSelectionHandler(Catalog catalog);
         public event CatalogSelectionHandler SelectionChanged;
         public event CatalogSelectionHandler CatalogDoubleClick;
         #endregion
 
         #region Properties
-        public Catalogue SelectedCatalog { get => list.SelectedItem == null ? null : (list.SelectedItem as CatalogListElement).Catalog; }
+        public Catalog SelectedCatalog { get => list.SelectedItem == null ? null : (list.SelectedItem as CatalogListElement).Catalog; }
         #endregion
 
         #region Bindings

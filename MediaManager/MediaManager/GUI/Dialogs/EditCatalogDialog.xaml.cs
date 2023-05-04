@@ -12,13 +12,13 @@ namespace MediaManager.GUI.Dialogs
     {
         #region Setup
         private int? EditedCatalogId;
-        private Catalogue EditedCatalog;
+        private Catalog EditedCatalog;
         public EditCatalogDialog(int? id)
         {
             EditedCatalogId = id;
             EditedCatalog = EditedCatalogId.HasValue
                 ? Reader.GetCatalog(EditedCatalogId.Value)
-                : new Catalogue
+                : new Catalog
                 {
                     Title = "",
                     Description = "",
