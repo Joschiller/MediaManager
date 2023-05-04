@@ -12,14 +12,14 @@ namespace MediaManager
     using System;
     using System.Collections.Generic;
     
-    public partial class Catalogue
+    public partial class Catalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Catalogue()
+        public Catalog()
         {
             this.Media = new HashSet<Medium>();
-            this.Tags = new HashSet<Tag>();
             this.Playlists = new HashSet<Playlist>();
+            this.Tags = new HashSet<Tag>();
         }
     
         public int Id { get; set; }
@@ -34,8 +34,8 @@ namespace MediaManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Medium> Media { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tags { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Playlist> Playlists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[Catalogues] (
+CREATE TABLE [dbo].[Catalogs] (
     [Id]                           INT             IDENTITY (1, 1) NOT NULL,
     [Title]                        NVARCHAR (128)  NOT NULL,
     [Description]                  NVARCHAR (2048) NOT NULL,
@@ -12,12 +12,12 @@ CREATE TABLE [dbo].[Catalogues] (
 
 CREATE TABLE [dbo].[Media] (
     [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [CatalogueId] INT            NOT NULL,
+    [CatalogId] INT            NOT NULL,
     [Title]       NVARCHAR (128) NOT NULL,
     [Description] NVARCHAR (512) NOT NULL,
     [Location]    NVARCHAR (128) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Media_ToCatalogues] FOREIGN KEY ([CatalogueId]) REFERENCES [dbo].[Catalogues] ([Id])
+    CONSTRAINT [FK_Media_ToCatalogs] FOREIGN KEY ([CatalogId]) REFERENCES [dbo].[Catalogs] ([Id])
     -- no ON DELETE CASCADE due to cycles
 );
 
@@ -36,10 +36,10 @@ CREATE TABLE [dbo].[Parts] (
 
 CREATE TABLE [dbo].[Tags] (
     [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [CatalogueId] INT            NOT NULL,
+    [CatalogId] INT            NOT NULL,
     [Title]       NVARCHAR (128) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Tags_ToCatalogues] FOREIGN KEY ([CatalogueId]) REFERENCES [dbo].[Catalogues] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_Tags_ToCatalogs] FOREIGN KEY ([CatalogId]) REFERENCES [dbo].[Catalogs] ([Id]) ON DELETE CASCADE
 );
 
 CREATE TABLE [dbo].[MT_Relation] (
@@ -62,10 +62,10 @@ CREATE TABLE [dbo].[PT_Relation] (
 
 CREATE TABLE [dbo].[Playlists] (
     [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [CatalogueId] INT            NOT NULL,
+    [CatalogId] INT            NOT NULL,
     [Title]       NVARCHAR (128) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Playlists_ToCatalogues] FOREIGN KEY ([CatalogueId]) REFERENCES [dbo].[Catalogues] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_Playlists_ToCatalogs] FOREIGN KEY ([CatalogId]) REFERENCES [dbo].[Catalogs] ([Id]) ON DELETE CASCADE
 );
 
 CREATE TABLE [dbo].[PPl_Relation] (

@@ -83,7 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Catalogue.cs">
+    <Compile Include="Catalog.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Globals\DataConnector.cs" />
@@ -249,6 +249,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\Search\SearchResultItem.cs" />
     <Compile Include="Medium.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
@@ -264,7 +265,6 @@
     <Compile Include="PT_Relation.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\Search\SearchResultItem.cs" />
     <Compile Include="Setting.cs">
       <DependentUpon>MediaDBModel.tt</DependentUpon>
     </Compile>

@@ -25,13 +25,13 @@ namespace MediaManager
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Catalogue> Catalogues { get; set; }
+        public virtual DbSet<Catalog> Catalogs { get; set; }
         public virtual DbSet<Medium> Media { get; set; }
         public virtual DbSet<MT_Relation> MT_Relation { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
+        public virtual DbSet<Playlist> Playlists { get; set; }
         public virtual DbSet<PT_Relation> PT_Relation { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<Playlist> Playlists { get; set; }
     }
 }
