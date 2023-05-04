@@ -53,7 +53,7 @@ namespace MediaManager.GUI.Menus
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             if (SelectedTag == null) return;
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationTag;
+            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationTag;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));

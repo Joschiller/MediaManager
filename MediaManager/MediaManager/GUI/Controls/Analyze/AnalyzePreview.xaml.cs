@@ -74,7 +74,7 @@ namespace MediaManager.GUI.Controls.Analyze
                     elementViewer.Medium = new Edit.EditableMedium
                     {
                         Id = medium.Id,
-                        CatalogueId = medium.CatalogId,
+                        CatalogId = medium.CatalogId,
                         Title = medium.Title,
                         Description = medium.Description,
                         Location = medium.Location,

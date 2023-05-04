@@ -42,11 +42,11 @@ namespace MediaManager.GUI.Menus
                 editor.Medium = new Controls.Edit.MediumWithTags
                 {
                     Id = MediumId,
-                    CatalogueId = CURRENT_CATALOGUE.Id,
+                    CatalogId = CURRENT_CATALOG.Id,
                     Title = "",
                     Description = "",
                     Location = "",
-                    Tags = CURRENT_CATALOGUE.Tags.Select(t => new ValuedTag
+                    Tags = CURRENT_CATALOG.Tags.Select(t => new ValuedTag
                     {
                         Tag = t,
                         Value = null
@@ -70,7 +70,7 @@ namespace MediaManager.GUI.Menus
                 var mediaData = new Controls.Edit.MediumWithTags
                 {
                     Id = medium.Id,
-                    CatalogueId = medium.CatalogId,
+                    CatalogId = medium.CatalogId,
                     Title = medium.Title,
                     Description = medium.Description,
                     Location = medium.Location,
@@ -111,7 +111,7 @@ namespace MediaManager.GUI.Menus
                     Writer.SaveMedium(new Medium
                     {
                         Id = MediumId,
-                        CatalogId = data.CatalogueId,
+                        CatalogId = data.CatalogId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location
@@ -148,7 +148,7 @@ namespace MediaManager.GUI.Menus
                 {
                     MediumId = Writer.CreateMedium(new Medium
                     {
-                        CatalogId = data.CatalogueId,
+                        CatalogId = data.CatalogId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location
@@ -202,7 +202,7 @@ namespace MediaManager.GUI.Menus
         }
         private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
         {
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationMedium;
+            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationMedium;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Edit.MediaDeletion"));

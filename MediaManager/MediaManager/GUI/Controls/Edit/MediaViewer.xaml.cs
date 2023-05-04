@@ -39,7 +39,7 @@ namespace MediaManager.GUI.Controls.Edit
             viewer.Medium = new EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogueId,
+                CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
                 Location = medium.Location,

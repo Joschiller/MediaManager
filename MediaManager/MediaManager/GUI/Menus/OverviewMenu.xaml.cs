@@ -48,7 +48,7 @@ namespace MediaManager.GUI.Menus
         }
         private void Reload()
         {
-            catalogTitle.Text = CURRENT_CATALOGUE.Title;
+            catalogTitle.Text = CURRENT_CATALOG.Title;
             multiUseTabs.ReloadGUI();
             searchPanel.ReloadTags();
             searchPanel.ReloadResultList();

@@ -63,7 +63,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         private void delete_Click(object sender, RoutedEventArgs e)
         {
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationPlaylist;
+            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationPlaylist;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.PlaylistDeletion"));

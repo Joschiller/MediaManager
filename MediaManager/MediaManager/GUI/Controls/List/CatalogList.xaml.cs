@@ -46,7 +46,7 @@ namespace MediaManager.GUI.Controls.List
         public void LoadCatalogs()
         {
             Catalogs.Clear();
-            var currentCatalog = CURRENT_CATALOGUE;
+            var currentCatalog = CURRENT_CATALOG;
             Reader.Catalogs.ForEach(c => Catalogs.Add(new CatalogListElement
             {
                 Catalog = c,

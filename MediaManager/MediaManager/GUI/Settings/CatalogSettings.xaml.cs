@@ -25,21 +25,21 @@ namespace MediaManager.GUI.Settings
         }
         public string GetControlName() => "Catalog";
         public string GetTabName() => LanguageProvider.getString("Controls.Settings.Catalog.TabName");
-        bool SettingsEditorItem.IsVisible() => CURRENT_CATALOGUE != null;
+        bool SettingsEditorItem.IsVisible() => CURRENT_CATALOG != null;
         #endregion
         #region Data
         public void LoadData(int? accountIdentifier)
         {
-            cbDeletionConfirmationMedium.IsChecked = CURRENT_CATALOGUE.DeletionConfirmationMedium;
-            cbDeletionConfirmationPart.IsChecked = CURRENT_CATALOGUE.DeletionConfirmationPart;
-            cbDeletionConfirmationPlaylist.IsChecked = CURRENT_CATALOGUE.DeletionConfirmationPlaylist;
-            cbDeletionConfirmationTag.IsChecked = CURRENT_CATALOGUE.DeletionConfirmationTag;
-            cbShowTitleOfTheDayAsMedium.IsChecked = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium;
+            cbDeletionConfirmationMedium.IsChecked = CURRENT_CATALOG.DeletionConfirmationMedium;
+            cbDeletionConfirmationPart.IsChecked = CURRENT_CATALOG.DeletionConfirmationPart;
+            cbDeletionConfirmationPlaylist.IsChecked = CURRENT_CATALOG.DeletionConfirmationPlaylist;
+            cbDeletionConfirmationTag.IsChecked = CURRENT_CATALOG.DeletionConfirmationTag;
+            cbShowTitleOfTheDayAsMedium.IsChecked = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium;
             LoadTexts(null);
         }
         public void SaveData()
         {
-            var catalog = CURRENT_CATALOGUE;
+            var catalog = CURRENT_CATALOG;
             catalog.DeletionConfirmationMedium = cbDeletionConfirmationMedium.IsChecked.HasValue && cbDeletionConfirmationMedium.IsChecked.Value;
             catalog.DeletionConfirmationPart = cbDeletionConfirmationPart.IsChecked.HasValue && cbDeletionConfirmationPart.IsChecked.Value;
             catalog.DeletionConfirmationPlaylist = cbDeletionConfirmationPlaylist.IsChecked.HasValue && cbDeletionConfirmationPlaylist.IsChecked.Value;

@@ -25,7 +25,7 @@ namespace MediaManager.GUI.Controls.Edit
             get => new EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogueId,
+                CatalogId = medium.CatalogId,
                 Title = title.Text.Trim(),
                 Description = description.Text.Trim(),
                 Location = location.Text.Trim(),

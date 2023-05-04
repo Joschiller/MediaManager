@@ -12,28 +12,28 @@ namespace MediaManager.Globals
         private static MediaDBEntities DBCONNECTION = new MediaDBEntities();
 
         /// <summary>
-        /// The currently active <see cref="Catalogue"/>.
+        /// The currently active <see cref="Catalog"/>.
         /// 
         /// Can be cleared by setting the value to <c>null</c>.
         /// </summary>
-        public static Catalog CURRENT_CATALOGUE
+        public static Catalog CURRENT_CATALOG
         {
             get
             {
-                var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOGUE_ID")?.Value;
+                var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID")?.Value;
                 if (id == null || int.Parse(id) == -1) return null;
                 return DBCONNECTION.Catalogs.Find(int.Parse(id));
             }
             set
             {
                 var newId = (value == null ? -1 : value.Id).ToString();
-                var originalSetting = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOGUE_ID");
+                var originalSetting = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID");
                 if (originalSetting != null) originalSetting.Value = newId;
-                else DBCONNECTION.Settings.Add(new Setting { Key = "CURRENT_CATALOGUE_ID", Value = newId });
+                else DBCONNECTION.Settings.Add(new Setting { Key = "CURRENT_CATALOG_ID", Value = newId });
                 DBCONNECTION.SaveChanges();
             }
         }
-        // TODO put all requests that are based on a catalogue inside common static class
+        // TODO put all requests that are based on a catalog inside common static class
 
         public static class Reader
         {
@@ -64,8 +64,8 @@ namespace MediaManager.Globals
             /// <summary>
             /// Media ordered by title.
             /// </summary>
-            public static List<Medium> Media { get => CURRENT_CATALOGUE?.Media.OrderBy(m => m.Title).ToList() ?? new List<Medium>(); }
-            public static int CountOfMedia { get => CURRENT_CATALOGUE?.Media.Count() ?? 0; }
+            public static List<Medium> Media { get => CURRENT_CATALOG?.Media.OrderBy(m => m.Title).ToList() ?? new List<Medium>(); }
+            public static int CountOfMedia { get => CURRENT_CATALOG?.Media.Count() ?? 0; }
             public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
             public static List<ValuedTag> GetTagsForPart(int id)
             {
@@ -84,16 +84,16 @@ namespace MediaManager.Globals
                 return result;
             }
             public static List<Part> GetPartsForTag(int id) => DBCONNECTION?.Tags.Find(id).PT_Relation.Where(r => r.Value).Select(r => r.Part).ToList() ?? new List<Part>();
-            public static int CountOfParts { get => CURRENT_CATALOGUE?.Media.Select(m => m.Parts.Count).Sum() ?? 0; }
-            public static List<Playlist> Playlists { get => CURRENT_CATALOGUE?.Playlists.ToList() ?? new List<Playlist>(); }
-            public static List<Tag> Tags { get => CURRENT_CATALOGUE?.Tags.ToList() ?? new List<Tag>(); }
+            public static int CountOfParts { get => CURRENT_CATALOG?.Media.Select(m => m.Parts.Count).Sum() ?? 0; }
+            public static List<Playlist> Playlists { get => CURRENT_CATALOG?.Playlists.ToList() ?? new List<Playlist>(); }
+            public static List<Tag> Tags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
 
             public static List<SearchResultItem> SearchUsingParameters(SearchParameters parameters)
             {
                 var result = new List<SearchResultItem>();
 
                 var fittingSearchString = DBCONNECTION.Parts
-                    .Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id)
+                    .Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id)
                     .Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
 
                 var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
@@ -140,25 +140,25 @@ namespace MediaManager.Globals
             {
                 switch(mode)
                 {
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Parts.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => CURRENT_CATALOGUE.Media.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Parts.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => CURRENT_CATALOG.Media.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.MediumCommonTags:
                         var allTagIds = Tags.Select(t => t.Id).ToList();
-                        return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m =>
+                        return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m =>
                             m.Parts.Count > 0 &&
                                 (allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != true)
                                 || allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != false))
                             ).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Description.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.MT_Relation.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOGUE.Media.Where(m => m.Location.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Description.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.PT_Relation.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).Where(p => p.Publication_Year == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Description.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.MT_Relation.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Location.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Description.Trim().Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.PT_Relation.Count == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Length == 0).ToList());
+                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Publication_Year == 0).ToList());
                     case GUI.Controls.Analyze.AnalyzeMode.PartImage:
                         var filteredParts = new List<Part>();
-                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOGUE.Id).ToList().ForEach(p =>
+                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).ToList().ForEach(p =>
                         {
                             if (p.Image == null || p.Image.Length == 0) filteredParts.Add(p);
                         });
@@ -166,7 +166,7 @@ namespace MediaManager.Globals
                     default: return new List<GUI.Controls.Analyze.AnalyzeListElement>();
                 }
             }
-            public static List<Medium> GetDoubledMediaToMediumTitle(string title) => CURRENT_CATALOGUE.Media.Where(m => m.Title == title).ToList();
+            public static List<Medium> GetDoubledMediaToMediumTitle(string title) => CURRENT_CATALOG.Media.Where(m => m.Title == title).ToList();
             public static List<int> GetNonCommonTagsOfMedium(int mediumId)
             {
                 var m = GetMedium(mediumId);
@@ -238,7 +238,7 @@ namespace MediaManager.Globals
             }
             public static int CreateMedium(Medium medium, List<ValuedTag> tags)
             {
-                CURRENT_CATALOGUE.Media.Add(medium);
+                CURRENT_CATALOG.Media.Add(medium);
                 DBCONNECTION.SaveChanges();
                 var mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
                 foreach (var t in tags)
@@ -342,7 +342,7 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Playlists.Add(new Playlist
                 {
-                    CatalogId = CURRENT_CATALOGUE.Id,
+                    CatalogId = CURRENT_CATALOG.Id,
                     Title = title
                 });
                 DBCONNECTION.SaveChanges();

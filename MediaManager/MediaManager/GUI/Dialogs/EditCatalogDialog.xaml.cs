@@ -61,7 +61,7 @@ namespace MediaManager.GUI.Dialogs
         {
             if (EditedCatalogId != null) Writer.SaveCatalog(EditedCatalog);
             else Writer.CreateCatalog(EditedCatalog);
-            if (Reader.Catalogs.Count == 1) CURRENT_CATALOGUE = Reader.Catalogs[0];
+            if (Reader.Catalogs.Count == 1) CURRENT_CATALOG = Reader.Catalogs[0];
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

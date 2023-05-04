@@ -48,8 +48,8 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         {
             if (CurrentItem != null)
             {
-                title.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
-                description.Text = CURRENT_CATALOGUE.ShowTitleOfTheDayAsMedium
+                title.Text = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
+                description.Text = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium
                     ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
                     + CurrentItem.Medium.Description)
                     : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ": " + CurrentItem.Medium.Title + "\n" + "\n"

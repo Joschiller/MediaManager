@@ -68,7 +68,7 @@ namespace MediaManager.GUI.Menus
                 });
             viewer.ProcessFailed += Viewer_ProcessFailed;
             viewer.ShowDialog();
-            if (Reader.Catalogs.Count == 1) CURRENT_CATALOGUE = Reader.Catalogs[0]; // activate imported catalog if it is the only existing one
+            if (Reader.Catalogs.Count == 1) CURRENT_CATALOG = Reader.Catalogs[0]; // activate imported catalog if it is the only existing one
             catalogList.LoadCatalogs();
         }
         private string showSaveFileDialog()
@@ -115,7 +115,7 @@ namespace MediaManager.GUI.Menus
             if (confirmation.HasValue && confirmation.Value)
             {
                 Writer.DeleteCatalog(catalogList.SelectedCatalog.Id);
-                if (CURRENT_CATALOGUE == null && Reader.AnyCatalogExists()) CURRENT_CATALOGUE = Reader.Catalogs[0];
+                if (CURRENT_CATALOG == null && Reader.AnyCatalogExists()) CURRENT_CATALOG = Reader.Catalogs[0];
                 catalogList.LoadCatalogs();
             }
         }
@@ -124,7 +124,7 @@ namespace MediaManager.GUI.Menus
         private void catalogList_SelectionChanged(Catalog catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
         private void catalogList_CatalogDoubleClick(Catalog catalog)
         {
-            CURRENT_CATALOGUE = catalog;
+            CURRENT_CATALOG = catalog;
             catalogList.LoadCatalogs();
         }
         #endregion

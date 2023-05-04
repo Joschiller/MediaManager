@@ -63,7 +63,7 @@ namespace MediaManager.GUI.Controls.Edit
             editor.Medium = new EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogueId,
+                CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
                 Location = medium.Location,
@@ -128,7 +128,7 @@ namespace MediaManager.GUI.Controls.Edit
         }
         private void deletePart_Click(object sender, RoutedEventArgs e)
         {
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationPart;
+            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationPart;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.PartDeletion"));

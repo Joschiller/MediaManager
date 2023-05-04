@@ -76,7 +76,7 @@ namespace MediaManager.GUI.Menus
             details.Medium = new Controls.Edit.EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogId,
+                CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
                 Tags = Reader.GetTagsForMedium(item.Id),
@@ -107,7 +107,7 @@ namespace MediaManager.GUI.Menus
                 mediaToMerge.Add(new MediumWithTags
                 {
                     Id = medium.Id,
-                    CatalogueId = medium.CatalogId,
+                    CatalogId = medium.CatalogId,
                     Title = medium.Title,
                     Description = medium.Description,
                     Location = medium.Location,
@@ -149,7 +149,7 @@ namespace MediaManager.GUI.Menus
             details.Medium = new EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogueId,
+                CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
                 Tags = medium.Tags,
@@ -180,7 +180,7 @@ namespace MediaManager.GUI.Menus
             details.Medium = new EditableMedium
             {
                 Id = -1,
-                CatalogueId = -1,
+                CatalogId = -1,
                 Title = "",
                 Description = "",
                 Location = "",
