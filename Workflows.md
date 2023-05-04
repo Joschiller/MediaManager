@@ -17,3 +17,42 @@
 6. FURTHER STEPS ...
 7. Commit changes: "release: Version x.x.x"
 8. Add tag to commit: "Version x.x.x"
+
+# File Structure
+
+## File Regions
+
+```c#
+#region Events
+// handler, delegates
+#endregion
+#region Properties
+// bindings, that are also used as getter/setter
+#endregion
+#region Bindings
+// internal bindings
+#endregion
+#region Setup
+// private state attributes that do not belong to bindings
+// constants
+// constructors
+// LanguageProvider
+// setup/reload-methods
+#endregion
+#region Getter/Setter
+// public methods
+#endregion
+#region Handler
+// internal event handlers and corresponding methods
+#endregion
+```
+
+## Constructors
+
+```c#
+InitializeComponent();
+DataContext = this;
+// ... register needed handlers
+RegisterAtLanguageProvider(); /* or */ LoadTexts();
+// ... further setup
+```
