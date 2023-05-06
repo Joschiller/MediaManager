@@ -25,27 +25,28 @@ namespace MediaManager.GUI.Settings
         }
         public string GetControlName() => "Catalog";
         public string GetTabName() => LanguageProvider.getString("Controls.Settings.Catalog.TabName");
-        bool SettingsEditorItem.IsVisible() => CURRENT_CATALOG != null;
+        bool SettingsEditorItem.IsVisible() => CatalogContext.CurrentCatalogId.HasValue;
         #endregion
         #region Data
         public void LoadData(int? accountIdentifier)
         {
-            cbDeletionConfirmationMedium.IsChecked = CURRENT_CATALOG.DeletionConfirmationMedium;
-            cbDeletionConfirmationPart.IsChecked = CURRENT_CATALOG.DeletionConfirmationPart;
-            cbDeletionConfirmationPlaylist.IsChecked = CURRENT_CATALOG.DeletionConfirmationPlaylist;
-            cbDeletionConfirmationTag.IsChecked = CURRENT_CATALOG.DeletionConfirmationTag;
-            cbShowTitleOfTheDayAsMedium.IsChecked = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium;
+            var catalog = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value);
+            cbDeletionConfirmationMedium.IsChecked = catalog.DeletionConfirmationMedium;
+            cbDeletionConfirmationPart.IsChecked = catalog.DeletionConfirmationPart;
+            cbDeletionConfirmationPlaylist.IsChecked = catalog.DeletionConfirmationPlaylist;
+            cbDeletionConfirmationTag.IsChecked = catalog.DeletionConfirmationTag;
+            cbShowTitleOfTheDayAsMedium.IsChecked = catalog.ShowTitleOfTheDayAsMedium;
             LoadTexts(null);
         }
         public void SaveData()
         {
-            var catalog = CURRENT_CATALOG;
+            var catalog = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value);
             catalog.DeletionConfirmationMedium = cbDeletionConfirmationMedium.IsChecked.HasValue && cbDeletionConfirmationMedium.IsChecked.Value;
             catalog.DeletionConfirmationPart = cbDeletionConfirmationPart.IsChecked.HasValue && cbDeletionConfirmationPart.IsChecked.Value;
             catalog.DeletionConfirmationPlaylist = cbDeletionConfirmationPlaylist.IsChecked.HasValue && cbDeletionConfirmationPlaylist.IsChecked.Value;
             catalog.DeletionConfirmationTag = cbDeletionConfirmationTag.IsChecked.HasValue && cbDeletionConfirmationTag.IsChecked.Value;
             catalog.ShowTitleOfTheDayAsMedium = cbShowTitleOfTheDayAsMedium.IsChecked.HasValue && cbShowTitleOfTheDayAsMedium.IsChecked.Value;
-            Writer.SaveCatalog(catalog);
+            GlobalContext.Writer.SaveCatalog(catalog);
         }
         public bool ValidateData() => true;
         #endregion

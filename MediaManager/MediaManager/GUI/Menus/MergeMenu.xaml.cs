@@ -30,7 +30,7 @@ namespace MediaManager.GUI.Menus
                 Title = mediumTitle
             };
 
-            mediaSelection.SetItems(Reader.GetDoubledMediaToMediumTitle(mediumTitle).Select(m => new CheckedListItem
+            mediaSelection.SetItems(CatalogContext.Reader.Analysis.GetDoubledMediaToMediumTitle(mediumTitle).Select(m => new CheckedListItem
             {
                 Id = m.Id,
                 Text = "#" + m.Id.ToString() + ": \"" + m.Title + "\""
@@ -72,14 +72,14 @@ namespace MediaManager.GUI.Menus
         }
         private void mediaSelection_SelectionChanged(CheckedListItem item)
         {
-            var medium = Reader.GetMedium(item.Id);
+            var medium = GlobalContext.Reader.GetMedium(item.Id);
             details.Medium = new Controls.Edit.EditableMedium
             {
                 Id = medium.Id,
                 CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
-                Tags = Reader.GetTagsForMedium(item.Id),
+                Tags = GlobalContext.Reader.GetTagsForMedium(item.Id),
                 Location = medium.Location
             };
         }
@@ -103,7 +103,7 @@ namespace MediaManager.GUI.Menus
             mediaToMerge = new List<MediumWithTags>();
             foreach(var m in mediaSelection.GetCheckedItems())
             {
-                var medium = Reader.GetMedium(m.Id);
+                var medium = GlobalContext.Reader.GetMedium(m.Id);
                 mediaToMerge.Add(new MediumWithTags
                 {
                     Id = medium.Id,
@@ -111,7 +111,7 @@ namespace MediaManager.GUI.Menus
                     Title = medium.Title,
                     Description = medium.Description,
                     Location = medium.Location,
-                    Tags = Reader.GetTagsForMedium(m.Id),
+                    Tags = GlobalContext.Reader.GetTagsForMedium(m.Id),
                     Parts = medium.Parts.Select(p => new PartWithTags
                     {
                         Id = p.Id,
@@ -121,7 +121,7 @@ namespace MediaManager.GUI.Menus
                         Length = p.Length,
                         Publication_Year = p.Publication_Year,
                         Image = p.Image,
-                        Tags = Reader.GetTagsForPart(p.Id)
+                        Tags = GlobalContext.Reader.GetTagsForPart(p.Id)
                     }).ToList()
                 });
             }
@@ -189,7 +189,7 @@ namespace MediaManager.GUI.Menus
         }
         private void partSelection_SelectionChanged(CheckedListItem item)
         {
-            var part = Reader.GetPart(item.Id);
+            var part = GlobalContext.Reader.GetPart(item.Id);
             details.Part = new EditablePart
             {
                 Id = part.Id,
@@ -200,7 +200,7 @@ namespace MediaManager.GUI.Menus
                 Length = part.Length,
                 Publication_Year = part.Publication_Year,
                 Image = part.Image,
-                Tags = Reader.GetTagsForPart(item.Id),
+                Tags = GlobalContext.Reader.GetTagsForPart(item.Id),
                 TagsBlockedByMedium = new List<int>() // not needed here
             };
         }
@@ -232,8 +232,8 @@ namespace MediaManager.GUI.Menus
             mergedMedium.Parts = new List<PartWithTags>();
             foreach (var p in partSelection.GetCheckedItems())
             {
-                var part = Reader.GetPart(p.Id);
-                var partTags = Reader.GetTagsForPart(p.Id).Where(t => !tagsIdsSetByMedium.Contains(t.Tag.Id)).ToList();
+                var part = GlobalContext.Reader.GetPart(p.Id);
+                var partTags = GlobalContext.Reader.GetTagsForPart(p.Id).Where(t => !tagsIdsSetByMedium.Contains(t.Tag.Id)).ToList();
                 tagValuesSetByMedium.ForEach(t => partTags.Add(new ValuedTag
                 {
                     Tag = t.Tag,
@@ -270,7 +270,7 @@ namespace MediaManager.GUI.Menus
 
             // store
             // 1. Create new medium
-            var mediumId = Writer.CreateMedium(new Medium
+            var mediumId = CatalogContext.Writer.CreateMedium(new Medium
             {
                 CatalogId = mergedMedium.Id,
                 Title = mergedMedium.Title,
@@ -280,7 +280,7 @@ namespace MediaManager.GUI.Menus
             // 2. Move old parts and update their tags
             foreach(var p in mergedMedium.Parts)
             {
-                Writer.SavePart(new Part
+                CatalogContext.Writer.SavePart(new Part
                 {
                     Id = p.Id,
                     MediumId = mediumId,
@@ -293,7 +293,7 @@ namespace MediaManager.GUI.Menus
                 }, p.Tags);
             }
             // 3. Delete remaining merged media
-            foreach (var m in mediaToMerge) Writer.DeleteMedium(m.Id); // TODO: deleting the media fails due to FK-violation
+            foreach (var m in mediaToMerge) GlobalContext.Writer.DeleteMedium(m.Id); // TODO: deleting the media fails due to FK-violation
 
             // finish
             ShowDefaultDialog(LanguageProvider.getString("Menus.Merge.Dialog.Success"), SuccessMode.Success);

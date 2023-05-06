@@ -29,7 +29,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         ~TitleOfTheDay() => LanguageProvider.Unregister(this);
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.TitleOfTheDayVisible;
+        public bool GetIsVisible() => GlobalContext.Settings.TitleOfTheDayVisible;
         public void ReloadGUI() => ShowNextRandomItem();
         #endregion
 
@@ -48,12 +48,12 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         {
             if (CurrentItem != null)
             {
-                title.Text = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
-                description.Text = CURRENT_CATALOG.ShowTitleOfTheDayAsMedium
-                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
+                title.Text = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
+                description.Text = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).ShowTitleOfTheDayAsMedium
+                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
                     + CurrentItem.Medium.Description)
                     : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ": " + CurrentItem.Medium.Title + "\n" + "\n"
-                    + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
+                    + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
                     + CurrentItem.Description);
             }
             else
@@ -64,7 +64,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         private void ShowNextRandomItem()
         {
-            var possibleMedia = Reader.Media.Where(m => m.Parts.Count > 0).ToList();
+            var possibleMedia = CatalogContext.Reader.Lists.NonEmptyMedia;
             if (possibleMedia.Count > 0)
             {
                 var randomMedium = possibleMedia[new Random().Next(possibleMedia.Count)];

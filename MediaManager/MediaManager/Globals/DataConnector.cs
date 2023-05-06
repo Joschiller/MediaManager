@@ -11,171 +11,188 @@ namespace MediaManager.Globals
     {
         private static MediaDBEntities DBCONNECTION = new MediaDBEntities();
 
-        /// <summary>
-        /// The currently active <see cref="Catalog"/>.
-        /// 
-        /// Can be cleared by setting the value to <c>null</c>.
-        /// </summary>
-        public static Catalog CURRENT_CATALOG
+        /// <summary>All methods that are independent from the currently active <see cref="Catalog"/>.</summary>
+        public static class GlobalContext
         {
-            get
+            /// <summary>Offers reading access to data independent from the currently active <see cref="Catalog"/>.</summary>
+            public static class Reader
             {
-                var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID")?.Value;
-                if (id == null || int.Parse(id) == -1) return null;
-                return DBCONNECTION.Catalogs.Find(int.Parse(id));
-            }
-            set
-            {
-                var newId = (value == null ? -1 : value.Id).ToString();
-                var originalSetting = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID");
-                if (originalSetting != null) originalSetting.Value = newId;
-                else DBCONNECTION.Settings.Add(new Setting { Key = "CURRENT_CATALOG_ID", Value = newId });
-                DBCONNECTION.SaveChanges();
-            }
-        }
-        // TODO put all requests that are based on a catalog inside common static class
+                /// <summary>True, if any <see cref="Catalog"/> exists</summary>
+                public static bool AnyCatalogExists { get => DBCONNECTION.Catalogs.Count() > 0; }
+                /// <summary><see cref="Catalog"/>s ordered by title.</summary>
+                public static List<Catalog> Catalogs { get => DBCONNECTION.Catalogs.OrderBy(c => c.Title).ToList() ?? new List<Catalog>(); }
+                /// <summary>
+                /// Retrieves a <see cref="Catalog"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Catalog"/> to retrieve</param>
+                /// <returns><see cref="Catalog"/></returns>
+                public static Catalog GetCatalog(int id) => DBCONNECTION.Catalogs.Find(id);
+                /// <summary>
+                /// Retrieves a <see cref="Medium"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Medium"/> to retrieve</param>
+                /// <returns><see cref="Medium"/></returns>
+                public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
+                /// <summary>
+                /// Retrieves a <see cref="Part"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Part"/> to retrieve</param>
+                /// <returns><see cref="Part"/></returns>
+                public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
+                /// <summary>
+                /// Retrieves a <see cref="Tag"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Tag"/> to retrieve</param>
+                /// <returns><see cref="Tag"/></returns>
+                public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
 
-        public static class Reader
-        {
-            public static bool AnyCatalogExists() => DBCONNECTION.Catalogs.Count() > 0;
-            public static Catalog GetCatalog(int id) => DBCONNECTION.Catalogs.Find(id);
-            public static Medium GetMedium(int id) => DBCONNECTION.Media.Find(id);
-            public static Tag GetTag(int id) => DBCONNECTION.Tags.Find(id);
-            public static List<ValuedTag> GetTagsForMedium(int id)
-            {
-                var result = new List<ValuedTag>();
-                var medium = GetMedium(id);
-                var mediaTags = medium.MT_Relation;
-                foreach (var t in medium.Catalog.Tags)
+                /// <summary>
+                /// Returns values for all <see cref="Tag"/>s of the <see cref="Catalog"/> of the <see cref="Medium"/> ordered by title. This includes the <see cref="Tag"/>s, that have a set value for the <see cref="Medium"/> and all neutral tags too.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Medium"/> to retrieve the <see cref="Tag"/>s for</param>
+                /// <returns>List of <see cref="Tag"/>s of the <see cref="Medium"/></returns>
+                public static List<ValuedTag> GetTagsForMedium(int id)
                 {
-                    var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
-                    result.Add(new ValuedTag
+                    var result = new List<ValuedTag>();
+                    var medium = GetMedium(id);
+                    var mediaTags = medium.MT_Relation;
+                    foreach (var t in medium.Catalog.Tags.OrderBy(t => t.Title))
                     {
-                        Tag = t,
-                        Value = val != null ? val.Value : (bool?)null
-                    });
-                }
-                return result;
-            }
-            /// <summary>
-            /// Catalogs ordered by title.
-            /// </summary>
-            public static List<Catalog> Catalogs { get => DBCONNECTION.Catalogs.OrderBy(c => c.Title).ToList() ?? new List<Catalog>(); }
-            /// <summary>
-            /// Media ordered by title.
-            /// </summary>
-            public static List<Medium> Media { get => CURRENT_CATALOG?.Media.OrderBy(m => m.Title).ToList() ?? new List<Medium>(); }
-            public static int CountOfMedia { get => CURRENT_CATALOG?.Media.Count() ?? 0; }
-            public static Part GetPart(int id) => DBCONNECTION.Parts.Find(id);
-            public static List<ValuedTag> GetTagsForPart(int id)
-            {
-                var result = new List<ValuedTag>();
-                var part = GetPart(id);
-                var partTags = part.PT_Relation;
-                foreach (var t in part.Medium.Catalog.Tags)
-                {
-                    var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
-                    result.Add(new ValuedTag
-                    {
-                        Tag = t,
-                        Value = val != null ? val.Value : (bool?)null
-                    });
-                }
-                return result;
-            }
-            public static List<Part> GetPartsForTag(int id) => DBCONNECTION?.Tags.Find(id).PT_Relation.Where(r => r.Value).Select(r => r.Part).ToList() ?? new List<Part>();
-            public static int CountOfParts { get => CURRENT_CATALOG?.Media.Select(m => m.Parts.Count).Sum() ?? 0; }
-            public static List<Playlist> Playlists { get => CURRENT_CATALOG?.Playlists.ToList() ?? new List<Playlist>(); }
-            public static List<Tag> Tags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
-
-            public static List<SearchResultItem> SearchUsingParameters(SearchParameters parameters)
-            {
-                var result = new List<SearchResultItem>();
-
-                var fittingSearchString = DBCONNECTION.Parts
-                    .Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id)
-                    .Where(p => p.Title.Contains(parameters.SearchString) || p.Medium.Title.Contains(parameters.SearchString) || (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString))));
-
-                var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
-                var negativeTags = parameters.SearchTags.Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList();
-                var fittingTags = parameters.ExactMode
-                    ? fittingSearchString.Where(p => positiveTags.All(t => p.PT_Relation.Any(r => r.TagId == t && r.Value)) && negativeTags.All(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value)))
-                    : fittingSearchString.Where(p => (positiveTags.Count == 0 || !positiveTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value))) && (negativeTags.Count == 0 || !negativeTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && r.Value))));
-
-                var fittingFavourites = parameters.OnlySearchWithinFavourites
-                    ? fittingTags.Where(p => p.Favourite)
-                    : fittingTags;
-
-                if (parameters.SearchResult == SearchResultMode.MediaList)
-                {
-                    foreach (var item in fittingFavourites.Select(p => new SearchResultItem
-                    {
-                        Id = p.Medium.Id,
-                        Text = p.Medium.Title,
-                    }).Distinct().OrderBy(m => m.Text)) result.Add(item);
-                }
-                else
-                {
-                    foreach (var item in fittingFavourites.Select(p => new SearchResultItem
-                    {
-                        Id = p.Id,
-                        Text = p.Title + " (" + p.Medium.Title + ")"
-                    }).OrderBy(p => p.Text)) result.Add(item);
-                }
-
-                return result;
-            }
-
-            private static List<GUI.Controls.Analyze.AnalyzeListElement> MapMediumToAnalyzeListElement(List<Medium> list) => list.Select(m => new GUI.Controls.Analyze.AnalyzeListElement
-            {
-                Id = m.Id,
-                Text = m.Title
-            }).ToList();
-            private static List<GUI.Controls.Analyze.AnalyzeListElement> MapPartToAnalyzeListElement(List<Part> list) => list.Select(p => new GUI.Controls.Analyze.AnalyzeListElement
-            {
-                Id = p.Id,
-                Text = p.Title + " (" + p.Medium.Title + ")"
-            }).ToList();
-            public static List<GUI.Controls.Analyze.AnalyzeListElement> LoadAnalyzeResult(GUI.Controls.Analyze.AnalyzeMode mode)
-            {
-                switch(mode)
-                {
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Parts.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => CURRENT_CATALOG.Media.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumCommonTags:
-                        var allTagIds = Tags.Select(t => t.Id).ToList();
-                        return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m =>
-                            m.Parts.Count > 0 &&
-                                (allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != true)
-                                || allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != false))
-                            ).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Description.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.MT_Relation.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(CURRENT_CATALOG.Media.Where(m => m.Location.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Description.Trim().Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.PT_Relation.Count == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Length == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).Where(p => p.Publication_Year == 0).ToList());
-                    case GUI.Controls.Analyze.AnalyzeMode.PartImage:
-                        var filteredParts = new List<Part>();
-                        DBCONNECTION.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).ToList().ForEach(p =>
+                        var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
+                        result.Add(new ValuedTag
                         {
-                            if (p.Image == null || p.Image.Length == 0) filteredParts.Add(p);
+                            Tag = t,
+                            Value = val != null ? val.Value : (bool?)null
                         });
-                        return MapPartToAnalyzeListElement(filteredParts);
-                    default: return new List<GUI.Controls.Analyze.AnalyzeListElement>();
+                    }
+                    return result;
+                }
+                /// <summary>
+                /// Returns values for all <see cref="Tag"/>s of the <see cref="Catalog"/> of the <see cref="Part"/> ordered by title. This includes the <see cref="Tag"/>s, that have a set value for the <see cref="Part"/> and all neutral tags too.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Part"/> to retrieve the <see cref="Tag"/>s for</param>
+                /// <returns>List of <see cref="Tag"/>s of the <see cref="Part"/></returns>
+                public static List<ValuedTag> GetTagsForPart(int id)
+                {
+                    var result = new List<ValuedTag>();
+                    var part = GetPart(id);
+                    var partTags = part.PT_Relation;
+                    foreach (var t in part.Medium.Catalog.Tags.OrderBy(t => t.Title))
+                    {
+                        var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
+                        result.Add(new ValuedTag
+                        {
+                            Tag = t,
+                            Value = val != null ? val.Value : (bool?)null
+                        });
+                    }
+                    return result;
+                }
+                /// <summary>
+                /// Retrieves all <see cref="Parts"/> that have a positive value for a given <see cref="Tag"/>.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Tag"/> to retrieve the parts for</param>
+                /// <returns>List of <see cref="Part"/>s</returns>
+                public static List<Part> GetPartsForTag(int id) => GetTag(id).PT_Relation.Where(r => r.Value).Select(r => r.Part).ToList() ?? new List<Part>();
+            }
+            /// <summary>Offers writing access to data independent from the currently active <see cref="Catalog"/>.</summary>
+            public static class Writer
+            {
+                /// <summary>
+                /// Deletes a <see cref="Catalog"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Catalog"/> to delete</param>
+                public static void DeleteCatalog(int id)
+                {
+                    DBCONNECTION.Media.RemoveRange(DBCONNECTION.Catalogs.Find(id).Media); // must be deleted explicitly
+                    DBCONNECTION.Catalogs.Remove(DBCONNECTION.Catalogs.Find(id));
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Deletes a <see cref="Medium"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Medium"/> to delete</param>
+                public static void DeleteMedium(int id)
+                {
+                    DBCONNECTION.Media.Remove(DBCONNECTION.Media.Find(id));
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Deletes a <see cref="Part"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Part"/> to delete</param>
+                public static void DeletePart(int id)
+                {
+                    DBCONNECTION.Parts.Remove(DBCONNECTION.Parts.Find(id));
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Deletes a <see cref="Tag"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Tag"/> to delete</param>
+                public static void DeleteTag(int id)
+                {
+                    DBCONNECTION.Tags.Remove(DBCONNECTION.Tags.Find(id));
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Deletes a <see cref="Playlist"/> by its id.
+                /// </summary>
+                /// <param name="id">Id of the <see cref="Playlist"/> to delete</param>
+                public static void DeletePlaylist(int id)
+                {
+                    DBCONNECTION.Playlists.Remove(DBCONNECTION.Playlists.Find(id));
+                    DBCONNECTION.SaveChanges();
+                }
+
+                /// <summary>
+                /// Stores a new <see cref="Catalog"/> to the database.
+                /// </summary>
+                /// <param name="catalog"><see cref="Catalog"/> to store into the database</param>
+                public static void CreateCatalog(Catalog catalog)
+                {
+                    DBCONNECTION.Catalogs.Add(catalog);
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Saves changes to an existing <see cref="Catalog"/>.
+                /// </summary>
+                /// <param name="catalog"><see cref="Catalog"/> to store into the database</param>
+                public static void SaveCatalog(Catalog catalog)
+                {
+                    var original = DBCONNECTION.Catalogs.Find(catalog.Id);
+                    original.Title = catalog.Title;
+                    original.Description = catalog.Description;
+                    original.DeletionConfirmationMedium = catalog.DeletionConfirmationMedium;
+                    original.DeletionConfirmationPart = catalog.DeletionConfirmationPart;
+                    original.DeletionConfirmationPlaylist = catalog.DeletionConfirmationPlaylist;
+                    original.DeletionConfirmationTag = catalog.DeletionConfirmationTag;
+                    original.ShowTitleOfTheDayAsMedium = catalog.ShowTitleOfTheDayAsMedium;
+                    DBCONNECTION.SaveChanges();
+                }
+
+                /// <summary>
+                /// Adds a <see cref="Part"/> to a <see cref="Playlist"/>.
+                /// </summary>
+                /// <param name="playlistId">Id of the <see cref="Playlist"/></param>
+                /// <param name="partId">Id of the <see cref="Part"/></param>
+                public static void AddPartToPlaylist(int playlistId, int partId)
+                {
+                    DBCONNECTION.Playlists.Find(playlistId).Parts.Add(DBCONNECTION.Parts.Find(partId));
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Removes a <see cref="Part"/> from a <see cref="Playlist"/>.
+                /// </summary>
+                /// <param name="playlistId">Id of the <see cref="Playlist"/></param>
+                /// <param name="partId">Id of the <see cref="Part"/></param>
+                public static void RemovePartFromPlaylist(int playlistId, int partId)
+                {
+                    DBCONNECTION.Playlists.Find(playlistId).Parts.Remove(DBCONNECTION.Parts.Find(partId));
+                    DBCONNECTION.SaveChanges();
                 }
             }
-            public static List<Medium> GetDoubledMediaToMediumTitle(string title) => CURRENT_CATALOG.Media.Where(m => m.Title == title).ToList();
-            public static List<int> GetNonCommonTagsOfMedium(int mediumId)
-            {
-                var m = GetMedium(mediumId);
-                return Tags.Where(t =>
-                    (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != true)
-                    || (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != false)
-                ).Select(t => t.Id).ToList();
-            }
-
+            /// <summary>Offers reading and writing access to settings independent from the currently active <see cref="Catalog"/>.</summary>
             public static class Settings
             {
                 private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue) where T : struct
@@ -183,183 +200,6 @@ namespace MediaManager.Globals
                     var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName)?.Value;
                     return val != null ? parser(val) : defaultValue;
                 }
-                public static int ResultListLength { get => GetSettingsValue("RESULT_LIST_LENGTH", int.Parse, 20); }
-                public static bool PlaylistEditorVisible { get => GetSettingsValue("VISIBILITY_PLAYLIST_EDITOR", bool.Parse, true); }
-                public static bool TitleOfTheDayVisible { get => GetSettingsValue("VISIBILITY_TITLE_OF_THE_DAY", bool.Parse, true); }
-                public static bool StatisticsOverviewVisible { get => GetSettingsValue("VISIBILITY_STATISTICS_OVERVIEW", bool.Parse, true); }
-            }
-        }
-        public static class Writer
-        {
-            public static void DeleteCatalog(int id)
-            {
-                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Catalogs.Find(id).Media); // must be deleted explicitly
-                DBCONNECTION.Catalogs.Remove(DBCONNECTION.Catalogs.Find(id));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void DeleteTag(int id)
-            {
-                DBCONNECTION.Tags.Remove(DBCONNECTION.Tags.Find(id));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void DeleteMedium(int id)
-            {
-                DBCONNECTION.Media.Remove(DBCONNECTION.Media.Find(id));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void DeletePart(int id)
-            {
-                DBCONNECTION.Parts.Remove(DBCONNECTION.Parts.Find(id));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void CleanupEmptyMediaAndParts()
-            {
-                DBCONNECTION.Parts.RemoveRange(DBCONNECTION.Parts.Where(p => p.Title.Length == 0));
-                DBCONNECTION.Media.RemoveRange(DBCONNECTION.Media.Where(m => m.Title.Length == 0));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void DeletePlaylist(int id)
-            {
-                DBCONNECTION.Playlists.Remove(DBCONNECTION.Playlists.Find(id));
-                DBCONNECTION.SaveChanges();
-            }
-
-            public static int CreateCatalog(Catalog catalog)
-            {
-                DBCONNECTION.Catalogs.Add(catalog);
-                DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Catalogs.ToList().LastOrDefault()?.Id ?? 0;
-            }
-            public static int CreateTag(Tag tag)
-            {
-                DBCONNECTION.Tags.Add(tag);
-                DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Tags.ToList().LastOrDefault()?.Id ?? 0;
-            }
-            public static int CreateMedium(Medium medium, List<ValuedTag> tags)
-            {
-                CURRENT_CATALOG.Media.Add(medium);
-                DBCONNECTION.SaveChanges();
-                var mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
-                foreach (var t in tags)
-                {
-                    if (!t.Value.HasValue) continue;
-                    DBCONNECTION.MT_Relation.Add(new MT_Relation
-                    {
-                        MediaId = mediumId,
-                        TagId = t.Tag.Id,
-                        Value = t.Value.Value
-                    });
-                }
-                DBCONNECTION.SaveChanges();
-                return mediumId;
-            }
-            public static int CreatePart(Part part, List<ValuedTag> tags)
-            {
-                DBCONNECTION.Parts.Add(part);
-                foreach (var t in tags)
-                {
-                    if (!t.Value.HasValue) continue;
-                    DBCONNECTION.PT_Relation.Add(new PT_Relation
-                    {
-                        PartId = part.Id,
-                        TagId = t.Tag.Id,
-                        Value = t.Value.Value
-                    });
-                }
-                DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
-            }
-
-            public static void SaveCatalog(Catalog catalog)
-            {
-                var original = DBCONNECTION.Catalogs.Find(catalog.Id);
-                original.Title = catalog.Title;
-                original.Description = catalog.Description;
-                original.DeletionConfirmationMedium = catalog.DeletionConfirmationMedium;
-                original.DeletionConfirmationPart = catalog.DeletionConfirmationPart;
-                original.DeletionConfirmationPlaylist = catalog.DeletionConfirmationPlaylist;
-                original.DeletionConfirmationTag = catalog.DeletionConfirmationTag;
-                original.ShowTitleOfTheDayAsMedium = catalog.ShowTitleOfTheDayAsMedium;
-                DBCONNECTION.SaveChanges();
-            }
-            public static void SaveTag(Tag tag)
-            {
-                var original = DBCONNECTION.Tags.Find(tag.Id);
-                original.Title = tag.Title;
-                DBCONNECTION.SaveChanges();
-            }
-            public static void SaveMedium(Medium medium, List<ValuedTag> tags)
-            {
-                var original = DBCONNECTION.Media.Find(medium.Id);
-                original.Title = medium.Title;
-                original.Location = medium.Location;
-                original.Description = medium.Description;
-                DBCONNECTION.MT_Relation.RemoveRange(DBCONNECTION.MT_Relation.Where(r => r.MediaId == medium.Id));
-                foreach (var t in tags)
-                {
-                    if (!t.Value.HasValue) continue;
-                    DBCONNECTION.MT_Relation.Add(new MT_Relation
-                    {
-                        MediaId = medium.Id,
-                        TagId = t.Tag.Id,
-                        Value = t.Value.Value
-                    });
-                }
-                DBCONNECTION.SaveChanges();
-                // overwrite relevant part tags
-                var mediumTags = Reader.GetTagsForMedium(medium.Id).Where(t => t.Value.HasValue).ToList();
-                var mediumTagsIds = mediumTags.Select(t => t.Tag.Id).ToList();
-                Reader.GetMedium(medium.Id).Parts.ToList().ForEach(p =>
-                {
-                    var partTags = Reader.GetTagsForPart(p.Id).Where(t => !mediumTagsIds.Contains(t.Tag.Id)).ToList();
-                    partTags.AddRange(mediumTags);
-                    SavePart(p, partTags);
-                });
-            }
-            public static void SavePart(Part part, List<ValuedTag> tags)
-            {
-                var original = DBCONNECTION.Parts.Find(part.Id);
-                original.Title = part.Title;
-                original.Favourite = part.Favourite;
-                original.Description = part.Description;
-                original.Length = part.Length;
-                original.Publication_Year = part.Publication_Year;
-                DBCONNECTION.PT_Relation.RemoveRange(DBCONNECTION.PT_Relation.Where(r => r.PartId == part.Id));
-                foreach (var t in tags)
-                {
-                    if (!t.Value.HasValue) continue;
-                    DBCONNECTION.PT_Relation.Add(new PT_Relation
-                    {
-                        PartId = part.Id,
-                        TagId = t.Tag.Id,
-                        Value = t.Value.Value
-                    });
-                }
-                DBCONNECTION.SaveChanges();
-            }
-            public static int CreatePlaylist(string title)
-            {
-                DBCONNECTION.Playlists.Add(new Playlist
-                {
-                    CatalogId = CURRENT_CATALOG.Id,
-                    Title = title
-                });
-                DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Playlists.ToList().Last().Id;
-            }
-            public static void AddPartToPlaylist(int playlistId, int partId)
-            {
-                DBCONNECTION.Playlists.Find(playlistId).Parts.Add(DBCONNECTION.Parts.Find(partId));
-                DBCONNECTION.SaveChanges();
-            }
-            public static void RemovePartFromPlaylist(int playlistId, int partId)
-            {
-                DBCONNECTION.Playlists.Find(playlistId).Parts.Remove(DBCONNECTION.Parts.Find(partId));
-                DBCONNECTION.SaveChanges();
-            }
-            public static class Settings
-            {
                 private static void SaveSetting(string settingsName, string value)
                 {
                     var original = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName);
@@ -367,12 +207,349 @@ namespace MediaManager.Globals
                     else DBCONNECTION.Settings.Add(new Setting { Key = settingsName, Value = value });
                     DBCONNECTION.SaveChanges();
                 }
-                public static int ResultListLength { set => SaveSetting("RESULT_LIST_LENGTH", value.ToString()); }
-                public static bool PlaylistEditorVisible { set => SaveSetting("VISIBILITY_PLAYLIST_EDITOR", value.ToString()); }
-                public static bool TitleOfTheDayVisible { set => SaveSetting("VISIBILITY_TITLE_OF_THE_DAY", value.ToString()); }
-                public static bool StatisticsOverviewVisible { set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString()); }
+
+                /// <summary>Length of the pages of any result list.</summary>
+                public static int ResultListLength
+                {
+                    get => GetSettingsValue("RESULT_LIST_LENGTH", int.Parse, 20);
+                    set => SaveSetting("RESULT_LIST_LENGTH", value.ToString());
+                }
+                /// <summary>True, if the playlist editor should be shown.</summary>
+                public static bool PlaylistEditorVisible
+                {
+                    get => GetSettingsValue("VISIBILITY_PLAYLIST_EDITOR", bool.Parse, true);
+                    set => SaveSetting("VISIBILITY_PLAYLIST_EDITOR", value.ToString());
+                }
+                /// <summary>True, if the title of the day should be shown.</summary>
+                public static bool TitleOfTheDayVisible
+                {
+                    get => GetSettingsValue("VISIBILITY_TITLE_OF_THE_DAY", bool.Parse, true);
+                    set => SaveSetting("VISIBILITY_TITLE_OF_THE_DAY", value.ToString());
+                }
+                /// <summary>True, if the statistics overview should be shown.</summary>
+                public static bool StatisticsOverviewVisible
+                {
+                    get => GetSettingsValue("VISIBILITY_STATISTICS_OVERVIEW", bool.Parse, true);
+                    set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString());
+                }
             }
         }
+
+        /// <summary>All methods that are based on the currently active <see cref="Catalog"/>.</summary>
+        public static class CatalogContext
+        {
+            #region Current Catalog
+            /// <summary>The currently active <see cref="Catalog"/>.<br/>Can be cleared by setting the value to <c>null</c>.</summary>
+            private static Catalog CURRENT_CATALOG
+            {
+                get
+                {
+                    var id = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID")?.Value;
+                    if (id == null || int.Parse(id) == -1) return null;
+                    return DBCONNECTION.Catalogs.Find(int.Parse(id));
+                }
+                set
+                {
+                    var newId = (value == null ? -1 : value.Id).ToString();
+                    var originalSetting = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == "CURRENT_CATALOG_ID");
+                    if (originalSetting != null) originalSetting.Value = newId;
+                    else DBCONNECTION.Settings.Add(new Setting { Key = "CURRENT_CATALOG_ID", Value = newId });
+                    DBCONNECTION.SaveChanges();
+                }
+            }
+            /// <summary>Id of the currently active <see cref="Catalog"/>.</summary>
+            public static int? CurrentCatalogId
+            {
+                get => CURRENT_CATALOG?.Id;
+            }
+            /// <summary>Sets the currently active <see cref="Catalog"/>.</summary>
+            /// <param name="catalog"></param>
+            public static void SetCurrentCatalog(Catalog catalog) => CURRENT_CATALOG = catalog;
+            #endregion
+            /// <summary>Offers reading access to data within the currently active <see cref="Catalog"/>.</summary>
+            public static class Reader
+            {
+                public static class Lists
+                {
+                    /// <summary>List of all <see cref="Medium"/>.</summary>
+                    public static List<Medium> UnorderedMedia { get => CURRENT_CATALOG?.Media.ToList() ?? new List<Medium>(); }
+                    /// <summary>List of all <see cref="Medium"/> ordered by title.</summary>
+                    public static List<Medium> Media { get => UnorderedMedia.OrderBy(m => m.Title).ToList(); }
+                    /// <summary>List of all <see cref="Medium"/> containing at least one <see cref="Part"/>.</summary>
+                    public static List<Medium> NonEmptyMedia { get => CURRENT_CATALOG?.Media.Where(m => m.Parts.Count > 0).ToList() ?? new List<Medium>(); }
+                    /// <summary>List of all <see cref="Part"/>s.</summary>
+                    public static List<Part> UnorderedParts { get => DBCONNECTION?.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).ToList() ?? new List<Part>(); }
+                    /// <summary>List of all <see cref="Part"/>s ordered by title.</summary>
+                    public static List<Part> Parts { get => UnorderedParts.OrderBy(p => p.Title).ToList(); }
+                    /// <summary>List of all <see cref="Tag"/>s.</summary>
+                    public static List<Tag> UnorderedTags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
+                    /// <summary>List of all <see cref="Tag"/>s ordered by title.</summary>
+                    public static List<Tag> Tags { get => UnorderedTags.OrderBy(p => p.Title).ToList(); }
+                    /// <summary>List of all <see cref="Playlist"/>s ordered by title.</summary>
+                    public static List<Playlist> Playlists { get => CURRENT_CATALOG?.Playlists.OrderBy(p => p.Title).ToList() ?? new List<Playlist>(); }
+                }
+                public static class Statistics
+                {
+                    public static int CountOfMedia { get => CURRENT_CATALOG?.Media.Count() ?? 0; }
+                    public static int CountOfParts { get => CURRENT_CATALOG?.Media.Select(m => m.Parts.Count).Sum() ?? 0; }
+                }
+                /// <summary>
+                /// Searches through all parts of the currently active <see cref="Catalog"/> using the given parameters and returns the results either as a list of parts or as a list of media.
+                /// </summary>
+                /// <param name="parameters">Search parameters</param>
+                /// <returns>Search result list</returns>
+                public static List<SearchResultItem> SearchUsingParameters(SearchParameters parameters)
+                {
+                    var result = new List<SearchResultItem>();
+
+                    var fittingSearchString = Lists.Parts.Where(p =>
+                        p.Title.Contains(parameters.SearchString) ||
+                        p.Medium.Title.Contains(parameters.SearchString) ||
+                        (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
+                        );
+
+                    var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
+                    var negativeTags = parameters.SearchTags.Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList();
+                    var fittingTags = parameters.ExactMode
+                        ? fittingSearchString.Where(p => positiveTags.All(t => p.PT_Relation.Any(r => r.TagId == t && r.Value)) && negativeTags.All(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value)))
+                        : fittingSearchString.Where(p => (positiveTags.Count == 0 || !positiveTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && !r.Value))) && (negativeTags.Count == 0 || !negativeTags.Any(t => p.PT_Relation.Any(r => r.TagId == t && r.Value))));
+
+                    var fittingFavourites = parameters.OnlySearchWithinFavourites
+                        ? fittingTags.Where(p => p.Favourite)
+                        : fittingTags;
+
+                    if (parameters.SearchResult == SearchResultMode.MediaList)
+                    {
+                        foreach (var item in fittingFavourites.Select(p => new SearchResultItem
+                        {
+                            Id = p.Medium.Id,
+                            Text = p.Medium.Title,
+                        }).Distinct().OrderBy(m => m.Text)) result.Add(item);
+                    }
+                    else
+                    {
+                        foreach (var item in fittingFavourites.Select(p => new SearchResultItem
+                        {
+                            Id = p.Id,
+                            Text = p.Title + " (" + p.Medium.Title + ")"
+                        }).OrderBy(p => p.Text)) result.Add(item);
+                    }
+
+                    return result;
+                }
+                public static class Analysis
+                {
+                    private static List<GUI.Controls.Analyze.AnalyzeListElement> MapMediumToAnalyzeListElement(List<Medium> list) => list.Select(m => new GUI.Controls.Analyze.AnalyzeListElement
+                    {
+                        Id = m.Id,
+                        Text = m.Title
+                    }).ToList();
+                    private static List<GUI.Controls.Analyze.AnalyzeListElement> MapPartToAnalyzeListElement(List<Part> list) => list.Select(p => new GUI.Controls.Analyze.AnalyzeListElement
+                    {
+                        Id = p.Id,
+                        Text = p.Title + " (" + p.Medium.Title + ")"
+                    }).ToList();
+                    /// <summary>
+                    /// Generates the result list for a specific analysis.
+                    /// </summary>
+                    /// <param name="mode">Analysis to perform</param>
+                    /// <returns>Result list for the analysis</returns>
+                    public static List<GUI.Controls.Analyze.AnalyzeListElement> LoadAnalyzeResult(GUI.Controls.Analyze.AnalyzeMode mode)
+                    {
+                        switch (mode)
+                        {
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumEmpty: return MapMediumToAnalyzeListElement(Lists.Media.Where(m => m.Parts.Count == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumDoubled: return MapMediumToAnalyzeListElement(Lists.Media.Where(m => Lists.UnorderedMedia.Where(mm => mm.Title == m.Title).Count() > 1).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumCommonTags:
+                                var allTagIds = Lists.UnorderedTags.Select(t => t.Id).ToList();
+                                return MapMediumToAnalyzeListElement(Lists.Media.Where(m =>
+                                    m.Parts.Count > 0 &&
+                                        (allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != true)
+                                        || allTagIds.Any(t => m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t)?.Value != false))
+                                    ).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumDescription: return MapMediumToAnalyzeListElement(Lists.Media.Where(m => m.Description.Trim().Length == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumTags: return MapMediumToAnalyzeListElement(Lists.Media.Where(m => m.MT_Relation.Count == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.MediumLocation: return MapMediumToAnalyzeListElement(Lists.Media.Where(m => m.Location.Trim().Length == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.PartDescription: return MapPartToAnalyzeListElement(Lists.Parts.Where(p => p.Description.Trim().Length == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.PartTags: return MapPartToAnalyzeListElement(Lists.Parts.Where(p => p.PT_Relation.Count == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.PartLength: return MapPartToAnalyzeListElement(Lists.Parts.Where(p => p.Length == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.PartPublication: return MapPartToAnalyzeListElement(Lists.Parts.Where(p => p.Publication_Year == 0).ToList());
+                            case GUI.Controls.Analyze.AnalyzeMode.PartImage:
+                                var filteredParts = new List<Part>();
+                                Lists.Parts.ToList().ForEach(p => { if (p.Image == null || p.Image.Length == 0) filteredParts.Add(p); });
+                                return MapPartToAnalyzeListElement(filteredParts);
+                            default: return new List<GUI.Controls.Analyze.AnalyzeListElement>();
+                        }
+                    }
+                    /// <summary>
+                    /// Retrieves all <see cref="Medium"/> with a given title.
+                    /// </summary>
+                    /// <param name="title">Title to search for</param>
+                    /// <returns>List of <see cref="Medium"/></returns>
+                    public static List<Medium> GetDoubledMediaToMediumTitle(string title) => Lists.Media.Where(m => m.Title == title).ToList();
+                    /// <summary>
+                    /// Checks the <see cref="Tag"/>s of all <see cref="Part"/>s of a <see cref="Medium"/> and returns the <see cref="Tags"/>, that should be commonly set.
+                    /// </summary>
+                    /// <param name="mediumId">Id of the <see cref="Medium"/> to analyze</param>
+                    /// <returns>List of <see cref="Tag"/> ids</returns>
+                    public static List<int> GetNonCommonTagsOfMedium(int mediumId)
+                    {
+                        var m = GlobalContext.Reader.GetMedium(mediumId);
+                        return Lists.Tags.Where(t =>
+                            (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == true) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != true)
+                            || (m.Parts.All(p => p.PT_Relation.FirstOrDefault(pt => pt.TagId == t.Id)?.Value == false) && m.MT_Relation.FirstOrDefault(mt => mt.TagId == t.Id)?.Value != false)
+                        ).Select(t => t.Id).ToList();
+                    }
+                }
+            }
+            /// <summary>Offers writing access to data within the currently active <see cref="Catalog"/>.</summary>
+            public static class Writer
+            {
+                /// <summary>
+                /// Creates a new <see cref="Medium"/>.
+                /// </summary>
+                /// <param name="medium"><see cref="Medium"/> to create</param>
+                /// <param name="tags"><see cref="Tag"/>s of the <see cref="Medium"/></param>
+                /// <returns>Id of the newly generated <see cref="Medium"/></returns>
+                public static int CreateMedium(Medium medium, List<ValuedTag> tags)
+                {
+                    CURRENT_CATALOG.Media.Add(medium);
+                    DBCONNECTION.SaveChanges();
+                    var mediumId = Reader.Lists.Media.LastOrDefault()?.Id ?? 0;
+                    foreach (var t in tags)
+                    {
+                        if (!t.Value.HasValue) continue;
+                        DBCONNECTION.MT_Relation.Add(new MT_Relation
+                        {
+                            MediaId = mediumId,
+                            TagId = t.Tag.Id,
+                            Value = t.Value.Value
+                        });
+                    }
+                    DBCONNECTION.SaveChanges();
+                    return mediumId;
+                }
+                /// <summary>
+                /// Creates a new <see cref="Part"/>.
+                /// </summary>
+                /// <param name="part"><see cref="Part"/> to create</param>
+                /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
+                public static void CreatePart(Part part, List<ValuedTag> tags)
+                {
+                    DBCONNECTION.Parts.Add(part);
+                    foreach (var t in tags)
+                    {
+                        if (!t.Value.HasValue) continue;
+                        DBCONNECTION.PT_Relation.Add(new PT_Relation
+                        {
+                            PartId = part.Id,
+                            TagId = t.Tag.Id,
+                            Value = t.Value.Value
+                        });
+                    }
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Creates a new <see cref="Tag"/>.
+                /// </summary>
+                /// <param name="title">Title of the <see cref="Tag"/> to create</param>
+                public static void CreateTag(string title)
+                {
+                    CURRENT_CATALOG.Tags.Add(new Tag
+                    {
+                        // catalog id must not be set here, because it is set implicitly by the CURRENT_CATALOG
+                        Title = title
+                    });
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Creates a new <see cref="Playlist"/>.
+                /// </summary>
+                /// <param name="title">Title of the <see cref="Playlist"/> to create</param>
+                /// <returns>Id of the newly generated <see cref="Playlist"/></returns>
+                public static int CreatePlaylist(string title)
+                {
+                    CURRENT_CATALOG.Playlists.Add(new Playlist
+                    {
+                        // catalog id must not be set here, because it is set implicitly by the CURRENT_CATALOG
+                        Title = title
+                    });
+                    DBCONNECTION.SaveChanges();
+                    return Reader.Lists.Playlists.LastOrDefault()?.Id ?? 0;
+                }
+
+                /// <summary>
+                /// Saves changes to an existing <see cref="Medium"/>.
+                /// </summary>
+                /// <param name="medium"><see cref="Medium"/> to save</param>
+                /// <param name="tags"><see cref="Tag"/>s of the <see cref="Medium"/></param>
+                public static void SaveMedium(Medium medium, List<ValuedTag> tags)
+                {
+                    var original = GlobalContext.Reader.GetMedium(medium.Id);
+                    original.Title = medium.Title;
+                    original.Location = medium.Location;
+                    original.Description = medium.Description;
+                    DBCONNECTION.MT_Relation.RemoveRange(DBCONNECTION.MT_Relation.Where(r => r.MediaId == medium.Id));
+                    foreach (var t in tags)
+                    {
+                        if (!t.Value.HasValue) continue;
+                        DBCONNECTION.MT_Relation.Add(new MT_Relation
+                        {
+                            MediaId = medium.Id,
+                            TagId = t.Tag.Id,
+                            Value = t.Value.Value
+                        });
+                    }
+                    DBCONNECTION.SaveChanges();
+                    // overwrite relevant part tags
+                    var mediumTags = GlobalContext.Reader.GetTagsForMedium(medium.Id).Where(t => t.Value.HasValue).ToList();
+                    var mediumTagsIds = mediumTags.Select(t => t.Tag.Id).ToList();
+                    GlobalContext.Reader.GetMedium(medium.Id).Parts.ToList().ForEach(p =>
+                    {
+                        var partTags = GlobalContext.Reader.GetTagsForPart(p.Id).Where(t => !mediumTagsIds.Contains(t.Tag.Id)).ToList();
+                        partTags.AddRange(mediumTags);
+                        SavePart(p, partTags);
+                    });
+                }
+                /// <summary>
+                /// Saves changes to an existing <see cref="Part"/>.
+                /// </summary>
+                /// <param name="part"><see cref="Part"/> to save</param>
+                /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
+                public static void SavePart(Part part, List<ValuedTag> tags)
+                {
+                    var original = GlobalContext.Reader.GetPart(part.Id);
+                    original.Title = part.Title;
+                    original.Favourite = part.Favourite;
+                    original.Description = part.Description;
+                    original.Length = part.Length;
+                    original.Publication_Year = part.Publication_Year;
+                    DBCONNECTION.PT_Relation.RemoveRange(DBCONNECTION.PT_Relation.Where(r => r.PartId == part.Id));
+                    foreach (var t in tags)
+                    {
+                        if (!t.Value.HasValue) continue;
+                        DBCONNECTION.PT_Relation.Add(new PT_Relation
+                        {
+                            PartId = part.Id,
+                            TagId = t.Tag.Id,
+                            Value = t.Value.Value
+                        });
+                    }
+                    DBCONNECTION.SaveChanges();
+                }
+                /// <summary>
+                /// Saves changes to an existing <see cref="Tag"/>.
+                /// </summary>
+                /// <param name="tag"><see cref="Tag"/> to save</param>
+                public static void SaveTag(Tag tag)
+                {
+                    var original = GlobalContext.Reader.GetTag(tag.Id);
+                    original.Title = tag.Title;
+                    DBCONNECTION.SaveChanges();
+                }
+            }
+        }
+
         private static string CurrentExportVersion = "1.0.0";
         private static string MinimumImportVersion = "1.0.0";
         public class CatalogExportThread : ExportThread
@@ -426,12 +603,12 @@ namespace MediaManager.Globals
                         columns: new List<string> { "Title", "Description", "Location", "PositiveTags", "NegativeTags" },
                         additionalComputedProperties: new Dictionary<string, Func<Medium, object>>
                         {
-                        { "PositiveTags", (i) => "[" + string.Join(",", Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
-                        { "NegativeTags", (i) => "[" + string.Join(",", Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
+                        { "PositiveTags", (i) => "[" + string.Join(",", GlobalContext.Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
+                        { "NegativeTags", (i) => "[" + string.Join(",", GlobalContext.Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue && !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]" },
                         },
                         computeChildren: (i) =>
                         {
-                            var mediaTags = Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue).Select(t => t.Tag.Id);
+                            var mediaTags = GlobalContext.Reader.GetTagsForMedium(i.Id).Where(t => t.Value.HasValue).Select(t => t.Tag.Id);
                             var list = new List<XElement>();
                             foreach (var p in i.Parts)
                             {
@@ -443,7 +620,7 @@ namespace MediaManager.Globals
                                 xmlPart.Add(new XAttribute("Length", p.Length));
                                 xmlPart.Add(new XAttribute("Publication_Year", p.Publication_Year));
                                 if (p.Image != null) xmlPart.Add(new XAttribute("Image", Convert.ToBase64String(p.Image)));
-                                var relevantPartTags = Reader.GetTagsForPart(p.Id).Where(t => !mediaTags.Contains(t.Tag.Id) && t.Value.HasValue);
+                                var relevantPartTags = GlobalContext.Reader.GetTagsForPart(p.Id).Where(t => !mediaTags.Contains(t.Tag.Id) && t.Value.HasValue);
                                 xmlPart.Add(new XAttribute("PositiveTags", "[" + string.Join(",", relevantPartTags.Where(t => t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
                                 xmlPart.Add(new XAttribute("NegativeTags", "[" + string.Join(",", relevantPartTags.Where(t => !t.Value.Value).Select(t => t.Tag.Id).ToList()) + "]"));
                                 list.Add(xmlPart);
@@ -506,7 +683,7 @@ namespace MediaManager.Globals
             }
             private List<ValuedTag> tagIdListToTagList(List<int> ids, bool tagValue) => ids.Select(t => new ValuedTag
             {
-                Tag = Reader.GetTag(t),
+                Tag = GlobalContext.Reader.GetTag(t),
                 Value = tagValue
             }).ToList();
             private void step()
@@ -547,7 +724,7 @@ namespace MediaManager.Globals
                 catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.WrongFormat"), null); }
                 try
                 {
-                    catalogId = Writer.CreateCatalog(importedCatalog);
+                    catalogId = CreateCatalog(importedCatalog);
                 }
                 catch (Exception) { throw ParseDBConstraintException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.Writing"), null); }
                 #endregion
@@ -579,7 +756,7 @@ namespace MediaManager.Globals
                     catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.MissingTitle"), xmlId), null); }
                     try
                     {
-                        tagIdMappings.Add(xmlId, Writer.CreateTag(new Tag
+                        tagIdMappings.Add(xmlId, CreateTag(new Tag
                         {
                             CatalogId = catalogId,
                             Title = xmlTitle
@@ -678,7 +855,7 @@ namespace MediaManager.Globals
                         catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), null); }
                         try
                         {
-                            partIdMappings.Add(xmlPartId, Writer.CreatePart(new Part
+                            partIdMappings.Add(xmlPartId, CreatePart(new Part
                             {
                                 MediumId = mediumId,
                                 Title = xmlPartTitle,
@@ -719,8 +896,8 @@ namespace MediaManager.Globals
                             Title = xmlTitle
                         });
                         DBCONNECTION.SaveChanges();
-                        var playlistId = DBCONNECTION.Playlists.ToList().Last().Id;
-                        xmlPlaylistParts.ForEach(p => Writer.AddPartToPlaylist(playlistId, p));
+                        var playlistId = DBCONNECTION.Playlists.ToList().LastOrDefault()?.Id ?? 0;
+                        xmlPlaylistParts.ForEach(p => GlobalContext.Writer.AddPartToPlaylist(playlistId, p));
                     }
                     catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
                 }
@@ -728,6 +905,35 @@ namespace MediaManager.Globals
 
                 step();
                 CallFinished();
+            }
+
+            private int CreateCatalog(Catalog catalog)
+            {
+                DBCONNECTION.Catalogs.Add(catalog);
+                DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Catalogs.ToList().LastOrDefault()?.Id ?? 0;
+            }
+            private int CreateTag(Tag tag)
+            {
+                DBCONNECTION.Tags.Add(tag);
+                DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Tags.ToList().LastOrDefault()?.Id ?? 0;
+            }
+            private int CreatePart(Part part, List<ValuedTag> tags)
+            {
+                DBCONNECTION.Parts.Add(part);
+                foreach (var t in tags)
+                {
+                    if (!t.Value.HasValue) continue;
+                    DBCONNECTION.PT_Relation.Add(new PT_Relation
+                    {
+                        PartId = part.Id,
+                        TagId = t.Tag.Id,
+                        Value = t.Value.Value
+                    });
+                }
+                DBCONNECTION.SaveChanges();
+                return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
             }
         }
     }

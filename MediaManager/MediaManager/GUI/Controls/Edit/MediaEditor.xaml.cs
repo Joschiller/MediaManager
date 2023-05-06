@@ -128,7 +128,7 @@ namespace MediaManager.GUI.Controls.Edit
         }
         private void deletePart_Click(object sender, RoutedEventArgs e)
         {
-            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationPart;
+            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationPart;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.PartDeletion"));

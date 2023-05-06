@@ -17,7 +17,7 @@ namespace MediaManager.GUI.Dialogs
         {
             EditedCatalogId = id;
             EditedCatalog = EditedCatalogId.HasValue
-                ? Reader.GetCatalog(EditedCatalogId.Value)
+                ? GlobalContext.Reader.GetCatalog(EditedCatalogId.Value)
                 : new Catalog
                 {
                     Title = "",
@@ -59,9 +59,9 @@ namespace MediaManager.GUI.Dialogs
         private void newTitle_TextChanged(object sender, TextChangedEventArgs e) => submit.IsEnabled = newTitle.Text.Length > 0;
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            if (EditedCatalogId != null) Writer.SaveCatalog(EditedCatalog);
-            else Writer.CreateCatalog(EditedCatalog);
-            if (Reader.Catalogs.Count == 1) CURRENT_CATALOG = Reader.Catalogs[0];
+            if (EditedCatalogId != null) GlobalContext.Writer.SaveCatalog(EditedCatalog);
+            else GlobalContext.Writer.CreateCatalog(EditedCatalog);
+            if (GlobalContext.Reader.Catalogs.Count == 1) CatalogContext.SetCurrentCatalog(GlobalContext.Reader.Catalogs[0]);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

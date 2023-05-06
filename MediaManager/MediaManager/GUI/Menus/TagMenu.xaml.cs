@@ -53,7 +53,7 @@ namespace MediaManager.GUI.Menus
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             if (SelectedTag == null) return;
-            var performDeletion = !CURRENT_CATALOG.DeletionConfirmationTag;
+            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationTag;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
@@ -61,7 +61,7 @@ namespace MediaManager.GUI.Menus
             }
             if (performDeletion)
             {
-                Writer.DeleteTag(SelectedTag.Id);
+                GlobalContext.Writer.DeleteTag(SelectedTag.Id);
                 LoadTags();
             }
         }
@@ -69,7 +69,7 @@ namespace MediaManager.GUI.Menus
         private void LoadTags()
         {
             Tags.Clear();
-            Reader.Tags.ForEach(Tags.Add);
+            CatalogContext.Reader.Lists.Tags.ForEach(Tags.Add);
         }
         private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

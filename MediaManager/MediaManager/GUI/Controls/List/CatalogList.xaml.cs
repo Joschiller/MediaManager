@@ -46,11 +46,11 @@ namespace MediaManager.GUI.Controls.List
         public void LoadCatalogs()
         {
             Catalogs.Clear();
-            var currentCatalog = CURRENT_CATALOG;
-            Reader.Catalogs.ForEach(c => Catalogs.Add(new CatalogListElement
+            var currentCatalogId = CatalogContext.CurrentCatalogId;
+            GlobalContext.Reader.Catalogs.ForEach(c => Catalogs.Add(new CatalogListElement
             {
                 Catalog = c,
-                IsActiveMarkVisible = c.Id == currentCatalog?.Id ? Visibility.Visible : Visibility.Collapsed
+                IsActiveMarkVisible = currentCatalogId.HasValue && c.Id == currentCatalogId.Value ? Visibility.Visible : Visibility.Collapsed
             }));
         }
         #endregion

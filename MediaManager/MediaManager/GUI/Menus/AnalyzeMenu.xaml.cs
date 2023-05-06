@@ -16,7 +16,7 @@ namespace MediaManager.GUI.Menus
     {
         #region Setup
         private List<AnalyzeListElement> allItems;
-        private int itemsPerPage = Reader.Settings.ResultListLength;
+        private int itemsPerPage = GlobalContext.Settings.ResultListLength;
         public AnalyzeMenu()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace MediaManager.GUI.Menus
         #endregion
         private void mode_ModeChanged(Controls.Analyze.AnalyzeMode mode)
         {
-            allItems = Reader.LoadAnalyzeResult(mode);
+            allItems = CatalogContext.Reader.Analysis.LoadAnalyzeResult(mode);
             pager.CurrentPage = 1;
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
         }
@@ -71,7 +71,7 @@ namespace MediaManager.GUI.Menus
                 case AnalyzeMode.PartLength:
                 case AnalyzeMode.PartPublication:
                 case AnalyzeMode.PartImage:
-                    OpenWindow(this, new EditMenu(Reader.GetPart(element.Id).MediumId, element.Id, true), () =>
+                    OpenWindow(this, new EditMenu(GlobalContext.Reader.GetPart(element.Id).MediumId, element.Id, true), () =>
                     {
                         Show();
                         reload();

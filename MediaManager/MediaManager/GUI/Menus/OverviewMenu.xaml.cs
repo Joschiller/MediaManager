@@ -18,7 +18,7 @@ namespace MediaManager.GUI.Menus
             Globals.Init.Initialize();
             InitializeComponent();
             RegisterAtLanguageProvider();
-            if (!Reader.AnyCatalogExists()) OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
+            if (!GlobalContext.Reader.AnyCatalogExists) OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
             else Reload();
         }
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
@@ -34,7 +34,7 @@ namespace MediaManager.GUI.Menus
 
         private void CloseIfNoCatalogExists()
         {
-            if (!Reader.AnyCatalogExists())
+            if (!GlobalContext.Reader.AnyCatalogExists)
             {
                 ShowDefaultDialog(LanguageProvider.getString("Menus.Overview.CloseHint"));
                 Close();
@@ -48,7 +48,7 @@ namespace MediaManager.GUI.Menus
         }
         private void Reload()
         {
-            catalogTitle.Text = CURRENT_CATALOG.Title;
+            catalogTitle.Text = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).Title;
             multiUseTabs.ReloadGUI();
             searchPanel.ReloadTags();
             searchPanel.ReloadResultList();

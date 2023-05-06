@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
-using static MediaManager.Globals.DataConnector.Reader;
 
 namespace MediaManager.GUI.Controls.Search
 {
@@ -24,7 +23,7 @@ namespace MediaManager.GUI.Controls.Search
 
         #region Bindings
         public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
-        public int ItemsPerPage { get; set; } = Reader.Settings.ResultListLength;
+        public int ItemsPerPage { get; set; } = GlobalContext.Settings.ResultListLength;
         #endregion
 
         #region Setup
@@ -46,7 +45,7 @@ namespace MediaManager.GUI.Controls.Search
         public void ReloadTags() => input.reloadTagList();
         public void ReloadResultList()
         {
-            ItemsPerPage = Reader.Settings.ResultListLength;
+            ItemsPerPage = GlobalContext.Settings.ResultListLength;
             input_SearchParametersChanged(CurrentSearchParameters);
         }
         #endregion
@@ -55,7 +54,7 @@ namespace MediaManager.GUI.Controls.Search
         private void input_SearchParametersChanged(SearchParameters parameters)
         {
             CurrentSearchParameters = parameters;
-            CompleteResultList = SearchUsingParameters(parameters);
+            CompleteResultList = CatalogContext.Reader.SearchUsingParameters(parameters);
             pager.CurrentPage = 1;
             pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
             LoadTexts(null);
@@ -72,7 +71,7 @@ namespace MediaManager.GUI.Controls.Search
             if (item != null)
             {
                 if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
-                else MediumSelected?.Invoke(GetPart(item.Id).MediumId, item.Id);
+                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
             }
         }
         private int? rightClickPivotId = null;

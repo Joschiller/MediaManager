@@ -53,7 +53,7 @@ namespace MediaManager.GUI.Controls.Search
         {
             var tags = new List<ValuedTag>();
             var currentFilter = tagList.GetTagList();
-            Globals.DataConnector.Reader.Tags.ForEach(t => tags.Add(new ValuedTag
+            Globals.DataConnector.CatalogContext.Reader.Lists.Tags.ForEach(t => tags.Add(new ValuedTag
             {
                 Tag = t,
                 Value = currentFilter.FirstOrDefault(f => f.Tag.Id == t.Id)?.Value ?? null
@@ -85,7 +85,7 @@ namespace MediaManager.GUI.Controls.Search
             CurrentSearchResultMode = SearchResultMode.MediaList;
             resultListMode.Content = LanguageProvider.getString("Controls.Search.ShowParts");
             var tags = new List<ValuedTag>();
-            Globals.DataConnector.Reader.Tags.ForEach(t => tags.Add(new ValuedTag
+            Globals.DataConnector.CatalogContext.Reader.Lists.Tags.ForEach(t => tags.Add(new ValuedTag
             {
                 Tag = t,
                 Value = null

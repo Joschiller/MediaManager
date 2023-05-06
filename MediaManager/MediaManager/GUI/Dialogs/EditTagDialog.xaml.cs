@@ -15,7 +15,7 @@ namespace MediaManager.GUI.Dialogs
         public EditTagDialog(int? id)
         {
             EditedTagId = id;
-            EditedTag = EditedTagId.HasValue ? Reader.GetTag(EditedTagId.Value) : new Tag { CatalogId = CURRENT_CATALOG.Id, Title = "" };
+            EditedTag = EditedTagId.HasValue ? GlobalContext.Reader.GetTag(EditedTagId.Value) : new Tag { CatalogId = CatalogContext.CurrentCatalogId.Value, Title = "" };
 
             InitializeComponent();
             LoadTexts(null);
@@ -41,8 +41,8 @@ namespace MediaManager.GUI.Dialogs
         private void newTag_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) => submit.IsEnabled = newTag.Text.Length > 0;
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            if (EditedTagId != null) Writer.SaveTag(EditedTag);
-            else Writer.CreateTag(EditedTag);
+            if (EditedTagId != null) CatalogContext.Writer.SaveTag(EditedTag);
+            else CatalogContext.Writer.CreateTag(EditedTag.Title);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

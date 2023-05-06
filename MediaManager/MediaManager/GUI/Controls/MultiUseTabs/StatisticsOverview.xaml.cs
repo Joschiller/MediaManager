@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static MediaManager.Globals.DataConnector;
-using static MediaManager.Globals.DataConnector.Reader;
 
 namespace MediaManager.GUI.Controls.MultiUseTabs
 {
@@ -28,11 +27,11 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
         }
         ~StatisticsOverview() => LanguageProvider.Unregister(this);
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
-        public bool GetIsVisible() => Reader.Settings.StatisticsOverviewVisible;
+        public bool GetIsVisible() => GlobalContext.Settings.StatisticsOverviewVisible;
         public void ReloadGUI()
         {
-            valueMediaCount.Text = CountOfMedia.ToString();
-            valuePartCount.Text = CountOfParts.ToString();
+            valueMediaCount.Text = CatalogContext.Reader.Statistics.CountOfMedia.ToString();
+            valuePartCount.Text = CatalogContext.Reader.Statistics.CountOfParts.ToString();
         }
         #endregion
     }
