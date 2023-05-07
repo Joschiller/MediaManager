@@ -32,17 +32,20 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <DockPanel  Grid.Column="0">
+            <DockPanel Grid.Column="0" Margin="{StaticResource defaultMarginSmall}">
                 <TextBlock x:Name="catalogTitle" DockPanel.Dock="Top" TextAlignment="Center" FontSize="{StaticResource fontSize_windowTitle}"/>
+                <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
                 <multiusetabs:MultiUseTabs x:Name="multiUseTabs">
                     <multiusetabs:PlaylistEditor PartSelected="PlaylistEditor_PartSelected"/>
                     <multiusetabs:TitleOfTheDay/>
                     <multiusetabs:StatisticsOverview/>
                 </multiusetabs:MultiUseTabs>
             </DockPanel>
-            <search:SearchPanel x:Name="searchPanel" Grid.Column="1" MediumSelected="searchPanel_MediumSelected" PlaylistAdditionRequested="searchPanel_PlaylistAdditionRequested"/>
+            <Border Grid.Column="1" Style="{StaticResource defaultBorder}"/>
+            <search:SearchPanel x:Name="searchPanel" Grid.Column="2" MediumSelected="searchPanel_MediumSelected" PlaylistAdditionRequested="searchPanel_PlaylistAdditionRequested" Margin="{StaticResource defaultMarginSmall}"/>
         </Grid>
     </DockPanel>
 </Window>

@@ -28,6 +28,7 @@ namespace MediaManager.GUI.Controls.List
             DataContext = this;
             pager.CurrentPage = 1;
             pager.TotalPages = CatalogContext.Reader.Statistics.CountOfMedia / ItemsPerPage + (CatalogContext.Reader.Statistics.CountOfMedia % ItemsPerPage == 0 ? 0 : 1);
+            pager.setItemCount(CatalogContext.Reader.Statistics.CountOfMedia);
             LoadTagsOfSelectedMedium();
         }
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);

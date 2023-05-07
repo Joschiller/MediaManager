@@ -14,22 +14,19 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False">
+        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False" Margin="{StaticResource defaultMarginSmall}">
             <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
-            <components:Pager x:Name="pager" PageChanged="pager_PageChanged" DockPanel.Dock="Left"/>
+            <components:Pager x:Name="pager" PageChanged="pager_PageChanged" DockPanel.Dock="Left" TextPlacement="Top"/>
         </DockPanel>
-        <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged">
+        <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tag="{Binding Id}" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <DockPanel Grid.Row="0" Grid.Column="1">
-            <Border DockPanel.Dock="Bottom" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="0.5" Margin="2"/>
-            <atoms:TagCheckbox x:Name="mediumTag" TagValueChanged="mediumTag_TagValueChanged"/>
-        </DockPanel>
-        <ListBox x:Name="partList" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Parts}">
+        <atoms:TagCheckbox x:Name="mediumTag" Grid.Row="0" Grid.Column="1" TagValueChanged="mediumTag_TagValueChanged" Margin="{StaticResource defaultMarginSmall}"/>
+        <ListBox x:Name="partList" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Parts}" Margin="{StaticResource defaultMarginSmall}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Tag="{Binding Part.Id}" MouseUp="Grid_MouseUp" Height="Auto">

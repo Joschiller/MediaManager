@@ -9,51 +9,53 @@
         <Grid DockPanel.Dock="Bottom">
             <atoms:ImageButton x:Name="editButton" Size="{StaticResource imageButtonSize}" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
         </Grid>
-        <Grid>
-            <Grid x:Name="doubled" Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox x:Name="mediumSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediumSelection_SelectionChanged" Margin="16,0,0,0">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="#"/>
-                                <TextBlock Text="{Binding Id}"/>
-                                <TextBlock Text=": &quot;"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid x:Name="doubled" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0"/>
+                    <ComboBox x:Name="mediumSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediumSelection_SelectionChanged" Margin="16,0,0,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="#"/>
+                                    <TextBlock Text="{Binding Id}"/>
+                                    <TextBlock Text=": &quot;"/>
+                                    <TextBlock Text="{Binding Title}"/>
+                                    <TextBlock Text="&quot;"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ListView x:Name="mediaPartListDoubled" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,16,0,0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
                                 <TextBlock Text="{Binding Title}"/>
-                                <TextBlock Text="&quot;"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ListView x:Name="mediaPartListDoubled" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,16,0,0">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Title}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid x:Name="tagHighlight" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="labelMediaTagList" Grid.Row="0"/>
+                    <components:TagList x:Name="highlightedTagList" Grid.Row="1" Enabled="False"/>
+                    <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
+                    <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
+                </Grid>
+                <edit:ElementViewer x:Name="elementViewer" Visibility="Collapsed"/>
             </Grid>
-            <Grid x:Name="tagHighlight" Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="labelMediaTagList" Grid.Row="0"/>
-                <components:TagList x:Name="highlightedTagList" Grid.Row="1" Enabled="False"/>
-                <TextBlock x:Name="labelMediaPartList" Grid.Row="2" Margin="0,16,0,0"/>
-                <ListView x:Name="mediaPartListTag" Grid.Row="3"/>
-            </Grid>
-            <edit:ElementViewer x:Name="elementViewer" Visibility="Collapsed"/>
-        </Grid>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>
