@@ -743,7 +743,6 @@ namespace MediaManager.Globals
 
                 var tagIdMappings = new Dictionary<int, int>();
                 var partIdMappings = new Dictionary<int, int>();
-                // TODO: add explicit exceptions if one of the mappings fails due to a non existent id
 
                 var tagList = xmlData.Element("Tags")?.Elements().ToList() ?? new List<XElement>();
                 var mediaList = xmlData.Element("Mediums")?.Elements().ToList() ?? new List<XElement>();
@@ -795,12 +794,18 @@ namespace MediaManager.Globals
                     {
                         xmlMediumDescription = xmlMedium.Attribute("Description")?.Value ?? "";
                         xmlMediumLocation = xmlMedium.Attribute("Location")?.Value ?? "";
-                        var positiveTagsString = xmlMedium.Attribute("PositiveTags")?.Value ?? "[]";
-                        var negativeTagsString = xmlMedium.Attribute("NegativeTags")?.Value ?? "[]";
-                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
-                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                        var positiveTags = stringToIntList(xmlMedium.Attribute("PositiveTags")?.Value ?? "[]");
+                        var negativeTags = stringToIntList(xmlMedium.Attribute("NegativeTags")?.Value ?? "[]");
+                        try
+                        {
+                            positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
+                            negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.MissingTag"), xmlMediumTitle), null); }
+                        xmlMediumTags.AddRange(tagIdListToTagList(positiveTags, true));
+                        xmlMediumTags.AddRange(tagIdListToTagList(negativeTags, false));
                     }
-                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), null); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), e as FormatException); }
                     var mediumId = -1;
                     try
                     {
@@ -859,12 +864,18 @@ namespace MediaManager.Globals
                             xmlPartPublication_Year = int.Parse(xmlPart.Attribute("Publication_Year")?.Value ?? "0");
                             var imgAttribute = xmlPart.Attribute("Image")?.Value;
                             xmlPartImage = imgAttribute != null ? Convert.FromBase64String(imgAttribute) : null;
-                            var positiveTagsString = xmlPart.Attribute("PositiveTags")?.Value ?? "[]";
-                            var negativeTagsString = xmlPart.Attribute("NegativeTags")?.Value ?? "[]";
-                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
-                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                            var positiveTags = stringToIntList(xmlPart.Attribute("PositiveTags")?.Value ?? "[]");
+                            var negativeTags = stringToIntList(xmlPart.Attribute("NegativeTags")?.Value ?? "[]");
+                            try
+                            {
+                                positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
+                                negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
+                            }
+                            catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingTag"), xmlPartId), null); }
+                            xmlPartTags.AddRange(tagIdListToTagList(positiveTags, true));
+                            xmlPartTags.AddRange(tagIdListToTagList(negativeTags, false));
                         }
-                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), null); }
+                        catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), e as FormatException); }
                         try
                         {
                             partIdMappings.Add(xmlPartId, CreatePart(new Part
@@ -896,10 +907,14 @@ namespace MediaManager.Globals
                     catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
                     try
                     {
-                        var partsString = xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]";
-                        xmlPlaylistParts = stringToIntList(partsString).Select(p => partIdMappings[p]).ToList();
+                        var playlistParts = stringToIntList(xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]");
+                        try
+                        {
+                            xmlPlaylistParts = playlistParts.Select(p => partIdMappings[p]).ToList();
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingPart"), xmlTitle), null); }
                     }
-                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), null); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), e as FormatException); }
                     try
                     {
                         DBCONNECTION.Playlists.Add(new Playlist

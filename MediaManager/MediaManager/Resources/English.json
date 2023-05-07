@@ -321,17 +321,20 @@
         },
         "Medium": {
           "MissingTitle": "A medium ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingTag": "The medium ${Dialog.Import.Exceptions.Common.WithTitle} references a non existing tag.",
           "WrongFormat": "The medium ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "The medium ${Dialog.Import.Exceptions.Common.WithTitle}"
         },
         "Part": {
           "MissingId": "A part ${Dialog.Import.Exceptions.Common.MissingId}.",
           "MissingTitle": "The part ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingTag": "The part ${Dialog.Import.Exceptions.Common.WithID} references a non existing tag.",
           "WrongFormat": "The part ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "The part ${Dialog.Import.Exceptions.Common.WithID}"
         },
         "Playlist": {
           "MissingTitle": "A playlist ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingPart": "The playlist ${Dialog.Import.Exceptions.Common.WithTitle} references a non existing part.",
           "WrongFormat": "The playlist ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "The playlist ${Dialog.Import.Exceptions.Common.WithTitle}"
         }
