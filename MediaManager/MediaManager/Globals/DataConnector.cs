@@ -442,7 +442,7 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Creates a new <see cref="Part"/>.
                 /// </summary>
-                /// <param name="part"><see cref="Part"/> to create</param>
+                /// <param name="part"><see cref="Part"/> to create, containing all its metadata including the corresponding medium id</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
                 public static void CreatePart(Part part, List<ValuedTag> tags)
                 {
@@ -524,16 +524,18 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Saves changes to an existing <see cref="Part"/>.
                 /// </summary>
-                /// <param name="part"><see cref="Part"/> to save</param>
+                /// <param name="part"><see cref="Part"/> to save, containing all its metadata including the corresponding medium id</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
                 public static void SavePart(Part part, List<ValuedTag> tags)
                 {
                     var original = GlobalContext.Reader.GetPart(part.Id);
+                    original.MediumId = part.MediumId;
                     original.Title = part.Title;
                     original.Favourite = part.Favourite;
                     original.Description = part.Description;
                     original.Length = part.Length;
                     original.Publication_Year = part.Publication_Year;
+                    original.Image = part.Image;
                     DBCONNECTION.PT_Relation.RemoveRange(DBCONNECTION.PT_Relation.Where(r => r.PartId == part.Id));
                     foreach (var t in tags)
                     {
