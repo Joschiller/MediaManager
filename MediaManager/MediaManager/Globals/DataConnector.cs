@@ -285,8 +285,10 @@ namespace MediaManager.Globals
                     public static List<Tag> UnorderedTags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
                     /// <summary>List of all <see cref="Tag"/>s ordered by title.</summary>
                     public static List<Tag> Tags { get => UnorderedTags.OrderBy(p => p.Title).ToList(); }
+                    /// <summary>List of all <see cref="Playlist"/>s.</summary>
+                    public static List<Playlist> UnorderedPlaylists { get => CURRENT_CATALOG?.Playlists.ToList() ?? new List<Playlist>(); }
                     /// <summary>List of all <see cref="Playlist"/>s ordered by title.</summary>
-                    public static List<Playlist> Playlists { get => CURRENT_CATALOG?.Playlists.OrderBy(p => p.Title).ToList() ?? new List<Playlist>(); }
+                    public static List<Playlist> Playlists { get => UnorderedPlaylists.OrderBy(p => p.Title).ToList(); }
                 }
                 public static class Statistics
                 {
@@ -415,7 +417,7 @@ namespace MediaManager.Globals
                 {
                     CURRENT_CATALOG.Media.Add(medium);
                     DBCONNECTION.SaveChanges();
-                    var mediumId = Reader.Lists.Media.LastOrDefault()?.Id ?? 0;
+                    var mediumId = Reader.Lists.UnorderedMedia.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
                     foreach (var t in tags)
                     {
                         if (!t.Value.HasValue) continue;
@@ -475,7 +477,7 @@ namespace MediaManager.Globals
                         Title = title
                     });
                     DBCONNECTION.SaveChanges();
-                    return Reader.Lists.Playlists.LastOrDefault()?.Id ?? 0;
+                    return Reader.Lists.UnorderedPlaylists.OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
                 }
 
                 /// <summary>
@@ -800,7 +802,7 @@ namespace MediaManager.Globals
                             Location = xmlMediumLocation,
                         });
                         DBCONNECTION.SaveChanges();
-                        mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
+                        mediumId = DBCONNECTION.Media.OrderBy(m => m.Id).ToList().LastOrDefault()?.Id ?? 0;
                         foreach (var t in xmlMediumTags)
                         {
                             if (!t.Value.HasValue) continue;
@@ -896,7 +898,7 @@ namespace MediaManager.Globals
                             Title = xmlTitle
                         });
                         DBCONNECTION.SaveChanges();
-                        var playlistId = DBCONNECTION.Playlists.ToList().LastOrDefault()?.Id ?? 0;
+                        var playlistId = DBCONNECTION.Playlists.OrderBy(p => p.Id).ToList().LastOrDefault()?.Id ?? 0;
                         xmlPlaylistParts.ForEach(p => GlobalContext.Writer.AddPartToPlaylist(playlistId, p));
                     }
                     catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
@@ -911,13 +913,13 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Catalogs.Add(catalog);
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Catalogs.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Catalogs.OrderBy(c => c.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
             private int CreateTag(Tag tag)
             {
                 DBCONNECTION.Tags.Add(tag);
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Tags.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Tags.OrderBy(t => t.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
             private int CreatePart(Part part, List<ValuedTag> tags)
             {
@@ -933,7 +935,7 @@ namespace MediaManager.Globals
                     });
                 }
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Parts.OrderBy(p => p.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
         }
     }
