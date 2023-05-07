@@ -10,15 +10,15 @@ namespace MediaManager.GUI.Dialogs
     /// </summary>
     public partial class EditCatalogDialog : Window, LanguageUser
     {
-        int? EditedCatalogId;
-        Catalogue EditedCatalog;
-
+        #region Setup
+        private int? EditedCatalogId;
+        private Catalog EditedCatalog;
         public EditCatalogDialog(int? id)
         {
             EditedCatalogId = id;
             EditedCatalog = EditedCatalogId.HasValue
-                ? Reader.GetCatalog(EditedCatalogId.Value)
-                : new Catalogue
+                ? GlobalContext.Reader.GetCatalog(EditedCatalogId.Value)
+                : new Catalog
                 {
                     Title = "",
                     Description = "",
@@ -38,7 +38,6 @@ namespace MediaManager.GUI.Dialogs
             oldTitle.Text = EditedCatalog.Title;
             submit.IsEnabled = newTitle.Text.Length > 0;
         }
-
         public void LoadTexts(string language)
         {
             labelOldTitle.Text = LanguageProvider.getString("Dialog.EditCatalog.LabelOldTitle") + ":";
@@ -53,17 +52,19 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
+        #endregion
+
+        #region Handler
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
-
         private void newTitle_TextChanged(object sender, TextChangedEventArgs e) => submit.IsEnabled = newTitle.Text.Length > 0;
-
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            if (EditedCatalogId != null) Writer.SaveCatalog(EditedCatalog);
-            else Writer.CreateCatalog(EditedCatalog);
-            if (Reader.Catalogs.Count == 1) CURRENT_CATALOGUE = Reader.Catalogs[0];
+            if (EditedCatalogId != null) GlobalContext.Writer.SaveCatalog(EditedCatalog);
+            else GlobalContext.Writer.CreateCatalog(EditedCatalog);
+            if (GlobalContext.Reader.Catalogs.Count == 1) CatalogContext.SetCurrentCatalog(GlobalContext.Reader.Catalogs[0]);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        #endregion
     }
 }

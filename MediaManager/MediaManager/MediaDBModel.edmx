@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MediaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Catalogues">
+        <EntityType Name="Catalogs">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -23,7 +23,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="CatalogId" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -55,7 +55,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="CatalogId" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="PPl_Relation">
@@ -87,18 +87,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatalogueId" Type="int" Nullable="false" />
+          <Property Name="CatalogId" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Media_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1" />
+        <Association Name="FK_Media_ToCatalogs">
+          <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1" />
           <End Role="Media" Type="Self.Media" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Catalogues">
+            <Principal Role="Catalogs">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Media">
-              <PropertyRef Name="CatalogueId" />
+              <PropertyRef Name="CatalogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -144,17 +144,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Playlists_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1">
+        <Association Name="FK_Playlists_ToCatalogs">
+          <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Playlists" Type="Self.Playlists" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Catalogues">
+            <Principal Role="Catalogs">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Playlists">
-              <PropertyRef Name="CatalogueId" />
+              <PropertyRef Name="CatalogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,22 +214,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tags_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogues" Multiplicity="1">
+        <Association Name="FK_Tags_ToCatalogs">
+          <End Role="Catalogs" Type="Self.Catalogs" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Catalogues">
+            <Principal Role="Catalogs">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Tags">
-              <PropertyRef Name="CatalogueId" />
+              <PropertyRef Name="CatalogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MediaDBModelStoreContainer">
-          <EntitySet Name="Catalogues" EntityType="Self.Catalogues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Catalogs" EntityType="Self.Catalogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MT_Relation" EntityType="Self.MT_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
@@ -238,8 +238,8 @@
           <EntitySet Name="PT_Relation" EntityType="Self.PT_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Media_ToCatalogues" Association="Self.FK_Media_ToCatalogues">
-            <End Role="Catalogues" EntitySet="Catalogues" />
+          <AssociationSet Name="FK_Media_ToCatalogs" Association="Self.FK_Media_ToCatalogs">
+            <End Role="Catalogs" EntitySet="Catalogs" />
             <End Role="Media" EntitySet="Media" />
           </AssociationSet>
           <AssociationSet Name="FK_MT_Relation_ToMedia" Association="Self.FK_MT_Relation_ToMedia">
@@ -254,8 +254,8 @@
             <End Role="Media" EntitySet="Media" />
             <End Role="Parts" EntitySet="Parts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Playlists_ToCatalogues" Association="Self.FK_Playlists_ToCatalogues">
-            <End Role="Catalogues" EntitySet="Catalogues" />
+          <AssociationSet Name="FK_Playlists_ToCatalogs" Association="Self.FK_Playlists_ToCatalogs">
+            <End Role="Catalogs" EntitySet="Catalogs" />
             <End Role="Playlists" EntitySet="Playlists" />
           </AssociationSet>
           <AssociationSet Name="FK_PPl_Relation_ToParts" Association="Self.FK_PPl_Relation_ToParts">
@@ -274,8 +274,8 @@
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PT_Relation" EntitySet="PT_Relation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tags_ToCatalogues" Association="Self.FK_Tags_ToCatalogues">
-            <End Role="Catalogues" EntitySet="Catalogues" />
+          <AssociationSet Name="FK_Tags_ToCatalogs" Association="Self.FK_Tags_ToCatalogs">
+            <End Role="Catalogs" EntitySet="Catalogs" />
             <End Role="Tags" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
@@ -283,34 +283,80 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MediaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Catalogue">
+        <EntityContainer Name="MediaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catalogs" EntityType="MediaDBModel.Catalog" />
+          <EntitySet Name="Media" EntityType="MediaDBModel.Medium" />
+          <EntitySet Name="MT_Relation" EntityType="MediaDBModel.MT_Relation" />
+          <EntitySet Name="Parts" EntityType="MediaDBModel.Part" />
+          <EntitySet Name="Playlists" EntityType="MediaDBModel.Playlist" />
+          <EntitySet Name="PT_Relation" EntityType="MediaDBModel.PT_Relation" />
+          <EntitySet Name="Settings" EntityType="MediaDBModel.Setting" />
+          <EntitySet Name="Tags" EntityType="MediaDBModel.Tag" />
+          <AssociationSet Name="FK_Media_ToCatalogs" Association="MediaDBModel.FK_Media_ToCatalogs">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Medium" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlists_ToCatalogs" Association="MediaDBModel.FK_Playlists_ToCatalogs">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Playlist" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_ToCatalogs" Association="MediaDBModel.FK_Tags_ToCatalogs">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToMedia" Association="MediaDBModel.FK_MT_Relation_ToMedia">
+            <End Role="Medium" EntitySet="Media" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_ToMedia" Association="MediaDBModel.FK_Parts_ToMedia">
+            <End Role="Medium" EntitySet="Media" />
+            <End Role="Part" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MT_Relation_ToTags" Association="MediaDBModel.FK_MT_Relation_ToTags">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="MT_Relation" EntitySet="MT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToParts" Association="MediaDBModel.FK_PT_Relation_ToParts">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT_Relation_ToTags" Association="MediaDBModel.FK_PT_Relation_ToTags">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="PT_Relation" EntitySet="PT_Relation" />
+          </AssociationSet>
+          <AssociationSet Name="PPl_Relation" Association="MediaDBModel.PPl_Relation">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="Playlist" EntitySet="Playlists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Catalog">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
           <Property Name="DeletionConfirmationMedium" Type="Boolean" Nullable="false" />
           <Property Name="DeletionConfirmationPart" Type="Boolean" Nullable="false" />
           <Property Name="DeletionConfirmationTag" Type="Boolean" Nullable="false" />
           <Property Name="DeletionConfirmationPlaylist" Type="Boolean" Nullable="false" />
           <Property Name="ShowTitleOfTheDayAsMedium" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Media" Relationship="Self.FK_Media_ToCatalogues" FromRole="Catalogues" ToRole="Media" />
-          <NavigationProperty Name="Tags" Relationship="Self.FK_Tags_ToCatalogues" FromRole="Catalogues" ToRole="Tags" />
-          <NavigationProperty Name="Playlists" Relationship="MediaDBModel.FK_Playlists_ToCatalogues" FromRole="Catalogue" ToRole="Playlist" />
+          <NavigationProperty Name="Media" Relationship="MediaDBModel.FK_Media_ToCatalogs" FromRole="Catalog" ToRole="Medium" />
+          <NavigationProperty Name="Playlists" Relationship="MediaDBModel.FK_Playlists_ToCatalogs" FromRole="Catalog" ToRole="Playlist" />
+          <NavigationProperty Name="Tags" Relationship="MediaDBModel.FK_Tags_ToCatalogs" FromRole="Catalog" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Medium">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Catalogue" Relationship="Self.FK_Media_ToCatalogues" FromRole="Media" ToRole="Catalogues" />
-          <NavigationProperty Name="MT_Relation" Relationship="Self.FK_MT_Relation_ToMedia" FromRole="Media" ToRole="MT_Relation" />
-          <NavigationProperty Name="Parts" Relationship="Self.FK_Parts_ToMedia" FromRole="Media" ToRole="Parts" />
+          <Property Name="CatalogId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="MediaDBModel.FK_Media_ToCatalogs" FromRole="Medium" ToRole="Catalog" />
+          <NavigationProperty Name="MT_Relation" Relationship="MediaDBModel.FK_MT_Relation_ToMedia" FromRole="Medium" ToRole="MT_Relation" />
+          <NavigationProperty Name="Parts" Relationship="MediaDBModel.FK_Parts_ToMedia" FromRole="Medium" ToRole="Part" />
         </EntityType>
         <EntityType Name="MT_Relation">
           <Key>
@@ -320,8 +366,8 @@
           <Property Name="MediaId" Type="Int32" Nullable="false" />
           <Property Name="TagId" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Medium" Relationship="Self.FK_MT_Relation_ToMedia" FromRole="MT_Relation" ToRole="Media" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK_MT_Relation_ToTags" FromRole="MT_Relation" ToRole="Tags" />
+          <NavigationProperty Name="Medium" Relationship="MediaDBModel.FK_MT_Relation_ToMedia" FromRole="MT_Relation" ToRole="Medium" />
+          <NavigationProperty Name="Tag" Relationship="MediaDBModel.FK_MT_Relation_ToTags" FromRole="MT_Relation" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Part">
           <Key>
@@ -329,15 +375,25 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MediumId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Favourite" Type="Boolean" Nullable="false" />
           <Property Name="Length" Type="Int32" Nullable="false" />
           <Property Name="Publication_Year" Type="Int32" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Medium" Relationship="Self.FK_Parts_ToMedia" FromRole="Parts" ToRole="Media" />
-          <NavigationProperty Name="PT_Relation" Relationship="Self.FK_PT_Relation_ToParts" FromRole="Parts" ToRole="PT_Relation" />
+          <NavigationProperty Name="Medium" Relationship="MediaDBModel.FK_Parts_ToMedia" FromRole="Part" ToRole="Medium" />
+          <NavigationProperty Name="PT_Relation" Relationship="MediaDBModel.FK_PT_Relation_ToParts" FromRole="Part" ToRole="PT_Relation" />
           <NavigationProperty Name="Playlists" Relationship="MediaDBModel.PPl_Relation" FromRole="Part" ToRole="Playlist" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatalogId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="MediaDBModel.FK_Playlists_ToCatalogs" FromRole="Playlist" ToRole="Catalog" />
+          <NavigationProperty Name="Parts" Relationship="MediaDBModel.PPl_Relation" FromRole="Playlist" ToRole="Part" />
         </EntityType>
         <EntityType Name="PT_Relation">
           <Key>
@@ -347,56 +403,74 @@
           <Property Name="PartId" Type="Int32" Nullable="false" />
           <Property Name="TagId" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Part" Relationship="Self.FK_PT_Relation_ToParts" FromRole="PT_Relation" ToRole="Parts" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK_PT_Relation_ToTags" FromRole="PT_Relation" ToRole="Tags" />
+          <NavigationProperty Name="Part" Relationship="MediaDBModel.FK_PT_Relation_ToParts" FromRole="PT_Relation" ToRole="Part" />
+          <NavigationProperty Name="Tag" Relationship="MediaDBModel.FK_PT_Relation_ToTags" FromRole="PT_Relation" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Key" />
           </Key>
-          <Property Name="Key" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Catalogue" Relationship="Self.FK_Tags_ToCatalogues" FromRole="Tags" ToRole="Catalogues" />
-          <NavigationProperty Name="MT_Relation" Relationship="Self.FK_MT_Relation_ToTags" FromRole="Tags" ToRole="MT_Relation" />
-          <NavigationProperty Name="PT_Relation" Relationship="Self.FK_PT_Relation_ToTags" FromRole="Tags" ToRole="PT_Relation" />
+          <Property Name="CatalogId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="MediaDBModel.FK_Tags_ToCatalogs" FromRole="Tag" ToRole="Catalog" />
+          <NavigationProperty Name="MT_Relation" Relationship="MediaDBModel.FK_MT_Relation_ToTags" FromRole="Tag" ToRole="MT_Relation" />
+          <NavigationProperty Name="PT_Relation" Relationship="MediaDBModel.FK_PT_Relation_ToTags" FromRole="Tag" ToRole="PT_Relation" />
         </EntityType>
-        <Association Name="FK_Media_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogue" Multiplicity="1" />
-          <End Role="Media" Type="Self.Medium" Multiplicity="*" />
+        <Association Name="FK_Media_ToCatalogs">
+          <End Type="MediaDBModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="MediaDBModel.Medium" Role="Medium" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Catalogues">
+            <Principal Role="Catalog">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Media">
-              <PropertyRef Name="CatalogueId" />
+            <Dependent Role="Medium">
+              <PropertyRef Name="CatalogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tags_ToCatalogues">
-          <End Role="Catalogues" Type="Self.Catalogue" Multiplicity="1" />
-          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
+        <Association Name="FK_Playlists_ToCatalogs">
+          <End Type="MediaDBModel.Catalog" Role="Catalog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.Playlist" Role="Playlist" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Catalogues">
+            <Principal Role="Catalog">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Tags">
-              <PropertyRef Name="CatalogueId" />
+            <Dependent Role="Playlist">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_ToCatalogs">
+          <End Type="MediaDBModel.Catalog" Role="Catalog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.Tag" Role="Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tag">
+              <PropertyRef Name="CatalogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MT_Relation_ToMedia">
-          <End Role="Media" Type="Self.Medium" Multiplicity="1" />
-          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <End Type="MediaDBModel.Medium" Role="Medium" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.MT_Relation" Role="MT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Media">
+            <Principal Role="Medium">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MT_Relation">
@@ -405,22 +479,26 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parts_ToMedia">
-          <End Role="Media" Type="Self.Medium" Multiplicity="1" />
-          <End Role="Parts" Type="Self.Part" Multiplicity="*" />
+          <End Type="MediaDBModel.Medium" Role="Medium" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.Part" Role="Part" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Media">
+            <Principal Role="Medium">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Parts">
+            <Dependent Role="Part">
               <PropertyRef Name="MediumId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MT_Relation_ToTags">
-          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
-          <End Role="MT_Relation" Type="Self.MT_Relation" Multiplicity="*" />
+          <End Type="MediaDBModel.Tag" Role="Tag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.MT_Relation" Role="MT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tags">
+            <Principal Role="Tag">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MT_Relation">
@@ -429,10 +507,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PT_Relation_ToParts">
-          <End Role="Parts" Type="Self.Part" Multiplicity="1" />
-          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <End Type="MediaDBModel.Part" Role="Part" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.PT_Relation" Role="PT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Parts">
+            <Principal Role="Part">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PT_Relation">
@@ -441,10 +521,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PT_Relation_ToTags">
-          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
-          <End Role="PT_Relation" Type="Self.PT_Relation" Multiplicity="*" />
+          <End Type="MediaDBModel.Tag" Role="Tag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MediaDBModel.PT_Relation" Role="PT_Relation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tags">
+            <Principal Role="Tag">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PT_Relation">
@@ -452,157 +534,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MediaDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Catalogues" EntityType="Self.Catalogue" />
-          <EntitySet Name="Media" EntityType="Self.Medium" />
-          <EntitySet Name="MT_Relation" EntityType="Self.MT_Relation" />
-          <EntitySet Name="Parts" EntityType="Self.Part" />
-          <EntitySet Name="PT_Relation" EntityType="Self.PT_Relation" />
-          <EntitySet Name="Settings" EntityType="Self.Setting" />
-          <EntitySet Name="Tags" EntityType="Self.Tag" />
-          <AssociationSet Name="FK_Media_ToCatalogues" Association="Self.FK_Media_ToCatalogues">
-            <End Role="Catalogues" EntitySet="Catalogues" />
-            <End Role="Media" EntitySet="Media" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tags_ToCatalogues" Association="Self.FK_Tags_ToCatalogues">
-            <End Role="Catalogues" EntitySet="Catalogues" />
-            <End Role="Tags" EntitySet="Tags" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MT_Relation_ToMedia" Association="Self.FK_MT_Relation_ToMedia">
-            <End Role="Media" EntitySet="Media" />
-            <End Role="MT_Relation" EntitySet="MT_Relation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Parts_ToMedia" Association="Self.FK_Parts_ToMedia">
-            <End Role="Media" EntitySet="Media" />
-            <End Role="Parts" EntitySet="Parts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MT_Relation_ToTags" Association="Self.FK_MT_Relation_ToTags">
-            <End Role="Tags" EntitySet="Tags" />
-            <End Role="MT_Relation" EntitySet="MT_Relation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PT_Relation_ToParts" Association="Self.FK_PT_Relation_ToParts">
-            <End Role="Parts" EntitySet="Parts" />
-            <End Role="PT_Relation" EntitySet="PT_Relation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PT_Relation_ToTags" Association="Self.FK_PT_Relation_ToTags">
-            <End Role="Tags" EntitySet="Tags" />
-            <End Role="PT_Relation" EntitySet="PT_Relation" />
-          </AssociationSet>
-          <EntitySet Name="Playlists" EntityType="MediaDBModel.Playlist" />
-          <AssociationSet Name="FK_Playlists_ToCatalogues" Association="MediaDBModel.FK_Playlists_ToCatalogues">
-            <End Role="Catalogue" EntitySet="Catalogues" />
-            <End Role="Playlist" EntitySet="Playlists" />
-          </AssociationSet>
-          <AssociationSet Name="PPl_Relation" Association="MediaDBModel.PPl_Relation">
-            <End Role="Part" EntitySet="Parts" />
-            <End Role="Playlist" EntitySet="Playlists" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Playlist">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatalogueId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Catalogue" Relationship="MediaDBModel.FK_Playlists_ToCatalogues" FromRole="Playlist" ToRole="Catalogue" />
-          <NavigationProperty Name="Parts" Relationship="MediaDBModel.PPl_Relation" FromRole="Playlist" ToRole="Part" />
-        </EntityType>
-        <Association Name="FK_Playlists_ToCatalogues">
-          <End Type="MediaDBModel.Catalogue" Role="Catalogue" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MediaDBModel.Playlist" Role="Playlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalogue">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Playlist">
-              <PropertyRef Name="CatalogueId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PPl_Relation">
           <End Type="MediaDBModel.Part" Role="Part" Multiplicity="*" />
           <End Type="MediaDBModel.Playlist" Role="Playlist" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MediaDBModelStoreContainer" CdmEntityContainer="MediaDBEntities">
-          <EntitySetMapping Name="Catalogues">
-            <EntityTypeMapping TypeName="MediaDBModel.Catalogue">
-              <MappingFragment StoreEntitySet="Catalogues">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DeletionConfirmationMedium" ColumnName="DeletionConfirmationMedium" />
-                <ScalarProperty Name="DeletionConfirmationPart" ColumnName="DeletionConfirmationPart" />
-                <ScalarProperty Name="DeletionConfirmationTag" ColumnName="DeletionConfirmationTag" />
-                <ScalarProperty Name="DeletionConfirmationPlaylist" ColumnName="DeletionConfirmationPlaylist" />
+          <EntitySetMapping Name="Catalogs">
+            <EntityTypeMapping TypeName="MediaDBModel.Catalog">
+              <MappingFragment StoreEntitySet="Catalogs">
                 <ScalarProperty Name="ShowTitleOfTheDayAsMedium" ColumnName="ShowTitleOfTheDayAsMedium" />
+                <ScalarProperty Name="DeletionConfirmationPlaylist" ColumnName="DeletionConfirmationPlaylist" />
+                <ScalarProperty Name="DeletionConfirmationTag" ColumnName="DeletionConfirmationTag" />
+                <ScalarProperty Name="DeletionConfirmationPart" ColumnName="DeletionConfirmationPart" />
+                <ScalarProperty Name="DeletionConfirmationMedium" ColumnName="DeletionConfirmationMedium" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Media">
             <EntityTypeMapping TypeName="MediaDBModel.Medium">
               <MappingFragment StoreEntitySet="Media">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MT_Relation">
             <EntityTypeMapping TypeName="MediaDBModel.MT_Relation">
               <MappingFragment StoreEntitySet="MT_Relation">
-                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Parts">
             <EntityTypeMapping TypeName="MediaDBModel.Part">
               <MappingFragment StoreEntitySet="Parts">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MediumId" ColumnName="MediumId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Favourite" ColumnName="Favourite" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="Publication_Year" ColumnName="Publication Year" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PT_Relation">
-            <EntityTypeMapping TypeName="MediaDBModel.PT_Relation">
-              <MappingFragment StoreEntitySet="PT_Relation">
-                <ScalarProperty Name="PartId" ColumnName="PartId" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Settings">
-            <EntityTypeMapping TypeName="MediaDBModel.Setting">
-              <MappingFragment StoreEntitySet="Settings">
-                <ScalarProperty Name="Key" ColumnName="Key" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="MediaDBModel.Tag">
-              <MappingFragment StoreEntitySet="Tags">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
+                <ScalarProperty Name="Publication_Year" ColumnName="Publication Year" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Favourite" ColumnName="Favourite" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MediumId" ColumnName="MediumId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -610,7 +596,33 @@
             <EntityTypeMapping TypeName="MediaDBModel.Playlist">
               <MappingFragment StoreEntitySet="Playlists">
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CatalogueId" ColumnName="CatalogueId" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PT_Relation">
+            <EntityTypeMapping TypeName="MediaDBModel.PT_Relation">
+              <MappingFragment StoreEntitySet="PT_Relation">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="PartId" ColumnName="PartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="MediaDBModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="MediaDBModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

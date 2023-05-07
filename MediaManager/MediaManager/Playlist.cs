@@ -21,10 +21,10 @@ namespace MediaManager
         }
     
         public int Id { get; set; }
-        public int CatalogueId { get; set; }
+        public int CatalogId { get; set; }
         public string Title { get; set; }
     
-        public virtual Catalogue Catalogue { get; set; }
+        public virtual Catalog Catalog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Part> Parts { get; set; }
     }

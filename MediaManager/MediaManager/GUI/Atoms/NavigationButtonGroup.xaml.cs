@@ -10,17 +10,25 @@ namespace MediaManager.GUI.Atoms
     [ContentProperty("Children")]
     public partial class NavigationButtonGroup : UserControl
     {
+        #region Properties
+        /// <summary>
+        /// Orientation in which the image buttons are stacked.<br/>
+        /// Default: <see cref="Orientation.Horizontal"/>
+        /// </summary>
         public Orientation Orientation { get; set; } = Orientation.Horizontal;
         public ObservableCollection<ImageButton> Children { get; private set; } = new ObservableCollection<ImageButton>();
+        #endregion
 
+        #region Setup
         public NavigationButtonGroup()
         {
             InitializeComponent();
             DataContext = this;
-
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
         }
+        #endregion
 
+        #region Handler
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -35,5 +43,6 @@ namespace MediaManager.GUI.Atoms
                     break;
             }
         }
+        #endregion
     }
 }

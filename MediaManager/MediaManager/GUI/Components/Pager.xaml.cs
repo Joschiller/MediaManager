@@ -9,9 +9,12 @@ namespace MediaManager.GUI.Components
     /// </summary>
     public partial class Pager : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void PageChangeHandler(int newPage);
         public event PageChangeHandler PageChanged;
+        #endregion
 
+        #region Properties
         private int _CurrentPage = 1;
         private int _TotalPages = 1;
         public int CurrentPage
@@ -32,14 +35,31 @@ namespace MediaManager.GUI.Components
                 UpdateGUI();
             }
         }
+        #endregion
 
+        #region Setup
         public Pager()
         {
             InitializeComponent();
-            UpdateGUI();
             RegisterAtLanguageProvider();
+            UpdateGUI();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            prev.ToolTip = LanguageProvider.getString("Component.Pager.Previous");
+            next.ToolTip = LanguageProvider.getString("Component.Pager.Next");
+        }
+        ~Pager() => LanguageProvider.Unregister(this);
+        private void UpdateGUI()
+        {
+            page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
+            prev.Enabled = CurrentPage > 1;
+            next.Enabled = CurrentPage < TotalPages;
+        }
+        #endregion
 
+        #region Handler
         private void prev_Click(object sender, RoutedEventArgs e)
         {
             CurrentPage--;
@@ -50,19 +70,6 @@ namespace MediaManager.GUI.Components
             CurrentPage++;
             UpdateGUI();
         }
-        private void UpdateGUI()
-        {
-            page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
-            prev.Enabled = CurrentPage > 1;
-            next.Enabled = CurrentPage < TotalPages;
-        }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            prev.ToolTip = LanguageProvider.getString("Component.Pager.Previous");
-            next.ToolTip = LanguageProvider.getString("Component.Pager.Next");
-        }
-        ~Pager() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

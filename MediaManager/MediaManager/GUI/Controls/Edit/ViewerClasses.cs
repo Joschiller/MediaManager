@@ -5,7 +5,7 @@ namespace MediaManager.GUI.Controls.Edit
     public class EditableMedium
     {
         public int Id { get; set; }
-        public int CatalogueId { get; set; }
+        public int CatalogId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -27,7 +27,7 @@ namespace MediaManager.GUI.Controls.Edit
     public class MediumWithTags
     {
         public int Id { get; set; }
-        public int CatalogueId { get; set; }
+        public int CatalogId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }

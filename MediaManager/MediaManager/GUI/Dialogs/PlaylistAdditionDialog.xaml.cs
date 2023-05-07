@@ -11,17 +11,17 @@ namespace MediaManager.GUI.Dialogs
     /// </summary>
     public partial class PlaylistAdditionDialog : Window, LanguageUser
     {
+        #region Setup
         private Playlist selectedPlaylist;
         private int referencedId;
         private Controls.Search.SearchResultMode mode;
-
         public PlaylistAdditionDialog(int id, Controls.Search.SearchResultMode mode)
         {
             referencedId = id;
             this.mode = mode;
             InitializeComponent();
             LoadTexts(null);
-            var allPlaylists = Reader.Playlists.ToList();
+            var allPlaylists = CatalogContext.Reader.Lists.Playlists.ToList();
             allPlaylists.Add(new Playlist
             {
                 Id = -1,
@@ -39,8 +39,10 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
-        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+        #endregion
 
+        #region Handler
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
         private void playlists_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPlaylist = (sender as ComboBox).SelectedItem as Playlist;
@@ -56,16 +58,16 @@ namespace MediaManager.GUI.Dialogs
         {
             submit.IsEnabled = selectedPlaylist?.Id >= 0 || playlistName.Text.Trim().Length > 0;
         }
-
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             var playlistId = selectedPlaylist.Id;
-            if (playlistId < 0) playlistId = Writer.CreatePlaylist(playlistName.Text.Trim());
+            if (playlistId < 0) playlistId = CatalogContext.Writer.CreatePlaylist(playlistName.Text.Trim());
 
-            if (mode == Controls.Search.SearchResultMode.MediaList) Reader.GetMedium(referencedId).Parts.ToList().ForEach(p => Writer.AddPartToPlaylist(playlistId, p.Id));
-            else Writer.AddPartToPlaylist(playlistId, referencedId);
+            if (mode == Controls.Search.SearchResultMode.MediaList) GlobalContext.Reader.GetMedium(referencedId).Parts.ToList().ForEach(p => GlobalContext.Writer.AddPartToPlaylist(playlistId, p.Id));
+            else GlobalContext.Writer.AddPartToPlaylist(playlistId, referencedId);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        #endregion
     }
 }

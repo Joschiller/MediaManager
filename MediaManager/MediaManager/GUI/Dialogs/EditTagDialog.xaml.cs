@@ -9,13 +9,13 @@ namespace MediaManager.GUI.Dialogs
     /// </summary>
     public partial class EditTagDialog : Window, LanguageUser
     {
+        #region Setup
         int? EditedTagId;
         Tag EditedTag;
-
         public EditTagDialog(int? id)
         {
             EditedTagId = id;
-            EditedTag = EditedTagId.HasValue ? Reader.GetTag(EditedTagId.Value) : new Tag { CatalogueId = CURRENT_CATALOGUE.Id, Title = "" };
+            EditedTag = EditedTagId.HasValue ? GlobalContext.Reader.GetTag(EditedTagId.Value) : new Tag { CatalogId = CatalogContext.CurrentCatalogId.Value, Title = "" };
 
             InitializeComponent();
             LoadTexts(null);
@@ -27,7 +27,6 @@ namespace MediaManager.GUI.Dialogs
             oldTag.Text = EditedTag.Title;
             submit.IsEnabled = newTag.Text.Length > 0;
         }
-
         public void LoadTexts(string language)
         {
             labelOldTag.Text = LanguageProvider.getString("Dialog.EditTag.LabelOld") + ":";
@@ -35,15 +34,18 @@ namespace MediaManager.GUI.Dialogs
             submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
             cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
         }
-        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+        #endregion
 
+        #region Handler
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
         private void newTag_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) => submit.IsEnabled = newTag.Text.Length > 0;
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            if (EditedTagId != null) Writer.SaveTag(EditedTag);
-            else Writer.CreateTag(EditedTag);
+            if (EditedTagId != null) CatalogContext.Writer.SaveTag(EditedTag);
+            else CatalogContext.Writer.CreateTag(EditedTag.Title);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        #endregion
     }
 }

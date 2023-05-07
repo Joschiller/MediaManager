@@ -2,18 +2,7 @@
 using MediaManager.Globals.SettingsEditor;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Settings
@@ -23,7 +12,9 @@ namespace MediaManager.GUI.Settings
     /// </summary>
     public partial class LanguageSetting : UserControl, LanguageUser, SettingsEditorItem
     {
+        #region Bindings
         public List<string> LanguageList { get; set; } = LanguageProvider.LanguageList;
+        #endregion
 
         #region Setup
         public LanguageSetting()
@@ -31,7 +22,6 @@ namespace MediaManager.GUI.Settings
             InitializeComponent();
             DataContext = this;
         }
-
         public void LoadTexts(string language)
         {
             languageText.Text = LanguageProvider.getString(language ?? LanguageProvider.CurrentLanguage, "Controls.Settings.Language.Label") + ":";

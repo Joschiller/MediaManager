@@ -13,8 +13,10 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class TagMenu : Window, UpdatedLanguageUser
     {
+        #region Bindings
         public ObservableCollection<Tag> Tags { get; set; } = new ObservableCollection<Tag>();
         public Tag SelectedTag { get; set; }
+        #endregion
 
         #region Setup
         public TagMenu()
@@ -24,7 +26,6 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             LoadTags();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
@@ -34,6 +35,7 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
+        #region Handler
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
@@ -51,7 +53,7 @@ namespace MediaManager.GUI.Menus
         private void btnDeleteTagClick(object sender, RoutedEventArgs e)
         {
             if (SelectedTag == null) return;
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationTag;
+            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationTag;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
@@ -59,21 +61,21 @@ namespace MediaManager.GUI.Menus
             }
             if (performDeletion)
             {
-                Writer.DeleteTag(SelectedTag.Id);
+                GlobalContext.Writer.DeleteTag(SelectedTag.Id);
                 LoadTags();
             }
         }
         #endregion
-
         private void LoadTags()
         {
             Tags.Clear();
-            Reader.Tags.ForEach(Tags.Add);
+            CatalogContext.Reader.Lists.Tags.ForEach(Tags.Add);
         }
         private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
             mediaTagList.setCurrentTag(SelectedTag);
         }
+        #endregion
     }
 }

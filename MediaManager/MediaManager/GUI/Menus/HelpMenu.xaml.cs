@@ -9,16 +9,17 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class HelpMenu : Window, UpdatedLanguageUser
     {
+        #region Setup
         public HelpMenu()
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

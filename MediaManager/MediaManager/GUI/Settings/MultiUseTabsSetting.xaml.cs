@@ -15,7 +15,6 @@ namespace MediaManager.GUI.Settings
         {
             InitializeComponent();
         }
-
         public void LoadTexts(string language)
         {
             playlistLabel.Text = LanguageProvider.getString("Controls.Settings.MultiUseTabs.PlaylistLabel") + ":";
@@ -29,16 +28,16 @@ namespace MediaManager.GUI.Settings
         #region Data
         public void LoadData(int? accountIdentifier)
         {
-            playlistVisible.IsChecked = Reader.Settings.PlaylistEditorVisible;
-            titleOfTheDayVisible.IsChecked = Reader.Settings.TitleOfTheDayVisible;
-            statisticsVisible.IsChecked = Reader.Settings.StatisticsOverviewVisible;
+            playlistVisible.IsChecked = GlobalContext.Settings.PlaylistEditorVisible;
+            titleOfTheDayVisible.IsChecked = GlobalContext.Settings.TitleOfTheDayVisible;
+            statisticsVisible.IsChecked = GlobalContext.Settings.StatisticsOverviewVisible;
             LoadTexts(null);
         }
         public void SaveData()
         {
-            Writer.Settings.PlaylistEditorVisible = playlistVisible.IsChecked.HasValue && playlistVisible.IsChecked.Value;
-            Writer.Settings.TitleOfTheDayVisible = titleOfTheDayVisible.IsChecked.HasValue && titleOfTheDayVisible.IsChecked.Value;
-            Writer.Settings.StatisticsOverviewVisible = statisticsVisible.IsChecked.HasValue && statisticsVisible.IsChecked.Value;
+            GlobalContext.Settings.PlaylistEditorVisible = playlistVisible.IsChecked.HasValue && playlistVisible.IsChecked.Value;
+            GlobalContext.Settings.TitleOfTheDayVisible = titleOfTheDayVisible.IsChecked.HasValue && titleOfTheDayVisible.IsChecked.Value;
+            GlobalContext.Settings.StatisticsOverviewVisible = statisticsVisible.IsChecked.HasValue && statisticsVisible.IsChecked.Value;
         }
         public bool ValidateData() => true;
         #endregion

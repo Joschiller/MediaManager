@@ -1,0 +1,168 @@
+# Version 1.0.0
+
+## Changelog
+
+- Added Tables:
+  - Tags
+  - Mediums
+  - Playlists
+
+## Migration Guide
+
+> No migration needed for the first version.
+
+## Specification
+
+- <b>Info</b>
+  - <b>Description:</b> The XML-file can be used to export and import catalogs and their data. It can hold catalog information, tags, media and playlists.
+  - <b>Version:</b> <b>`1.0.0`</b>
+  - <b>Title:</b> Media Manager XML Export
+  - <b>Existing Versions:</b> `1.0.0`
+- <b>XML Root</b>
+  - <b>Name:</b> `FinanceLoggerData`
+  - <b>Description:</b> The document root provides information regarding the export version and catalog settings.
+  - <b>Properties:</b>
+    - `ExportVersion`
+      - <b>Type:</b> `string`
+      - <b>Values:</b> one of the existing versions
+      - <b>Description:</b> Represents the used version for the xml export.
+    - `DownwardsCompatibleTo`
+      - <b>Type:</b> `string`
+      - <b>Values:</b> one of the existing versions which is &le; to the `ExportVersion` of the XML Root
+      - <b>Description:</b> Represents, which older versions of the xml export/import system are able to import this version of the export. The import of compatible versions will simply ignore newly added fields (e.g. whole tables or attributes of entities) so it can still understand some newer formats. The given data will simply be ignored. Only if mandatory attributes or lists are removed the downwards compatibility will be restricted to a newer version, because older version may need those values to work with.
+    - `Title`
+      - <b>Type:</b> `string`
+      - <b>Description:</b> Description of the catalog.
+      - <b>Max Length:</b> 128
+    - `Description`
+      - <b>Type:</b> `string`
+      - <b>Description:</b> Description of the catalog.
+      - <b>Max Length:</b> 2048
+      - <b>Default:</b> empty string
+    - `DeletionConfirmationMedium`
+      - <b>Type:</b> `bool`
+      - <b>Description:</b> Setting for displaying the deletion confirmation for media within the application.
+      - <b>Default:</b> `true`
+    - `DeletionConfirmationPart`
+      - <b>Type:</b> `bool`
+      - <b>Description:</b> Setting for displaying the deletion confirmation for parts within the application.
+      - <b>Default:</b> `true`
+    - `DeletionConfirmationTag`
+      - <b>Type:</b> `bool`
+      - <b>Description:</b> Setting for displaying the deletion confirmation for tags within the application.
+      - <b>Default:</b> `true`
+    - `DeletionConfirmationPlaylist`
+      - <b>Type:</b> `bool`
+      - <b>Description:</b> Setting for displaying the deletion confirmation for playlists within the application.
+      - <b>Default:</b> `true`
+    - `ShowTitleOfTheDayAsMedium`
+      - <b>Type:</b> `bool`
+      - <b>Description:</b> Setting for the way of displaying the current title of the day within the application.
+      - <b>Default:</b> `false`
+- <b>XML Content</b>
+  - <b>`Tags`</b>
+    - <b>List Description:</b> Holds a list of all tags within the catalog.
+    - <b>Element Type:</b> `Tag`
+  - <b>`Mediums`</b>
+    - <b>List Description:</b> Holds a list of all media within the catalog.
+    - <b>Element Type:</b> `Medium`
+  - <b>`Playlists`</b>
+    - <b>List Description:</b> Holds a list of all playlists within the catalog.
+    - <b>Element Type:</b> `Playlist`
+- <b>Schemas</b>
+  - <b>`TagID`</b>
+    - <b>Description:</b> A unique tag identifier.
+    - <b>Type:</b> `int`
+    - <b>Min Value:</b> 1
+  - <b>`PartID`</b>
+    - <b>Description:</b> A unique part identifier.
+    - <b>Type:</b> `int`
+    - <b>Min Value:</b> 1
+  - <b>`Title`</b>
+    - <b>Description:</b> A title of an element.
+    - <b>Type:</b> `string`
+    - <b>Max Length:</b> 128
+  - <b>`Description`</b>
+    - <b>Description:</b> A description of an element.
+    - <b>Type:</b> `string`
+    - <b>Max Length:</b> 512
+  - <b>`Tag`</b>
+    - <b>Description:</b> Represents a category within the catalog. Each category has a given title and can be referenced by its id.
+    - <b>Type:</b> `object`
+    - <b>Properties:</b>
+      - `Id`
+        - <b>Type:</b> `TagID`
+      - `Title`
+        - <b>Type:</b> `Title`
+  - <b>`Medium`</b>
+    - <b>Description:</b> Represents a medium within the catalog. Each medium can contain a list of `Part`s.
+    - <b>Type:</b> `object`
+    - <b>List Description:</b> Holds a list of all parts within the medium.
+    - <b>Element Type:</b> `Part`
+    - <b>Properties:</b>
+      - `Title`
+        - <b>Type:</b> `Title`
+      - `Description`
+        - <b>Type:</b> `Description`
+        - <b>Default:</b> empty string
+      - `Location`
+        - <b>Description:</b> A location description for the medium.
+        - <b>Type:</b> `string`
+        - <b>Max Length:</b> 128
+        - <b>Default:</b> empty string
+      - `PositiveTags`
+        - <b>Description:</b> A list of positive tags of the medium.
+        - <b>Type:</b> `TagID[]`
+        - <b>Default:</b> empty array `[]`
+      - `NegativeTags`
+        - <b>Description:</b> A list of negative tags of the medium.
+        - <b>Type:</b> `TagID[]`
+        - <b>Default:</b> empty array `[]`
+  - <b>`Part`</b>
+    - <b>Description:</b> Represents a part within a medium.
+    - <b>Type:</b> `object`
+    - <b>Properties:</b>
+      - `Id`
+        - <b>Type:</b> `PartID`
+      - `Title`
+        - <b>Type:</b> `Title`
+      - `Description`
+        - <b>Type:</b> `Description`
+        - <b>Default:</b> empty string
+      - `Favourite`
+        - <b>Type:</b> `bool`
+        - <b>Description:</b> `true`, if the part is a favourite.
+        - <b>Default:</b> `false`
+      - `Length`
+        - <b>Type:</b> `int`
+        - <b>Description:</b> Length of the part.
+        - <b>Default:</b> 0
+        - <b>Min Value:</b> 0
+      - `Publication_Year`
+        - <b>Type:</b> `int`
+        - <b>Description:</b> Publication year of the part.
+        - <b>Default:</b> 0
+        - <b>Min Value:</b> 0
+      - `Image`
+        - <b>Type:</b> `string`
+        - <b>Description:</b> Base64-String of an image.
+        - <b>Default:</b> empty string
+        - <b>Null Replacement:</b> empty string
+      - `PositiveTags`
+        - <b>Description:</b> A list of positive tags of the part.
+        - <b>Type:</b> `TagID[]`
+        - <b>Default:</b> empty array `[]`
+      - `NegativeTags`
+        - <b>Description:</b> A list of negative tags of the part.
+        - <b>Type:</b> `TagID[]`
+        - <b>Default:</b> empty array `[]`
+  - <b>`Playlist`</b>
+    - <b>Description:</b> Represents a playlist within the catalog.
+    - <b>Type:</b> `object`
+    - <b>Properties:</b>
+      - `Title`
+        - <b>Type:</b> `Title`
+      - `PlaylistParts`
+        - <b>Description:</b> A list of parts within the playlist.
+        - <b>Type:</b> `PartID[]`
+        - <b>Default:</b> empty array `[]`

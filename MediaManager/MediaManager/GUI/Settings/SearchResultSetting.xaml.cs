@@ -20,7 +20,6 @@ namespace MediaManager.GUI.Settings
             searchResultValue.SetMax(50);
             searchResultValue.MaxLength = 512;
         }
-
         public void LoadTexts(string language)
         {
             searchResultLabel.Text = LanguageProvider.getString("Controls.Settings.SearchResult.Label") + ":";
@@ -32,10 +31,10 @@ namespace MediaManager.GUI.Settings
         #region Data
         public void LoadData(int? accountIdentifier)
         {
-            searchResultValue.SetValue((uint)Reader.Settings.ResultListLength);
+            searchResultValue.SetValue((uint)GlobalContext.Settings.ResultListLength);
             LoadTexts(null);
         }
-        public void SaveData() => Writer.Settings.ResultListLength = (int)searchResultValue.Value;
+        public void SaveData() => GlobalContext.Settings.ResultListLength = (int)searchResultValue.Value;
         // validation is already ensured by to the input mechanism itself
         public bool ValidateData() => RunValidation(new List<System.Func<string>>
             {

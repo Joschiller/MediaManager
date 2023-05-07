@@ -15,7 +15,6 @@ namespace MediaManager.GUI.Menus
         #region Setup
         private int MediumId;
         private bool AnyChangeMade = false;
-
         /// <summary>
         /// Opens the editor or viewer for the given medium.
         /// </summary>
@@ -43,11 +42,11 @@ namespace MediaManager.GUI.Menus
                 editor.Medium = new Controls.Edit.MediumWithTags
                 {
                     Id = MediumId,
-                    CatalogueId = CURRENT_CATALOGUE.Id,
+                    CatalogId = CatalogContext.CurrentCatalogId.Value,
                     Title = "",
                     Description = "",
                     Location = "",
-                    Tags = CURRENT_CATALOGUE.Tags.Select(t => new ValuedTag
+                    Tags = CatalogContext.Reader.Lists.Tags.Select(t => new ValuedTag
                     {
                         Tag = t,
                         Value = null
@@ -57,20 +56,25 @@ namespace MediaManager.GUI.Menus
                 updateVisibility(true); // start editing
             }
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void LoadTexts(string language)
+        {
+            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
+        }
         private bool IsExistingMedium { get => MediumId >= 0; }
         private void reloadData()
         {
             if (IsExistingMedium)
             {
-                var medium = Reader.GetMedium(MediumId);
+                var medium = GlobalContext.Reader.GetMedium(MediumId);
                 var mediaData = new Controls.Edit.MediumWithTags
                 {
                     Id = medium.Id,
-                    CatalogueId = medium.CatalogueId,
+                    CatalogId = medium.CatalogId,
                     Title = medium.Title,
                     Description = medium.Description,
                     Location = medium.Location,
-                    Tags = Reader.GetTagsForMedium(MediumId),
+                    Tags = GlobalContext.Reader.GetTagsForMedium(MediumId),
                     Parts = medium.Parts.Select(p => new Controls.Edit.PartWithTags
                     {
                         Id = p.Id,
@@ -80,21 +84,16 @@ namespace MediaManager.GUI.Menus
                         Length = p.Length,
                         Publication_Year = p.Publication_Year,
                         Image = p.Image,
-                        Tags = Reader.GetTagsForPart(p.Id)
+                        Tags = GlobalContext.Reader.GetTagsForPart(p.Id)
                     }).ToList()
                 };
                 viewer.Medium = mediaData;
                 editor.Medium = mediaData;
             }
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
-        public void LoadTexts(string language)
-        {
-            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
-        }
         #endregion
 
+        #region Handler
         private bool validate() => RunValidation(new System.Collections.Generic.List<Func<string>>
         {
             () => editor.Medium.Title.Trim().Length == 0 ? LanguageProvider.getString("Menus.Edit.Validation.MediaTitle") : null,
@@ -109,20 +108,20 @@ namespace MediaManager.GUI.Menus
                 var data = editor.Medium;
                 if (IsExistingMedium)
                 {
-                    Writer.SaveMedium(new Medium
+                    CatalogContext.Writer.SaveMedium(new Medium
                     {
                         Id = MediumId,
-                        CatalogueId = data.CatalogueId,
+                        CatalogId = data.CatalogId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location
                     }, data.Tags);
                     // remove unused parts
-                    var oldParts = Reader.GetMedium(MediumId).Parts;
+                    var oldParts = GlobalContext.Reader.GetMedium(MediumId).Parts;
                     var newParts = data.Parts.Select(p => p.Id).Where(p => p >= 0).ToList();
-                    oldParts.Where(p => !newParts.Contains(p.Id)).ToList().ForEach(p => Writer.DeletePart(p.Id));
+                    oldParts.Where(p => !newParts.Contains(p.Id)).ToList().ForEach(p => GlobalContext.Writer.DeletePart(p.Id));
                     // save updated parts
-                    data.Parts.Where(p => p.Id >= 0).ToList().ForEach(p => Writer.SavePart(new Part
+                    data.Parts.Where(p => p.Id >= 0).ToList().ForEach(p => CatalogContext.Writer.SavePart(new Part
                     {
                         Id = p.Id,
                         MediumId = MediumId,
@@ -134,7 +133,7 @@ namespace MediaManager.GUI.Menus
                         Image = p.Image,
                     }, p.Tags));
                     // add new parts
-                    data.Parts.Where(p => p.Id < 0).ToList().ForEach(p => Writer.CreatePart(new Part
+                    data.Parts.Where(p => p.Id < 0).ToList().ForEach(p => CatalogContext.Writer.CreatePart(new Part
                     {
                         MediumId = MediumId,
                         Title = p.Title,
@@ -147,14 +146,14 @@ namespace MediaManager.GUI.Menus
                 }
                 else
                 {
-                    MediumId = Writer.CreateMedium(new Medium
+                    MediumId = CatalogContext.Writer.CreateMedium(new Medium
                     {
-                        CatalogueId = data.CatalogueId,
+                        CatalogId = data.CatalogId,
                         Title = data.Title,
                         Description = data.Description,
                         Location = data.Location
                     }, data.Tags);
-                    data.Parts.ForEach(p => Writer.CreatePart(new Part
+                    data.Parts.ForEach(p => CatalogContext.Writer.CreatePart(new Part
                     {
                         MediumId = MediumId,
                         Title = p.Title,
@@ -172,7 +171,6 @@ namespace MediaManager.GUI.Menus
                 return false;
             }
         }
-
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e)
         {
@@ -204,7 +202,7 @@ namespace MediaManager.GUI.Menus
         }
         private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
         {
-            var performDeletion = !CURRENT_CATALOGUE.DeletionConfirmationMedium;
+            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationMedium;
             if (!performDeletion)
             {
                 var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Edit.MediaDeletion"));
@@ -212,7 +210,7 @@ namespace MediaManager.GUI.Menus
             }
             if (performDeletion)
             {
-                if (IsExistingMedium) Writer.DeleteMedium(MediumId);
+                if (IsExistingMedium) GlobalContext.Writer.DeleteMedium(MediumId);
                 Close();
             }
         }
@@ -241,11 +239,11 @@ namespace MediaManager.GUI.Menus
             }
         }
         #endregion
-
         private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
         {
             AnyChangeMade = true;
             updateVisibility(true);
         }
+        #endregion
     }
 }

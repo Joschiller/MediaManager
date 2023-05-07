@@ -18,7 +18,6 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             editor.LoadData(null);
         }
-
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {

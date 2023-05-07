@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
-using static MediaManager.Globals.DataConnector.Reader;
 
 namespace MediaManager.GUI.Controls.Search
 {
@@ -15,18 +14,21 @@ namespace MediaManager.GUI.Controls.Search
     /// </summary>
     public partial class SearchPanel : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void MediumSelectionHandler(int mediumId, int? partId);
         public event MediumSelectionHandler MediumSelected;
-
         public delegate void PlaylistAdditionHandler(int id, SearchResultMode mode);
         public event PlaylistAdditionHandler PlaylistAdditionRequested;
+        #endregion
 
+        #region Bindings
+        public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
+        public int ItemsPerPage { get; set; } = GlobalContext.Settings.ResultListLength;
+        #endregion
+
+        #region Setup
         private SearchParameters CurrentSearchParameters;
         private List<SearchResultItem> CompleteResultList = new List<SearchResultItem>();
-        public ObservableCollection<SearchResultItem> SearchResult { get; set; } = new ObservableCollection<SearchResultItem>();
-
-        public int ItemsPerPage { get; set; } = Reader.Settings.ResultListLength;
-
         public SearchPanel()
         {
             InitializeComponent();
@@ -34,11 +36,25 @@ namespace MediaManager.GUI.Controls.Search
             RegisterAtLanguageProvider();
             CurrentSearchParameters = input.CurrentSearchParameters;
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
+        }
+        ~SearchPanel() => LanguageProvider.Unregister(this);
+        public void ReloadTags() => input.reloadTagList();
+        public void ReloadResultList()
+        {
+            ItemsPerPage = GlobalContext.Settings.ResultListLength;
+            input_SearchParametersChanged(CurrentSearchParameters);
+        }
+        #endregion
 
+        #region Handler
         private void input_SearchParametersChanged(SearchParameters parameters)
         {
             CurrentSearchParameters = parameters;
-            CompleteResultList = SearchUsingParameters(parameters);
+            CompleteResultList = CatalogContext.Reader.SearchUsingParameters(parameters);
             pager.CurrentPage = 1;
             pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
             LoadTexts(null);
@@ -55,7 +71,7 @@ namespace MediaManager.GUI.Controls.Search
             if (item != null)
             {
                 if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
-                else MediumSelected?.Invoke(GetPart(item.Id).MediumId, item.Id);
+                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
             }
         }
         private int? rightClickPivotId = null;
@@ -74,19 +90,6 @@ namespace MediaManager.GUI.Controls.Search
         {
             if (rightClickPivotId.HasValue) PlaylistAdditionRequested?.Invoke(rightClickPivotId.Value, CurrentSearchParameters.SearchResult);
         }
-
-        public void ReloadTags() => input.reloadTagList();
-        public void ReloadResultList()
-        {
-            ItemsPerPage = Reader.Settings.ResultListLength;
-            input_SearchParametersChanged(CurrentSearchParameters);
-        }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
-        }
-        ~SearchPanel() => LanguageProvider.Unregister(this);
+        #endregion
     }
 }

@@ -15,6 +15,13 @@ namespace MediaManager.GUI.Components
     [ContentProperty("Children")]
     public partial class NavigationBar : UserControl, UpdatedLanguageUser
     {
+        #region Events
+        public event EventHandler IconClicked;
+        public event EventHandler BackClicked;
+        public event EventHandler HelpClicked;
+        #endregion
+
+        #region Properties
         public ObservableCollection<NavigationButtonGroup> Children { get; private set; } = new ObservableCollection<NavigationButtonGroup>();
         private NavigationBarMode _Mode = 0;
         /// <summary>
@@ -38,19 +45,27 @@ namespace MediaManager.GUI.Components
                 help.Visibility = withHelp ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-        public event EventHandler IconClicked;
-        public event EventHandler BackClicked;
-        public event EventHandler HelpClicked;
+        #endregion
 
+        #region Setup
         public NavigationBar()
         {
             InitializeComponent();
             DataContext = this;
-
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
             RegisterAtLanguageProvider();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            // TODO: these strings are not properly updated in already existing components when the language changes (e.g. in the overview menu)
+            back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
+            help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
+        }
+        ~NavigationBar() => LanguageProvider.Unregister(this);
+        #endregion
 
+        #region Handler
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -69,20 +84,6 @@ namespace MediaManager.GUI.Components
         private void icon_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) => IconClicked?.Invoke(sender, e);
         private void back_Click(object sender, RoutedEventArgs e) => BackClicked?.Invoke(sender, e);
         private void help_Click(object sender, RoutedEventArgs e) => HelpClicked?.Invoke(sender, e);
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
-        public void LoadTexts(string language)
-        {
-            // TODO: these strings are not properly updated in already existing components when the language changes
-            back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
-            help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
-        }
-        ~NavigationBar() => LanguageProvider.Unregister(this);
+        #endregion
     }
-
-    public enum NavigationBarMode {
-        WithAppIcon = 1,
-        WithBackButton = 2,
-        WithHelpButton = 4,
-    };
 }

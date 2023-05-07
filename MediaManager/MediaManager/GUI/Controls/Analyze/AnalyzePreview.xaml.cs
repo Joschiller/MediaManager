@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using static MediaManager.Globals.DataConnector.Reader;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Controls.Analyze
 {
@@ -12,18 +12,31 @@ namespace MediaManager.GUI.Controls.Analyze
     /// </summary>
     public partial class AnalyzePreview : UserControl, UpdatedLanguageUser
     {
+        #region Events
         public delegate void AnalyzeEditHandler(AnalyzeMode mode, AnalyzeListElement element);
         public event AnalyzeEditHandler StartEditing;
+        #endregion
 
+        #region Setup
         private AnalyzeMode mode;
         private AnalyzeListElement element;
-
         public AnalyzePreview()
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            editButton.ToolTip = LanguageProvider.getString("Common.Button.Edit");
+            labelMediumSelection.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
+            labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
+            labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
+        }
+        ~AnalyzePreview() => LanguageProvider.Unregister(this);
+        #endregion
 
+        #region Getter/Setter
         public void LoadPreview(AnalyzeMode mode, AnalyzeListElement element)
         {
             this.mode = mode;
@@ -40,16 +53,16 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.MediumDoubled:
                     editButton.Visibility = Visibility.Visible;
                     doubled.Visibility = Visibility.Visible;
-                    mediumSelection.ItemsSource = GetDoubledMediaToMediumTitle(element.Text);
+                    mediumSelection.ItemsSource = CatalogContext.Reader.Analysis.GetDoubledMediaToMediumTitle(element.Text);
                     mediumSelection.SelectedIndex = 0;
                     break;
                 case AnalyzeMode.MediumCommonTags:
                     editButton.Visibility = Visibility.Visible;
                     tagHighlight.Visibility = Visibility.Visible;
-                    var nonCommonTags = GetNonCommonTagsOfMedium(element.Id);
-                    var tagsOfMedium = GetTagsForMedium(element.Id);
+                    var nonCommonTags = CatalogContext.Reader.Analysis.GetNonCommonTagsOfMedium(element.Id);
+                    var tagsOfMedium = GlobalContext.Reader.GetTagsForMedium(element.Id);
                     highlightedTagList.SetTagList(tagsOfMedium, new System.Collections.Generic.List<int>(), nonCommonTags);
-                    mediaPartListTag.ItemsSource = GetMedium(element.Id).Parts.Select(p => p.Title).ToList();
+                    mediaPartListTag.ItemsSource = GlobalContext.Reader.GetMedium(element.Id).Parts.Select(p => p.Title).ToList();
                     break;
                 case AnalyzeMode.MediumEmpty:
                 case AnalyzeMode.MediumDescription:
@@ -57,15 +70,15 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.MediumLocation:
                     editButton.Visibility = Visibility.Visible;
                     elementViewer.Visibility = Visibility.Visible;
-                    var medium = GetMedium(element.Id);
+                    var medium = GlobalContext.Reader.GetMedium(element.Id);
                     elementViewer.Medium = new Edit.EditableMedium
                     {
                         Id = medium.Id,
-                        CatalogueId = medium.CatalogueId,
+                        CatalogId = medium.CatalogId,
                         Title = medium.Title,
                         Description = medium.Description,
                         Location = medium.Location,
-                        Tags = GetTagsForMedium(element.Id)
+                        Tags = GlobalContext.Reader.GetTagsForMedium(element.Id)
                     };
                     break;
                 case AnalyzeMode.PartDescription:
@@ -75,7 +88,7 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.PartImage:
                     editButton.Visibility = Visibility.Visible;
                     elementViewer.Visibility = Visibility.Visible;
-                    var part = GetPart(element.Id);
+                    var part = GlobalContext.Reader.GetPart(element.Id);
                     elementViewer.Part = new Edit.EditablePart
                     {
                         Id = part.Id,
@@ -86,24 +99,18 @@ namespace MediaManager.GUI.Controls.Analyze
                         Length = part.Length,
                         Publication_Year = part.Publication_Year,
                         Image = part.Image,
-                        Tags = GetTagsForPart(element.Id),
-                        TagsBlockedByMedium = GetTagsForMedium(part.MediumId).Where(t => t.Value.HasValue).Select(t => t.Tag.Id).ToList()
+                        Tags = GlobalContext.Reader.GetTagsForPart(element.Id),
+                        TagsBlockedByMedium = GlobalContext.Reader.GetTagsForMedium(part.MediumId).Where(t => t.Value.HasValue).Select(t => t.Tag.Id).ToList()
                     };
                     break;
             }
         }
-        private void mediumSelection_SelectionChanged(object sender, SelectionChangedEventArgs e) => mediaPartListDoubled.ItemsSource = mediumSelection.SelectedItem != null ? (mediumSelection.SelectedItem as Medium).Parts : new List<Part>();
+        #endregion
 
+        #region Handler
+        private void mediumSelection_SelectionChanged(object sender, SelectionChangedEventArgs e) => mediaPartListDoubled.ItemsSource = mediumSelection.SelectedItem != null ? (mediumSelection.SelectedItem as Medium).Parts : new List<Part>();
         private void elementViewer_EditClicked(Edit.ElementMode mode, int id) => StartEditing(this.mode, element);
         private void editButton_Click(object sender, RoutedEventArgs e) => StartEditing(mode, element);
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
-        public void LoadTexts(string language)
-        {
-            editButton.ToolTip = LanguageProvider.getString("Common.Button.Edit");
-            labelMediumSelection.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
-            labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
-            labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
-        }
+        #endregion
     }
 }

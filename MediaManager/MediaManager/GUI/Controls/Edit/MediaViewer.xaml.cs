@@ -1,6 +1,4 @@
-﻿using MediaManager.Globals.LanguageProvider;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Controls;
 
 namespace MediaManager.GUI.Controls.Edit
@@ -10,13 +8,8 @@ namespace MediaManager.GUI.Controls.Edit
     /// </summary>
     public partial class MediaViewer : UserControl
     {
+        #region Properties
         private MediumWithTags medium;
-
-        public MediaViewer()
-        {
-            InitializeComponent();
-        }
-
         public MediumWithTags Medium
         {
             get => medium;
@@ -31,13 +24,22 @@ namespace MediaManager.GUI.Controls.Edit
                 OpenMediumTab();
             }
         }
+        #endregion
 
+        #region Setup
+        public MediaViewer()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region Getter/setter
         public void OpenMediumTab()
         {
             viewer.Medium = new EditableMedium
             {
                 Id = medium.Id,
-                CatalogueId = medium.CatalogueId,
+                CatalogId = medium.CatalogId,
                 Title = medium.Title,
                 Description = medium.Description,
                 Location = medium.Location,
@@ -65,11 +67,14 @@ namespace MediaManager.GUI.Controls.Edit
                 };
             }
         }
+        #endregion
 
+        #region Handler
         private void list_SelectionChanged(int? id)
         {
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
+        #endregion
     }
 }

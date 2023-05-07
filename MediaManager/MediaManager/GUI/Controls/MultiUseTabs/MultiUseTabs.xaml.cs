@@ -12,18 +12,21 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     [ContentProperty("Children")]
     public partial class MultiUseTabs : UserControl
     {
+        #region Properties
         public ObservableCollection<MultiUseTabsControl> Children { get; private set; } = new ObservableCollection<MultiUseTabsControl>();
-        public ObservableCollection<TabItem> Tabs { get; private set; } = new ObservableCollection<TabItem>();
+        #endregion
 
+        #region Bindings
+        public ObservableCollection<TabItem> Tabs { get; private set; } = new ObservableCollection<TabItem>();
+        #endregion
+
+        #region Setup
         public MultiUseTabs()
         {
             InitializeComponent();
             DataContext = this;
-
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
         }
-
-        void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => ReloadGUI();
         public void ReloadGUI()
         {
             foreach (var t in Tabs) t.Content = null;
@@ -61,5 +64,10 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
                 if (child != null) single.Children.Add((UIElement)child);
             }
         }
+        #endregion
+
+        #region Handler
+        void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => ReloadGUI();
+        #endregion
     }
 }

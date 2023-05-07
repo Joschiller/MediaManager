@@ -11,18 +11,25 @@ namespace MediaManager.GUI.Atoms
     /// </summary>
     public partial class NumericUpDown : UserControl
     {
+        #region Events
         public delegate void ValueChangeHandler(uint newVal);
         public event ValueChangeHandler ValueChanged;
+        #endregion
 
+        #region Properties
         public uint Value { get; private set; } = 0;
-
         public uint? Min { get; private set; } = null;
         public uint? Max { get; private set; } = null;
-
+        /// <summary>
+        /// Maximum character length of the numeric value. To set no limit set the <see cref="MaxLength"/> to <c>null</c>.<br/>
+        /// Default: <c>null</c>
+        /// </summary>
         public uint? MaxLength { get; set; } = null;
+        #endregion
 
-        private Regex POSITIVE_NUMBER_REGEX = new Regex(@"^\d+$");
-
+        #region Setup
+        // the control only allows non-negative numbers
+        private readonly Regex NON_NEGATIVE_NUMBER_REGEX = new Regex(@"^\d+$");
         public NumericUpDown()
         {
             InitializeComponent();
@@ -39,7 +46,9 @@ namespace MediaManager.GUI.Atoms
             number.IsEnabled = down.IsEnabled || up.IsEnabled;
             callback?.Invoke();
         }
-        #region Change Value
+        #endregion
+
+        #region Getter/Setter
         public void SetValue(uint val)
         {
             Value = val;
@@ -55,6 +64,9 @@ namespace MediaManager.GUI.Atoms
             Max = val;
             updateGUI(() => ValueChanged?.Invoke(Value));
         }
+        #endregion
+
+        #region Handler
         private void up_Click(object sender, RoutedEventArgs e)
         {
             Value++;
@@ -80,7 +92,7 @@ namespace MediaManager.GUI.Atoms
         }
         private void number_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (POSITIVE_NUMBER_REGEX.IsMatch(number.Text))
+            if (NON_NEGATIVE_NUMBER_REGEX.IsMatch(number.Text))
             {
                 var parsedValue = Value;
                 if (uint.TryParse(number.Text, out parsedValue))

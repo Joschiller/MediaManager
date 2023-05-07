@@ -14,32 +14,44 @@ namespace MediaManager.GUI.Controls.List
     /// </summary>
     public partial class MediaTagList : UserControl, UpdatedLanguageUser
     {
+        #region Bindings
         public ObservableCollection<Medium> Media { get; set; } = new ObservableCollection<Medium>();
         public ObservableCollection<MediaTagListElement> Parts { get; set; } = new ObservableCollection<MediaTagListElement>();
+        #endregion
 
+        #region Setup
         private Tag CurrentTag;
-        private int ItemsPerPage = Reader.Settings.ResultListLength;
-
+        private int ItemsPerPage = GlobalContext.Settings.ResultListLength;
         public MediaTagList()
         {
             InitializeComponent();
             DataContext = this;
             pager.CurrentPage = 1;
-            pager.TotalPages = Reader.CountOfMedia / ItemsPerPage + (Reader.CountOfMedia % ItemsPerPage == 0 ? 0 : 1);
+            pager.TotalPages = CatalogContext.Reader.Statistics.CountOfMedia / ItemsPerPage + (CatalogContext.Reader.Statistics.CountOfMedia % ItemsPerPage == 0 ? 0 : 1);
             LoadTagsOfSelectedMedium();
         }
+        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void LoadTexts(string language)
+        {
+            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
+        }
+        ~MediaTagList() => LanguageProvider.Unregister(this);
+        #endregion
 
+        #region Getter/Setter
         public void setCurrentTag(Tag tag)
         {
             CurrentTag = tag;
             LoadTagsOfSelectedMedium();
         }
+        #endregion
 
+        #region Handler
         #region Navigation
         private void pager_PageChanged(int newPage)
         {
             Media.Clear();
-            var dbMedia = Reader.Media;
+            var dbMedia = CatalogContext.Reader.Lists.Media;
             for (int i = 0; i < ItemsPerPage; i++)
             {
                 if ((newPage - 1) * ItemsPerPage + i >= dbMedia.Count) break;
@@ -60,7 +72,7 @@ namespace MediaManager.GUI.Controls.List
                 var currentMedium = mediaList.SelectedItem as Medium;
                 foreach (var p in currentMedium.Parts)
                 {
-                    var value = Reader.GetTagsForPart(p.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
+                    var value = GlobalContext.Reader.GetTagsForPart(p.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                     Parts.Add(new MediaTagListElement
                     {
                         Part = p,
@@ -68,7 +80,7 @@ namespace MediaManager.GUI.Controls.List
                         Icon = GetIconForTagValue(value)
                     });
                 }
-                mediumTag.Value = Reader.GetTagsForMedium(currentMedium.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
+                mediumTag.Value = GlobalContext.Reader.GetTagsForMedium(currentMedium.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                 mediumTag.TagName = currentMedium.Title;
                 saveButton.Enabled = false;
             }
@@ -140,25 +152,20 @@ namespace MediaManager.GUI.Controls.List
 
             var currentMedium = mediaList.SelectedItem as Medium;
             // update medium
-            var mediumTags = Reader.GetTagsForMedium(currentMedium.Id);
+            var mediumTags = GlobalContext.Reader.GetTagsForMedium(currentMedium.Id);
             mediumTags.FirstOrDefault(t => t.Tag.Id == CurrentTag.Id).Value = mediumTag.Value;
-            Writer.SaveMedium(Reader.GetMedium(currentMedium.Id), mediumTags);
+            CatalogContext.Writer.SaveMedium(GlobalContext.Reader.GetMedium(currentMedium.Id), mediumTags);
 
             // update parts
             foreach (var p in Parts)
             {
-                var partTags = Reader.GetTagsForPart(p.Part.Id);
+                var partTags = GlobalContext.Reader.GetTagsForPart(p.Part.Id);
                 partTags.FirstOrDefault(t => t.Tag.Id == CurrentTag.Id).Value = p.Value;
-                Writer.SavePart(Reader.GetPart(p.Part.Id), partTags);
+                CatalogContext.Writer.SavePart(GlobalContext.Reader.GetPart(p.Part.Id), partTags);
             }
 
             LoadTagsOfSelectedMedium();
         }
-
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
-        public void LoadTexts(string language)
-        {
-            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
-        }
+        #endregion
     }
 }
