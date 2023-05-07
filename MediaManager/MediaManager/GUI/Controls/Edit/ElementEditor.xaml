@@ -33,7 +33,7 @@
             <Button x:Name="removeImage" Click="removeImage_Click" DockPanel.Dock="Top" Margin="{StaticResource defaultMarginSmall}"/>
         </DockPanel>
         <DockPanel x:Name="imageViewer" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="{StaticResource defaultMarginSmall}">
-            <TextBlock x:Name="imagePath" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="Auto"/>
+            <TextBlock x:Name="imagePath" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="Auto" Margin="{StaticResource defaultMarginSmall}"/>
             <Image x:Name="image"/>
         </DockPanel>
         <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
