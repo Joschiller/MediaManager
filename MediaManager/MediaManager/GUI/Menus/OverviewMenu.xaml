@@ -35,7 +35,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <DockPanel  Grid.Column="0" Margin="{StaticResource defaultMarginSmall}">
+            <DockPanel Grid.Column="0" Margin="{StaticResource defaultMarginSmall}">
                 <TextBlock x:Name="catalogTitle" DockPanel.Dock="Top" TextAlignment="Center" FontSize="{StaticResource fontSize_windowTitle}"/>
                 <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
                 <multiusetabs:MultiUseTabs x:Name="multiUseTabs">
