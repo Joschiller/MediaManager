@@ -21,7 +21,8 @@
       "Concat": " und "
     },
     "DispatcherUnhandledException": "Es ist ein unerwarteter Fehler aufgetreten. Bitte schließen und starten Sie die Anwendung neu!\nSie können einen Screenshot aufnehmen, um Ihre Daten später wiederherzustellen oder den Fehler zu melden.",
-    "ExportFileType": "Media Manager Datei"
+    "ExportFileType": "Media Manager Datei",
+    "ImageFileType": "Bilddatei"
   },
   "Component": {
     "Pager": {
@@ -52,7 +53,9 @@
       },
       "Button": {
         "AddPart": "Einen neuen Medienteil hinzufügen",
-        "DeletePart": "Gewählten Medienteil löschen"
+        "DeletePart": "Gewählten Medienteil löschen",
+        "SelectImage": "Bild wählen",
+        "RemoveImage": "Bild entfernen"
       },
       "Minute": "Minute",
       "Minutes": "Minuten",

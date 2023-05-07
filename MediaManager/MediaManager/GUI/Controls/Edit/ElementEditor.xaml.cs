@@ -1,8 +1,9 @@
 ﻿using MediaManager.Globals.LanguageProvider;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using static MediaManager.Globals.ImageUtils;
 
 namespace MediaManager.GUI.Controls.Edit
 {
@@ -42,7 +43,8 @@ namespace MediaManager.GUI.Controls.Edit
                 textLocation.Visibility = Visibility.Visible;
                 location.Visibility = Visibility.Visible;
                 integerMeta.Visibility = Visibility.Collapsed;
-                image.Visibility = Visibility.Collapsed;
+                imageButtons.Visibility = Visibility.Collapsed;
+                imageViewer.Visibility = Visibility.Collapsed;
 
                 title.Text = medium.Title;
                 location.Text = medium.Location;
@@ -78,7 +80,8 @@ namespace MediaManager.GUI.Controls.Edit
                 textLocation.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Collapsed;
                 integerMeta.Visibility = Visibility.Visible;
-                image.Visibility = Visibility.Visible;
+                imageButtons.Visibility = Visibility.Visible;
+                imageViewer.Visibility = Visibility.Visible;
 
                 title.Text = part.Title;
                 IsCurrentlyFavorite = part.Favourite;
@@ -87,7 +90,9 @@ namespace MediaManager.GUI.Controls.Edit
                 length.SetValue((uint)part.Length);
                 textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 publication.SetValue((uint)part.Publication_Year);
-                // TODO image
+                image.Source = part.Image != null ? convertByteArrayToBitmapImage(part.Image) : null;
+                imagePath.Text = "";
+                imagePath.Visibility = Visibility.Collapsed;
                 tags.SetTagList(part.Tags, part.TagsBlockedByMedium);
                 skipOnChange = false;
             }
@@ -110,6 +115,8 @@ namespace MediaManager.GUI.Controls.Edit
             textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
             textDescription.Text = LanguageProvider.getString("Controls.Edit.Label.Description") + ":";
             textTags.Text = LanguageProvider.getString("Controls.Edit.Label.Tags") + ":";
+            selectImage.Content = LanguageProvider.getString("Controls.Edit.Button.SelectImage");
+            removeImage.Content = LanguageProvider.getString("Controls.Edit.Button.RemoveImage");
             textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
             textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
             textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
@@ -149,13 +156,33 @@ namespace MediaManager.GUI.Controls.Edit
             onEdited();
         }
         private void tags_TagValueChanged(List<ValuedTag> tags) => onEdited();
-        private void selectImage_Click(object sender, RoutedEventArgs e) => onEdited(); // TODO: dialog => set image of part and imagePath
+        private string showLoadImageDialog()
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = LanguageProvider.getString("Common.ImageFileType") + " (*.png)|*.png";
+            ofd.ShowDialog();
+            return ofd.FileName;
+        }
+        private void selectImage_Click(object sender, RoutedEventArgs e)
+        {
+            var fileName = showLoadImageDialog();
+            if (fileName == null || fileName == "") return;
+
+            part.Image = convertImageToByteArray(fileName);
+            imagePath.Text = fileName;
+            imagePath.Visibility = Visibility.Visible;
+            image.Source = convertByteArrayToBitmapImage(part.Image);
+
+            onEdited();
+        }
         private void removeImage_Click(object sender, RoutedEventArgs e)
         {
             if (part != null)
             {
                 part.Image = null;
                 imagePath.Text = "";
+                imagePath.Visibility = Visibility.Collapsed;
+                image.Source = null;
             }
             onEdited();
         }

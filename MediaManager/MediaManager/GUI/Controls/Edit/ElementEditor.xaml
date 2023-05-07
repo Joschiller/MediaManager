@@ -19,25 +19,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="textTitle" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <DockPanel Grid.Row="0" Grid.Column="1">
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}">
             <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
             <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
         <TextBlock x:Name="textDescription" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <TextBox x:Name="description" Grid.Row="1" Grid.Column="1" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged"/>
+        <TextBox x:Name="description" Grid.Row="1" Grid.Column="1" AcceptsReturn="True" MaxLength="512" TextChanged="textChanged" Margin="{StaticResource defaultMarginSmall}"/>
         <TextBlock x:Name="textTags" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="1" TagValueChanged="tags_TagValueChanged"/>
-        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel DockPanel.Dock="Right" Orientation="Vertical">
-                <Button x:Name="selectImage" Click="selectImage_Click"/>
-                <Button x:Name="removeImage" Click="removeImage_Click"/>
-                <TextBlock x:Name="imagePath"/>
-            </StackPanel>
+        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="1" TagValueChanged="tags_TagValueChanged" Margin="{StaticResource defaultMarginSmall}"/>
+        <DockPanel x:Name="imageButtons" Grid.Row="3" Grid.Column="0" LastChildFill="False">
+            <Button x:Name="selectImage" Click="selectImage_Click" DockPanel.Dock="Top" Margin="{StaticResource defaultMarginSmall}"/>
+            <Button x:Name="removeImage" Click="removeImage_Click" DockPanel.Dock="Top" Margin="{StaticResource defaultMarginSmall}"/>
+        </DockPanel>
+        <DockPanel x:Name="imageViewer" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="{StaticResource defaultMarginSmall}">
+            <TextBlock x:Name="imagePath" DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="Auto"/>
             <Image x:Name="image"/>
         </DockPanel>
         <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <TextBox x:Name="location" Grid.Row="4" Grid.Column="1" MaxLength="128" TextChanged="textChanged"/>
+        <TextBox x:Name="location" Grid.Row="4" Grid.Column="1" MaxLength="128" TextChanged="textChanged" Margin="{StaticResource defaultMarginSmall}"/>
         <Grid x:Name="integerMeta" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

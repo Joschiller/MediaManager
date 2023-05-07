@@ -21,7 +21,8 @@
       "Concat": " and "
     },
     "DispatcherUnhandledException": "An unexpected error occurred. Please close and restart the application!\nYou can take a screenshot to restore your data later on or to report the error.",
-    "ExportFileType": "Media Manager File"
+    "ExportFileType": "Media Manager File",
+    "ImageFileType": "Image File"
   },
   "Component": {
     "Pager": {
@@ -52,7 +53,9 @@
       },
       "Button": {
         "AddPart": "Add a new part",
-        "DeletePart": "Delete the selected part"
+        "DeletePart": "Delete the selected part",
+        "SelectImage": "Select Image",
+        "RemoveImage": "Remove Image"
       },
       "Minute": "Minute",
       "Minutes": "Minutes",
