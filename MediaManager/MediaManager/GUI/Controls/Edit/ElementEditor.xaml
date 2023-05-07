@@ -47,10 +47,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="textLength" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-            <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+            <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10"/>
             <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
             <TextBlock x:Name="textPublication" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-            <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged"/>
+            <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50"/>
         </Grid>
     </Grid>
 </UserControl>

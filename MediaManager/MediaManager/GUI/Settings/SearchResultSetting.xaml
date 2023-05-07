@@ -11,6 +11,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="searchResultLabel" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
-        <atoms:NumericUpDown x:Name="searchResultValue" Grid.Column="1"/>
+        <atoms:NumericUpDown x:Name="searchResultValue" Grid.Column="1" StepPerScroll="1"/>
     </Grid>
 </UserControl>

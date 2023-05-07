@@ -25,6 +25,10 @@ namespace MediaManager.GUI.Atoms
         /// Default: <c>null</c>
         /// </summary>
         public uint? MaxLength { get; set; } = null;
+        /// <summary>
+        /// Value that will be added or substracted from the current value per scoll-event when using the mouse wheel over the input field.
+        /// </summary>
+        public uint StepPerScroll { get; set; } = 1;
         #endregion
 
         #region Setup
@@ -81,9 +85,9 @@ namespace MediaManager.GUI.Atoms
         {
             e.Handled = true; // prevent scolling outside the control
             var newValue = Value;
-            if (e.Delta > 0) newValue += (uint)e.Delta;
-            if (e.Delta < 0 && (-e.Delta) >= newValue) newValue = 0;
-            if (e.Delta < 0 && (-e.Delta) < newValue) newValue = (uint)(newValue + e.Delta);
+            if (e.Delta > 0) newValue += StepPerScroll;
+            if (e.Delta < 0 && StepPerScroll >= newValue) newValue = 0;
+            if (e.Delta < 0 && StepPerScroll < newValue) newValue -= StepPerScroll;
             if (MaxLength.HasValue && newValue.ToString().Length > MaxLength.Value)
             {
                 uint.TryParse(new string('9', (int)MaxLength.Value), out newValue);
