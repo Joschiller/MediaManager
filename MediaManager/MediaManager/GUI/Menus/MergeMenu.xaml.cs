@@ -287,7 +287,7 @@ namespace MediaManager.GUI.Menus
                 }, p.Tags);
             }
             // 3. Delete remaining merged media
-            foreach (var m in mediaToMerge) GlobalContext.Writer.DeleteMedium(m.Id); // TODO: deleting the media fails due to FK-violation
+            foreach (var m in mediaToMerge) GlobalContext.Writer.DeleteMedium(m.Id);
 
             // finish
             ShowDefaultDialog(LanguageProvider.getString("Menus.Merge.Dialog.Success"), SuccessMode.Success);
