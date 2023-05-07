@@ -79,6 +79,7 @@ namespace MediaManager.GUI.Atoms
         }
         private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            e.Handled = true; // prevent scolling outside the control
             var newValue = Value;
             if (e.Delta > 0) newValue += (uint)e.Delta;
             if (e.Delta < 0 && (-e.Delta) >= newValue) newValue = 0;
