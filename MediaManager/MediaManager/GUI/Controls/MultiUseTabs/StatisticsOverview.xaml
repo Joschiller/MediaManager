@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs"
              mc:Ignorable="d">
-    <DockPanel LastChildFill="False">
+    <DockPanel LastChildFill="False" Margin="{StaticResource defaultMarginSmall}">
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

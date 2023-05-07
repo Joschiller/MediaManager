@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
              mc:Ignorable="d">
-    <DockPanel>
+    <DockPanel Margin="{StaticResource defaultMarginSmall}">
         <DockPanel DockPanel.Dock="Top">
             <atoms:ImageButton x:Name="next" DockPanel.Dock="Right" EnabledIconSource="../../../Resources/next_random.png" Click="next_Click" Size="32" HorizontalAlignment="Right" VerticalAlignment="Top"/>
             <TextBlock x:Name="title" FontSize="{StaticResource fontSize_subTitle}" TextWrapping="WrapWithOverflow"/>
