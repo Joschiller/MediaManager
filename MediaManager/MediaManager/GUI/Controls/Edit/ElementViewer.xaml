@@ -22,7 +22,7 @@
             <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="{StaticResource imageButtonSize}" Width="{StaticResource imageButtonSize}"/>
             <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}" TextWrapping="WrapWithOverflow"/>
         </DockPanel>
-        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow"/>
+        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Justify" TextWrapping="WrapWithOverflow"/>
         <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Enabled="False"/>
         <Image x:Name="image" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
