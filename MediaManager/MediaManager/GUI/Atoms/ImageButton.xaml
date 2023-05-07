@@ -44,7 +44,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Button x:Name="btn" ToolTip="{Binding Tooltip}" Click="btn_Click">
+        <Button x:Name="btn" Click="btn_Click">
             <Image Source="{Binding EnabledIconSource}"/>
         </Button>
         <Button x:Name="disabledIcon" IsEnabled="False" Visibility="Collapsed">

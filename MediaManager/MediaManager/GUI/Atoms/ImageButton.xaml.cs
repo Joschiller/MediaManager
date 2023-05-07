@@ -14,7 +14,7 @@ namespace MediaManager.GUI.Atoms
         #endregion
 
         #region Properties
-        public object Tooltip { get; set; } = null;
+        public object Tooltip { get => btn.ToolTip; set => btn.ToolTip = value; }
         /// <summary>
         /// Size of the button.<br/>
         /// Default: <c>48</c>

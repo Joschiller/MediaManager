@@ -58,7 +58,6 @@ namespace MediaManager.GUI.Components
         public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
         public void LoadTexts(string language)
         {
-            // TODO: these strings are not properly updated in already existing components when the language changes (e.g. in the overview menu)
             back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
             help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
         }
