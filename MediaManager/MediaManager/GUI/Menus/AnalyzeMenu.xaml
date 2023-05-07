@@ -18,7 +18,7 @@
                 <GroupBox x:Name="modeGroup" DockPanel.Dock="Top">
                     <analyze:AnalyzeModeSelector x:Name="mode" ModeChanged="mode_ModeChanged"/>
                 </GroupBox>
-                <components:Pager x:Name="pager" DockPanel.Dock="Top" PageChanged="pager_PageChanged" HorizontalAlignment="Right"/>
+                <components:Pager x:Name="pager" DockPanel.Dock="Top" PageChanged="pager_PageChanged" HorizontalAlignment="Right" TextPlacement="Left"/>
                 <analyze:AnalyzeList x:Name="list" SelectionChanged="list_SelectionChanged"/>
             </DockPanel>
             <analyze:AnalyzePreview x:Name="preview" Grid.Column="1" Margin="4" StartEditing="preview_StartEditing"/>

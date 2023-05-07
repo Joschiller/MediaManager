@@ -35,6 +35,11 @@ namespace MediaManager.GUI.Components
                 UpdateGUI();
             }
         }
+        /// <summary>
+        /// Placement of the page and item counter within the control.<br/>
+        /// By default, <see cref="Dock.Top"/> will be used.
+        /// </summary>
+        public Dock TextPlacement { get => DockPanel.GetDock(textPanel); set => DockPanel.SetDock(textPanel, value); }
         #endregion
 
         #region Setup
