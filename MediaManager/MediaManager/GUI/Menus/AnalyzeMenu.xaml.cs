@@ -41,6 +41,7 @@ namespace MediaManager.GUI.Menus
             allItems = CatalogContext.Reader.Analysis.LoadAnalyzeResult(mode);
             pager.CurrentPage = 1;
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
+            pager.setItemCount(allItems.Count);
         }
         private void pager_PageChanged(int newPage) => list.SetItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
         private void list_SelectionChanged(AnalyzeListElement element) => preview.LoadPreview(mode.Mode, element);

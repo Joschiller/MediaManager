@@ -57,6 +57,7 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList = CatalogContext.Reader.SearchUsingParameters(parameters);
             pager.CurrentPage = 1;
             pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
+            pager.setItemCount(CompleteResultList.Count);
             LoadTexts(null);
         }
         private void pager_PageChanged(int newPage)

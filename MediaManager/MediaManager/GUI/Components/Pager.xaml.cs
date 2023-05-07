@@ -59,6 +59,10 @@ namespace MediaManager.GUI.Components
         }
         #endregion
 
+        #region Getter/Setter
+        public void setItemCount(int count) => itemCount.Text = count.ToString();
+        #endregion
+
         #region Handler
         private void prev_Click(object sender, RoutedEventArgs e)
         {
