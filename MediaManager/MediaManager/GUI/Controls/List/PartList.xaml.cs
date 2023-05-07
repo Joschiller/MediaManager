@@ -16,10 +16,6 @@ namespace MediaManager.GUI.Controls.List
         public event SelectionHandler SelectionChanged;
         #endregion
 
-        #region Bindings
-        public ObservableCollection<PartListElement> Parts { get; private set; } = new ObservableCollection<PartListElement>();
-        #endregion
-
         #region Setup
         public PartList()
         {
@@ -32,12 +28,11 @@ namespace MediaManager.GUI.Controls.List
         public void SetPartList(string mediaTitle, List<PartListElement> parts)
         {
             title.Text = mediaTitle;
-            Parts.Clear();
-            parts.OrderBy(part => part.Title).ToList().ForEach(Parts.Add);
+            list.ItemsSource = parts.OrderBy(part => part.Title).ToList();
         }
         public void SelectItem(int? id)
         {
-            list.SelectedItem = Parts.FirstOrDefault(p => p.Id == id);
+            list.SelectedItem = (list.ItemsSource as List<PartListElement>).FirstOrDefault(p => p.Id == id);
             //SelectionChanged?.Invoke(id);
         }
 

@@ -10,7 +10,7 @@
             <TextBlock x:Name="title" TextWrapping="WrapWithOverflow"/>
         </Button>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
-        <ListView x:Name="list" ItemsSource="{Binding Parts}" SelectionChanged="list_SelectionChanged">
+        <ListView x:Name="list" SelectionChanged="list_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tag="{Binding Id}" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
