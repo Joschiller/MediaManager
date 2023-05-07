@@ -37,7 +37,7 @@
             <DockPanel  Grid.Column="0">
                 <TextBlock x:Name="catalogTitle" DockPanel.Dock="Top" TextAlignment="Center" FontSize="{StaticResource fontSize_windowTitle}"/>
                 <multiusetabs:MultiUseTabs x:Name="multiUseTabs">
-                    <multiusetabs:PlaylistEditor/>
+                    <multiusetabs:PlaylistEditor PartSelected="PlaylistEditor_PartSelected"/>
                     <multiusetabs:TitleOfTheDay/>
                     <multiusetabs:StatisticsOverview/>
                 </multiusetabs:MultiUseTabs>

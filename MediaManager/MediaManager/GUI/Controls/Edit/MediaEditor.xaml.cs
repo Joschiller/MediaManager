@@ -99,11 +99,7 @@ namespace MediaManager.GUI.Controls.Edit
 
         private void list_SelectionChanged(int? id)
         {
-            if (needsListReload)
-            {
-                reloadList();
-                list.SelectItem(id);
-            }
+            if (needsListReload) reloadList();
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }

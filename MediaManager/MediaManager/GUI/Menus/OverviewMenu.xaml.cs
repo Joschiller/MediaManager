@@ -76,6 +76,7 @@ namespace MediaManager.GUI.Menus
             var result = new PlaylistAdditionDialog(id, mode).ShowDialog();
             if (result.HasValue && result.Value) Reload();
         }
+        private void PlaylistEditor_PartSelected(Part part) => OpenWindow(this, new EditMenu(part.MediumId, part.Id, false), ShowAndReload);
         #endregion
     }
 }

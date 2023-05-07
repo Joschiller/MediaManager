@@ -43,7 +43,7 @@
                         </ComboBox>
                         <Button x:Name="create" Click="create_Click" Margin="{StaticResource defaultMarginSmall}"/>
                     </StackPanel>
-                    <ListView x:Name="playlistEntries" ItemsSource="{Binding SelectedItem.Parts, ElementName=playlists}">
+                    <ListView x:Name="playlistEntries" ItemsSource="{Binding SelectedItem.Parts, ElementName=playlists}" MouseDoubleClick="playlistEntries_MouseDoubleClick">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}, Converter={StaticResource WidthCalculator}}">

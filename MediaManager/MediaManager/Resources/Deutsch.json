@@ -21,7 +21,8 @@
       "Concat": " und "
     },
     "DispatcherUnhandledException": "Es ist ein unerwarteter Fehler aufgetreten. Bitte schließen und starten Sie die Anwendung neu!\nSie können einen Screenshot aufnehmen, um Ihre Daten später wiederherzustellen oder den Fehler zu melden.",
-    "ExportFileType": "Media Manager Datei"
+    "ExportFileType": "Media Manager Datei",
+    "ImageFileType": "Bilddatei"
   },
   "Component": {
     "Pager": {
@@ -52,7 +53,9 @@
       },
       "Button": {
         "AddPart": "Einen neuen Medienteil hinzufügen",
-        "DeletePart": "Gewählten Medienteil löschen"
+        "DeletePart": "Gewählten Medienteil löschen",
+        "SelectImage": "Bild wählen",
+        "RemoveImage": "Bild entfernen"
       },
       "Minute": "Minute",
       "Minutes": "Minuten",
@@ -318,17 +321,20 @@
         },
         "Medium": {
           "MissingTitle": "Ein Medium ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingTag": "Das Medium ${Dialog.Import.Exceptions.Common.WithTitle} referenziert eine nicht existierende Kategorie.",
           "WrongFormat": "Das Medium ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "Das Medium ${Dialog.Import.Exceptions.Common.WithTitle}"
         },
         "Part": {
           "MissingId": "Ein Medienteil ${Dialog.Import.Exceptions.Common.MissingId}.",
           "MissingTitle": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingTag": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID} referenziert eine nicht existierende Kategorie.",
           "WrongFormat": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "Der Medienteil ${Dialog.Import.Exceptions.Common.WithID}"
         },
         "Playlist": {
           "MissingTitle": "Eine Playlist ${Dialog.Import.Exceptions.Common.MissingTitle}.",
+          "MissingPart": "Die Playlist ${Dialog.Import.Exceptions.Common.WithTitle} referenziert einen nicht existierenden Medienteil.",
           "WrongFormat": "Die Playlist ${Dialog.Import.Exceptions.Common.WithTitle} ${Dialog.Import.Exceptions.Common.WrongFormat}.",
           "Writing": "Die Playlist ${Dialog.Import.Exceptions.Common.WithTitle}"
         }

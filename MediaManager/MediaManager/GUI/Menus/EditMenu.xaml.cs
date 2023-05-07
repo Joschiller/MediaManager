@@ -146,13 +146,7 @@ namespace MediaManager.GUI.Menus
                 }
                 else
                 {
-                    MediumId = CatalogContext.Writer.CreateMedium(new Medium
-                    {
-                        CatalogId = data.CatalogId,
-                        Title = data.Title,
-                        Description = data.Description,
-                        Location = data.Location
-                    }, data.Tags);
+                    MediumId = CatalogContext.Writer.CreateMedium(data.Title, data.Description, data.Location, data.Tags);
                     data.Parts.ForEach(p => CatalogContext.Writer.CreatePart(new Part
                     {
                         MediumId = MediumId,
@@ -224,7 +218,7 @@ namespace MediaManager.GUI.Menus
             if (!IsExistingMedium) Close();
             else
             {
-                editor.Medium = viewer.Medium;
+                reloadData();
                 AnyChangeMade = false;
                 updateVisibility(false);
             }

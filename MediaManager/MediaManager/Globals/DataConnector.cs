@@ -285,8 +285,10 @@ namespace MediaManager.Globals
                     public static List<Tag> UnorderedTags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
                     /// <summary>List of all <see cref="Tag"/>s ordered by title.</summary>
                     public static List<Tag> Tags { get => UnorderedTags.OrderBy(p => p.Title).ToList(); }
+                    /// <summary>List of all <see cref="Playlist"/>s.</summary>
+                    public static List<Playlist> UnorderedPlaylists { get => CURRENT_CATALOG?.Playlists.ToList() ?? new List<Playlist>(); }
                     /// <summary>List of all <see cref="Playlist"/>s ordered by title.</summary>
-                    public static List<Playlist> Playlists { get => CURRENT_CATALOG?.Playlists.OrderBy(p => p.Title).ToList() ?? new List<Playlist>(); }
+                    public static List<Playlist> Playlists { get => UnorderedPlaylists.OrderBy(p => p.Title).ToList(); }
                 }
                 public static class Statistics
                 {
@@ -324,7 +326,7 @@ namespace MediaManager.Globals
                         {
                             Id = p.Medium.Id,
                             Text = p.Medium.Title,
-                        }).Distinct().OrderBy(m => m.Text)) result.Add(item);
+                        }).OrderBy(m => m.Text)) { if (!result.Any(r => r.Id == item.Id)) result.Add(item); }
                     }
                     else
                     {
@@ -408,14 +410,22 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Creates a new <see cref="Medium"/>.
                 /// </summary>
-                /// <param name="medium"><see cref="Medium"/> to create</param>
+                /// <param name="title">Title of the <see cref="Medium"/> to create</param>
+                /// <param name="description">Description of the <see cref="Medium"/> to create</param>
+                /// <param name="location">Location of the <see cref="Medium"/> to create</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Medium"/></param>
                 /// <returns>Id of the newly generated <see cref="Medium"/></returns>
-                public static int CreateMedium(Medium medium, List<ValuedTag> tags)
+                public static int CreateMedium(string title, string description, string location, List<ValuedTag> tags)
                 {
-                    CURRENT_CATALOG.Media.Add(medium);
+                    CURRENT_CATALOG.Media.Add(new Medium
+                    {
+                        // catalog id must not be set here, because it is set implicitly by the CURRENT_CATALOG
+                        Title = title,
+                        Description = description,
+                        Location = location
+                    });
                     DBCONNECTION.SaveChanges();
-                    var mediumId = Reader.Lists.Media.LastOrDefault()?.Id ?? 0;
+                    var mediumId = Reader.Lists.UnorderedMedia.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
                     foreach (var t in tags)
                     {
                         if (!t.Value.HasValue) continue;
@@ -432,7 +442,7 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Creates a new <see cref="Part"/>.
                 /// </summary>
-                /// <param name="part"><see cref="Part"/> to create</param>
+                /// <param name="part"><see cref="Part"/> to create, containing all its metadata including the corresponding medium id</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
                 public static void CreatePart(Part part, List<ValuedTag> tags)
                 {
@@ -475,7 +485,7 @@ namespace MediaManager.Globals
                         Title = title
                     });
                     DBCONNECTION.SaveChanges();
-                    return Reader.Lists.Playlists.LastOrDefault()?.Id ?? 0;
+                    return Reader.Lists.UnorderedPlaylists.OrderBy(p => p.Id).LastOrDefault()?.Id ?? 0;
                 }
 
                 /// <summary>
@@ -514,16 +524,18 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Saves changes to an existing <see cref="Part"/>.
                 /// </summary>
-                /// <param name="part"><see cref="Part"/> to save</param>
+                /// <param name="part"><see cref="Part"/> to save, containing all its metadata including the corresponding medium id</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Part"/></param>
                 public static void SavePart(Part part, List<ValuedTag> tags)
                 {
                     var original = GlobalContext.Reader.GetPart(part.Id);
+                    original.MediumId = part.MediumId;
                     original.Title = part.Title;
                     original.Favourite = part.Favourite;
                     original.Description = part.Description;
                     original.Length = part.Length;
                     original.Publication_Year = part.Publication_Year;
+                    original.Image = part.Image;
                     DBCONNECTION.PT_Relation.RemoveRange(DBCONNECTION.PT_Relation.Where(r => r.PartId == part.Id));
                     foreach (var t in tags)
                     {
@@ -731,7 +743,6 @@ namespace MediaManager.Globals
 
                 var tagIdMappings = new Dictionary<int, int>();
                 var partIdMappings = new Dictionary<int, int>();
-                // TODO: add explicit exceptions if one of the mappings fails due to a non existent id
 
                 var tagList = xmlData.Element("Tags")?.Elements().ToList() ?? new List<XElement>();
                 var mediaList = xmlData.Element("Mediums")?.Elements().ToList() ?? new List<XElement>();
@@ -783,12 +794,18 @@ namespace MediaManager.Globals
                     {
                         xmlMediumDescription = xmlMedium.Attribute("Description")?.Value ?? "";
                         xmlMediumLocation = xmlMedium.Attribute("Location")?.Value ?? "";
-                        var positiveTagsString = xmlMedium.Attribute("PositiveTags")?.Value ?? "[]";
-                        var negativeTagsString = xmlMedium.Attribute("NegativeTags")?.Value ?? "[]";
-                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
-                        xmlMediumTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                        var positiveTags = stringToIntList(xmlMedium.Attribute("PositiveTags")?.Value ?? "[]");
+                        var negativeTags = stringToIntList(xmlMedium.Attribute("NegativeTags")?.Value ?? "[]");
+                        try
+                        {
+                            positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
+                            negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.MissingTag"), xmlMediumTitle), null); }
+                        xmlMediumTags.AddRange(tagIdListToTagList(positiveTags, true));
+                        xmlMediumTags.AddRange(tagIdListToTagList(negativeTags, false));
                     }
-                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), null); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), e as FormatException); }
                     var mediumId = -1;
                     try
                     {
@@ -800,7 +817,7 @@ namespace MediaManager.Globals
                             Location = xmlMediumLocation,
                         });
                         DBCONNECTION.SaveChanges();
-                        mediumId = DBCONNECTION.Media.ToList().LastOrDefault()?.Id ?? 0;
+                        mediumId = DBCONNECTION.Media.OrderBy(m => m.Id).ToList().LastOrDefault()?.Id ?? 0;
                         foreach (var t in xmlMediumTags)
                         {
                             if (!t.Value.HasValue) continue;
@@ -847,12 +864,18 @@ namespace MediaManager.Globals
                             xmlPartPublication_Year = int.Parse(xmlPart.Attribute("Publication_Year")?.Value ?? "0");
                             var imgAttribute = xmlPart.Attribute("Image")?.Value;
                             xmlPartImage = imgAttribute != null ? Convert.FromBase64String(imgAttribute) : null;
-                            var positiveTagsString = xmlPart.Attribute("PositiveTags")?.Value ?? "[]";
-                            var negativeTagsString = xmlPart.Attribute("NegativeTags")?.Value ?? "[]";
-                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(positiveTagsString).Select(t => tagIdMappings[t]).ToList(), true));
-                            xmlPartTags.AddRange(tagIdListToTagList(stringToIntList(negativeTagsString).Select(t => tagIdMappings[t]).ToList(), false));
+                            var positiveTags = stringToIntList(xmlPart.Attribute("PositiveTags")?.Value ?? "[]");
+                            var negativeTags = stringToIntList(xmlPart.Attribute("NegativeTags")?.Value ?? "[]");
+                            try
+                            {
+                                positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
+                                negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
+                            }
+                            catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingTag"), xmlPartId), null); }
+                            xmlPartTags.AddRange(tagIdListToTagList(positiveTags, true));
+                            xmlPartTags.AddRange(tagIdListToTagList(negativeTags, false));
                         }
-                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), null); }
+                        catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), e as FormatException); }
                         try
                         {
                             partIdMappings.Add(xmlPartId, CreatePart(new Part
@@ -884,10 +907,14 @@ namespace MediaManager.Globals
                     catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
                     try
                     {
-                        var partsString = xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]";
-                        xmlPlaylistParts = stringToIntList(partsString).Select(p => partIdMappings[p]).ToList();
+                        var playlistParts = stringToIntList(xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]");
+                        try
+                        {
+                            xmlPlaylistParts = playlistParts.Select(p => partIdMappings[p]).ToList();
+                        }
+                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingPart"), xmlTitle), null); }
                     }
-                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), null); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), e as FormatException); }
                     try
                     {
                         DBCONNECTION.Playlists.Add(new Playlist
@@ -896,7 +923,7 @@ namespace MediaManager.Globals
                             Title = xmlTitle
                         });
                         DBCONNECTION.SaveChanges();
-                        var playlistId = DBCONNECTION.Playlists.ToList().LastOrDefault()?.Id ?? 0;
+                        var playlistId = DBCONNECTION.Playlists.OrderBy(p => p.Id).ToList().LastOrDefault()?.Id ?? 0;
                         xmlPlaylistParts.ForEach(p => GlobalContext.Writer.AddPartToPlaylist(playlistId, p));
                     }
                     catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
@@ -911,13 +938,13 @@ namespace MediaManager.Globals
             {
                 DBCONNECTION.Catalogs.Add(catalog);
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Catalogs.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Catalogs.OrderBy(c => c.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
             private int CreateTag(Tag tag)
             {
                 DBCONNECTION.Tags.Add(tag);
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Tags.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Tags.OrderBy(t => t.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
             private int CreatePart(Part part, List<ValuedTag> tags)
             {
@@ -933,7 +960,7 @@ namespace MediaManager.Globals
                     });
                 }
                 DBCONNECTION.SaveChanges();
-                return DBCONNECTION.Parts.ToList().LastOrDefault()?.Id ?? 0;
+                return DBCONNECTION.Parts.OrderBy(p => p.Id).ToList().LastOrDefault()?.Id ?? 0;
             }
         }
     }

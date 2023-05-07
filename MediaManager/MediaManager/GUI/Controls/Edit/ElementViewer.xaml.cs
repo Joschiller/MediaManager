@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using static MediaManager.Globals.ImageUtils;
 
 namespace MediaManager.GUI.Controls.Edit
 {
@@ -59,7 +60,7 @@ namespace MediaManager.GUI.Controls.Edit
                 publication.Text = part.Publication_Year.ToString();
                 textPublication.Visibility = part.Publication_Year > 0 ? Visibility.Visible : Visibility.Collapsed;
                 publication.Visibility = part.Publication_Year > 0 ? Visibility.Visible : Visibility.Collapsed;
-                // TODO image
+                image.Source = part.Image != null ? convertByteArrayToBitmapImage(part.Image) : null;
                 tags.SetTagList(part.Tags);
             }
         }

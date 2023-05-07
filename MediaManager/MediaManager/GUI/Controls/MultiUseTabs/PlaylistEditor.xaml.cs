@@ -14,6 +14,10 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
     /// </summary>
     public partial class PlaylistEditor : UserControl, MultiUseTabsControl, UpdatedLanguageUser
     {
+        #region Events
+        public delegate void PartSelectionHandler(Part part);
+        public event PartSelectionHandler PartSelected;
+        #endregion
         #region Setup
         public PlaylistEditor()
         {
@@ -119,6 +123,11 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             }
         }
         #endregion
+        private void playlistEntries_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var part = playlistEntries.SelectedItem as Part;
+            if (part != null) PartSelected?.Invoke(part);
+        }
         #endregion
     }
 }
