@@ -324,7 +324,7 @@ namespace MediaManager.Globals
                         {
                             Id = p.Medium.Id,
                             Text = p.Medium.Title,
-                        }).Distinct().OrderBy(m => m.Text)) result.Add(item);
+                        }).OrderBy(m => m.Text)) { if (!result.Any(r => r.Id == item.Id)) result.Add(item); }
                     }
                     else
                     {
