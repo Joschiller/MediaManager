@@ -218,7 +218,7 @@ namespace MediaManager.GUI.Menus
             if (!IsExistingMedium) Close();
             else
             {
-                editor.Medium = viewer.Medium;
+                reloadData();
                 AnyChangeMade = false;
                 updateVisibility(false);
             }
