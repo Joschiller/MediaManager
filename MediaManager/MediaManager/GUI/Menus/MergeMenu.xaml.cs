@@ -270,13 +270,7 @@ namespace MediaManager.GUI.Menus
 
             // store
             // 1. Create new medium
-            var mediumId = CatalogContext.Writer.CreateMedium(new Medium
-            {
-                CatalogId = mergedMedium.Id,
-                Title = mergedMedium.Title,
-                Description = mergedMedium.Description,
-                Location = mergedMedium.Location,
-            }, mergedMedium.Tags);
+            var mediumId = CatalogContext.Writer.CreateMedium(mergedMedium.Title, mergedMedium.Description, mergedMedium.Location, mergedMedium.Tags);
             // 2. Move old parts and update their tags
             foreach(var p in mergedMedium.Parts)
             {

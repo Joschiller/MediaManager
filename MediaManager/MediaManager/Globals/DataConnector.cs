@@ -410,12 +410,20 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Creates a new <see cref="Medium"/>.
                 /// </summary>
-                /// <param name="medium"><see cref="Medium"/> to create</param>
+                /// <param name="title">Title of the <see cref="Medium"/> to create</param>
+                /// <param name="description">Description of the <see cref="Medium"/> to create</param>
+                /// <param name="location">Location of the <see cref="Medium"/> to create</param>
                 /// <param name="tags"><see cref="Tag"/>s of the <see cref="Medium"/></param>
                 /// <returns>Id of the newly generated <see cref="Medium"/></returns>
-                public static int CreateMedium(Medium medium, List<ValuedTag> tags)
+                public static int CreateMedium(string title, string description, string location, List<ValuedTag> tags)
                 {
-                    CURRENT_CATALOG.Media.Add(medium);
+                    CURRENT_CATALOG.Media.Add(new Medium
+                    {
+                        // catalog id must not be set here, because it is set implicitly by the CURRENT_CATALOG
+                        Title = title,
+                        Description = description,
+                        Location = location
+                    });
                     DBCONNECTION.SaveChanges();
                     var mediumId = Reader.Lists.UnorderedMedia.OrderBy(m => m.Id).LastOrDefault()?.Id ?? 0;
                     foreach (var t in tags)
