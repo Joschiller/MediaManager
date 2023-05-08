@@ -8,7 +8,7 @@
     <DockPanel>
         <DockPanel x:Name="textPanel" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="page" DockPanel.Dock="Top" TextAlignment="Center" VerticalAlignment="Bottom"/>
-            <TextBlock x:Name="itemCount" DockPanel.Dock="Top" TextAlignment="Center" VerticalAlignment="Bottom" Text="0"/>
+            <TextBlock x:Name="itemCount" DockPanel.Dock="Top" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
         </DockPanel>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>

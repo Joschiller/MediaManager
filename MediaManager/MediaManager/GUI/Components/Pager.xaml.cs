@@ -65,7 +65,11 @@ namespace MediaManager.GUI.Components
         #endregion
 
         #region Getter/Setter
-        public void setItemCount(int count) => itemCount.Text = count.ToString();
+        public void setItemCount(int count)
+        {
+            itemCount.Visibility = Visibility.Visible;
+            itemCount.Text = count.ToString();
+        }
         #endregion
 
         #region Handler
