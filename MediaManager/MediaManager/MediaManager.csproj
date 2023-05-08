@@ -209,6 +209,8 @@
     <Compile Include="GUI\Dialogs\PlaylistAdditionDialog.xaml.cs">
       <DependentUpon>PlaylistAdditionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\HelpTopics\HelpTopic.cs" />
+    <Compile Include="GUI\HelpTopics\Topics.cs" />
     <Compile Include="GUI\Menus\AnalyzeMenu.xaml.cs">
       <DependentUpon>AnalyzeMenu.xaml</DependentUpon>
     </Compile>
