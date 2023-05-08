@@ -51,7 +51,7 @@ namespace MediaManager.GUI.Menus
         {
             selectedTopic = topics.SelectedItem as HelpTopic;
             pager.CurrentPage = 1;
-            pager.TotalPages = 1;
+            pager.TotalPages = selectedTopic.Pages?.Count ?? 0;
         }
         private void pager_PageChanged(int newPage)
         {
