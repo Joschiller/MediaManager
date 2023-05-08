@@ -5,13 +5,13 @@ namespace MediaManager.GUI.HelpTopics
 {
     public class HelpTopic
     {
-        public string Caption { get; set; }
+        public string TreeCaption { get; set; }
         public List<HelpTopicPage> Pages { get; set; }
         public List<HelpTopic> Children { get; set; }
     }
     public class HelpTopicPage
     {
-        public string Caption { get; set; }
+        public string PageCaption { get; set; }
         public Bitmap Image { get; set; }
         public string Content { get; set; }
     }

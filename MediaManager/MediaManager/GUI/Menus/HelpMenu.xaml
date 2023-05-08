@@ -12,7 +12,7 @@
             <TreeView x:Name="topics" Margin="{StaticResource defaultMarginSmall}" SelectedItemChanged="topics_SelectedItemChanged">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <TextBlock Text="{Binding Caption}"/>
+                        <TextBlock Text="{Binding TreeCaption}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
