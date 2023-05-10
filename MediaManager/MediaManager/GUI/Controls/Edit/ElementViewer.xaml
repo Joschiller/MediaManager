@@ -7,7 +7,6 @@
              mc:Ignorable="d">
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,16 +17,22 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+        <DockPanel Grid.Row="0">
             <Image DockPanel.Dock="Right" x:Name="favoriteIcon" Height="{StaticResource imageButtonSize}" Width="{StaticResource imageButtonSize}"/>
             <TextBlock x:Name="title" FontSize="{StaticResource fontSize_windowTitle}" TextWrapping="WrapWithOverflow"/>
         </DockPanel>
-        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Justify" TextWrapping="WrapWithOverflow"/>
-        <components:TagList x:Name="tags" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Enabled="False"/>
-        <Image x:Name="image" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
-        <TextBlock x:Name="location" Grid.Row="4" Grid.Column="1"/>
-        <Grid x:Name="integerMeta" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+        <TextBlock x:Name="description" Grid.Row="1" TextAlignment="Justify" TextWrapping="WrapWithOverflow"/>
+        <components:TagList x:Name="tags" Grid.Row="2" Enabled="False"/>
+        <Image x:Name="image" Grid.Row="3"/>
+        <Grid x:Name="locationContainer" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="textLocation" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource leftsideLabel}"/>
+            <TextBlock x:Name="location" Grid.Column="1"/>
+        </Grid>
+        <Grid x:Name="integerMeta" Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
