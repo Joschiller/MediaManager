@@ -23,6 +23,7 @@ namespace MediaManager.GUI.Menus
         {
             InitializeComponent();
             RegisterAtLanguageProvider();
+            contentImageContainer.Visibility = Visibility.Collapsed;
         }
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
@@ -56,7 +57,9 @@ namespace MediaManager.GUI.Menus
         private void pager_PageChanged(int newPage)
         {
             contentCaption.Text = selectedTopic?.Pages?[newPage - 1]?.PageCaption;
-            contentImage.Source = selectedTopic?.Pages?[newPage - 1]?.Image != null ? getImageSourceFromBitmap(selectedTopic?.Pages?[newPage - 1]?.Image) : null;
+            var image = selectedTopic?.Pages?[newPage - 1]?.Image != null ? getImageSourceFromBitmap(selectedTopic?.Pages?[newPage - 1]?.Image) : null;
+            contentImageContainer.Visibility = image != null ? Visibility.Visible : Visibility.Collapsed;
+            contentImage.Source = image;
             contentText.Text = selectedTopic?.Pages?[newPage - 1]?.Content;
         }
         private ImageSource getImageSourceFromBitmap(Bitmap bmp) => Imaging.CreateBitmapSourceFromHBitmap(bmp.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());

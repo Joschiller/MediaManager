@@ -21,7 +21,9 @@
             <DockPanel>
                 <TextBlock x:Name="contentCaption" DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" FontSize="{StaticResource fontSize_subTitle}"/>
                 <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
-                <Image x:Name="contentImage" DockPanel.Dock="Top" HorizontalAlignment="Center" MaxHeight="300"/>
+                <Border x:Name="contentImageContainer" DockPanel.Dock="Top" Background="Transparent" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="2" HorizontalAlignment="Center">
+                    <Image x:Name="contentImage" MaxHeight="300"/>
+                </Border>
                 <TextBlock x:Name="contentText" TextWrapping="WrapWithOverflow" TextAlignment="Justify"/>
             </DockPanel>
         </ScrollViewer>
