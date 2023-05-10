@@ -278,7 +278,6 @@
       "FinishButton": "Finish",
       "exportFailedStep": "Export failed",
       "exportFailedMessage": "The export has failed!",
-      "DefaultExportFileName": "Catalog",
       "Steps": {
         "0": "Export started",
         "1": "Exporting tags",

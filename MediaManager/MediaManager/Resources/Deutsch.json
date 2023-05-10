@@ -278,7 +278,6 @@
       "FinishButton": "Abschlieﬂen",
       "exportFailedStep": "Export fehlgeschlagen",
       "exportFailedMessage": "Der Export ist fehlgeschlagen!",
-      "DefaultExportFileName": "Katalog",
       "Steps": {
         "0": "Export gestartet",
         "1": "Exportiere Kategorien",

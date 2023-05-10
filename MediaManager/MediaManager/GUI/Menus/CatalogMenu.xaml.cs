@@ -71,10 +71,10 @@ namespace MediaManager.GUI.Menus
             if (GlobalContext.Reader.Catalogs.Count == 1) CatalogContext.SetCurrentCatalog(GlobalContext.Reader.Catalogs[0]); // activate imported catalog if it is the only existing one
             catalogList.LoadCatalogs();
         }
-        private string showSaveFileDialog()
+        private string showSaveFileDialog(string catalogTitle)
         {
             var sfd = new SaveFileDialog();
-            sfd.FileName = LanguageProvider.getString("Dialog.Export.DefaultExportFileName");
+            sfd.FileName = catalogTitle;
             sfd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*.mmf.xml)|*.mmf.xml";
             var res = sfd.ShowDialog();
             if (!res.HasValue || !res.Value) return "";
@@ -83,7 +83,7 @@ namespace MediaManager.GUI.Menus
         private void btnExportCatalogClick(object sender, RoutedEventArgs e)
         {
             if (catalogList.SelectedCatalog == null) return;
-            var fileName = showSaveFileDialog();
+            var fileName = showSaveFileDialog(catalogList.SelectedCatalog.Title);
             if (fileName == null || fileName == "") return;
             var viewer = new ThreadProcessViewer(
                 new CatalogExportThread(
