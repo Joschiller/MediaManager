@@ -347,5 +347,398 @@
         "5": "Import finished"
       }
     }
+  },
+  "Help": {
+    "CatalogMenu": {
+      "TreeCaption": "Catalog Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "EditCatalog": {
+          "TreeCaption": "Adding and Editing Catalogs",
+          "Pages": {
+            "0": {
+              "PageCaption": "Adding a Catalog",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Editing a Catalog",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Deleting a Catalog",
+              "Content": "... selection after deletion"
+            }
+          }
+        },
+        "SelectCatalog": {
+          "TreeCaption": "Selecting the Active Catalog",
+          "Pages": {
+            "0": {
+              "PageCaption": "Selecting the Active Catalog",
+              "Content": "... default selected ... double click"
+            }
+          }
+        },
+        "ExportCatalog": {
+          "TreeCaption": "Exporting Catalogs",
+          "Pages": {
+            "0": {
+              "PageCaption": "Exporting Catalogs",
+              "Content": ""
+            }
+          }
+        },
+        "ImportCatalog": {
+          "TreeCaption": "Importing Catalogs",
+          "Pages": {
+            "0": {
+              "PageCaption": "Importing Catalogs",
+              "Content": ""
+            }
+          }
+        }
+      }
+    },
+    "OverviewMenu": {
+      "TreeCaption": "Overview Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "Editing": {
+          "TreeCaption": "Editing Catalog Contents",
+          "Pages": {
+            "0": {
+              "PageCaption": "Adding a Medium",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Adding a Tag",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Viewing or Editing a Medium",
+              "Content": "... double click on search"
+            }
+          }
+        },
+        "Search": {
+          "TreeCaption": "Searching Media",
+          "Pages": {
+            "0": {
+              "PageCaption": "Text Search",
+              "Content": "... input + enter"
+            },
+            "1": {
+              "PageCaption": "Tag Search",
+              "Content": "... changing tag values (checkbox cycle)"
+            },
+            "2": {
+              "PageCaption": "Search Modi",
+              "Content": ""
+            }
+          }
+        },
+        "Playlists": {
+          "TreeCaption": "Playlists",
+          "Pages": {
+            "0": {
+              "PageCaption": "Generating a Playlist",
+              "Content": "... setting ... inputs"
+            },
+            "1": {
+              "PageCaption": "Viewing a Playlist",
+              "Content": "... removing items"
+            },
+            "2": {
+              "PageCaption": "Adding Entries to a Playlist",
+              "Content": "... right click ... add to playlist"
+            },
+            "3": {
+              "PageCaption": "Deleting a Playlist",
+              "Content": "... select + button ... deletion confirmation"
+            }
+          }
+        },
+        "TitleOfTheDay": {
+          "TreeCaption": "Title Of The Day",
+          "Pages": {
+            "0": {
+              "PageCaption": "Viewing the Title Of The Day",
+              "Content": "... setting ... modes ... next"
+            }
+          }
+        },
+        "Statistics": {
+          "TreeCaption": "Statistics",
+          "Pages": {
+            "0": {
+              "PageCaption": "Viewing the Statistics",
+              "Content": "... setting"
+            }
+          }
+        }
+      }
+    },
+    "EditMenu": {
+      "TreeCaption": "Edit Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "Viewing": {
+          "TreeCaption": "Viewing Media",
+          "Pages": {
+            "0": {
+              "PageCaption": "Viewing Media",
+              "Content": ""
+            }
+          }
+        },
+        "Editing": {
+          "TreeCaption": "Editing Media",
+          "Pages": {
+            "0": {
+              "PageCaption": "Start Editing",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Tag Values",
+              "Content": "... changing tag values (checkbox cycle)"
+            },
+            "2": {
+              "PageCaption": "Deleting Media",
+              "Content": "... deletion confirmation"
+            },
+            "3": {
+              "PageCaption": "Adding Parts",
+              "Content": ""
+            },
+            "4": {
+              "PageCaption": "Deleting Parts",
+              "Content": "... deletion confirmation => persisted when saved"
+            },
+            "5": {
+              "PageCaption": "Saving or Discarding Changes",
+              "Content": ""
+            }
+          },
+          "Topics": {
+            "Medium": {
+              "TreeCaption": "Media Information",
+              "Pages": {
+                "0": {
+                  "PageCaption": "Edit Media Information",
+                  "Content": ""
+                },
+                "1": {
+                  "PageCaption": "Title, Description and Location",
+                  "Content": ""
+                },
+                "2": {
+                  "PageCaption": "Tags",
+                  "Content": "... influence on parts"
+                }
+              }
+            },
+            "Part": {
+              "TreeCaption": "Part Information",
+              "Pages": {
+                "0": {
+                  "PageCaption": "Edit Part Information",
+                  "Content": ""
+                },
+                "1": {
+                  "PageCaption": "Title and Description",
+                  "Content": ""
+                },
+                "2": {
+                  "PageCaption": "Favourites",
+                  "Content": ""
+                },
+                "3": {
+                  "PageCaption": "Tags",
+                  "Content": "... blocked tags"
+                },
+                "4": {
+                  "PageCaption": "Image Selection",
+                  "Content": ""
+                },
+                "5": {
+                  "PageCaption": "Length and Publication Year",
+                  "Content": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TagMenu": {
+      "TreeCaption": "Tag Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "EditTag": {
+          "TreeCaption": "Adding and Editing Tags",
+          "Pages": {
+            "0": {
+              "PageCaption": "Adding a Tag",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Editing a Tag",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Deleting a Tag",
+              "Content": "... deletion confirmation"
+            }
+          }
+        },
+        "TagValues": {
+          "TreeCaption": "Editing Tag Values",
+          "Pages": {
+            "0": {
+              "PageCaption": "Selecting a Medium",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Editing Tag Values",
+              "Content": "... changing tag values (checkbox cycle) ... influence between medium and parts"
+            },
+            "2": {
+              "PageCaption": "Saving Changes",
+              "Content": ""
+            }
+          }
+        }
+      }
+    },
+    "SettingsMenu": {
+      "TreeCaption": "Settings Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "GlobalSettings": {
+          "TreeCaption": "Global Settings",
+          "Pages": {
+            "0": {
+              "PageCaption": "Language Setting",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Overview Menu Features",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Search Result Pages",
+              "Content": ""
+            }
+          }
+        },
+        "CatalogSettings": {
+          "TreeCaption": "Catalog Settings",
+          "Pages": {
+            "0": {
+              "PageCaption": "Deletion Confirmations",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Title Of The Day",
+              "Content": ""
+            }
+          }
+        }
+      }
+    },
+    "AnalyzeMenu": {
+      "TreeCaption": "Analyze Menu",
+      "Pages": {
+        "0": {
+          "PageCaption": "Overview",
+          "Content": ""
+        },
+        "1": {
+          "PageCaption": "Menu Bar",
+          "Content": ""
+        }
+      },
+      "Topics": {
+        "Preview": {
+          "TreeCaption": "Preview Analysis",
+          "Pages": {
+            "0": {
+              "PageCaption": "Empty Media or Missing Attributes",
+              "Content": ""
+            },
+            "1": {
+              "PageCaption": "Doubled Media",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Missing Medium Tag",
+              "Content": ""
+            }
+          }
+        },
+        "Edit": {
+          "TreeCaption": "Editing",
+          "Pages": {
+            "0": {
+              "PageCaption": "Editing",
+              "Content": "... normal mode via Edit Menu ... redirection to merge menu"
+            },
+            "1": {
+              "PageCaption": "Merging Doubled Media",
+              "Content": ""
+            },
+            "2": {
+              "PageCaption": "Merge Preview",
+              "Content": ""
+            }
+          }
+        }
+      }
+    }
   }
 }

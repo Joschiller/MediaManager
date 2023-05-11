@@ -15,4 +15,11 @@ namespace MediaManager.GUI.HelpTopics
         public Bitmap Image { get; set; }
         public string Content { get; set; }
     }
+
+    public class ShortHelpTopic
+    {
+        public string LanguageFileKey { get; set; }
+        public List<Bitmap> PageImages { get; set; }
+        public List<ShortHelpTopic> Children { get; set; }
+    }
 }
