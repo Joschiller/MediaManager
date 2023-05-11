@@ -20,7 +20,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock x:Name="labelMediumSelection" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
                     <ComboBox x:Name="mediumSelection" Grid.Row="0" Grid.Column="1" SelectionChanged="mediumSelection_SelectionChanged" Margin="16,0,0,0">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
