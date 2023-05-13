@@ -349,16 +349,24 @@
     }
   },
   "Help": {
+    "Common": {
+      "MenuBar": "The menu bar offers the following actions:",
+      "MenuBarButton": "using the button in the menu bar",
+      "DeletionConfirmationShow": "a deletion confirmation will be shown to prevent accidental deletions",
+      "DeletionConfirmationSetting": "If the corresponding setting is enabled, ${Help.Common.DeletionConfirmationShow}.",
+      "MutliuseTabsSetting": "the corresponding setting must be enabled",
+      "TagValueChanges": "When editing tags, the way in which the value changes, depends on the click that is performed:\n- Left click: The tag changes from neutral to positive, to negative to then loop back around to neutral.\n- Right click: The tag changes from neutral to negative, to positive to then loop back around to neutral."
+    },
     "CatalogMenu": {
       "TreeCaption": "Catalog Menu",
       "Pages": {
         "0": {
           "PageCaption": "Overview",
-          "Content": "The catalog menu offers the functionality to add new collections of media to the application. Within this menu new catalog can be created, edited or removed. Also switching between the opened catalogs is done here."
+          "Content": "The catalog menu offers the functionality to add new collections of media to the application. Within this menu catalogs can be created, edited or removed. Also switching between the opened catalogs is done here."
         },
         "1": {
           "PageCaption": "Menu Bar",
-          "Content": "The menu bar offers the following actions:\n- Adding a catalog\n- Importing a catalog\n- Opening the settings\n\nIf a catalog is selected, additional actions such as editing, exporting and deleting the selected catalog become visible."
+          "Content": "${Help.Common.MenuBar}\n- Adding a catalog\n- Importing a catalog\n- Opening the settings\n\nIf a catalog is selected, additional actions such as editing, exporting and deleting the selected catalog become visible."
         }
       },
       "Topics": {
@@ -367,7 +375,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Adding a Catalog",
-              "Content": "New catalogs can be added through the menu bar button."
+              "Content": "New catalogs can be added ${Help.Common.MenuBarButton}."
             },
             "1": {
               "PageCaption": "Editing a Catalog",
@@ -375,7 +383,7 @@
             },
             "2": {
               "PageCaption": "Deleting a Catalog",
-              "Content": "When deleting a selected catalog, a deletion confirmation will be shown to prevent accidental deletions. After the deletion, the catalog will be removed permanently.\nIf the currently active catalog is deleted, the first catalog in the list will be selected as the active catalog."
+              "Content": "When deleting a selected catalog, ${Help.Common.DeletionConfirmationShow}. After the deletion, the catalog will be removed permanently.\nIf the currently active catalog is deleted, the first catalog in the list will be selected as the active catalog."
             }
           }
         },
@@ -393,7 +401,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Exporting Catalogs",
-              "Content": "A selected catalog can be exported using the button in the menu bar. A dialog will ask for the desired file destination.\nAfter the file selection, a dialog will show the progress of the export until it is finished."
+              "Content": "A selected catalog can be exported ${Help.Common.MenuBarButton}. A dialog will ask for the desired file destination.\nAfter the file selection, a dialog will show the progress of the export until it is finished."
             }
           }
         },
@@ -402,7 +410,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Importing Catalogs",
-              "Content": "Catalogs can be imported from existing files. Therefore the import-button in the menu bar can be used, to show a file selection dialog.\nAfter the file selection, a dialog will show the progress of the import until it is finished.\nThe import will always create a new catalog within the application."
+              "Content": "Catalogs can be imported from existing files ${Help.Common.MenuBarButton}. A dialog will ask for the selection of the desired file to import.\nAfter the file selection, a dialog will show the progress of the import until it is finished.\nThe import will always create a new catalog within the application."
             }
           }
         }
@@ -417,7 +425,7 @@
         },
         "1": {
           "PageCaption": "Menu Bar",
-          "Content": "The menu bar contains the actions for adding media or tags and the links to all sub menus such as the tag, catalog, settings and analyze menu."
+          "Content": "${Help.Common.MenuBar}\n- Adding a medium\n- Adding a tag\n- Open the tag menu\n- Open the catalog menu\n- Open the settings menu\n- Open the analyze menu"
         }
       },
       "Topics": {
@@ -426,11 +434,11 @@
           "Pages": {
             "0": {
               "PageCaption": "Adding a Medium",
-              "Content": "By using the button in the menu bar, the edit menu can be opened for creating a new medium."
+              "Content": "A medium can be added ${Help.Common.MenuBarButton}. That way the edit menu will be opened for creating a new medium."
             },
             "1": {
               "PageCaption": "Adding a Tag",
-              "Content": "By using the button in the menu bar, a dialog for creating a new tag can be opened."
+              "Content": "A tag can be added ${Help.Common.MenuBarButton}. That way a dialog will be opened for creating a new tag."
             },
             "2": {
               "PageCaption": "Viewing or Editing a Medium",
@@ -443,7 +451,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Text Search",
-              "Content": "To search through media the text search can be used to filter for titles of media or their parts. Optionally also the descriptions can be included in this search.\nTherefore the desired search text can be inserted in the topmost input of the search panel."
+              "Content": "To search through media the text search can be used to filter for titles of media or their parts. Optionally also the descriptions can be included in this search.\nTherefore, the desired search text can be inserted in the topmost input of the search panel. The search can then be started by either using the button on the righthand side or by pressing the enter-key."
             },
             "1": {
               "PageCaption": "Tag Search",
@@ -451,7 +459,7 @@
             },
             "2": {
               "PageCaption": "Search Modi",
-              "Content": "The search result can be influenced by different modes within the search panel.\n- Using the exact search, the tags will be filtered more strictly, by only showing those search results, whose tag values exactly match the selected tags within the search input.\n- The description search expands the search radius of the text input to also search through descriptions of media and parts.\n- The favourite search reduces the search result to only include favourites.\n\nAlso the mode of the search result can be changed by either showing a list of media or a list of parts within those media, matching the search criteria."
+              "Content": "The search result can be influenced by different modes within the search panel:\n- Using the exact search, the tags will be filtered more strictly, by only showing those search results, whose tag values exactly match the selected tags within the search input.\n- The description search expands the search radius of the text input to also search through descriptions of media and parts.\n- The favourite search reduces the search result to only include favourites.\n\nAlso, the mode of the search result can be changed by either showing a list of media or a list of parts within those media, matching the search criteria."
             }
           }
         },
@@ -460,11 +468,11 @@
           "Pages": {
             "0": {
               "PageCaption": "Generating a Playlist",
-              "Content": "To be able to edit playlists, the corresponding setting must be enabled.\nThen a playlist title can be inserted to create a new playlist.\nOptionally, the playlist can be generated based on parts that match a specific tag, by inserting a maximum playlist length and selecting a tag before submitting the playlist creation."
+              "Content": "To be able to edit playlists, ${Help.Common.MutliuseTabsSetting}.\nThen a playlist title can be inserted to create a new playlist.\nOptionally, the playlist can be generated based on parts that match a specific tag, by inserting a maximum playlist length and selecting a tag before submitting the playlist creation."
             },
             "1": {
               "PageCaption": "Viewing a Playlist",
-              "Content": "By selecting an existing playlist within the lefthand side list, the items of the playlist are shown.\nItems can be removed using the cross on the righthand side."
+              "Content": "By selecting an existing playlist within the list on the lefthand side, the items of the playlist are shown.\nItems can be removed using the cross on the righthand side."
             },
             "2": {
               "PageCaption": "Adding Entries to a Playlist",
@@ -472,7 +480,7 @@
             },
             "3": {
               "PageCaption": "Deleting a Playlist",
-              "Content": "If a playlist is selected within the playlist view, it can be deleted by pressing the button at the top of the control. If the corresponding setting is enabled, a deletion confirmation will be shown."
+              "Content": "If a playlist is selected within the playlist view, it can be deleted by pressing the button at the top of the control. ${Help.Common.DeletionConfirmationSetting}"
             }
           }
         },
@@ -481,7 +489,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Viewing the Title Of The Day",
-              "Content": "To be able to view the title of the day, the corresponding setting must be enabled. For each catalog the title of the day can either be set to be a single part or the whole medium with all its parts.\nThe title of the day changes automatically whenever the menu is reloaded, but can also be changed by pressing the button at the top of the control."
+              "Content": "To be able to view the title of the day, ${Help.Common.MutliuseTabsSetting}. For each catalog the title of the day can either be set to be a single part or the whole medium with all its parts.\nThe title of the day changes automatically whenever the menu is reloaded, but can also be changed by pressing the button at the top of the control."
             }
           }
         },
@@ -490,7 +498,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Viewing the Statistics",
-              "Content": "To be able to view the statistics, the corresponding setting must be enabled. The control then provides a brief overview over the existing media and parts."
+              "Content": "To be able to view the statistics, ${Help.Common.MutliuseTabsSetting}. The control then provides a brief overview over the existing media and parts."
             }
           }
         }
@@ -501,7 +509,7 @@
       "Pages": {
         "0": {
           "PageCaption": "Overview",
-          "Content": "Within the edit menu, media and their parts can be viewed and edited."
+          "Content": "Within the edit menu, media and their parts can be viewed and edited. The lefthand side of the menu provides the selection of the media information or parts within the medium whilst the righthand side shows the details for the selected element."
         },
         "1": {
           "PageCaption": "Menu Bar",
@@ -514,7 +522,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Viewing Media",
-              "Content": "When viewing media, the medium contents are listed on the lefthand side, whilst the righthand side displays the actual information for the medium and the contained parts."
+              "Content": "When viewing media, the medium contents are listed on the lefthand side, whilst the righthand side displays the details for the medium and the contained parts."
             }
           }
         },
@@ -523,15 +531,15 @@
           "Pages": {
             "0": {
               "PageCaption": "Start Editing",
-              "Content": "Editing can be started by using the button in the menu bar. The visible medium will then be opened in an editable mode so that all data can be changed."
+              "Content": "Editing can be started ${Help.Common.MenuBarButton}. The visible medium will then be opened in an editable mode so that all data can be changed."
             },
             "1": {
               "PageCaption": "Tag Values",
-              "Content": "When editing tags, the way in which the value changes depends on the click that is performed:\n- Left click: The tag changes from neutral to positive, to negative to then loop back around to neutral\n- Right click: The tag changes from neutral to negative, to positive to then loop back around to neutral"
+              "Content": "${Help.Common.TagValueChanges}"
             },
             "2": {
               "PageCaption": "Deleting Media",
-              "Content": "In viewing mode, media can be deleted with the button in the menu bar. If the corresponding setting is enabled, a deletion confirmation will be shown."
+              "Content": "In viewing mode, media can be deleted ${Help.Common.MenuBarButton}. ${Help.Common.DeletionConfirmationSetting}"
             },
             "3": {
               "PageCaption": "Adding Parts",
@@ -539,7 +547,7 @@
             },
             "4": {
               "PageCaption": "Deleting Parts",
-              "Content": "In editing mode, parts can be deleted with the button next to the part list on the lefthand side. This button will only be available, if any part is selected. If the corresponding setting is enabled, a deletion confirmation will be shown.\nThe changes will only be persisted, if they are actually saved using the button in the menu bar."
+              "Content": "In editing mode, parts can be deleted with the button next to the part list on the lefthand side. This button will only be available if any part is selected. ${Help.Common.DeletionConfirmationSetting}\nThe changes will only be persisted if they are actually saved using the button in the menu bar."
             },
             "5": {
               "PageCaption": "Saving or Discarding Changes",
@@ -560,7 +568,7 @@
                 },
                 "2": {
                   "PageCaption": "Tags",
-                  "Content": "If tags are set for the whole medium they are automatically used for all its parts too. In case a tag is set for the whole medium it cannot be changed for a part individually."
+                  "Content": "If tags are set for the whole medium, they are automatically used for all its parts too. In case a tag is set for the whole medium it cannot be changed for a part individually."
                 }
               }
             },
@@ -569,7 +577,7 @@
               "Pages": {
                 "0": {
                   "PageCaption": "Edit Part Information",
-                  "Content": "To edit the part information the part editor has to be selected by clicking an item on the lefthand side. Also adding a new part with automatically open the editor for the new part."
+                  "Content": "To edit the part information the part editor has to be selected by clicking an item on the lefthand side. Also adding a new part will automatically open the editor for the new part."
                 },
                 "1": {
                   "PageCaption": "Title and Description",
@@ -581,7 +589,7 @@
                 },
                 "3": {
                   "PageCaption": "Tags",
-                  "Content": "Tags can be edited within a part, if the corresponding tag is not set to a non-neutral value for the whole medium."
+                  "Content": "Tags can be edited within a part if the corresponding tag is not set to a non-neutral value for the whole medium."
                 },
                 "4": {
                   "PageCaption": "Image Selection",
@@ -615,7 +623,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Adding a Tag",
-              "Content": "By using the button in the menu bar, a dialog for creating a new tag can be opened."
+              "Content": "A dialog for creating a new tag can be opened ${Help.Common.MenuBarButton}."
             },
             "1": {
               "PageCaption": "Editing a Tag",
@@ -623,7 +631,7 @@
             },
             "2": {
               "PageCaption": "Deleting a Tag",
-              "Content": "If a tag is selected, it can be deleted by using the button in the menu bar. If the corresponding setting is enabled, a deletion confirmation will be shown."
+              "Content": "If a tag is selected, it can be deleted ${Help.Common.MenuBarButton}. ${Help.Common.DeletionConfirmationSetting}"
             }
           }
         },
@@ -636,7 +644,7 @@
             },
             "1": {
               "PageCaption": "Editing Tag Values",
-              "Content": "When editing tags, the way in which the value changes depends on the click that is performed:\n- Left click: The tag changes from neutral to positive, to negative to then loop back around to neutral\n- Right click: The tag changes from neutral to negative, to positive to then loop back around to neutral\n\nOther then in the edit menu, the tag values for the whole medium do not block the tag values for the parts of the medium. If a medium value is set, it will simply overwrite the part values. If a part value is changed, it will remove the media value."
+              "Content": "${Help.Common.TagValueChanges}\n\nOther than in the edit menu, the tag values for the whole medium do not block the tag values for the parts of the medium. If a medium value is set, it will simply overwrite the part values. If a part value is changed, it will remove the media value."
             },
             "2": {
               "PageCaption": "Saving Changes",
@@ -651,11 +659,11 @@
       "Pages": {
         "0": {
           "PageCaption": "Overview",
-          "Content": "The settings menu provides the access to global and catalog related configurations. Global settings are always available. Catalog settings can only be edited, if any catalog exists."
+          "Content": "The settings menu provides the access to global and catalog related configurations. Global settings are always available. Catalog settings can only be edited if any catalog exists."
         },
         "1": {
           "PageCaption": "Menu Bar",
-          "Content": "If settings are changed they must be saved explicitly. Therefore the buttons in the menu bar provide the actions for saving or discarding changes."
+          "Content": "If settings are changed, they must be saved explicitly. Therefore, the buttons in the menu bar provide the actions for saving or discarding changes."
         }
       },
       "Topics": {
@@ -672,7 +680,7 @@
             },
             "2": {
               "PageCaption": "Search Result Pages",
-              "Content": "Several lists within the application show their contents by splitting the list into several pages. Each of these pages can contain a maximum count of items.\nIf the performance for larger lists is not good enough, the maximum length of each page can be changed here."
+              "Content": "Several lists within the application show their contents by splitting the list into pages. Each of these pages can contain a maximum count of items.\nIf the performance for larger lists is not good enough, the maximum length of each page can be changed here."
             }
           }
         },
@@ -681,7 +689,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Deletion Confirmations",
-              "Content": "Several actions within the application show a deletion confirmation to prevent accidental removal of data. These confirmations can be deactivated here to always instantly perform the desired deletion.\nThe deletion confirmation for dialogs themselves can not be deactivated."
+              "Content": "Several actions within the application show a deletion confirmation to prevent accidental removal of data. These confirmations can be deactivated here to always instantly perform the desired deletion.\nThe deletion confirmation for catalogs themselves cannot be deactivated."
             },
             "1": {
               "PageCaption": "Title Of The Day",
@@ -726,11 +734,11 @@
           "Pages": {
             "0": {
               "PageCaption": "Editing",
-              "Content": "For all analyze results except the doubled media the conflicts can be edited within the edit menu, by pressing the edit button at the bottom of the analyze preview. Merging double media is done in a separate type of menu, which can also be opened using the corresponding edit button."
+              "Content": "For all analyze results except the doubled media the conflicts can be edited within the edit menu, by pressing the edit button at the bottom of the analyze preview. Merging doubled media is done in a separate type of menu, which can also be opened using the corresponding edit button."
             },
             "1": {
               "PageCaption": "Merging Doubled Media",
-              "Content": "In the merge menu, several steps lead through the merge process:\n1. The media that should be merged must be selected\n2. The media information must be compiled using the media that should be merged\n3. The parts that should be used for the new medium must be selected\n\nAfter those steps a preview can be generated before finishing the merge.\nFor each step, the information of the corresponding medium or part can be viewed on the righthand side of the menu by selecting an item on the lefthand side.\n\nMerging can be cancelled by using the back button in the menu bar."
+              "Content": "In the merge menu, several steps lead through the merge process:\n1. The media that should be merged must be selected\n2. The media information must be compiled using the media that should be merged\n3. The parts that should be used for the new medium must be selected\n\nAfter those steps, a preview can be generated before finishing the merge.\nFor each step, the information of the corresponding medium or part can be viewed on the righthand side of the menu by selecting an item on the lefthand side.\n\nMerging can be cancelled by using the back button in the menu bar."
             },
             "2": {
               "PageCaption": "Merge Preview",
