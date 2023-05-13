@@ -62,6 +62,19 @@ namespace MediaManager.GUI.Menus
             contentImage.Source = image;
             contentText.Text = selectedTopic?.Pages?[newPage - 1]?.Content;
         }
+        private void topics_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Right && pager.CurrentPage < pager.TotalPages)
+            {
+                pager.CurrentPage++;
+                e.Handled = true;
+            }
+            if (e.Key == System.Windows.Input.Key.Left && pager.CurrentPage > 1)
+            {
+                pager.CurrentPage--;
+                e.Handled = true;
+            }
+        }
         private ImageSource getImageSourceFromBitmap(Bitmap bmp) => Imaging.CreateBitmapSourceFromHBitmap(bmp.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         #endregion
     }

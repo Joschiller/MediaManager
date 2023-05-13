@@ -9,7 +9,7 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="350">
             <components:Pager x:Name="pager" DockPanel.Dock="Top" HorizontalAlignment="Right" TextPlacement="Left" PageChanged="pager_PageChanged"/>
-            <TreeView x:Name="topics" Margin="{StaticResource defaultMarginSmall}" SelectedItemChanged="topics_SelectedItemChanged">
+            <TreeView x:Name="topics" Margin="{StaticResource defaultMarginSmall}" SelectedItemChanged="topics_SelectedItemChanged" PreviewKeyDown="topics_PreviewKeyDown">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                         <TextBlock Text="{Binding TreeCaption}"/>
