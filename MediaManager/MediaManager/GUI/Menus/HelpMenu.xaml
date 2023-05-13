@@ -18,13 +18,13 @@
             </TreeView>
         </DockPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <DockPanel>
+            <DockPanel Margin="{StaticResource defaultMarginSmall}">
                 <TextBlock x:Name="contentCaption" DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" FontSize="{StaticResource fontSize_subTitle}"/>
                 <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
-                <Border x:Name="contentImageContainer" DockPanel.Dock="Top" Background="Transparent" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="2" HorizontalAlignment="Center">
+                <Border x:Name="contentImageContainer" DockPanel.Dock="Top" Background="Transparent" BorderBrush="{StaticResource accent_border_brush}" BorderThickness="2" HorizontalAlignment="Center" Margin="{StaticResource defaultMarginSmall}">
                     <Image x:Name="contentImage" MaxHeight="300"/>
                 </Border>
-                <TextBlock x:Name="contentText" TextWrapping="WrapWithOverflow" TextAlignment="Justify"/>
+                <TextBlock x:Name="contentText" TextWrapping="WrapWithOverflow" TextAlignment="Justify" Margin="{StaticResource defaultMarginSmall}"/>
             </DockPanel>
         </ScrollViewer>
     </DockPanel>
