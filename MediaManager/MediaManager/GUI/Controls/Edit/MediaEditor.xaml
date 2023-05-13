@@ -14,7 +14,7 @@
         <DockPanel Grid.Column="0">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <atoms:ImageButton x:Name="addPart" Size="{StaticResource imageButtonSize}" EnabledIconSource="../../../Resources/add_part.png" Click="addPart_Click"/>
-                <atoms:ImageButton x:Name="deletePart" Size="{StaticResource imageButtonSize}" EnabledIconSource="../../../Resources/delete.png" Click="deletePart_Click"/>
+                <atoms:ImageButton x:Name="deletePart" Size="{StaticResource imageButtonSize}" EnabledIconSource="../../../Resources/delete_part.png" Click="deletePart_Click"/>
             </StackPanel>
             <list:PartList x:Name="list" SelectionChanged="list_SelectionChanged"/>
         </DockPanel>

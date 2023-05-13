@@ -133,8 +133,38 @@
   <data name="analyze" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\analyze.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AnalyzeMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeMenu_Doubled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu_Doubled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeMenu_MediumTag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu_MediumTag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeMenu_MergeEdit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu_MergeEdit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalyzeMenu_MergePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalyzeMenu_MergePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CatalogMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CatalogMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CatalogMenu_Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CatalogMenu_Edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CatalogMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CatalogMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CatalogMenu_Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CatalogMenu_Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="catalogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\catalogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,11 +187,26 @@
   <data name="delete_medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete_medium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="delete_part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_part.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="delete_tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete_tag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Deutsch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deutsch.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EditMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditMenu_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditMenu_Part.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditMenu_View" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditMenu_View.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,6 +247,36 @@
   <data name="nosave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nosave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="OverviewMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Playlist_AddEntry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Playlist_AddEntry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Playlist_Generate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Playlist_Generate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Playlist_View" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Playlist_View.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Search_Tags" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Search_Tags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Search_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Search_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_Statistics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_Statistics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OverviewMenu_TitleOfTheDay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OverviewMenu_TitleOfTheDay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="playlist" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\playlist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -214,11 +289,35 @@
   <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SettingsMenu_Catalog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsMenu_Catalog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsMenu_Global" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsMenu_Global.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="statistics" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\statistics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagMenu_Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagMenu_Edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagMenu_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagMenu_Medium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagMenu_Menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagMenu_Menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="title_of_the_day" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\title_of_the_day.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

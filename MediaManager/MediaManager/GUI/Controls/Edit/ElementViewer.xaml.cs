@@ -23,8 +23,7 @@ namespace MediaManager.GUI.Controls.Edit
                 part = null;
 
                 favoriteIcon.Visibility = Visibility.Collapsed;
-                textLocation.Visibility = Visibility.Visible;
-                location.Visibility = Visibility.Visible;
+                locationContainer.Visibility = Visibility.Visible;
                 integerMeta.Visibility = Visibility.Collapsed;
                 image.Visibility = Visibility.Collapsed;
 
@@ -44,8 +43,7 @@ namespace MediaManager.GUI.Controls.Edit
                 part = value;
 
                 favoriteIcon.Visibility = Visibility.Visible;
-                textLocation.Visibility = Visibility.Collapsed;
-                location.Visibility = Visibility.Collapsed;
+                locationContainer.Visibility = Visibility.Collapsed;
                 integerMeta.Visibility = Visibility.Visible;
                 image.Visibility = Visibility.Visible;
 

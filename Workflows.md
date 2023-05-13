@@ -88,3 +88,7 @@ When modifying the XML export always complete these steps:
 - Add a new section (or update the newest section for the upcoming release) in the xml versioning description.
   - Include a complete copy of the older version description here with an additional change section on top, to describe the last changes.
   - Also include a migration guide to update older file versions to the new version, in case the application needs to have more data provided that cannot be optional. - Otherwise always try to make new fields optional!
+
+## Help Images
+
+When editing images for the help menu, the nearest border to the shown feature (e.g. menu bar) is always cut off.
