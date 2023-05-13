@@ -347,5 +347,406 @@
         "5": "Import vollständig"
       }
     }
+  },
+  "Help": {
+    "Common": {
+      "MenuBar": "Die Menüleiste bietet folgende Aktionen:",
+      "MenuBarButton": "mittels des Buttons in der Menüleiste",
+      "DeletionConfirmationShow": "wird eine Löschbestätigung angezeigt, um versehentliche Löschungen zu verhindern",
+      "DeletionConfirmationSetting": "Wenn die entsprechende Einstellung aktiviert ist, ${Help.Common.DeletionConfirmationShow}.",
+      "MutliuseTabsSetting": "muss die entsprechende Einstellung aktiviert sein",
+      "TagValueChanges": "Beim Bearbeiten von Kategorien, ist die Änderung des Wertes abhängig von der Art des Klicks:\n- Linksklick: Der Wert wechselt von neutral, zu positiv, zu negativ und dann wieder zurück zu neutral.\n- Rechtsklick: Der Wert wechselt von neutral, zu negativ, zu positiv und dann wieder zurück zu neutral."
+    },
+    "CatalogMenu": {
+      "TreeCaption": "Katalogmenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Das Katalogmenü bietet die Funktionen zum Erstellen neuer Mediensammlungen in der Anwendung. Innerhalb dieses Menüs können neue Kataloge erstellt, bearbeitet und gelöscht werden. Der wechsel des aktuell geöffneten Katalogs wird hier vollzogen."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "${Help.Common.MenuBar}\n- Kataloge hinzufügen\n- Kataloge importieren\n- Einstellungen öffnen\n\nWenn ein Kataog ausgewählt ist, werden weitere Aktionen wie die Bearbeitung, der Export und die Löschung des Katalogs sichtbar."
+        }
+      },
+      "Topics": {
+        "EditCatalog": {
+          "TreeCaption": "Kataloge hinzufügen und bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Einen Katalog hinzufügen",
+              "Content": "Neue Kataloge können ${Help.Common.MenuBarButton} hinzugefügt werden."
+            },
+            "1": {
+              "PageCaption": "Einen Katalog bearbeiten",
+              "Content": "Jeder Katalog muss einen Titel erhalten und kann durch eine optionale Beschreibung näher beschrieben werden. Weitere Einstellungen können hier genauso wie im Einstellungsmenü angepasst werden."
+            },
+            "2": {
+              "PageCaption": "Einen Katalog löschen",
+              "Content": "Beim Löschen eines ausgewählten Katalogs ${Help.Common.DeletionConfirmationShow}. Durch die Löschung wird der Katalog permanent entfernt.\nWird der aktuell aktive Katalog gelöscht, wird der erste Katalog in der Liste als aktiver Katalog ausgewählt."
+            }
+          }
+        },
+        "SelectCatalog": {
+          "TreeCaption": "Den aktiven Katalog auswählen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Den aktiven Katalog auswählen",
+              "Content": "Der erste erstellte Katalog wird standardmäßig nach der Erstellung als aktiver Katalog ausgewählt. Wenn mhere Katalog existieren, kann ein anderer Katalog durch einen Doppelklick in der Liste ausgewählt werden."
+            }
+          }
+        },
+        "ExportCatalog": {
+          "TreeCaption": "Kataloge exportieren",
+          "Pages": {
+            "0": {
+              "PageCaption": "Kataloge exportieren",
+              "Content": "Ein ausgewählter Katalog kann ${Help.Common.MenuBarButton} exportiert werden. Dafür wird zunächst der Speicherort über einen Dialog abgefragt.\nNach der Auswahl des Speicherorts wird der Fortschritt des Exports angezeigt bis der Export abgeschlossen ist."
+            }
+          }
+        },
+        "ImportCatalog": {
+          "TreeCaption": "Kataloge importieren",
+          "Pages": {
+            "0": {
+              "PageCaption": "Kataloge importieren",
+              "Content": "Kataloge können ${Help.Common.MenuBarButton} importiert werden. Dafür wird zunächst die zu importierende Datei über einen Dialog abgefragt.\nNach der Auswahl des Datei wird der Fortschritt des Imports angezeigt bis der Import abgeschlossen ist.\nDurch den Import wird immer ein neuer Katalog innerhalb der Anwendung angelegt."
+            }
+          }
+        }
+      }
+    },
+    "OverviewMenu": {
+      "TreeCaption": "Übersichtsmenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Das Übersichtsmenü bietet den Zugang zu allen anderen Untermenüs und enthält weitere Funktionen zum Zugriff auf Medien und ihre Medienteile."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "${Help.Common.MenuBar}\n- Medien hinzufügen\n- Kategorien hinzufügen\n- Kategoriemenü öffnen\n- Katalogmenü öffnen\n- Einstellungsmenü öffnen\n- Analysemenü öffnen"
+        }
+      },
+      "Topics": {
+        "Editing": {
+          "TreeCaption": "Kataloginhalte bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Ein Medium hinzufügen",
+              "Content": "Medien können ${Help.Common.MenuBarButton} hinzugefügt werden. So wird das Bearbeitungsmenü geöffnet, um ein neues Medium zu erstellen."
+            },
+            "1": {
+              "PageCaption": "Eine Kategorie hinzufügen",
+              "Content": "Kategorien können ${Help.Common.MenuBarButton} hinzugefügt werden. So wird ein Dialog geöffnet, um eine neue Kategorie zu erstellen."
+            },
+            "2": {
+              "PageCaption": "Ein Medium ansehen oder bearbeiten",
+              "Content": "Die Suche auf der rechten Seite des Menüs ermöglicht den Zugriff auf alle existierenden Medien und Medienteile. Durch einen Doppelklick auf das entsprechende Element in der Suchergebnisliste können Medien und Medienteile für die Detailansicht geöffnet werden."
+            }
+          }
+        },
+        "Search": {
+          "TreeCaption": "Mediensuche",
+          "Pages": {
+            "0": {
+              "PageCaption": "Textsuche",
+              "Content": "Medien und Medienteile können anhand ihres Titels gesucht werden. Optional können auch die Beschreibungen von Medien und Medienteilen mit durchsucht werden.\nDafür kann im obersten Eingabefeld der Suche ein Text eingegeben und danach entweder über den Button oder die Enter-Taste die Suche gestartet werden."
+            },
+            "1": {
+              "PageCaption": "Kategoriesuche",
+              "Content": "Kategorien von Medien und Medienteilen können zur Suche verwendet werden.\nIm normalen Modus werden alle Suchergebnisse angezeigt, die keiner der gewählten Kategorien widersprechen. Im exakten Modus werden nur die Suchergebnisse angezeigt, die genau den gleichen Wert für die gewählten Kategorien aufweisen."
+            },
+            "2": {
+              "PageCaption": "Suchmodi",
+              "Content": "Die Suchergebnisse können durch verschiedene Modi beeinflusst werden:\n- Im exakten Modus werden die Kategorien strenger gefiltert, indem nur die Suchergebnisse angezeigt werden, die für die gewählten Kategorien genau die gleichen Werte aufweisen.\n- Die Beschreibungssuche erweitert die Textsuche, um auch die Beschreibungen von Medien und Medienteilen zu durchsuchen.\n- Die Favoritensuche reduziert die Suchergebnisse ausschließlich auf Favoriten.\n\nDer Modus der Suchergebnisliste kann außerdem so eingstellt werden, dass anstelle der Medien alle einzelnen Medienteile aufgelistet werden, die die Suchkriterien erfüllen."
+            }
+          }
+        },
+        "Playlists": {
+          "TreeCaption": "Playlisten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Eine Playlist generieren",
+              "Content": "Um Playlisten bearbeiten zu können, ${Help.Common.MutliuseTabsSetting}.\nDann kann durch Eingabe eines Playlist-Titels eine neue Playlist erstellt werden.\nOptional können Playlists auch auf Basis von Medienteilen generiert werden, die eine bestimmte Kategorie aufweisen, indem vor der Erstellung der Playlist eine maximale Playlistlänge und eine Kategorie gewählt werden."
+            },
+            "1": {
+              "PageCaption": "Eine Playlist ansehen",
+              "Content": "Durch Auswahl einer existierenden Playlist in der Liste auf der linken Seite werden die Elemente der Playlist angezeigt.\nEinzelne Elemente können durch Klick auf das Kreuz auf der rechten Seite entfernt werden."
+            },
+            "2": {
+              "PageCaption": "Elemente zu einer Playlist hinzufügen",
+              "Content": "Einträge können zu einer existierenden Playlist hinzugefügt werden, indem in der Suchergebnisliste ein Element ausgewählt und dann ein Rechtsklick auf die Suchergebnisliste erfolgt. So wird ein Kontextmenü eingeblendet, über dessen angebotene Aktionen ein Hinzufügen eines Medienteils oder aller Teile eines Mediums zu einer bestehenden oder neuen Playlist möglich ist."
+            },
+            "3": {
+              "PageCaption": "Eine Playlist löschen",
+              "Content": "Wenn eine Playlist ausgewählt wurde, kann diese durch den Button über der Liste gelöscht werden. ${Help.Common.DeletionConfirmationSetting}"
+            }
+          }
+        },
+        "TitleOfTheDay": {
+          "TreeCaption": "Titel des Tages",
+          "Pages": {
+            "0": {
+              "PageCaption": "Titel des Tages ansehen",
+              "Content": "Um den Titel des Tages einsehen zu können, ${Help.Common.MutliuseTabsSetting}. Für jeden Katalog kann sich der Titel des Tages entweder auf einen einzelnen Medienteil oder auf ein gesamtes Medium beziehen.\nDer Titel des Tages wird automatisch geändert, wenn das Menü neu geladen wird, kann aber auch durch einen Klick des Buttons in der Ansicht manuell geändert werden."
+            }
+          }
+        },
+        "Statistics": {
+          "TreeCaption": "Statistiken",
+          "Pages": {
+            "0": {
+              "PageCaption": "Statistiken ansehen",
+              "Content": "Um die Statistiken einsehen zu können, ${Help.Common.MutliuseTabsSetting}. Die Ansicht bietet einen Überblick über die existierenden Medien und Medienteile."
+            }
+          }
+        }
+      }
+    },
+    "EditMenu": {
+      "TreeCaption": "Bearbeitungsmenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Innerhalb des Bearbeitungsmenüs können Medien und ihre medienteile angesehen und bearbeitet werden. Links erfolgt die Auswahl des jeweiligen Elements, dessen Informationen auf der rechten Seite dargestellt werden."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "Das Menü weist im Ansichts- und Bearbeitungsmodus unterschiedliche Buttons auf. Das obige Bild zeigt das Menü für den Bearbeitungsmodus, in dem die vorgenommenen Änderungen entweder verworfen oder gespeichert werden können."
+        }
+      },
+      "Topics": {
+        "Viewing": {
+          "TreeCaption": "Medien ansehen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Medien ansehen",
+              "Content": "Beim Ansehen von MEdien werden die Inhalte des Mediums links aufgelistet. Auf der rechten Seite sind jeweils die Details des gewählten Medienteils oder des Mediums selbst sichtbar."
+            }
+          }
+        },
+        "Editing": {
+          "TreeCaption": "Medien bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Bearbeitung starten",
+              "Content": "Die Bearbeitung kann ${Help.Common.MenuBarButton} gestartet werden. Das sichtbare Medium wird dann in einer bearbeitbaren Ansicht geöffnet, sodass alle Daten geändert werden können."
+            },
+            "1": {
+              "PageCaption": "Kategoriewerte",
+              "Content": "${Help.Common.TagValueChanges}"
+            },
+            "2": {
+              "PageCaption": "Medien löschen",
+              "Content": "Im Ansichtsmodus können Medien ${Help.Common.MenuBarButton} gelöscht werden. ${Help.Common.DeletionConfirmationSetting}"
+            },
+            "3": {
+              "PageCaption": "Medienteile hinzufügen",
+              "Content": "Im Bearbeitungsmodus können Medienteile durch den Button neben der Liste auf der linken Seite hinzugefügt werden."
+            },
+            "4": {
+              "PageCaption": "Medienteile löschen",
+              "Content": "Im Bearbeitungsmodus können Medienteile durch den Button neben der Liste auf der linken Seite gelöscht werden. Dieser Button ist nur verfügbar, wenn ein Medienteil ausgewählt ist. ${Help.Common.DeletionConfirmationSetting}\nDie Änderungen werden erst nach explizitem Speichern mit dem Button in der Menüleiste dauerhaft wirksam."
+            },
+            "5": {
+              "PageCaption": "Änderungen speichern oder verwerfen",
+              "Content": "Im Bearbeitungsmodus werden Änderungen nicht automatisch gespeichert. Das Medium kann vollständig bearbeitet werden, sodss die Änderungen insgesamt mittels der Buttons in der Menüleiste verworfen oder gespeichert werden können."
+            }
+          },
+          "Topics": {
+            "Medium": {
+              "TreeCaption": "Medieninformationen",
+              "Pages": {
+                "0": {
+                  "PageCaption": "Medieninformationen bearbeiten",
+                  "Content": "Um Medieninformationen zu bearbeiten, muss der Medieneditor durch Klick auf das oberste Element der Liste auf der linken Seite geöffnet werden."
+                },
+                "1": {
+                  "PageCaption": "Titel, Beschreibung und Aufbewahrungsort",
+                  "Content": "Die Attribute Titel, Beschreibung und Aufbewahrungsort des Mediums sind Textfelder. Der Titel ist ein Pflichtfeld."
+                },
+                "2": {
+                  "PageCaption": "Kategorien",
+                  "Content": "Wenn Kategorien für das gesamte Medium gesetzt sind, werden sie automatisch für alle im Medium enthaltenen Teile angewendet. In diesem Fall kann die entsprechende Kategorie nicht mehr für die einzelnen Teile individuell verändert werden."
+                }
+              }
+            },
+            "Part": {
+              "TreeCaption": "Medienteilinformationen",
+              "Pages": {
+                "0": {
+                  "PageCaption": "Medienteilinformationen bearbeiten",
+                  "Content": "Um Medienteilinformationen zu bearbeiten, muss der Medienteileditor durch Klick auf ein Element in der Liste auf der linken Seite geöffnet werden. Beim Hinzufügen eines neuen Medienteils wird automatisch der Editor für diesen Teil geöffnet."
+                },
+                "1": {
+                  "PageCaption": "Titel und Beschreibung",
+                  "Content": "Die Attribute Titel und Beschreibung des Medienteils sind Textfelder. Der Titel ist ein Pflichtfeld."
+                },
+                "2": {
+                  "PageCaption": "Favoriten",
+                  "Content": "Medienteile können als Favoriten markiert werden, um weitere Filtermöglichkeiten in der Suche des Übersichtsmenüs zu ermöglichen."
+                },
+                "3": {
+                  "PageCaption": "Kategorien",
+                  "Content": "Kategorien können für einen Medienteil bearbeitet werden, wenn die Kategorie für das Medium selbst einen neutralen Wert aufweist."
+                },
+                "4": {
+                  "PageCaption": "Bildauswahl",
+                  "Content": "Medienteile können zudem ein Bild enthalten. Dieses kann aus allen auf dem Gerät vorhandenen png-Dateien ausgewählt werden."
+                },
+                "5": {
+                  "PageCaption": "Länge und Veröffentlichungsjahr",
+                  "Content": "Die Attribute Länge und Veröffentlichungsjahr des Medienteils sind numerische Eingabefelder. Jedes dieser Felder kann durch Eingabe auf einen nicht-negativen Wert gesetzt oder durch scrollen über dem Eingabefeld verändert werden."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TagMenu": {
+      "TreeCaption": "Kategoriemenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Das Kategoriemenü ermöglicht die Bearbeitung der Kategorien innerhalb der Anwendung. Das beinhaltet die Erstellung, Bearbeitung und Löschung von Kategorien, sowie die Bearbeitung von Kategoriewerten für Medien und Medienteile."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "Die Menüleiste bietet einen Button zum Hinzufügen von Kategorien. Weitere Buttons zur Bearbeitung und Löschung von Kategorien werden sichtbar, wenn eine Kategorie in der untenstehenden Liste ausgewählt ist."
+        }
+      },
+      "Topics": {
+        "EditTag": {
+          "TreeCaption": "Kategorien hinzufügen und bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Eine Kategorie hinzufügen",
+              "Content": "Ein Dialog zum Erstellen von Kategorien kann ${Help.Common.MenuBarButton} geöffnet werden."
+            },
+            "1": {
+              "PageCaption": "Eine Kategorie bearbeiten",
+              "Content": "Kategorien werden durch ihren Titel beschrieben. Der Titel ist ein Pflichtfeld."
+            },
+            "2": {
+              "PageCaption": "Eine Kategorie löschen",
+              "Content": "Wenn eine Kategorie ausgewählt ist, kann diese ${Help.Common.MenuBarButton} gelöscht werden. ${Help.Common.DeletionConfirmationSetting}"
+            }
+          }
+        },
+        "TagValues": {
+          "TreeCaption": "Kategoriewerte bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Ein Medium auswählen",
+              "Content": "Kategoriewerte können im Kategoriemenü zentralisiert bearbeitet werden, indem links eine Kategorie und in der dann sichtbaren Liste ein Medium ausgewählt werden. So wird für die entsprechende Kategorie eine Übersicht der Werte innerhalb des Mediums sichtbar, die die Werte für das Medium und die enthaltenen Teile anzeigt."
+            },
+            "1": {
+              "PageCaption": "Kategoriewerte bearbeiten",
+              "Content": "${Help.Common.TagValueChanges}\n\nIm Gegensatz zum Bearbeitungsmenü blockiert die Angabe eines medienweiten Kategoriewertes nicht die Teilwerte. Wenn der Medienwert gesetzt wird, überschreibt dies die Teilwerte. Umgekehrt führt das Setzen eines Teilwerts zum leeren des Medienwerts."
+            },
+            "2": {
+              "PageCaption": "Änderungen speichern",
+              "Content": "Die Änderungen der Kategoriewerte müssen manuell gespeichert werden. Es ist kein expliziter Verwerfen-Button verfügbar, da Änderungen beim Schließen des Menüs oder Auswahl einer anderen Kategorie oder eines anderen Mediums automatisch verworfen werden."
+            }
+          }
+        }
+      }
+    },
+    "SettingsMenu": {
+      "TreeCaption": "Einstellungsmenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Das Einstellungsmenü bietet den Zugriff auf globale und katalogspezifische Konfigurationen. Globale Einstellungen sind immer verfügbar. Katalogeinstellungen können nur geändert werden, wenn ein Katalog existiert."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "Wenn Einstellungen geändert werden, müssen sie explizit gespeichert werden. Dafür stehen Buttons zum Speichern und Verwerfen der Einstellungsänderungen in der Menüleiste zur Verfügung."
+        }
+      },
+      "Topics": {
+        "GlobalSettings": {
+          "TreeCaption": "Globale Einstellungen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Spracheinstellung",
+              "Content": "Die Spracheinstellung ermöglicht die Anpassung der Anwendung durch Auswahl der Anzeigesprache."
+            },
+            "1": {
+              "PageCaption": "Übersichtsmenüfunktionen",
+              "Content": "Das Übersichtsmenü verfügbt über mehrere optionale Funktionen, die aktiviert oder deaktiviert werden können. Diese Einstellungen können hier vorgenommen werden."
+            },
+            "2": {
+              "PageCaption": "Suchergebnisseiten",
+              "Content": "Mehrere Listen in der Anwendung zeigen ihre Inhalte in Seiten gegliedert an. Jede dieser Seiten kann nur eine maximale Anzahl an Elementen enthalten.\nWenn die Länge der Ergebnislisten zur Verlangsamung der Anwendung führt, kann der Seitenumfang dieser Listen hier angepasst werden."
+            }
+          }
+        },
+        "CatalogSettings": {
+          "TreeCaption": "Katalogeinstellungen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Löschbestätigungen",
+              "Content": "Mehrere Aktionen innerhalb der Anwendung zeigen eine Löschbestätigung an, um versehentliche Löschungen zu vermeiden. Diese Konfigurationen können hier deaktiviert werden, um Löschungen immer sofort vorzunehmen.\nDie Löschbestätigung für Kataloge kan nicht deaktiviert werden."
+            },
+            "1": {
+              "PageCaption": "Titel des Tages",
+              "Content": "Der Titel des Tages kann entweder einen einzelnen Medienteil oder ein gesamtes Medium anzeigen, was hier eingestellt werden kann."
+            }
+          }
+        }
+      }
+    },
+    "AnalyzeMenu": {
+      "TreeCaption": "Analysemenü",
+      "Pages": {
+        "0": {
+          "PageCaption": "Überblick",
+          "Content": "Das Analysemenü kann genutzt werden, um Inkonsistenzen in den gespeicherten Daten aufzudecken. Dies beinhaltet fehlende oder doppelte Daten im aktuell geöffneten Katalog."
+        },
+        "1": {
+          "PageCaption": "Menüleiste",
+          "Content": "Die Menüleiste bietet nur die Navigation zu anderen Teilen der Anwendung, da das Analysemenü nur eine Vorschau für die gefundenen Inkonsistenzen bietet."
+        }
+      },
+      "Topics": {
+        "Preview": {
+          "TreeCaption": "Analysevorschau",
+          "Pages": {
+            "0": {
+              "PageCaption": "Leere Medien und fehlende Attribute",
+              "Content": "Leere Medien sind solche, die keine Medienteile enthalten. Weitere fehlende Daten beziehen sich auf einzelne Attribute innerhalb von Medien und Medienteilen. Diese fehlenden Attribute können im Analysemenü in einer Vorschau betrachtet werden."
+            },
+            "1": {
+              "PageCaption": "Doppelte Medien",
+              "Content": "Wenn mehrere MEdien den gleichen Titel aufweisen, werden diese gedoppelten Medien in diesem Abschnitt angezeigt und können im Detail eingesehen werden."
+            },
+            "2": {
+              "PageCaption": "Fehlende Medienkategorien",
+              "Content": "Wenn alle Teile eines Mediums für eine Kategorie den gleichen Wert (positiv oder negativ) aufweisen, aber die übergreifende Medienkategorie einen neutralen Wert aufweist, wird diese Inkonsistenz hier angezeigt. Die widersprüchlichen Kategorien werden hervorgehoben."
+            }
+          }
+        },
+        "Edit": {
+          "TreeCaption": "Bearbeiten",
+          "Pages": {
+            "0": {
+              "PageCaption": "Bearbeiten",
+              "Content": "Für alle Analyseergebnisse außer für gedoppelte Medien kann eine Nachbearbeitung im Bearbeitungsmenü erfolgen, indem der Bearbeitungsbutton im Analysemenü betätigt wird. Das Zusammenführen gedoppelter Medien wird in einem separaten Menü vorgenommen, das auch durch diesen Bearbeitungsbutton verfügbar ist."
+            },
+            "1": {
+              "PageCaption": "Doppelte Medien zusammenführen",
+              "Content": "Im Zusammenführungsmenü wird durch mehrere Schritte durch den Zusammenführungsprozess geleitet:\n1. Die Medien, die zusammengeführt werden sollen, müssen ausgewählt werden\n2. Die für das zusammengeführte Medium zu verwendenden Medieninformationen müssen ausgewählt werden\n3. Die Medienteile, die für das zusammengeführte Medium übernommen werden sollen, müssen ausgewählt werden\n\nNach diesen Schritten kann eine Vorschau generiert werden, bevor das Zusammenführen abgeschlossen wird\nFür jeden der Schritte können die Informationen der Medien und Medienteile in einer Detailansicht betrachtet werden, indem das entsprechende Element links ausgewählt wird\n\nDas Zusammenführen der Medien kann durch die Rücknavigation abgebrochen werden."
+            },
+            "2": {
+              "PageCaption": "Vorschau der Zusammenführung",
+              "Content": "Die Vorschau der Zusammenführung zeigt einen Entwurf des zusammengeführten Mediums an. Das neue Medium wird nur generiert, wenn die Zusammenführung bestätigt wird. In diesem Fall werden die zusammengeführten Medien gelöscht und durch das neue Medium ersetzt."
+            }
+          }
+        }
+      }
+    }
   }
 }
