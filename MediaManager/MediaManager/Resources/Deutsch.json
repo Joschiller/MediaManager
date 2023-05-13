@@ -362,11 +362,11 @@
       "Pages": {
         "0": {
           "PageCaption": "Überblick",
-          "Content": "Das Katalogmenü bietet die Funktionen zum Erstellen neuer Mediensammlungen in der Anwendung. Innerhalb dieses Menüs können neue Kataloge erstellt, bearbeitet und gelöscht werden. Der wechsel des aktuell geöffneten Katalogs wird hier vollzogen."
+          "Content": "Das Katalogmenü bietet die Funktionen zum Erstellen neuer Mediensammlungen in der Anwendung. Innerhalb dieses Menüs können neue Kataloge erstellt, bearbeitet und gelöscht werden. Der Wechsel des aktuell geöffneten Katalogs wird auch hier vollzogen."
         },
         "1": {
           "PageCaption": "Menüleiste",
-          "Content": "${Help.Common.MenuBar}\n- Kataloge hinzufügen\n- Kataloge importieren\n- Einstellungen öffnen\n\nWenn ein Kataog ausgewählt ist, werden weitere Aktionen wie die Bearbeitung, der Export und die Löschung des Katalogs sichtbar."
+          "Content": "${Help.Common.MenuBar}\n- Kataloge hinzufügen\n- Kataloge importieren\n- Einstellungen öffnen\n\nWenn ein Katalog ausgewählt ist, werden weitere Aktionen wie die Bearbeitung, der Export und die Löschung des Katalogs sichtbar."
         }
       },
       "Topics": {
@@ -392,7 +392,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Den aktiven Katalog auswählen",
-              "Content": "Der erste erstellte Katalog wird standardmäßig nach der Erstellung als aktiver Katalog ausgewählt. Wenn mhere Katalog existieren, kann ein anderer Katalog durch einen Doppelklick in der Liste ausgewählt werden."
+              "Content": "Der erste erstellte Katalog wird standardmäßig nach der Erstellung als aktiver Katalog ausgewählt. Wenn mehrere Kataloge existieren, kann ein anderer Katalog durch einen Doppelklick in der Liste ausgewählt werden."
             }
           }
         },
@@ -410,7 +410,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Kataloge importieren",
-              "Content": "Kataloge können ${Help.Common.MenuBarButton} importiert werden. Dafür wird zunächst die zu importierende Datei über einen Dialog abgefragt.\nNach der Auswahl des Datei wird der Fortschritt des Imports angezeigt bis der Import abgeschlossen ist.\nDurch den Import wird immer ein neuer Katalog innerhalb der Anwendung angelegt."
+              "Content": "Kataloge können ${Help.Common.MenuBarButton} importiert werden. Dafür wird zunächst die zu importierende Datei über einen Dialog abgefragt.\nNach der Auswahl der Datei wird der Fortschritt des Imports angezeigt bis der Import abgeschlossen ist.\nDurch den Import wird immer ein neuer Katalog innerhalb der Anwendung angelegt."
             }
           }
         }
@@ -459,7 +459,7 @@
             },
             "2": {
               "PageCaption": "Suchmodi",
-              "Content": "Die Suchergebnisse können durch verschiedene Modi beeinflusst werden:\n- Im exakten Modus werden die Kategorien strenger gefiltert, indem nur die Suchergebnisse angezeigt werden, die für die gewählten Kategorien genau die gleichen Werte aufweisen.\n- Die Beschreibungssuche erweitert die Textsuche, um auch die Beschreibungen von Medien und Medienteilen zu durchsuchen.\n- Die Favoritensuche reduziert die Suchergebnisse ausschließlich auf Favoriten.\n\nDer Modus der Suchergebnisliste kann außerdem so eingstellt werden, dass anstelle der Medien alle einzelnen Medienteile aufgelistet werden, die die Suchkriterien erfüllen."
+              "Content": "Die Suchergebnisse können durch verschiedene Modi beeinflusst werden:\n- Im exakten Modus werden die Kategorien strenger gefiltert, indem nur die Suchergebnisse angezeigt werden, die für die gewählten Kategorien genau die gleichen Werte aufweisen.\n- Die Beschreibungssuche erweitert die Textsuche, um auch die Beschreibungen von Medien und Medienteilen zu durchsuchen.\n- Die Favoritensuche reduziert die Suchergebnisse ausschließlich auf Favoriten.\n\nDer Modus der Suchergebnisliste kann außerdem so eingestellt werden, dass anstelle der Medien alle einzelnen Medienteile aufgelistet werden, die die Suchkriterien erfüllen."
             }
           }
         },
@@ -509,7 +509,7 @@
       "Pages": {
         "0": {
           "PageCaption": "Überblick",
-          "Content": "Innerhalb des Bearbeitungsmenüs können Medien und ihre medienteile angesehen und bearbeitet werden. Links erfolgt die Auswahl des jeweiligen Elements, dessen Informationen auf der rechten Seite dargestellt werden."
+          "Content": "Innerhalb des Bearbeitungsmenüs können Medien und ihre Medienteile angesehen und bearbeitet werden. Links erfolgt die Auswahl des jeweiligen Elements, dessen Informationen auf der rechten Seite dargestellt werden."
         },
         "1": {
           "PageCaption": "Menüleiste",
@@ -522,7 +522,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Medien ansehen",
-              "Content": "Beim Ansehen von MEdien werden die Inhalte des Mediums links aufgelistet. Auf der rechten Seite sind jeweils die Details des gewählten Medienteils oder des Mediums selbst sichtbar."
+              "Content": "Beim Ansehen von Medien werden die Inhalte des Mediums links aufgelistet. Auf der rechten Seite sind jeweils die Details des gewählten Medienteils oder des Mediums selbst sichtbar."
             }
           }
         },
@@ -551,7 +551,7 @@
             },
             "5": {
               "PageCaption": "Änderungen speichern oder verwerfen",
-              "Content": "Im Bearbeitungsmodus werden Änderungen nicht automatisch gespeichert. Das Medium kann vollständig bearbeitet werden, sodss die Änderungen insgesamt mittels der Buttons in der Menüleiste verworfen oder gespeichert werden können."
+              "Content": "Im Bearbeitungsmodus werden Änderungen nicht automatisch gespeichert. Das Medium kann vollständig bearbeitet werden, sodass die Änderungen insgesamt mittels der Buttons in der Menüleiste verworfen oder gespeichert werden können."
             }
           },
           "Topics": {
@@ -644,7 +644,7 @@
             },
             "1": {
               "PageCaption": "Kategoriewerte bearbeiten",
-              "Content": "${Help.Common.TagValueChanges}\n\nIm Gegensatz zum Bearbeitungsmenü blockiert die Angabe eines medienweiten Kategoriewertes nicht die Teilwerte. Wenn der Medienwert gesetzt wird, überschreibt dies die Teilwerte. Umgekehrt führt das Setzen eines Teilwerts zum leeren des Medienwerts."
+              "Content": "${Help.Common.TagValueChanges}\n\nIm Gegensatz zum Bearbeitungsmenü blockiert die Angabe eines medienweiten Kategoriewertes nicht die Teilwerte. Wenn der Medienwert gesetzt wird, überschreibt dies die Teilwerte. Umgekehrt führt das Setzen eines Teilwerts zum Leeren des Medienwerts."
             },
             "2": {
               "PageCaption": "Änderungen speichern",
@@ -676,7 +676,7 @@
             },
             "1": {
               "PageCaption": "Übersichtsmenüfunktionen",
-              "Content": "Das Übersichtsmenü verfügbt über mehrere optionale Funktionen, die aktiviert oder deaktiviert werden können. Diese Einstellungen können hier vorgenommen werden."
+              "Content": "Das Übersichtsmenü verfügt über mehrere optionale Funktionen, die aktiviert oder deaktiviert werden können. Diese Einstellungen können hier vorgenommen werden."
             },
             "2": {
               "PageCaption": "Suchergebnisseiten",
@@ -689,7 +689,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Löschbestätigungen",
-              "Content": "Mehrere Aktionen innerhalb der Anwendung zeigen eine Löschbestätigung an, um versehentliche Löschungen zu vermeiden. Diese Konfigurationen können hier deaktiviert werden, um Löschungen immer sofort vorzunehmen.\nDie Löschbestätigung für Kataloge kan nicht deaktiviert werden."
+              "Content": "Mehrere Aktionen innerhalb der Anwendung zeigen eine Löschbestätigung an, um versehentliche Löschungen zu vermeiden. Diese Konfigurationen können hier deaktiviert werden, um Löschungen immer sofort vorzunehmen.\nDie Löschbestätigung für Kataloge kann nicht deaktiviert werden."
             },
             "1": {
               "PageCaption": "Titel des Tages",
@@ -708,7 +708,7 @@
         },
         "1": {
           "PageCaption": "Menüleiste",
-          "Content": "Die Menüleiste bietet nur die Navigation zu anderen Teilen der Anwendung, da das Analysemenü nur eine Vorschau für die gefundenen Inkonsistenzen bietet."
+          "Content": "Die Menüleiste bietet nur die Navigation zu anderen Teilen der Anwendung, da das Analysemenü nur eine Vorschau für die gefundenen Inkonsistenzen darstellt."
         }
       },
       "Topics": {
@@ -721,11 +721,11 @@
             },
             "1": {
               "PageCaption": "Doppelte Medien",
-              "Content": "Wenn mehrere MEdien den gleichen Titel aufweisen, werden diese gedoppelten Medien in diesem Abschnitt angezeigt und können im Detail eingesehen werden."
+              "Content": "Wenn mehrere Medien den gleichen Titel aufweisen, werden diese doppelten Medien in diesem Abschnitt angezeigt und können im Detail eingesehen werden."
             },
             "2": {
               "PageCaption": "Fehlende Medienkategorien",
-              "Content": "Wenn alle Teile eines Mediums für eine Kategorie den gleichen Wert (positiv oder negativ) aufweisen, aber die übergreifende Medienkategorie einen neutralen Wert aufweist, wird diese Inkonsistenz hier angezeigt. Die widersprüchlichen Kategorien werden hervorgehoben."
+              "Content": "Wenn alle Teile eines Mediums für eine Kategorie den gleichen Wert (positiv oder negativ) aufweisen, aber die übergreifende Medienkategorie einen neutralen Wert enthält, wird diese Inkonsistenz hier angezeigt. Die widersprüchlichen Kategorien werden hervorgehoben."
             }
           }
         },
