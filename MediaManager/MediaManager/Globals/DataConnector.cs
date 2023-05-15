@@ -195,7 +195,7 @@ namespace MediaManager.Globals
             /// <summary>Offers reading and writing access to settings independent from the currently active <see cref="Catalog"/>.</summary>
             public static class Settings
             {
-                private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue) where T : struct
+                private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue)
                 {
                     var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName)?.Value;
                     return val != null ? parser(val) : defaultValue;
