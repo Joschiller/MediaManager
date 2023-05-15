@@ -238,6 +238,12 @@ namespace MediaManager.Globals
                     get => GetSettingsValue("BACKUP_PATH", s => s, Navigation.DefaultBackupPath);
                     set => SaveSetting("BACKUP_PATH", value);
                 }
+                /// <summary>True, if the automatic backup should be performed.</summary>
+                public static bool BackupEnabled
+                {
+                    get => GetSettingsValue("BACKUP_ENABLED", bool.Parse, true);
+                    set => SaveSetting("BACKUP_ENABLED", value.ToString());
+                }
             }
         }
 

@@ -107,7 +107,9 @@
         "BackupPath": "Sicherungspfad",
         "BtnSelect": "Ordner auswählen",
         "BtnReset": "Zurücksetzen",
-        "PathToLong": "Der gewählte Pfad ist zu lang. Es muss ein anderer Ordner gewählt werden."
+        "PathToLong": "Der gewählte Pfad ist zu lang. Es muss ein anderer Ordner gewählt werden.",
+        "BackupEnabled": "Automatische Sicherung ausführen",
+        "BackupExplanation": "Die automatische Sicherung wird in zwei Fällen ausgeführt:\n- Die Anwendung wird geöffnet, während ein Katalog bereits geöffnet ist. Dann wird der aktuell geöffnete Katalog gesichert.\n- Über das Katalogmenü wird ein anderer Katalog geöffnet. In diesem Fall werden der zuvor geöffnete und der neu geöffnete Katalog gesichert."
       }
     },
     "CatalogList": {

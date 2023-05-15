@@ -107,7 +107,9 @@
         "BackupPath": "Backup folder path",
         "BtnSelect": "Select folder",
         "BtnReset": "Reset",
-        "PathToLong": "The selected path is to long. Please select a different folder."
+        "PathToLong": "The selected path is to long. Please select a different folder.",
+        "BackupEnabled": "Run automatic backup",
+        "BackupExplanation": "The automatic backup saves all contents of a catalog in the following two cases:\n- The application is started whilst a catalog is already active. In this case the currently opened catalog is saved.\n- Another catalog is opened via the catalog menu. In this case the previously and newly opened catalog will both be saved."
       }
     },
     "CatalogList": {

@@ -242,6 +242,9 @@
     <Compile Include="GUI\Settings\BackupPathSetting.xaml.cs">
       <DependentUpon>BackupPathSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Settings\BackupSetting.xaml.cs">
+      <DependentUpon>BackupSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Settings\CatalogSettings.xaml.cs">
       <DependentUpon>CatalogSettings.xaml</DependentUpon>
     </Compile>
@@ -436,6 +439,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Settings\BackupPathSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\BackupSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

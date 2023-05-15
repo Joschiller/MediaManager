@@ -1,6 +1,5 @@
 ﻿using MediaManager.Globals.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
