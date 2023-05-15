@@ -101,6 +101,13 @@
         "DeletionConfirmationPlaylist": "Show deletion confirmation for playlists",
         "DeletionConfirmationTag": "Show deletion confirmation for tags",
         "ShowTitleOfTheDayAsMedium": "Show whole medium for title of the day"
+      },
+      "Backup": {
+        "TabName": "Backup",
+        "BackupPath": "Backup folder path",
+        "BtnSelect": "Select folder",
+        "BtnReset": "Reset",
+        "PathToLong": "The selected path is to long. Please select a different folder."
       }
     },
     "CatalogList": {

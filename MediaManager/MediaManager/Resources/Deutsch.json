@@ -101,6 +101,13 @@
         "DeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
         "DeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
         "ShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
+      },
+      "Backup": {
+        "TabName": "Sicherung",
+        "BackupPath": "Sicherungspfad",
+        "BtnSelect": "Ordner auswählen",
+        "BtnReset": "Zurücksetzen",
+        "PathToLong": "Der gewählte Pfad ist zu lang. Es muss ein anderer Ordner gewählt werden."
       }
     },
     "CatalogList": {

@@ -232,6 +232,12 @@ namespace MediaManager.Globals
                     get => GetSettingsValue("VISIBILITY_STATISTICS_OVERVIEW", bool.Parse, true);
                     set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString());
                 }
+                /// <summary>Currently configured backup path.</summary>
+                public static string BackupPath
+                {
+                    get => GetSettingsValue("BACKUP_PATH", s => s, Navigation.DefaultBackupPath);
+                    set => SaveSetting("BACKUP_PATH", value);
+                }
             }
         }
 
