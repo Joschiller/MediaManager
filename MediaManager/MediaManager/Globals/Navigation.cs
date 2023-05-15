@@ -12,6 +12,7 @@ namespace MediaManager.Globals
     public static class Navigation
     {
         public static string DefaultBackupPath { get => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MediaManager"; }
+        public static string ExportFileExtension { get => ".mmf.xml"; }
 
         public static Window CurrentHelpMenu;
         public static void OpenHelpMenu()

@@ -2,7 +2,9 @@
 using MediaManager.GUI.Controls.Search;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace MediaManager.Globals
@@ -572,6 +574,21 @@ namespace MediaManager.Globals
                     DBCONNECTION.SaveChanges();
                 }
             }
+        }
+
+        /// <summary>
+        /// Runs the automatic backup for the given <see cref="Catalog"/> in the background. Also includes the creation of the backup folder if it does not exist yet.
+        /// </summary>
+        /// <param name="catalogId">Id of the <see cref="Catalog"/> to export</param>
+        public static void RunBackgroundBackup(int catalogId)
+        {
+            var catalog = GlobalContext.Reader.GetCatalog(catalogId);
+            var backupPath = GlobalContext.Settings.BackupPath;
+            if (!Directory.Exists(backupPath)) Directory.CreateDirectory(backupPath);
+            var fileName = backupPath + "\\" + catalog.Title + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss.fff") + Navigation.ExportFileExtension;
+            var stepper = new CatalogExportThread(fileName, "", "", catalogId);
+            var th = new Thread(new ThreadStart(stepper.run));
+            th.Start();
         }
 
         private static string CurrentExportVersion = "1.0.0";

@@ -44,7 +44,7 @@ namespace MediaManager.GUI.Menus
         private string showLoadFileDialog()
         {
             var ofd = new OpenFileDialog();
-            ofd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*.mmf.xml)|*.mmf.xml";
+            ofd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
             ofd.ShowDialog();
             return ofd.FileName;
         }
@@ -75,7 +75,7 @@ namespace MediaManager.GUI.Menus
         {
             var sfd = new SaveFileDialog();
             sfd.FileName = catalogTitle;
-            sfd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*.mmf.xml)|*.mmf.xml";
+            sfd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
             var res = sfd.ShowDialog();
             if (!res.HasValue || !res.Value) return "";
             return sfd.FileName;
@@ -124,7 +124,13 @@ namespace MediaManager.GUI.Menus
         private void catalogList_SelectionChanged(Catalog catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
         private void catalogList_CatalogDoubleClick(Catalog catalog)
         {
+            var oldCatalog = CatalogContext.CurrentCatalogId;
             CatalogContext.SetCurrentCatalog(catalog);
+            if (GlobalContext.Settings.BackupEnabled)
+            {
+                if (oldCatalog.HasValue) RunBackgroundBackup(oldCatalog.Value);
+                RunBackgroundBackup(catalog.Id);
+            }
             catalogList.LoadCatalogs();
         }
         #endregion
