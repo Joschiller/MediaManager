@@ -633,6 +633,16 @@ namespace MediaManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SettingsMenu_Backup {
+            get {
+                object obj = ResourceManager.GetObject("SettingsMenu_Backup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SettingsMenu_Catalog {
             get {
                 object obj = ResourceManager.GetObject("SettingsMenu_Catalog", resourceCulture);

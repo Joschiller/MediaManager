@@ -68,6 +68,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -237,6 +238,12 @@
     </Compile>
     <Compile Include="GUI\Menus\TagMenu.xaml.cs">
       <DependentUpon>TagMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Settings\BackupPathSetting.xaml.cs">
+      <DependentUpon>BackupPathSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Settings\BackupSetting.xaml.cs">
+      <DependentUpon>BackupSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Settings\CatalogSettings.xaml.cs">
       <DependentUpon>CatalogSettings.xaml</DependentUpon>
@@ -428,6 +435,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Menus\TagMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\BackupPathSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Settings\BackupSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -628,6 +643,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SettingsMenu_Backup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SettingsMenu_Catalog.png">

@@ -26,8 +26,17 @@ namespace MediaManager.Globals.SettingsEditor
             InstantiateAllElements();
         }
 
-        private void InstantiateAllElements()
+        /// <summary>
+        /// Can be used to completely reload the rendered tabs.
+        /// <br/>
+        /// Afterwards <see cref="LoadData(int?)"/> should be run to correctly reload the data of all contained controls of the <see cref="SettingsEditor"/>.
+        /// </summary>
+        public void InstantiateAllElements()
         {
+            var selectedTab = settingsTabs.SelectedIndex;
+            settingsTabs.Items.Clear();
+            SettingsEditorItems.Clear();
+
             var controlTypes = AppDomain
                 .CurrentDomain
                 .GetAssemblies()
@@ -67,6 +76,7 @@ namespace MediaManager.Globals.SettingsEditor
 
                 settingsTabs.Items.Add(tabitem);
             }
+            settingsTabs.SelectedIndex = settingsTabs.Items.Count > selectedTab ? selectedTab : 0;
         }
 
         /// <summary>

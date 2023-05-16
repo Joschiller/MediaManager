@@ -21,28 +21,30 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnSave"] = LanguageProvider.getString("Menus.Settings.ToolTip.Save");
             Resources["btnDiscard"] = LanguageProvider.getString("Menus.Settings.ToolTip.Discard");
+            Resources["btnSave"] = LanguageProvider.getString("Menus.Settings.ToolTip.Save");
         }
         #endregion
 
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(null);
         private void btnSaveClick(object sender, RoutedEventArgs e)
         {
             if (editor.ValidateData())
             {
                 editor.SaveData();
-                editor.LoadData(null);
                 ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.Saved"), SuccessMode.Success);
+
+                editor.InstantiateAllElements(); // reload all settings in case the language changed
+                editor.LoadData(null); // needed so that the tabs are reloaded correctly
             }
             else
             {
                 ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.ValidationFailed"), SuccessMode.Error);
             }
         }
-        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(null);
         #endregion
     }
 }

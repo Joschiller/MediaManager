@@ -101,6 +101,15 @@
         "DeletionConfirmationPlaylist": "Löschbestätigung für Playlisten anzeigen",
         "DeletionConfirmationTag": "Löschbestätigung für Kategorien anzeigen",
         "ShowTitleOfTheDayAsMedium": "Gesamtes Medium für den Titel des Tages anzeigen"
+      },
+      "Backup": {
+        "TabName": "Sicherung",
+        "BackupPath": "Sicherungspfad",
+        "BtnSelect": "Ordner auswählen",
+        "BtnReset": "Zurücksetzen",
+        "PathToLong": "Der gewählte Pfad ist zu lang. Es muss ein anderer Ordner gewählt werden.",
+        "BackupEnabled": "Automatische Sicherung ausführen",
+        "BackupExplanation": "Die automatische Sicherung wird in zwei Fällen ausgeführt:\n- Die Anwendung wird geöffnet, während ein Katalog bereits geöffnet ist. Dann wird der aktuell geöffnete Katalog gesichert.\n- Über das Katalogmenü wird ein anderer Katalog geöffnet. In diesem Fall werden der zuvor geöffnete und der neu geöffnete Katalog gesichert."
       }
     },
     "CatalogList": {
@@ -401,7 +410,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Kataloge exportieren",
-              "Content": "Ein ausgewählter Katalog kann ${Help.Common.MenuBarButton} exportiert werden. Dafür wird zunächst der Speicherort über einen Dialog abgefragt.\nNach der Auswahl des Speicherorts wird der Fortschritt des Exports angezeigt bis der Export abgeschlossen ist."
+              "Content": "Ein ausgewählter Katalog kann ${Help.Common.MenuBarButton} exportiert werden. Dafür wird zunächst der Speicherort über einen Dialog abgefragt.\nNach der Auswahl des Speicherorts wird der Fortschritt des Exports angezeigt bis der Export abgeschlossen ist.\n\nAußerdem wird eine automatische Sicherung ausgeführt, wenn dies konfiguriert ist.\n${Controls.Settings.Backup.BackupExplanation}"
             }
           }
         },
@@ -663,10 +672,19 @@
         },
         "1": {
           "PageCaption": "Menüleiste",
-          "Content": "Wenn Einstellungen geändert werden, müssen sie explizit gespeichert werden. Dafür stehen Buttons zum Speichern und Verwerfen der Einstellungsänderungen in der Menüleiste zur Verfügung."
+          "Content": "Wenn Einstellungen geändert werden, müssen sie explizit gespeichert werden. Dafür stehen Buttons zum Verwerfen und Speichern der Einstellungsänderungen in der Menüleiste zur Verfügung."
         }
       },
       "Topics": {
+        "BackupSettings": {
+          "TreeCaption": "Sicherungseinstellungen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Sicherungseinstellungen",
+              "Content": "${Controls.Settings.Backup.BackupExplanation}\n\nDafür kann ein Ordnerpfad konfiguriert werden, unter dem die Sicherungsdateien gespeichert werden. Optional kann die automatische Sicherung auch komplett deaktiviert werden."
+            }
+          }
+        },
         "GlobalSettings": {
           "TreeCaption": "Globale Einstellungen",
           "Pages": {

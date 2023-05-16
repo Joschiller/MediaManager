@@ -19,7 +19,15 @@ namespace MediaManager.GUI.Menus
             InitializeComponent();
             RegisterAtLanguageProvider();
             if (!GlobalContext.Reader.AnyCatalogExists) OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
-            else Reload();
+            else
+            {
+                if (GlobalContext.Settings.BackupEnabled)
+                {
+                    var currentCatalog = CatalogContext.CurrentCatalogId;
+                    if (currentCatalog.HasValue) RunBackgroundBackup(currentCatalog.Value);
+                }
+                Reload();
+            }
         }
         public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
         public void LoadTexts(string language)

@@ -2,7 +2,9 @@
 using MediaManager.GUI.Controls.Search;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace MediaManager.Globals
@@ -195,7 +197,7 @@ namespace MediaManager.Globals
             /// <summary>Offers reading and writing access to settings independent from the currently active <see cref="Catalog"/>.</summary>
             public static class Settings
             {
-                private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue) where T : struct
+                private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue)
                 {
                     var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName)?.Value;
                     return val != null ? parser(val) : defaultValue;
@@ -231,6 +233,18 @@ namespace MediaManager.Globals
                 {
                     get => GetSettingsValue("VISIBILITY_STATISTICS_OVERVIEW", bool.Parse, true);
                     set => SaveSetting("VISIBILITY_STATISTICS_OVERVIEW", value.ToString());
+                }
+                /// <summary>Currently configured backup path.</summary>
+                public static string BackupPath
+                {
+                    get => GetSettingsValue("BACKUP_PATH", s => s, Navigation.DefaultBackupPath);
+                    set => SaveSetting("BACKUP_PATH", value);
+                }
+                /// <summary>True, if the automatic backup should be performed.</summary>
+                public static bool BackupEnabled
+                {
+                    get => GetSettingsValue("BACKUP_ENABLED", bool.Parse, true);
+                    set => SaveSetting("BACKUP_ENABLED", value.ToString());
                 }
             }
         }
@@ -560,6 +574,21 @@ namespace MediaManager.Globals
                     DBCONNECTION.SaveChanges();
                 }
             }
+        }
+
+        /// <summary>
+        /// Runs the automatic backup for the given <see cref="Catalog"/> in the background. Also includes the creation of the backup folder if it does not exist yet.
+        /// </summary>
+        /// <param name="catalogId">Id of the <see cref="Catalog"/> to export</param>
+        public static void RunBackgroundBackup(int catalogId)
+        {
+            var catalog = GlobalContext.Reader.GetCatalog(catalogId);
+            var backupPath = GlobalContext.Settings.BackupPath;
+            if (!Directory.Exists(backupPath)) Directory.CreateDirectory(backupPath);
+            var fileName = backupPath + "\\" + catalog.Title + "-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss.fff") + Navigation.ExportFileExtension;
+            var stepper = new CatalogExportThread(fileName, "", "", catalogId);
+            var th = new Thread(new ThreadStart(stepper.run));
+            th.Start();
         }
 
         private static string CurrentExportVersion = "1.0.0";
