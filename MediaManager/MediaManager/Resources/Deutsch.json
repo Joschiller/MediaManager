@@ -672,10 +672,19 @@
         },
         "1": {
           "PageCaption": "Menüleiste",
-          "Content": "Wenn Einstellungen geändert werden, müssen sie explizit gespeichert werden. Dafür stehen Buttons zum Speichern und Verwerfen der Einstellungsänderungen in der Menüleiste zur Verfügung."
+          "Content": "Wenn Einstellungen geändert werden, müssen sie explizit gespeichert werden. Dafür stehen Buttons zum Verwerfen und Speichern der Einstellungsänderungen in der Menüleiste zur Verfügung."
         }
       },
       "Topics": {
+        "BackupSettings": {
+          "TreeCaption": "Sicherungseinstellungen",
+          "Pages": {
+            "0": {
+              "PageCaption": "Sicherungseinstellungen",
+              "Content": "${Controls.Settings.Backup.BackupExplanation}\n\nDafür kann ein Ordnerpfad konfiguriert werden, unter dem die Sicherungsdateien gespeichert werden. Optional kann die automatische Sicherung auch komplett deaktiviert werden."
+            }
+          }
+        },
         "GlobalSettings": {
           "TreeCaption": "Globale Einstellungen",
           "Pages": {

@@ -672,10 +672,19 @@
         },
         "1": {
           "PageCaption": "Menu Bar",
-          "Content": "If settings are changed, they must be saved explicitly. Therefore, the buttons in the menu bar provide the actions for saving or discarding changes."
+          "Content": "If settings are changed, they must be saved explicitly. Therefore, the buttons in the menu bar provide the actions for discarding or saving changes."
         }
       },
       "Topics": {
+        "BackupSettings": {
+          "TreeCaption": "Backup Settings",
+          "Pages": {
+            "0": {
+              "PageCaption": "Backup Settings",
+              "Content": "${Controls.Settings.Backup.BackupExplanation}\n\nTherefore, a root path can be configured where the backup files are stored at. Optionally the automatic backup can be completely disabled."
+            }
+          }
+        },
         "GlobalSettings": {
           "TreeCaption": "Global Settings",
           "Pages": {

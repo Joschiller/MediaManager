@@ -126,6 +126,11 @@ namespace MediaManager.GUI.HelpTopics
                 {
                     new ShortHelpTopic
                     {
+                        LanguageFileKey = "BackupSettings",
+                        PageImages = new List<System.Drawing.Bitmap> { Resources.SettingsMenu_Backup }
+                    },
+                    new ShortHelpTopic
+                    {
                         LanguageFileKey = "GlobalSettings",
                         PageImages = new List<System.Drawing.Bitmap> { Resources.SettingsMenu_Global, Resources.SettingsMenu_Global, Resources.SettingsMenu_Global }
                     },
