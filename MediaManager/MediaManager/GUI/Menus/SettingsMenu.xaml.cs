@@ -35,8 +35,10 @@ namespace MediaManager.GUI.Menus
             if (editor.ValidateData())
             {
                 editor.SaveData();
-                editor.LoadData(null);
                 ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.Saved"), SuccessMode.Success);
+
+                editor.InstantiateAllElements(); // reload all settings in case the language changed
+                editor.LoadData(null); // needed so that the tabs are reloaded correctly
             }
             else
             {
