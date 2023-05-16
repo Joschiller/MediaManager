@@ -410,7 +410,7 @@
           "Pages": {
             "0": {
               "PageCaption": "Kataloge exportieren",
-              "Content": "Ein ausgewählter Katalog kann ${Help.Common.MenuBarButton} exportiert werden. Dafür wird zunächst der Speicherort über einen Dialog abgefragt.\nNach der Auswahl des Speicherorts wird der Fortschritt des Exports angezeigt bis der Export abgeschlossen ist."
+              "Content": "Ein ausgewählter Katalog kann ${Help.Common.MenuBarButton} exportiert werden. Dafür wird zunächst der Speicherort über einen Dialog abgefragt.\nNach der Auswahl des Speicherorts wird der Fortschritt des Exports angezeigt bis der Export abgeschlossen ist.\n\nAußerdem wird eine automatische Sicherung ausgeführt, wenn dies konfiguriert ist.\n${Controls.Settings.Backup.BackupExplanation}"
             }
           }
         },
