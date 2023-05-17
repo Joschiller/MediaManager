@@ -83,14 +83,14 @@ namespace MediaManager.GUI.Controls.List
                 }
                 mediumTag.Value = GlobalContext.Reader.GetTagsForMedium(currentMedium.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                 mediumTag.TagName = currentMedium.Title;
-                saveButton.Enabled = false;
+                saveButton.IsEnabled = false;
             }
             else
             {
                 mediumTag.Visibility = Visibility.Hidden;
                 partList.Visibility = Visibility.Hidden;
                 saveButton.Visibility = Visibility.Hidden;
-                saveButton.Enabled = false;
+                saveButton.IsEnabled = false;
             }
         }
 
@@ -111,7 +111,7 @@ namespace MediaManager.GUI.Controls.List
                 Parts.Clear();
                 currentPartTags.ForEach(Parts.Add);
             }
-            saveButton.Enabled = true;
+            saveButton.IsEnabled = true;
         }
         private void Grid_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -144,7 +144,7 @@ namespace MediaManager.GUI.Controls.List
             // reset media tag
             mediumTag.Value = null;
 
-            saveButton.Enabled = true;
+            saveButton.IsEnabled = true;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)

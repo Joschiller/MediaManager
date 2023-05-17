@@ -14,7 +14,7 @@
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup Visibility="{DynamicResource editorButtonsVisibility}">
                 <atoms:ImageButton EnabledIconSource="../../Resources/undo.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnUndoChanges}" Click="btnUndoChangesClick"/>
-                <atoms:ImageButton EnabledIconSource="../../../Resources/save.png" Size="{StaticResource imageButtonSize}" DisabledIconSource="../../../Resources/nosave.png" ToolTip="{DynamicResource btnSaveMedium}" Click="btnSaveMediumClick" Enabled="{DynamicResource saveEnabled}" />
+                <atoms:ImageButton EnabledIconSource="../../../Resources/save.png" Size="{StaticResource imageButtonSize}" DisabledIconSource="../../../Resources/nosave.png" ToolTip="{DynamicResource btnSaveMedium}" Click="btnSaveMediumClick" IsEnabled="{DynamicResource saveEnabled}" />
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>

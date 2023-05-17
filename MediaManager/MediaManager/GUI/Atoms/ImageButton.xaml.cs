@@ -5,53 +5,53 @@ using System.Windows.Media;
 namespace MediaManager.GUI.Atoms
 {
     /// <summary>
-    /// Interaction logic for ImageButton.xaml
+    /// A button that displays an icon instead of text.
+    /// <br/>
+    /// The <see cref="ImageButton"/> can be enabled and disabled. When enabled the <see cref="EnabledIconSource"/> will be used. The <see cref="DisabledIconSource"/> will be used otherwise.
+    /// <br/>
+    /// Also a <see cref="Tooltip"/> and the <see cref="Size"/> of the <see cref="ImageButton"/> can be configured.
     /// </summary>
     public partial class ImageButton : UserControl
     {
-        #region Events
+        /// <summary>
+        /// Event that will be triggered, whenever the enabled <see cref="ImageButton"/> is clicked.
+        /// </summary>
         public event RoutedEventHandler Click;
-        #endregion
 
-        #region Properties
+        /// <summary>
+        /// Tooltip that will be shown when hovering above the <see cref="ImageButton"/>.
+        /// </summary>
         public object Tooltip { get => btn.ToolTip; set => btn.ToolTip = value; }
         /// <summary>
-        /// Size of the button.<br/>
+        /// Size of the button.
+        /// <br/>
         /// Default: <c>48</c>
         /// </summary>
         public double Size { get; set; } = 48;
-        public ImageSource EnabledIconSource { get; set; }
-        public ImageSource DisabledIconSource { get; set; } = null;
         /// <summary>
-        /// This property should be used to correctly update the appearance of the image button if it gets enabled or disabled.<br/>
-        /// Default: <c>true</c>
+        /// Image that will be used if the <see cref="ImageButton"/> is enabled.
         /// </summary>
-        public bool Enabled
-        {
-            get => (bool)GetValue(EnabledProperty);
-            set => SetValue(EnabledProperty, value);
-        }
-        public static readonly DependencyProperty EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(ImageButton), new PropertyMetadata(true, OnEnabledPropertyChanged));
-        public static void OnEnabledPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((ImageButton)d).RefreshGUI((bool)e.NewValue);
-        #endregion
+        public ImageSource EnabledIconSource { get; set; }
+        /// <summary>
+        /// Image that will be used if the <see cref="ImageButton"/> is disabled.
+        /// </summary>
+        public ImageSource DisabledIconSource { get; set; } = null;
 
-        #region Setup
         public ImageButton()
         {
             InitializeComponent();
             DataContext = this;
-            RefreshGUI(Enabled);
+            IsEnabledChanged += ImageButton_IsEnabledChanged;
+            RefreshGUI();
         }
-        private void RefreshGUI(bool enabled)
+        private void RefreshGUI()
         {
-            btn.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
-            disabledIcon.Visibility = enabled ? Visibility.Collapsed : Visibility.Visible;
-            if (!enabled && DisabledIconSource == null) DisabledIconSource = EnabledIconSource;
+            btn.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
+            disabledIcon.Visibility = IsEnabled ? Visibility.Collapsed : Visibility.Visible;
+            if (!IsEnabled && DisabledIconSource == null) DisabledIconSource = EnabledIconSource;
         }
-        #endregion
 
-        #region Handler
+        private void ImageButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) => RefreshGUI();
         private void btn_Click(object sender, RoutedEventArgs e) => Click?.Invoke(this, e);
-        #endregion
     }
 }

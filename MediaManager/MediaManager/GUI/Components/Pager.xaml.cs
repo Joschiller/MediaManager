@@ -59,8 +59,8 @@ namespace MediaManager.GUI.Components
         private void UpdateGUI()
         {
             page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();
-            prev.Enabled = CurrentPage > 1;
-            next.Enabled = CurrentPage < TotalPages;
+            prev.IsEnabled = CurrentPage > 1;
+            next.IsEnabled = CurrentPage < TotalPages;
         }
         #endregion
 
