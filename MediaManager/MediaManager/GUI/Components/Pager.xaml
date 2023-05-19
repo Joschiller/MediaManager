@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MediaManager.GUI.Components.Pager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel x:Name="textPanel" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="page" DockPanel.Dock="Top" TextAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="itemCount" DockPanel.Dock="Top" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+        </DockPanel>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <atoms:ImageButton x:Name="prev" Grid.Column="0" HorizontalAlignment="Left" Size="24" Click="prev_Click" EnabledIconSource="../../Resources/previous.png" DisabledIconSource="../../Resources/noprevious.png"/>
+            <atoms:ImageButton x:Name="next" Grid.Column="1" HorizontalAlignment="Right" Size="24" Click="next_Click" EnabledIconSource="../../Resources/next.png" DisabledIconSource="../../Resources/nonext.png"/>
+        </Grid>
+    </DockPanel>
+</UserControl>

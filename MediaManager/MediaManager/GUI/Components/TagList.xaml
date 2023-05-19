@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="MediaManager.GUI.Components.TagList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             mc:Ignorable="d">
+    <ListBox ItemsSource="{Binding Tags}">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Columns="2"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid Tag="{Binding Tag.Id}" MouseUp="Grid_MouseUp" Height="Auto" IsEnabled="{Binding Enabled}" Background="{Binding Background}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Background="{StaticResource control_background_brush}" Margin="8" VerticalAlignment="Center">
+                        <Image x:Name="checkbox" Width="{StaticResource imageButtonSize}" Height="{StaticResource imageButtonSize}" Margin="-8" Source="{Binding Icon}"/>
+                    </Grid>
+                    <TextBlock Grid.Column="1" Text="{Binding Tag.Title}" VerticalAlignment="Center" Margin="8" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>

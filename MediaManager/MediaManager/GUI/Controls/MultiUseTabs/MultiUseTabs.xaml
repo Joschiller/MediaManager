@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="MediaManager.GUI.Controls.MultiUseTabs.MultiUseTabs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs"
+             mc:Ignorable="d">
+    <Grid>
+        <TabControl x:Name="tabs" ItemsSource="{Binding Tabs}" Visibility="Collapsed"/>
+        <Grid x:Name="single" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

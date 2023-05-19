@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MediaManager.GUI.Components.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             mc:Ignorable="d">
+    <DockPanel>
+        <Image x:Name="icon1" DockPanel.Dock="Left" Source="../../Resources/icon.png" Height="{StaticResource imageButtonSize}" Visibility="Collapsed" MouseUp="icon_MouseUp" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <atoms:ImageButton x:Name="back" DockPanel.Dock="Left" EnabledIconSource="../../Resources/back.png" Visibility="Collapsed" Click="back_Click" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <atoms:ImageButton x:Name="help" DockPanel.Dock="Right" EnabledIconSource="../../Resources/help.png" Visibility="Collapsed" Click="help_Click" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <Image x:Name="icon2" DockPanel.Dock="Right" Source="../../Resources/icon.png" Height="{StaticResource imageButtonSize}" Visibility="Collapsed" MouseUp="icon_MouseUp" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+        <StackPanel x:Name="container" Orientation="Horizontal" VerticalAlignment="Center" Margin="{StaticResource defaultMargin}"/>
+    </DockPanel>
+</UserControl>
