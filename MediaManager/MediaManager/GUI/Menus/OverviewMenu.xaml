@@ -1,0 +1,51 @@
+﻿<Window x:Class="MediaManager.GUI.Menus.OverviewMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:multiusetabs="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:search="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Style="{StaticResource defaultWindow}">
+    <Window.Resources>
+        <system:String x:Key="btnAddMedium">Add medium</system:String>
+        <system:String x:Key="btnAddTag">Add tag</system:String>
+        <system:String x:Key="btnTags">Open tag menu</system:String>
+        <system:String x:Key="btnCatalogs">Open catalog menu</system:String>
+        <system:String x:Key="btnSettings">Open settings menu</system:String>
+        <system:String x:Key="btnAnalyze">Open analyze menu</system:String>
+    </Window.Resources>
+    <DockPanel>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
+            <atoms:NavigationButtonGroup>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
+            </atoms:NavigationButtonGroup>
+            <atoms:NavigationButtonGroup>
+                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
+            </atoms:NavigationButtonGroup>
+        </components:NavigationBar>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0" Margin="{StaticResource defaultMarginSmall}">
+                <TextBlock x:Name="catalogTitle" DockPanel.Dock="Top" TextAlignment="Center" FontSize="{StaticResource fontSize_windowTitle}"/>
+                <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
+                <multiusetabs:MultiUseTabs x:Name="multiUseTabs">
+                    <multiusetabs:PlaylistEditor PartSelected="PlaylistEditor_PartSelected"/>
+                    <multiusetabs:TitleOfTheDay/>
+                    <multiusetabs:StatisticsOverview/>
+                </multiusetabs:MultiUseTabs>
+            </DockPanel>
+            <Border Grid.Column="1" Style="{StaticResource defaultBorder}"/>
+            <search:SearchPanel x:Name="searchPanel" Grid.Column="2" MediumSelected="searchPanel_MediumSelected" PlaylistAdditionRequested="searchPanel_PlaylistAdditionRequested" Margin="{StaticResource defaultMarginSmall}"/>
+        </Grid>
+    </DockPanel>
+</Window>

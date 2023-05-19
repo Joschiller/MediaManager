@@ -1,0 +1,41 @@
+﻿<Window x:Class="MediaManager.GUI.Menus.TagMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:list="clr-namespace:MediaManager.GUI.Controls.List"
+        mc:Ignorable="d"
+        Style="{StaticResource defaultWindow}">
+    <Window.Resources>
+        <system:String x:Key="btnAddTag">Add tag</system:String>
+        <system:String x:Key="btnEditTag">Edit tag</system:String>
+        <system:String x:Key="btnDeleteTag">Delete tag</system:String>
+        <Visibility x:Key="tagDependentVisibility">Collapsed</Visibility>
+    </Window.Resources>
+    <DockPanel>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
+            <atoms:NavigationButtonGroup>
+                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+            </atoms:NavigationButtonGroup>
+            <atoms:NavigationButtonGroup Visibility="{DynamicResource tagDependentVisibility}">
+                <atoms:ImageButton EnabledIconSource="../../Resources/edit_blue.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnEditTag}" Click="btnEditTagClick"/>
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDeleteTag}" Click="btnDeleteTagClick"/>
+            </atoms:NavigationButtonGroup>
+        </components:NavigationBar>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="tagList" Grid.Column="0" ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" SelectionChanged="tagList_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <list:MediaTagList x:Name="mediaTagList" Grid.Column="1" Visibility="{DynamicResource tagDependentVisibility}"/>
+        </Grid>
+    </DockPanel>
+</Window>

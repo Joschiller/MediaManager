@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dbb7899631524525af8942eca90835e7" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="MediaDBModel.Catalog" Width="1.5" PointX="7" PointY="3.125" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Medium" Width="1.5" PointX="9.25" PointY="3.125" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.MT_Relation" Width="1.5" PointX="9.25" PointY="6.5" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Part" Width="1.5" PointX="11.5" PointY="3.125" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Playlist" Width="1.5" PointX="9.25" PointY="0.5" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.PT_Relation" Width="1.5" PointX="11.5" PointY="7" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Setting" Width="1.5" PointX="4.75" PointY="3.125" FillColor="255, 226, 120" />
+        <EntityTypeShape EntityType="MediaDBModel.Tag" Width="1.5" PointX="7" PointY="6.875" FillColor="255, 226, 120" />
+        <AssociationConnector Association="MediaDBModel.FK_Media_ToCatalogs" />
+        <AssociationConnector Association="MediaDBModel.FK_Playlists_ToCatalogs" />
+        <AssociationConnector Association="MediaDBModel.FK_Tags_ToCatalogs" />
+        <AssociationConnector Association="MediaDBModel.FK_MT_Relation_ToMedia" />
+        <AssociationConnector Association="MediaDBModel.FK_Parts_ToMedia" />
+        <AssociationConnector Association="MediaDBModel.FK_MT_Relation_ToTags" />
+        <AssociationConnector Association="MediaDBModel.FK_PT_Relation_ToParts" />
+        <AssociationConnector Association="MediaDBModel.FK_PT_Relation_ToTags" />
+        <AssociationConnector Association="MediaDBModel.PPl_Relation" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

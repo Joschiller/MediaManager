@@ -1,0 +1,26 @@
+﻿<Window x:Class="MediaManager.GUI.Menus.EditMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit"
+        mc:Ignorable="d"
+        Style="{StaticResource defaultWindow}">
+    <DockPanel>
+        <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
+            <atoms:NavigationButtonGroup Visibility="{DynamicResource viewerButtonsVisibility}">
+                <atoms:ImageButton EnabledIconSource="../../Resources/delete_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDeleteMedium}" Click="btnDeleteMediumClick"/>
+                <atoms:ImageButton EnabledIconSource="../../../Resources/edit_blue.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnEditMedium}" Click="btnEditMediumClick" />
+            </atoms:NavigationButtonGroup>
+            <atoms:NavigationButtonGroup Visibility="{DynamicResource editorButtonsVisibility}">
+                <atoms:ImageButton EnabledIconSource="../../Resources/undo.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnUndoChanges}" Click="btnUndoChangesClick"/>
+                <atoms:ImageButton EnabledIconSource="../../../Resources/save.png" Size="{StaticResource imageButtonSize}" DisabledIconSource="../../../Resources/nosave.png" ToolTip="{DynamicResource btnSaveMedium}" Click="btnSaveMediumClick" IsEnabled="{DynamicResource saveEnabled}" />
+            </atoms:NavigationButtonGroup>
+        </components:NavigationBar>
+        <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
+        <Grid>
+            <edit:MediaViewer x:Name="viewer"/>
+            <edit:MediaEditor x:Name="editor" MediumEdited="editor_MediumEdited"/>
+        </Grid>
+    </DockPanel>
+</Window>
