@@ -1,10 +1,10 @@
 # Media Manager
 
-<!-- <div style="background: #0D1117;" width="100%" height="640px">
-  <img style="margin: 40%; padding-right: 64px" src="./MediaManager.png" height="128px"/>
+<div style="background: #141414;" width="100%" height="640px">
+  <img style="margin: 40%; padding-right: 64px" src="./styles/app_icon/icon.png" height="128px"/>
 </div>
 
-<div style="page-break-after: always;"></div> -->
+<div style="page-break-after: always;"></div>
 
 - [1 Introduction](#1-introduction)
 - [2 Use Cases](#2-use-cases)
