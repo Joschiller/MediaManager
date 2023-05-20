@@ -26,6 +26,8 @@ Das Hilfemenü kann aus jedem Menü heraus über den "Hilfe" Button in der Menü
 
 ![Help Menu](../HelpImages/HelpMenu.png)
 
+<div style="page-break-after: always;"></div>
+
 ## 3 Kataloge bearbeiten
 
 Im Katalogmenü können Kataloge erstellt, bearbeitet und gelöscht werden. Außerdem können der aktive Katalog ausgewählt und Kataloge exportiert und importiert werden.
@@ -39,6 +41,8 @@ Das Katalogmenü ist das erste Menü, das beim Start der Anwendung geöffnet wir
 Beim Klick auf den "Katalog hinzufügen" Button in der Menüleiste wird ein Dialog geöffnet, in dem der Titel für den zu erstellenden Katalog festgelegt wird.
 
 ![Catalog Menu Dialog](../HelpImages/CatalogMenu_Edit.png)
+
+<div style="page-break-after: always;"></div>
 
 ## 4 Übersichtsmenü
 
@@ -60,7 +64,9 @@ Die Suche auf der rechten Seite des Übersichtsmenüs bietet die Filterung von M
 
 Um ein existierendes Medium aus dem Übersichtsmenü zu öffnen, kann das entsprechende Element in einer Playlist oder den Suchergebnissen durch einen Doppelklick im Bearbeitungsmenü geöffnet werden.
 
-![Overview Menu Searcg](../HelpImages/OverviewMenu_Search.png)
+<img src="../HelpImages/OverviewMenu_Search.png" height="350px" />
+
+<div style="page-break-after: always;"></div>
 
 ## 5 Medien und Medienteile bearbeiten
 
@@ -75,6 +81,8 @@ Wenn Kategorien für ein gesamtes Medium gesetzt werden, werden diese Werte auch
 ![Edit Menu](../HelpImages/EditMenu.png)
 ![Edit Menu](../HelpImages/EditMenu_Part.png)
 
+<div style="page-break-after: always;"></div>
+
 ## 6 Einstellungen
 
 Die Einstellungen erlauben die Konfiguration der Anwendung. Das beinhaltet die Konfiguration der automatischen Sicherung, Katalogeinstellungen und weitere globale Einstellungen wie die Sprache und die im Übersichtsmenü verfügbaren Funktionen.
@@ -82,6 +90,8 @@ Die Einstellungen erlauben die Konfiguration der Anwendung. Das beinhaltet die K
 ![Edit Menu](../HelpImages/SettingsMenu_Backup.png)
 ![Edit Menu](../HelpImages/SettingsMenu_Catalog.png)
 ![Edit Menu](../HelpImages/SettingsMenu_Global.png)
+
+<div style="page-break-after: always;"></div>
 
 ## 7 Analysemenü
 

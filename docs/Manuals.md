@@ -26,6 +26,8 @@ The help menu can be reached from all other menus by using the "Help" button in 
 
 ![Help Menu](../HelpImages/HelpMenu.png)
 
+<div style="page-break-after: always;"></div>
+
 ## 3 Editing Catalogs
 
 Within the catalog menu, catalogs can be created, edited or deleted. Furthermore, the active catalog can be selected or catalogs can be exported and imported.
@@ -39,6 +41,8 @@ The catalog menu is the first menu that will be opened, if no catalog exists yet
 When clicking the "Add Catalog" button in the menu bar, a dialog will be opened to insert a title for the catalog.
 
 ![Catalog Menu Dialog](../HelpImages/CatalogMenu_Edit.png)
+
+<div style="page-break-after: always;"></div>
 
 ## 4 Overview Menu
 
@@ -60,7 +64,9 @@ The search on the righthand side of the overview menu allows to filter for media
 
 To open an existing medium from the overview menu, an item in a playlist or the search result can be double clicked.
 
-![Overview Menu Searcg](../HelpImages/OverviewMenu_Search.png)
+<img src="../HelpImages/OverviewMenu_Search.png" height="350px" />
+
+<div style="page-break-after: always;"></div>
 
 ## 5 Editing Media and Media Parts
 
@@ -75,6 +81,8 @@ If tags are set for the whole medium, these values will be applied for all of th
 ![Edit Menu](../HelpImages/EditMenu.png)
 ![Edit Menu](../HelpImages/EditMenu_Part.png)
 
+<div style="page-break-after: always;"></div>
+
 ## 6 Settings
 
 The settings allow the configuration of the application. This includes the setup of the automatic backup, catalog settings and further global settings such as the language and the available features in the overview menu.
@@ -82,6 +90,8 @@ The settings allow the configuration of the application. This includes the setup
 ![Edit Menu](../HelpImages/SettingsMenu_Backup.png)
 ![Edit Menu](../HelpImages/SettingsMenu_Catalog.png)
 ![Edit Menu](../HelpImages/SettingsMenu_Global.png)
+
+<div style="page-break-after: always;"></div>
 
 ## 7 Analyze Menu
 
