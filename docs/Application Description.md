@@ -126,19 +126,19 @@ The _Media Manager_ application can be used to list different types of media wit
 
 ### 2.5 Editing Media
 
-|                         **2.5.1** | **Adding a medium**                                                                |
-| --------------------------------: | :--------------------------------------------------------------------------------- |
-|                 **Precondition:** | the overview menu is opened                                                        |
-|                      **Actions:** | 1. Click the "Add Medium" button<br/>2. Insert data<br/>3. Save the changes        |
-|                       **Result:** | 1. The edit menu is opened<br/>2. The data is changed<br/>3. The medium is created |
-| **Exceptions and special cases:** | The creation can also be cancelled                                                 |
+|                         **2.5.1** | **Adding a medium**                                                                         |
+| --------------------------------: | :------------------------------------------------------------------------------------------ |
+|                 **Precondition:** | the overview menu is opened                                                                 |
+|                      **Actions:** | 1. Click the "Add Medium" button<br/>2. Insert data<br/>3. Save the changes                 |
+|                       **Result:** | 1. The edit menu is opened<br/>2. The data is changed<br/>3. The medium is created          |
+| **Exceptions and special cases:** | The creation can also be cancelled<br/>If no title is inserted, the changes cannot be saved |
 
-|                         **2.5.2** | **Updating a medium**                                                        |
-| --------------------------------: | :--------------------------------------------------------------------------- |
-|                 **Precondition:** | the edit menu is opened                                                      |
-|                      **Actions:** | 1. Click the "Edit Medium" button<br/>2. Insert data<br/>3. Save the changes |
-|                       **Result:** | The medium is updated                                                        |
-| **Exceptions and special cases:** | The update can also be cancelled                                             |
+|                         **2.5.2** | **Updating a medium**                                                                     |
+| --------------------------------: | :---------------------------------------------------------------------------------------- |
+|                 **Precondition:** | the edit menu is opened                                                                   |
+|                      **Actions:** | 1. Click the "Edit Medium" button<br/>2. Insert data<br/>3. Save the changes              |
+|                       **Result:** | The medium is updated                                                                     |
+| **Exceptions and special cases:** | The update can also be cancelled<br/>If no title is inserted, the changes cannot be saved |
 
 |                         **2.5.3** | **Deleting a medium**                                                                              |
 | --------------------------------: | :------------------------------------------------------------------------------------------------- |
@@ -149,19 +149,19 @@ The _Media Manager_ application can be used to list different types of media wit
 
 ### 2.6 Editing Media Parts
 
-|                         **2.6.1** | **Adding a media part**              |
-| --------------------------------: | :----------------------------------- |
-|                 **Precondition:** | the edit menu is opened in edit mode |
-|                      **Actions:** | 1. Click the "Add Media Part" button |
-|                       **Result:** | An empty part is added to the medium |
-| **Exceptions and special cases:** |                                      |
+|                         **2.6.1** | **Adding a media part**                              |
+| --------------------------------: | :--------------------------------------------------- |
+|                 **Precondition:** | the edit menu is opened in edit mode                 |
+|                      **Actions:** | 1. Click the "Add Media Part" button                 |
+|                       **Result:** | An empty part is added to the medium                 |
+| **Exceptions and special cases:** | If no title is inserted, the changes cannot be saved |
 
 |                         **2.6.2** | **Updating a media part**                                               |
 | --------------------------------: | :---------------------------------------------------------------------- |
 |                 **Precondition:** | the edit menu is opened in edit mode and at least one media part exists |
 |                      **Actions:** | 1. Select the media part to edit<br/>2. Insert data                     |
 |                       **Result:** | The media part is updated                                               |
-| **Exceptions and special cases:** |                                                                         |
+| **Exceptions and special cases:** | If no title is inserted, the changes cannot be saved                    |
 
 |                         **2.6.3** | **Deleting a media part**                                                                                                                     |
 | --------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------- |
