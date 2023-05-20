@@ -23,7 +23,13 @@
   - [2.13 Viewing Statistics](#213-viewing-statistics)
   - [2.14 Viewing Media](#214-viewing-media)
 - [3 Application Screens](#3-application-screens)
-  - [3.x ...](#3x-)
+  - [3.1 Help Menu](#31-help-menu)
+  - [3.2 Catalog Menu](#32-catalog-menu)
+  - [3.3 Overview Menu](#33-overview-menu)
+  - [3.4 Edit Menu](#34-edit-menu)
+  - [3.5 Tag Menu](#35-tag-menu)
+  - [3.6 Settings Menu](#36-settings-menu)
+  - [3.7 Analyze Menu](#37-analyze-menu)
 - [4 Stored Data](#4-stored-data)
 - [5 Definitions](#5-definitions)
   - [5.1 Types](#51-types)
@@ -366,7 +372,64 @@ The _Media Manager_ application can be used to list different types of media wit
 
 The _Media Manager_ supports the user with a clear UI design that highlights the most important actions using individual icons. That way, the user can intuitively use the application.
 
-### 3.x ...
+### 3.1 Help Menu
+
+The help menu can be reached from all other menus by using the "Help" button in the menu bar. The help menu shows different topics in the lefthand list from which the user can select a desired topic. The user can then navigate through the topics and pages of the topics by using the arrow buttons or the arrow keys.
+
+![Help Menu](../HelpImages/HelpMenu.png)
+
+### 3.2 Catalog Menu
+
+Within the catalog menu, catalogs can be created, edited or deleted. Furthermore the active catalog can be selected or catalogs can be exported and imported.
+
+The catalog menu is the first menu that will be opened, if no catalog exists yet. The menu then offers the access to the catalog creation as well as the settings and help menu.
+
+![Catalog Menu](../HelpImages/CatalogMenu.png)
+
+### 3.3 Overview Menu
+
+The overview menu provides the searching functionality on the righthand side of the menu as well as the access to all other menus.
+
+On the lefthand side of the menu, further controls can be enabled that allow editing playlists, viewing the title of the day or viewing statistics.
+
+To open an existing medium from the overview menu, an item in a playlist or the search result can be double clicked.
+
+![Overview Menu](../HelpImages/OverviewMenu.png)
+
+### 3.4 Edit Menu
+
+Within the edit menu, media and their parts can be edited. When creating a new medium, the menu will automatically be opened in edit mode. Otherwise, the chosen medium will be shown in viewing mode and can be edited, by clicking the "Edit Medium" button in the menu bar.
+
+Then the medium can be edited with all its parts. Changes must be saved explicitly.
+
+![Edit Menu](../HelpImages/EditMenu.png)
+
+### 3.5 Tag Menu
+
+The tag menu lists all tags that exist within the application and offers the editing and deletion functionality for those tags.
+
+By selecting a tag and a medium within the menu, the tag values for this medium and its parts can be edited on the righthand side of the menu. Changes must be saved explicitly.
+
+![Tag Menu](../HelpImages/TagMenu_Medium.png)
+
+### 3.6 Settings Menu
+
+Within the settings menu, several tabs allow the access to different configurations. The catalog settings are only available if any catalog exists. Changes must be saved explicitly.
+
+![Settings Menu Backup](../HelpImages/SettingsMenu_Backup.png)
+![Settings Menu Global](../HelpImages/SettingsMenu_Global.png)
+![Settings Menu Catalog](../HelpImages/SettingsMenu_Catalog.png)
+
+### 3.7 Analyze Menu
+
+The analyze menu provides the access to differnt inconsistencies that were found within the currently active catalog. This includes empty or doubled media as well as missing attributes for media or their parts.
+
+The found items are shown in a preview and can then be opened in the edit menu by clicking the edit button.
+
+In case of doubled media, the items are not edited in the edit menu. Rather they are opened in a merge menu that allows the combination of the desired media information and parts to create a single combined medium instead of the doubled items.
+
+![Analyze Menu](../HelpImages/AnalyzeMenu.png)
+![Merge Menu](../HelpImages/AnalyzeMenu_MergeEdit.png)
 
 ## 4 Stored Data
 
