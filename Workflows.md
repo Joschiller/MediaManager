@@ -2,10 +2,10 @@
 
 1. Check API
    - Configuration in `CatalogExportThread` and `CatalogImportThread` code
-   - Description in [specification file](XML-API.md) including all changelog and migration information
+   - Description in [specification file](./XML-API.md) including all changelog and migration information
    - also check the correct version number in respect to the performed changes
 2. Check Workflow documentation
-3. Update [Application Description](./Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
+3. Update [Application Description](./docs/Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
 4. Update [Changelog](./Changelog.md)
    - document new features
    - document open issues that have a direct impact regarding the functionality
