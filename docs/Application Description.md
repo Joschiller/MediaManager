@@ -44,7 +44,14 @@
     - [5.2.2 Export and Automatic Backup](#522-export-and-automatic-backup)
     - [5.2.3 Analyze Results](#523-analyze-results)
 - [6 Test Cases](#6-test-cases)
-  - [6.x ...](#6x-)
+  - [6.1 Showing Help](#61-showing-help)
+  - [6.2 Editing Catalogs](#62-editing-catalogs)
+  - [6.3 Editing and Viewing Media and Media Parts](#63-editing-and-viewing-media-and-media-parts)
+  - [6.4 Editing Tags](#64-editing-tags)
+  - [6.5 Searching Media and Media Parts](#65-searching-media-and-media-parts)
+  - [6.6 Changing Settings](#66-changing-settings)
+  - [6.7 Analyzing Data](#67-analyzing-data)
+  - [6.8 Editing Playlists](#68-editing-playlists)
 - [7 Appendix](#7-appendix)
 
 ## 1 Introduction
@@ -587,13 +594,159 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 
 ## 6 Test Cases
 
-### 6.x ...
+### 6.1 Showing Help
 
-|         **6.x.x** | **Title** |
-| ----------------: | :-------- |
-| **Precondition:** | ...       |
-|      **Actions:** | 1. ...    |
-|       **Result:** | (1.) ...  |
+|         **6.1.1** | **Opening the help menu and navigating through topics**                                                                                                                                                                                                                                            |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** |                                                                                                                                                                                                                                                                                                    |
+|      **Actions:** | 1. Click the "Help" button in any menu<br/>2. Select a topic on the lefthand side<br/>3. Navigate through the menu by either using the arrow buttons or arrow keys                                                                                                                                 |
+|       **Result:** | 1. The help menu is opened<br/>2. The contents of the topic are shown on the righthand side and if the topic contains several pages, the arrow buttons are enabled<br/>3. The contents of the topic and the selected page are shown in the righthand side and the page counter updates accordingly |
+
+### 6.2 Editing Catalogs
+
+|         **6.2.1** | **Adding and editing a catalog**                                                                                                                                             |
+| ----------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** |                                                                                                                                                                              |
+|      **Actions:** | 1. Click the "Add Catalog" button<br/>2. Insert and confirm data<br/>3. Select the catalog in the list<br/>4. Click the "Edit Catalog" button<br/>5. Change and confirm data |
+|       **Result:** | 1. An edit dialog is opened<br/>2. The catalog is created<br/>3. The "Edit Catalog" button is available<br/>4. An edit dialog is opened<br/>5. The catalog is updated        |
+
+|         **6.2.2** | **Exporting, deleting and importing a catalog**                                                                                                                                                              |
+| ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | at least one catalog exists                                                                                                                                                                                  |
+|      **Actions:** | 1. Select a catalog<br/>2. Click the "Export Catalog" button and confirm the export<br/>3. Delete the catalog and confirm the deletion<br/>4. Click the "Import Catalog" button and select the exported file |
+|       **Result:** | 1. The "Export Catalog" button is available<br/>2. The catalog is exported to the selected file<br/>3. The catalog is deleted<br/>4. The catalog is created and contains the data from before the deletion   |
+
+### 6.3 Editing and Viewing Media and Media Parts
+
+|         **6.3.1** | **Adding a new medium with parts**                                                                                                        |
+| ----------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu                                                                                                  |
+|      **Actions:** | 1. Click the "Add Medium" button<br/>2. Insert data for the medium<br/>3. Add parts and insert data for the parts<br/>4. Save the changes |
+|       **Result:** | The medium is created and now shown in viewing mode                                                                                       |
+
+|         **6.3.2** | **Opening and editing an existing medium**                                                     |
+| ----------------: | :--------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu that contains at least one medium with parts          |
+|      **Actions:** | 1. Dobule click an item in the search result list<br/>2. Click the "Edit Medium" button        |
+|       **Result:** | 1. The medium is opened in viewing mode in the edit menu<br/>2. The menu switches to edit mode |
+
+### 6.4 Editing Tags
+
+|         **6.4.1** | **Adding a tag**                                                            |
+| ----------------: | :-------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu                                    |
+|      **Actions:** | 1. Click the "Add Tag" button<br/>2. Insert a title and confirm the changes |
+|       **Result:** | 1. An edit dialog is opened<br/>2. The tag is created                       |
+
+|         **6.4.2** | **Editing and deleting a tag**                                                                                                                                                       |
+| ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the tag menu that contains at least one tag                                                                                                                   |
+|      **Actions:** | 1. Select a tag<br/>2. Click the "Edit Tag" button<br/>3. Change the title and confirm the changes<br/>4. Select a tag<br/>5. Click the "Delete Tag" button and confirm the deletion |
+|       **Result:** | 1. The "Edit Tag" button is available<br/>2. An edit dialog is opened<br/>3. The tag is updated<br/>4. The "Delete Tag" button is available<br/>5. The tag is deleted                |
+
+|         **6.4.3** | **Updating tag values**                                                                                     |
+| ----------------: | :---------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the tag menu that contains at least one tag and a medium                             |
+|      **Actions:** | 1. Select a tag<br/>2. Select a medium<br/>3. Change some tag values and save the changes                   |
+|       **Result:** | 1. A list of media is available<br/>2. The media and part tag values are shown<br/>3. The changes are saved |
+
+### 6.5 Searching Media and Media Parts
+
+|         **6.5.1** | **Using the text search including descriptions**                                                                                                         |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu that contains several media with parts                                                                          |
+|      **Actions:** | 1. Insert a text into the search input and press enter<br/>2. Enable description mode                                                                    |
+|       **Result:** | 1. Only results are shown whose medium or part title contains the given text<br/>2. Further results are shown whose descriptions contains the given text |
+
+|         **6.5.2** | **Using the tag search including exact mode**                                                                                         |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------ |
+| **Precondition:** | a catalog is opened in the overview menu that contains several media with parts                                                       |
+|      **Actions:** | 1. Disable exact mode and select a tag<br/>2. Enable exact mode                                                                       |
+|       **Result:** | 1. Only results are shown that do not set the opposite tag value<br/>2. Only results are shown that have set the exact same tag value |
+
+|         **6.5.3** | **Searching for favorites**                                                     |
+| ----------------: | :------------------------------------------------------------------------------ |
+| **Precondition:** | a catalog is opened in the overview menu that contains several media with parts |
+|      **Actions:** | 1. Enable the favorites mode                                                    |
+|       **Result:** | Only favorites are shown in the search result                                   |
+
+### 6.6 Changing Settings
+
+|         **6.6.1** | **Changing backup settings**                                                                                                                             |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | several catalogs exist                                                                                                                                   |
+|      **Actions:** | 1. Change the backup path<br/>2. If disabled, enable the automatic backup<br/>3. Save the settings<br/>4. Select a different catalog in the catalog menu |
+|       **Result:** | The formally active catalog and the newly active catalog are exported to the selected folder                                                             |
+
+|         **6.6.2** | **Showing the playlist editor**                                                                                |
+| ----------------: | :------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu                                                                       |
+|      **Actions:** | 1. Enable or disable the playlist editor setting<br/>2. Save the settings<br/>3. Navigate to the overview menu |
+|       **Result:** | If the setting is enabled, the playlist editor is available                                                    |
+
+|         **6.6.3** | **Showing the title of the day in different modes**                                                                                                                                                                    |
+| ----------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu                                                                                                                                                                               |
+|      **Actions:** | 1. Enable or disable the title of the day setting<br/>2. Save the settings<br/>3. Navigate to the overview menu<br/>4. Change the mode of the title of the day within the settings to either show media or media parts |
+|       **Result:** | If the setting is enabled, the title of the day is available<br/>According to the settings either a medium or a media part is shown                                                                                    |
+
+|         **6.6.4** | **Showing the statistics**                                                                                |
+| ----------------: | :-------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu                                                                  |
+|      **Actions:** | 1. Enable or disable the statistics setting<br/>2. Save the settings<br/>3. Navigate to the overview menu |
+|       **Result:** | If the setting is enabled, the statistics are available                                                   |
+
+|         **6.6.5** | **Enabling and disabling deletion confirmations**                                                                                             |
+| ----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu that contains at least one medium, part, tag and playlist                                            |
+|      **Actions:** | 1. Enable or disable some deletion confirmations<br/>2. Save the settings<br/>3. Check the deletion of media, media parts, tags and playlists |
+|       **Result:** | According to the settings, a deletion confirmation is shown or skipped                                                                        |
+
+### 6.7 Analyzing Data
+
+|         **6.7.1** | **Finding and editing empty media**                                   |
+| ----------------: | :-------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the analyze menu that contains an empty medium |
+|      **Actions:** | 1. Select the "Empty medium" mode within the analyze menu             |
+|       **Result:** | A list of emtpy media is shown                                        |
+
+|         **6.7.2** | **Finding and merging doubled media**                                                                                                                                                |
+| ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the analyze menu that contains two media with the exact same title                                                                                            |
+|      **Actions:** | 1. Select the "Doubled medium" mode within the analyze menu<br/>2. Click the "Edit" button<br/>3. Select media, media information and media parts to merge<br/>4. Submit the preview |
+|       **Result:** | 1. A list of doubled media is shown<br/>2. The merge menu is opened<br/>3. A preview is generated<br/>4. The selected media are merged into a single medium as shown in the preview  |
+
+|         **6.7.3** | **Finding and editing media with missing tags**                                                                     |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------ |
+| **Precondition:** | a catalog is opened in the analyze menu that contains a medium with no tags and a part with all tags set to a value |
+|      **Actions:** | 1. Select the "Missing medium tag" mode within the analyze menu                                                     |
+|       **Result:** | A list of media with missing media tags is shown                                                                    |
+
+|         **6.7.4** | **Finding and editing media and media parts with missing attributes**                                                                      |
+| ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the analyze menu that contains media and parts with partially empty attributes                                      |
+|      **Actions:** | 1. Select the "Missing media attribute" or "Missing media part attribute" mode within the analyze menu<br/>2. Select an attribute to check |
+|       **Result:** | A listof media or media parts with missing values for the given attribute is shown                                                         |
+
+### 6.8 Editing Playlists
+
+|         **6.8.1** | **Creating a playlist**                                                                                                                   |
+| ----------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu and the setting for showing playlists is enabled                                                 |
+|      **Actions:** | 1. Click the "Add Playlist" button<br/>2. Insert a title and optionally select a tag and playlist length<br/>3. Click the "Create" button |
+|       **Result:** | The playlist is created and if selected it is filled with parts matching the selected tag                                                 |
+
+|         **6.8.2** | **Adding parts to and removing parts from a playlist**                                                                                                                                       |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu and the setting for showing playlists is enabled; a playlist exists; parts exist within the catalog                                                 |
+|      **Actions:** | 1. Select an item in the search result list<br/>2. Right click the search result list and select the option to add the item to a playlist<br/>3. Select a playlist and confirm the selection |
+|       **Result:** | The selected parts are added to the chosen playlist and can be removed using the "X" button                                                                                                  |
+
+|         **6.8.3** | **Deleting a playlist**                                                                                      |
+| ----------------: | :----------------------------------------------------------------------------------------------------------- |
+| **Precondition:** | a catalog is opened in the overview menu and the setting for showing playlists is enabled; a playlist exists |
+|      **Actions:** | 1. Select a playlist<br/>2. Click the "Delete Playlist" button and confirm the deletion                      |
+|       **Result:** | 1. The "Delete Playlist" button is enabled<br/>2. The playlist is deleted                                    |
 
 ## 7 Appendix
 
