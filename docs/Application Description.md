@@ -67,23 +67,23 @@ The _Media Manager_ application can be used to list different types of media wit
 |                 **Precondition:** |                                                                                        |
 |                      **Actions:** | 1. Click the "Help"-Button in the menu bar                                             |
 |                       **Result:** | The help menu is opened, containing different topics that lead through the application |
-| **Exceptions and special cases:** | If an instance of the help menu is already opened, it will be focussed                 |
+| **Exceptions and special cases:** | If an instance of the help menu is already opened, it will be focused                  |
 
 |                         **2.1.2** | **Navigating through the help menu**                                                                           |
 | --------------------------------: | :------------------------------------------------------------------------------------------------------------- |
 |                 **Precondition:** |                                                                                                                |
 |                      **Actions:** | 1. Select a topic in the lefthand list<br/>2. Navigate through the pages using the arrow buttons or arrow keys |
-|                       **Result:** | The menu navigates through the manual and shows screenshows and explanations accordingly                       |
+|                       **Result:** | The menu navigates through the manual and shows screenshots and explanations accordingly                       |
 | **Exceptions and special cases:** |                                                                                                                |
 
 ### 2.2 Using Inputs
 
-|                         **2.2.1** | **Using a tag input**                                                                                                                                                                                                          |
-| --------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                 **Precondition:** |                                                                                                                                                                                                                                |
-|                      **Actions:** | 1. Left-click or right-click the checkbox                                                                                                                                                                                      |
-|                       **Result:** | Left-click: the tag changes it's value from `neutral` to `positive` to `negative` and then back to `neutral`<br/>Right-click: the tag changes it's value from `neutral` to `negative` to `positive` and then back to `neutral` |
-| **Exceptions and special cases:** |                                                                                                                                                                                                                                |
+|                         **2.2.1** | **Using a tag input**                                                                                                                                                                                                        |
+| --------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                 **Precondition:** |                                                                                                                                                                                                                              |
+|                      **Actions:** | 1. Left-click or right-click the checkbox                                                                                                                                                                                    |
+|                       **Result:** | Left-click: the tag changes its value from `neutral` to `positive` to `negative` and then back to `neutral`<br/>Right-click: the tag changes its value from `neutral` to `negative` to `positive` and then back to `neutral` |
+| **Exceptions and special cases:** |                                                                                                                                                                                                                              |
 
 ### 2.3 Editing Catalogs
 
@@ -124,12 +124,12 @@ The _Media Manager_ application can be used to list different types of media wit
 
 ### 2.4 Selecting Catalogs
 
-|                         **2.4.1** | **Switching to a catalog**                                                                                                                         |
-| --------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                 **Precondition:** | the catalog menu is opened and at least one inactive catalog exists                                                                                |
-|                      **Actions:** | 1. Double-click in inactive catalog in the list                                                                                                    |
-|                       **Result:** | The catalog is actived<br/>If the setting is not deactivated, both the now deactivated and now activated catalog will be exported to a backup file |
-| **Exceptions and special cases:** | In case another catalog was active before, the old active catalog will be deactivated                                                              |
+|                         **2.4.1** | **Switching to a catalog**                                                                                                                           |
+| --------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                 **Precondition:** | the catalog menu is opened and at least one inactive catalog exists                                                                                  |
+|                      **Actions:** | 1. Double-click in inactive catalog in the list                                                                                                      |
+|                       **Result:** | The catalog is activated<br/>If the setting is not deactivated, both the now deactivated and now activated catalog will be exported to a backup file |
+| **Exceptions and special cases:** | In case another catalog was active before, the old active catalog will be deactivated                                                                |
 
 ### 2.5 Editing Media
 
@@ -236,7 +236,7 @@ The _Media Manager_ application can be used to list different types of media wit
 | --------------------------------: | :------------------------------------------------------------------------------------------------------------------------------ |
 |                 **Precondition:** | the settings menu is opened                                                                                                     |
 |                      **Actions:** | 1. Enable or disable a feature in the list<br/>2. Save or apply the new settings                                                |
-|                       **Result:** | The selected features are enabled and the other features are disabled<br/>This effects the multi use control on the main screen |
+|                       **Result:** | The selected features are enabled and the other features are disabled<br/>This effects the multi-use control on the main screen |
 | **Exceptions and special cases:** | Changing the settings can also be cancelled                                                                                     |
 
 |                         **2.9.3** | **Changing the result list length**                                                    |
@@ -311,7 +311,7 @@ The _Media Manager_ application can be used to list different types of media wit
 |                 **Precondition:** | the overview menu is opened; the according setting is enabled                                                                                                                        |
 |                      **Actions:** | 1. Click the "Add Playlist" button in the playlist control<br/>2. Insert a name for the playlist<br/>3. Optionally select a tag and playlist length<br/>4. Click the "Create" button |
 |                       **Result:** | The playlist is created<br/>If a tag and length were inserted, the playlist is randomly filled with parts that match the given tag until the length is reached                       |
-| **Exceptions and special cases:** | The playlist may be shorter then the selected length if no more media parts exist for the tag                                                                                        |
+| **Exceptions and special cases:** | The playlist may be shorter than the selected length if no more media parts exist for the tag                                                                                        |
 
 |                        **2.11.3** | **Adding elements to a playlist**                                                                                                                                                   |
 | --------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -387,7 +387,7 @@ The help menu can be reached from all other menus by using the "Help" button in 
 
 ### 3.2 Catalog Menu
 
-Within the catalog menu, catalogs can be created, edited or deleted. Furthermore the active catalog can be selected or catalogs can be exported and imported.
+Within the catalog menu, catalogs can be created, edited or deleted. Furthermore, the active catalog can be selected or catalogs can be exported and imported.
 
 The catalog menu is the first menu that will be opened, if no catalog exists yet. The menu then offers the access to the catalog creation as well as the settings and help menu.
 
@@ -429,7 +429,7 @@ Within the settings menu, several tabs allow the access to different configurati
 
 ### 3.7 Analyze Menu
 
-The analyze menu provides the access to differnt inconsistencies that were found within the currently active catalog. This includes empty or doubled media as well as missing attributes for media or their parts.
+The analyze menu provides the access to different inconsistencies that were found within the currently active catalog. This includes empty or doubled media as well as missing attributes for media or their parts.
 
 The found items are shown in a preview and can then be opened in the edit menu by clicking the edit button.
 
@@ -562,12 +562,12 @@ By default, the application contains the following settings:
 | :---------------------- | :------------------------------------------------------------------------------------------------------------------------- |
 | Search Text             | String to use for the applied search                                                                                       |
 | Tags                    | Tags to use for the applied search                                                                                         |
-| Exact Mode              | In exact mode, the ticked tags must match exactly; otherwise the ticked tags cannot have the opposite value                |
+| Exact Mode              | In exact mode, the ticked tags must match exactly; otherwise, the ticked tags cannot have the opposite value               |
 | Search Description Mode | Whether the text should also be searched within the descriptions; otherwise only the media and part titles will be scanned |
 | Favourite Only Mode     | Filter out all parts that are not marked as favourite                                                                      |
 | Result List Type        | Whether to show the results as a list of media or as a list of parts                                                       |
 
-Default search parameters: By default, the search text is empty and no tag is selected. Furthermore no mode will be active and the result list will show the media.
+Default search parameters: By default, the search text is empty and no tag is selected. Furthermore, no mode will be active and the result list will show the media.
 
 #### 5.2.2 Export and Automatic Backup
 
@@ -590,7 +590,7 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 |               Doubled medium | Several media share the exact same title.                                                                    |
 |           Missing medium tag | All parts of a medium share the same non-neutral tag value but the value is not globally set for the medium. |
 |      Missing media attribute | A given attribute (selectable within a dropdown) is not set for the medium.                                  |
-| Missing media oart attribute | A given attribute (selectable within a dropdown) is not set for the media part.                              |
+| Missing media part attribute | A given attribute (selectable within a dropdown) is not set for the media part.                              |
 
 ## 6 Test Cases
 
@@ -627,7 +627,7 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 |         **6.3.2** | **Opening and editing an existing medium**                                                     |
 | ----------------: | :--------------------------------------------------------------------------------------------- |
 | **Precondition:** | a catalog is opened in the overview menu that contains at least one medium with parts          |
-|      **Actions:** | 1. Dobule click an item in the search result list<br/>2. Click the "Edit Medium" button        |
+|      **Actions:** | 1. Double click an item in the search result list<br/>2. Click the "Edit Medium" button        |
 |       **Result:** | 1. The medium is opened in viewing mode in the edit menu<br/>2. The menu switches to edit mode |
 
 ### 6.4 Editing Tags
@@ -664,11 +664,11 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 |      **Actions:** | 1. Disable exact mode and select a tag<br/>2. Enable exact mode                                                                       |
 |       **Result:** | 1. Only results are shown that do not set the opposite tag value<br/>2. Only results are shown that have set the exact same tag value |
 
-|         **6.5.3** | **Searching for favorites**                                                     |
+|         **6.5.3** | **Searching for favourites**                                                    |
 | ----------------: | :------------------------------------------------------------------------------ |
 | **Precondition:** | a catalog is opened in the overview menu that contains several media with parts |
-|      **Actions:** | 1. Enable the favorites mode                                                    |
-|       **Result:** | Only favorites are shown in the search result                                   |
+|      **Actions:** | 1. Enable the favourites mode                                                   |
+|       **Result:** | Only favourites are shown in the search result                                  |
 
 ### 6.6 Changing Settings
 
@@ -708,7 +708,7 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 | ----------------: | :-------------------------------------------------------------------- |
 | **Precondition:** | a catalog is opened in the analyze menu that contains an empty medium |
 |      **Actions:** | 1. Select the "Empty medium" mode within the analyze menu             |
-|       **Result:** | A list of emtpy media is shown                                        |
+|       **Result:** | A list of empty media is shown                                        |
 
 |         **6.7.2** | **Finding and merging doubled media**                                                                                                                                                |
 | ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -726,7 +726,7 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 | ----------------: | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | **Precondition:** | a catalog is opened in the analyze menu that contains media and parts with partially empty attributes                                      |
 |      **Actions:** | 1. Select the "Missing media attribute" or "Missing media part attribute" mode within the analyze menu<br/>2. Select an attribute to check |
-|       **Result:** | A listof media or media parts with missing values for the given attribute is shown                                                         |
+|       **Result:** | A list of media or media parts with missing values for the given attribute is shown                                                        |
 
 ### 6.8 Editing Playlists
 
