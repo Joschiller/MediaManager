@@ -30,9 +30,13 @@
     - [5.1.1 Catalog Attributes](#511-catalog-attributes)
     - [5.1.2 Media Attributes](#512-media-attributes)
     - [5.1.3 Media Part Attributes](#513-media-part-attributes)
-    - [5.1.4 Tag](#514-tag)
+    - [5.1.4 Tag Attributes](#514-tag-attributes)
+    - [5.1.5 Playlist Attributes](#515-playlist-attributes)
+    - [5.1.6 Settings](#516-settings)
   - [5.2 Algorithms](#52-algorithms)
     - [5.2.1 Search Parameters](#521-search-parameters)
+    - [5.2.2 Export and Automatic Backup](#522-export-and-automatic-backup)
+    - [5.2.3 Analyze Results](#523-analyze-results)
 - [6 Test Cases](#6-test-cases)
   - [6.x ...](#6x-)
 - [7 Appendix](#7-appendix)
@@ -370,37 +374,43 @@ The application stores the data within a local MSSQL database.
 
 This data will only be stored locally as long as the user does not copy it manually. The user must ensure to keep the device safe and secure the device access appropriately to keep the data safe.
 
+If desired, the user can export the data to xml-Files outside the application. This can be used to transfer data between different devices or to create a backup.
+
 ## 5 Definitions
 
 ### 5.1 Types
+
+An overview of the data types can be viewed in the following diagram:
+
+![ERD](../ERD.png)
 
 #### 5.1.1 Catalog Attributes
 
 Catalogs contain the following data:
 
-|                              Attribute | Data Type  | Explanation                                                                           |
-| -------------------------------------: | :--------- | :------------------------------------------------------------------------------------ |
-|                                     Id | Numeric    | Identification of the catalog                                                         |
-|                                  Title | Text       | Title of the catalog                                                                  |
-|                            Description | Text       | Detailed description of the catalog                                                   |
-|           Deletion Confirmation Medium | True/False | Whether the application asks for a deletion confirmation when deleting a whole medium |
-|             Deletion Confirmation Part | True/False | Whether the application asks for a deletion confirmation when deleting a media part   |
-|              Deletion Confirmation Tag | True/False | Whether the application asks for a deletion confirmation when deleting a tag          |
-|         Deletion Confirmation Playlist | True/False | Whether the application asks for a deletion confirmation when deleting a playlist     |
-| Show whole medium for title of the day | True/false | Whether to show a media part or a whole medium within the title of the day control    |
+|                              Attribute | Data Type              | Explanation                                                                           |
+| -------------------------------------: | :--------------------- | :------------------------------------------------------------------------------------ |
+|                                     Id | Numeric                | Identification of the catalog                                                         |
+|                                  Title | Text (128 characters)  | Title of the catalog                                                                  |
+|                            Description | Text (2048 characters) | Detailed description of the catalog                                                   |
+|           Deletion Confirmation Medium | True/False             | Whether the application asks for a deletion confirmation when deleting a whole medium |
+|             Deletion Confirmation Part | True/False             | Whether the application asks for a deletion confirmation when deleting a media part   |
+|              Deletion Confirmation Tag | True/False             | Whether the application asks for a deletion confirmation when deleting a tag          |
+|         Deletion Confirmation Playlist | True/False             | Whether the application asks for a deletion confirmation when deleting a playlist     |
+| Show whole medium for title of the day | True/false             | Whether to show a media part or a whole medium within the title of the day control    |
 
 #### 5.1.2 Media Attributes
 
 Media contain the following data:
 
-|   Attribute | Data Type    | Explanation                               |
-| ----------: | :----------- | :---------------------------------------- |
-|          Id | Numeric      | Identification of the medium              |
-|  Catalog Id | Numeric      | Reference to the parent catalog           |
-|       Title | Text         | Title of the medium                       |
-| Description | Text         | Detailed description of the medium        |
-|    Location | Text         | Place where the medium is located         |
-|        Tags | List of Tags | Categories the medium is contained within |
+|   Attribute | Data Type             | Explanation                               |
+| ----------: | :-------------------- | :---------------------------------------- |
+|          Id | Numeric               | Identification of the medium              |
+|  Catalog Id | Numeric               | Reference to the parent catalog           |
+|       Title | Text (128 characters) | Title of the medium                       |
+| Description | Text (512 characters) | Detailed description of the medium        |
+|    Location | Text (128 characters) | Place where the medium is located         |
+|        Tags | List of Tags          | Categories the medium is contained within |
 
 #### 5.1.3 Media Part Attributes
 
@@ -408,23 +418,23 @@ Each media can hold several parts.
 
 Media parts contain the following data:
 
-|        Attribute | Data Type    | Explanation                               |
-| ---------------: | :----------- | :---------------------------------------- |
-|               Id | Numeric      | Identification of the part                |
-|        Medium Id | Numeric      | Reference to the parent medium            |
-|            Title | Text         | Title of the part                         |
-|      Description | Text         | Detailed description of the part          |
-|        Favourite | True/False   | Whether the part is a favourite           |
-|           Length | Numeric      | Length of the part                        |
-| Publication Year | Numeric      | Publication year of the part              |
-|            Image | Image        | Cover image or thumbnail of the part      |
-|             Tags | List of Tags | Categories the medium is contained within |
+|        Attribute | Data Type             | Explanation                             |
+| ---------------: | :-------------------- | :-------------------------------------- |
+|               Id | Numeric               | Identification of the part              |
+|        Medium Id | Numeric               | Reference to the parent medium          |
+|            Title | Text (128 characters) | Title of the part                       |
+|      Description | Text (512 characters) | Detailed description of the part        |
+|        Favourite | True/False            | Whether the part is a favourite         |
+|           Length | Numeric               | Length of the part                      |
+| Publication Year | Numeric               | Publication year of the part            |
+|            Image | Image                 | Cover image or thumbnail of the part    |
+|             Tags | List of Tags          | Categories the part is contained within |
 
 If a tag for the whole media has a set value (not neutral), all media parts on this media will have the same value for that tag. Media parts can only redefine the neutral tags of the parent media.
 
-#### 5.1.4 Tag
+#### 5.1.4 Tag Attributes
 
-Each tag can have one of the follow values:
+Each tag that is set for a medium or a medium part can have one of the follow values:
 
 - neutral: no data inserted for the category
 - positive: the media or part is contained within the category
@@ -432,11 +442,47 @@ Each tag can have one of the follow values:
 
 Configured tags contain the following data:
 
-|  Attribute | Data Type | Explanation                     |
-| ---------: | :-------- | :------------------------------ |
-|         Id | Numeric   | Identification of the tag       |
-| Catalog Id | Numeric   | Reference to the parent catalog |
-|      Title | Text      | Title of the tag                |
+|  Attribute | Data Type             | Explanation                     |
+| ---------: | :-------------------- | :------------------------------ |
+|         Id | Numeric               | Identification of the tag       |
+| Catalog Id | Numeric               | Reference to the parent catalog |
+|      Title | Text (128 characters) | Title of the tag                |
+
+#### 5.1.5 Playlist Attributes
+
+Playlists can contain several parts.
+
+Playlists contain the following data:
+
+|  Attribute | Data Type             | Explanation                                  |
+| ---------: | :-------------------- | :------------------------------------------- |
+|         Id | Numeric               | Identification of the playlist               |
+| Catalog Id | Numeric               | Reference to the parent catalog              |
+|      Title | Text (128 characters) | Title of the playlist                        |
+|      Parts | List of Parts         | Parts that are contained within the playlist |
+
+#### 5.1.6 Settings
+
+Global settings that are independent from catalog contents are stored in a settings table.
+
+Each setting contains the following data:
+
+| Attribute | Data Type             | Explanation                   |
+| --------: | :-------------------- | :---------------------------- |
+|       Key | Text (512 characters) | Identification of the setting |
+|     Value | Text (512 characters) | Content of the setting        |
+
+By default, the application contains the following settings:
+
+|                            Key | Data Type             | Explanation                                                        | Default                                                                |
+| -----------------------------: | :-------------------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------- |
+|             RESULT_LIST_LENGTH | Numeric               | Length of the pages of any result list within the application      | 20                                                                     |
+|     VISIBILITY_PLAYLIST_EDITOR | True/False            | Whether the playlist editor will be shown in the overview menu     | True                                                                   |
+|    VISIBILITY_TITLE_OF_THE_DAY | True/False            | Whether the title of the day will be shown in the overview menu    | True                                                                   |
+| VISIBILITY_STATISTICS_OVERVIEW | True/False            | Whether the statistics overview will be shown in the overview menu | True                                                                   |
+|                    BACKUP_PATH | Text (512 characters) | Path to the backup folder in which the backup files will be stored | A folder named `MediaManager` within the documents of the current user |
+|                 BACKUP_ENABLED | True/False            | Whether an automatic backup will be created                        | True                                                                   |
+|             CURRENT_CATALOG_ID | Numeric               | Reference to the currently active catalog                          | -                                                                      |
 
 ### 5.2 Algorithms
 
@@ -452,6 +498,29 @@ Configured tags contain the following data:
 | Result List Type        | Whether to show the results as a list of media or as a list of parts                                                       |
 
 Default search parameters: By default, the search text is empty and no tag is selected. Furthermore no mode will be active and the result list will show the media.
+
+#### 5.2.2 Export and Automatic Backup
+
+The user can export a selected catalog manually by using the export button in the catalog menu. For any export, the default file name will be the name of the exported catalog.
+
+Furthermore, an automatic backup will be performed in the following two cases:
+
+- The application is started whilst a catalog is already active. In this case the currently opened catalog is saved.
+- Another catalog is opened via the catalog menu. In this case the previously and newly opened catalog will both be saved.
+
+This backup only is performed, if the corresponding setting is not disabled. If enabled, the backup files would be stored into the configured backup folder. Each file is then named after the exported catalog and a timestamp of the export.
+
+#### 5.2.3 Analyze Results
+
+The analyze menu checks the currently active catalog for inconsistencies. Those include the following:
+
+|                Analysis mode | Explanation                                                                                                  |
+| ---------------------------: | :----------------------------------------------------------------------------------------------------------- |
+|                 Empty medium | The medium does not contain any parts.                                                                       |
+|               Doubled medium | Several media share the exact same title.                                                                    |
+|           Missing medium tag | All parts of a medium share the same non-neutral tag value but the value is not globally set for the medium. |
+|      Missing media attribute | A given attribute (selectable within a dropdown) is not set for the medium.                                  |
+| Missing media oart attribute | A given attribute (selectable within a dropdown) is not set for the media part.                              |
 
 ## 6 Test Cases
 
