@@ -19,8 +19,20 @@
    - remove unnecessary imports
    - check autocompletion hints
 7. FURTHER STEPS ...
-8. Commit changes: "release: Version x.x.x"
-9. Add tag to commit: "Version x.x.x"
+8. Create Release in Repository
+   1. `git checkout -b X.X.X-rc`
+   2. push new branch
+   3. Github > Tags > Create a new Release
+      - Target branch: "X.X.X-rc"
+      - Title: "vX.X.X"
+      - Description: Copy from Changelog
+
+# Update against template
+
+> Run once: `git remote add template https://github.com/Joschiller/Project_Template`
+
+1. `git fetch --all`
+2. `git merge template/main --allow-unrelated-histories`
 
 # File Structure
 

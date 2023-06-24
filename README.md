@@ -1,4 +1,4 @@
-# APPLICATION TITLE
+# Media Manager
 
 <img style="float: right;" src="./MediaManager/MediaManager/Resources/icon.png" height="80px" />
 
