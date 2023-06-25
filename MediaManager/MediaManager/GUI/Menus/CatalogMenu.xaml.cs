@@ -1,6 +1,6 @@
 ﻿using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
-using MediaManager.Globals.XMLImportExport;
+using XMLImportExport;
 using MediaManager.GUI.Dialogs;
 using Microsoft.Win32;
 using System;

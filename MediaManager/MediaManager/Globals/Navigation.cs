@@ -1,6 +1,6 @@
 ﻿using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.DefaultDialogs;
-using MediaManager.Globals.XMLImportExport;
+using XMLImportExport;
 using MediaManager.GUI.Menus;
 using System;
 using System.Collections.Generic;

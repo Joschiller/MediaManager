@@ -1,5 +1,5 @@
 ﻿using static LanguageProvider.LanguageProvider;
-using MediaManager.Globals.XMLImportExport;
+using XMLImportExport;
 using MediaManager.GUI.Controls.Search;
 using System;
 using System.Collections.Generic;
