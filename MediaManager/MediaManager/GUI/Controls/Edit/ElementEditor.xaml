@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
              mc:Ignorable="d">
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
@@ -20,8 +20,8 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="textTitle" Grid.Row="0" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}">
-            <atoms:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
-            <atoms:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
+            <wpfcomponents:ImageButton x:Name="favoriteButtonEnabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteDisableButton_Click" EnabledIconSource="../../../Resources/favorite.png"/>
+            <wpfcomponents:ImageButton x:Name="favoriteButtonDisabled" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="favoriteEnableButton_Click" EnabledIconSource="../../../Resources/nofavorite.png"/>
             <TextBox x:Name="title" MaxLength="128" TextChanged="textChanged"/>
         </DockPanel>
         <TextBlock x:Name="textDescription" Grid.Row="1" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
@@ -47,10 +47,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="textLength" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
-            <atoms:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Margin="{StaticResource defaultMarginSmall}"/>
+            <wpfcomponents:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Margin="{StaticResource defaultMarginSmall}"/>
             <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
             <TextBlock x:Name="textPublication" Grid.Column="3" Style="{StaticResource dialogLabel}"/>
-            <atoms:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}"/>
+            <wpfcomponents:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}"/>
         </Grid>
     </Grid>
 </UserControl>

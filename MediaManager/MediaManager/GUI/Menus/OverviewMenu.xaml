@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:multiusetabs="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:search="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:multiusetabs="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:search="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}">
@@ -18,14 +18,14 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithAppIcon,WithHelpButton" IconClicked="NavigationBar_IconClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/catalogs.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/add_medium.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddMedium}" Click="btnAddMediumClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/add_tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAddTag}" Click="btnAddTagClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/tag.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnTags}" Click="btnTagsClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/catalogs.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnCatalogs}" Click="btnCatalogsClick"/>
             </atoms:NavigationButtonGroup>
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/settings.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/analyze.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/settings.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSettings}" Click="btnSettingsClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/analyze.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnAnalyze}" Click="btnAnalyzeClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>

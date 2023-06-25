@@ -88,9 +88,9 @@ namespace MediaManager.GUI.Controls.Edit
                 IsCurrentlyFavorite = part.Favourite;
                 updateFavoriteButtonVisibility();
                 description.Text = part.Description;
-                length.SetValue((uint)part.Length);
+                length.SetValue(part.Length);
                 textMinute.Text = getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
-                publication.SetValue((uint)part.Publication_Year);
+                publication.SetValue(part.Publication_Year);
                 image.Source = part.Image != null ? convertByteArrayToBitmapImage(part.Image) : null;
                 imagePath.Text = "";
                 imagePath.Visibility = Visibility.Collapsed;
@@ -151,7 +151,7 @@ namespace MediaManager.GUI.Controls.Edit
             onEdited();
         }
         private void textChanged(object sender, TextChangedEventArgs e) => onEdited();
-        private void numericValueChanged(uint newVal)
+        private void numericValueChanged(int newVal)
         {
             textMinute.Text = getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
             onEdited();

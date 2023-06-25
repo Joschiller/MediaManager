@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Settings" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             xmlns:local="clr-namespace:MediaManager.GUI.Settings" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
              mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -11,6 +11,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="searchResultLabel" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
-        <atoms:NumericUpDown x:Name="searchResultValue" Grid.Column="1" StepPerScroll="1"/>
+        <wpfcomponents:NumericUpDown x:Name="searchResultValue" Grid.Column="1" StepPerScroll="1"/>
     </Grid>
 </UserControl>

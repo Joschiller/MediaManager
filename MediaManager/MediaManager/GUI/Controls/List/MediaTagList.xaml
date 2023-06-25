@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Controls.List" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.List" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
              mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False" Margin="{StaticResource defaultMarginSmall}">
-            <atoms:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
+            <wpfcomponents:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
             <components:Pager x:Name="pager" PageChanged="pager_PageChanged" DockPanel.Dock="Left" TextPlacement="Top"/>
         </DockPanel>
         <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">

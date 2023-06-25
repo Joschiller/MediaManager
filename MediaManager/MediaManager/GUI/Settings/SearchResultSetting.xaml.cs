@@ -32,7 +32,7 @@ namespace MediaManager.GUI.Settings
         #region Data
         public void LoadData(int? accountIdentifier)
         {
-            searchResultValue.SetValue((uint)GlobalContext.Settings.ResultListLength);
+            searchResultValue.SetValue(GlobalContext.Settings.ResultListLength);
             LoadTexts(null);
         }
         public void SaveData() => GlobalContext.Settings.ResultListLength = (int)searchResultValue.Value;

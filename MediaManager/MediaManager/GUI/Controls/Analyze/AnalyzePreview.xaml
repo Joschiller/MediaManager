@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Analyze" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.Analyze" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
              mc:Ignorable="d">
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
-            <atoms:ImageButton x:Name="editButton" Size="{StaticResource imageButtonSize}" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
+            <wpfcomponents:ImageButton x:Name="editButton" Size="{StaticResource imageButtonSize}" Click="editButton_Click"  EnabledIconSource="../../../Resources/edit_blue.png" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
         </Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <Grid>

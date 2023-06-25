@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:globals="clr-namespace:MediaManager.Globals"
+             xmlns:local="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:globals="clr-namespace:MediaManager.Globals" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
              mc:Ignorable="d">
     <UserControl.Resources>
         <globals:XamlValueAdder x:Key="WidthCalculator" Pad="-11"/>
@@ -32,7 +32,7 @@
                         <TextBlock x:Name="titleLabel" Margin="{StaticResource defaultMarginSmall}"/>
                         <TextBox x:Name="titleInput" MaxLength="128" TextChanged="titleInput_TextChanged" Margin="{StaticResource defaultMarginSmall}"/>
                         <TextBlock x:Name="lengthLabel" Margin="{StaticResource defaultMarginSmall}"/>
-                        <atoms:NumericUpDown x:Name="lengthInput" Margin="{StaticResource defaultMarginSmall}" StepPerScroll="1"/>
+                        <wpfcomponents:NumericUpDown x:Name="lengthInput" Margin="{StaticResource defaultMarginSmall}" StepPerScroll="1"/>
                         <TextBlock x:Name="tagLabel" Margin="{StaticResource defaultMarginSmall}"/>
                         <ComboBox x:Name="tagInput" Margin="{StaticResource defaultMarginSmall}">
                             <ComboBox.ItemTemplate>

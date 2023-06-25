@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using WPFComponents;
 
 namespace MediaManager.GUI.Atoms
 {

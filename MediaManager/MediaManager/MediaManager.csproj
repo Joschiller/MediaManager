@@ -90,6 +90,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFComponents, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFComponents.1.0.1\lib\net472\WPFComponents.dll</HintPath>
+    </Reference>
     <Reference Include="XMLImportExport, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XMLImportExport.1.0.1\lib\net472\XMLImportExport.dll</HintPath>
     </Reference>
@@ -111,14 +114,8 @@
       <DependentUpon>CheckedList.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Atoms\CheckedListItem.cs" />
-    <Compile Include="GUI\Atoms\ImageButton.xaml.cs">
-      <DependentUpon>ImageButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Atoms\NavigationButtonGroup.xaml.cs">
       <DependentUpon>NavigationButtonGroup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Atoms\NumericUpDown.xaml.cs">
-      <DependentUpon>NumericUpDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Atoms\TagCheckbox.xaml.cs">
       <DependentUpon>TagCheckbox.xaml</DependentUpon>
@@ -280,15 +277,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\Atoms\ImageButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="GUI\Atoms\NavigationButtonGroup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\Atoms\NumericUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

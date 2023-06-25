@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:settingseditor="clr-namespace:SettingsEditor;assembly=SettingsEditor"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:settingseditor="clr-namespace:SettingsEditor;assembly=SettingsEditor" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}">
     <Window.Resources>
@@ -13,8 +13,8 @@
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup>
-                <atoms:ImageButton EnabledIconSource="../../Resources/undo.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDiscard}" Click="btnDiscardClick"/>
-                <atoms:ImageButton EnabledIconSource="../../Resources/save.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSave}" Click="btnSaveClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/undo.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnDiscard}" Click="btnDiscardClick"/>
+                <wpfcomponents:ImageButton EnabledIconSource="../../Resources/save.png" Size="{StaticResource imageButtonSize}" ToolTip="{DynamicResource btnSave}" Click="btnSaveClick"/>
             </atoms:NavigationButtonGroup>
         </components:NavigationBar>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
