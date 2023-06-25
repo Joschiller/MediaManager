@@ -68,6 +68,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SettingsEditor, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SettingsEditor.1.0.1\lib\net472\SettingsEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -121,10 +124,6 @@
       <DependentUpon>TagCheckbox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globals\Navigation.cs" />
-    <Compile Include="Globals\SettingsEditor\SettingsEditor.xaml.cs">
-      <DependentUpon>SettingsEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Globals\SettingsEditor\SettingsEditorItem.cs" />
     <Compile Include="GUI\Components\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
@@ -294,10 +293,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Atoms\TagCheckbox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Globals\SettingsEditor\SettingsEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

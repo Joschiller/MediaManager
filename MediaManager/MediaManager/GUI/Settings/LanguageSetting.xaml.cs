@@ -1,6 +1,6 @@
 ﻿using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
-using MediaManager.Globals.SettingsEditor;
+using SettingsEditor;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;

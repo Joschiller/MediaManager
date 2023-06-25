@@ -1,7 +1,7 @@
 ﻿using DefaultDialogs;
 using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
-using MediaManager.Globals.SettingsEditor;
+using SettingsEditor;
 using System.Windows;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
