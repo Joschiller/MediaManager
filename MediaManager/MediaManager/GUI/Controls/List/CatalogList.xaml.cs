@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,12 +35,12 @@ namespace MediaManager.GUI.Controls.List
             RegisterAtLanguageProvider();
             LoadCatalogs();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            Resources["activeString"] = "(" + LanguageProvider.getString("Controls.CatalogList.ActiveString") + ")";
+            Resources["activeString"] = "(" + getString("Controls.CatalogList.ActiveString") + ")";
         }
-        ~CatalogList() => LanguageProvider.Unregister(this);
+        ~CatalogList() => Unregister(this);
         #endregion
 
         #region Getter/Setter

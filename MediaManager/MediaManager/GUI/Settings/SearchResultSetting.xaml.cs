@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -22,10 +23,10 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            searchResultLabel.Text = LanguageProvider.getString("Controls.Settings.SearchResult.Label") + ":";
+            searchResultLabel.Text = getString("Controls.Settings.SearchResult.Label") + ":";
         }
         public string GetControlName() => "SearchResult";
-        public string GetTabName() => LanguageProvider.getString("Menus.Settings.TabName");
+        public string GetTabName() => getString("Menus.Settings.TabName");
         bool SettingsEditorItem.IsVisible() => true;
         #endregion
         #region Data
@@ -38,7 +39,7 @@ namespace MediaManager.GUI.Settings
         // validation is already ensured by to the input mechanism itself
         public bool ValidateData() => RunValidation(new List<System.Func<string>>
             {
-                () => searchResultValue.Value <= 0 && searchResultValue.Value > 50 ? LanguageProvider.getString("Controls.Settings.SearchResult.Validation") : null, // value is valid
+                () => searchResultValue.Value <= 0 && searchResultValue.Value > 50 ? getString("Controls.Settings.SearchResult.Validation") : null, // value is valid
             });
         #endregion
     }

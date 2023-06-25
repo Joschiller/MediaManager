@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.DefaultDialogs;
+﻿using static LanguageProvider.LanguageProvider;
+using MediaManager.Globals.DefaultDialogs;
 using MediaManager.Globals.XMLImportExport;
 using MediaManager.GUI.Menus;
 using System;
@@ -62,12 +63,12 @@ namespace MediaManager.Globals
         }
         public static void ShowDefaultDialog(string text, SuccessMode mode = SuccessMode.Neutral, string language = null)
         {
-            language = language ?? LanguageProvider.LanguageProvider.CurrentLanguage;
+            language = language ?? CurrentLanguage;
             new GeneralButtonBasedDialog(GeneralButtonBasedDialogStyle)
-                .WithTitle(LanguageProvider.LanguageProvider.getString(language, "ApplicationName"))
+                .WithTitle(getString(language, "ApplicationName"))
                 .WithText(text)
                 .WithBorder(mode)
-                .WithNeutralButton("_" + LanguageProvider.LanguageProvider.getString(language, "Common.Button.Ok"), isDefault: true, isCancel: true)
+                .WithNeutralButton("_" + getString(language, "Common.Button.Ok"), isDefault: true, isCancel: true)
                 .ShowDialog();
         }
         /// <summary>
@@ -85,12 +86,12 @@ namespace MediaManager.Globals
         public static bool? ShowUnsavedChangesDialog()
         {
             return new GeneralButtonBasedDialog(GeneralButtonBasedDialogStyle)
-                .WithTitle(LanguageProvider.LanguageProvider.getString("ApplicationName"))
-                .WithText(LanguageProvider.LanguageProvider.getString("Dialog.UnsavedChanges"))
+                .WithTitle(getString("ApplicationName"))
+                .WithText(getString("Dialog.UnsavedChanges"))
                 .WithBorder(SuccessMode.Error)
-                .WithDefaultButton("_" + LanguageProvider.LanguageProvider.getString("Common.Button.Yes"), true)
-                .WithNeutralButton("_" + LanguageProvider.LanguageProvider.getString("Common.Button.No"), false)
-                .WithCancelButton("_" + LanguageProvider.LanguageProvider.getString("Common.Button.Cancel"), null)
+                .WithDefaultButton("_" + getString("Common.Button.Yes"), true)
+                .WithNeutralButton("_" + getString("Common.Button.No"), false)
+                .WithCancelButton("_" + getString("Common.Button.Cancel"), null)
                 .ShowForResult() as bool?;
         }
         /// <summary>
@@ -108,11 +109,11 @@ namespace MediaManager.Globals
         public static bool? ShowDeletionConfirmationDialog(string deletedObjectRepresentation, string additionalHint = "")
         {
             return new GeneralButtonBasedDialog(GeneralButtonBasedDialogStyle)
-                .WithTitle(LanguageProvider.LanguageProvider.getString("ApplicationName"))
-                .WithText(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.DeletionConfirmation.Intro") + (additionalHint == "" ? "" : ("\n" + additionalHint)), deletedObjectRepresentation))
+                .WithTitle(getString("ApplicationName"))
+                .WithText(string.Format(getString("Dialog.DeletionConfirmation.Intro") + (additionalHint == "" ? "" : ("\n" + additionalHint)), deletedObjectRepresentation))
                 .WithBorder(SuccessMode.Error)
-                .WithDefaultButton("_" + LanguageProvider.LanguageProvider.getString("Common.Button.Yes"), true)
-                .WithCancelButton("_" + LanguageProvider.LanguageProvider.getString("Common.Button.No"), false)
+                .WithDefaultButton("_" + getString("Common.Button.Yes"), true)
+                .WithCancelButton("_" + getString("Common.Button.No"), false)
                 .ShowForResult() as bool?;
         }
         /// <summary>
@@ -123,7 +124,7 @@ namespace MediaManager.Globals
         /// <returns>true, if all validations succeeded, false either</returns>
         public static bool RunValidation(List<Func<string>> validations, string language = null)
         {
-            language = language ?? LanguageProvider.LanguageProvider.CurrentLanguage;
+            language = language ?? CurrentLanguage;
             var problems = new Queue<string>();
             foreach (var v in validations)
             {
@@ -135,9 +136,9 @@ namespace MediaManager.Globals
             {
                 sb.Append(problems.Dequeue());
                 if (problems.Count > 1) sb.Append(", ");
-                else if (problems.Count > 0) sb.Append(LanguageProvider.LanguageProvider.getString(language, "Common.ValidationText.Concat"));
+                else if (problems.Count > 0) sb.Append(getString(language, "Common.ValidationText.Concat"));
             }
-            if (sb.Length > 0) ShowDefaultDialog(LanguageProvider.LanguageProvider.getString(language, "Common.ValidationText.Intro") + sb.ToString() + "!", SuccessMode.Error, language);
+            if (sb.Length > 0) ShowDefaultDialog(getString(language, "Common.ValidationText.Intro") + sb.ToString() + "!", SuccessMode.Error, language);
             return sb.Length == 0;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using static LanguageProvider.LanguageProvider;
+using System.Collections.Generic;
 
 namespace MediaManager.Globals
 {
@@ -10,7 +11,7 @@ namespace MediaManager.Globals
         }
         private static void InitLanguages()
         {
-            LanguageProvider.LanguageProvider.ConfigureLanguages(new Dictionary<string, byte[]>
+            ConfigureLanguages(new Dictionary<string, byte[]>
             {
                 { "English", Properties.Resources.English },
                 { "Deutsch", Properties.Resources.Deutsch }

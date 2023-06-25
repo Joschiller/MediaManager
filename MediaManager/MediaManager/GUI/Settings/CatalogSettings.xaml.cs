@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
@@ -17,14 +18,14 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            labelDeletionConfirmationMedium.Text = LanguageProvider.getString("Controls.Settings.Catalog.DeletionConfirmationMedium") + ":";
-            labelDeletionConfirmationPart.Text = LanguageProvider.getString("Controls.Settings.Catalog.DeletionConfirmationPart") + ":";
-            labelDeletionConfirmationPlaylist.Text = LanguageProvider.getString("Controls.Settings.Catalog.DeletionConfirmationPlaylist") + ":";
-            labelDeletionConfirmationTag.Text = LanguageProvider.getString("Controls.Settings.Catalog.DeletionConfirmationTag") + ":";
-            labelShowTitleOfTheDayAsMedium.Text = LanguageProvider.getString("Controls.Settings.Catalog.ShowTitleOfTheDayAsMedium") + ":";
+            labelDeletionConfirmationMedium.Text = getString("Controls.Settings.Catalog.DeletionConfirmationMedium") + ":";
+            labelDeletionConfirmationPart.Text = getString("Controls.Settings.Catalog.DeletionConfirmationPart") + ":";
+            labelDeletionConfirmationPlaylist.Text = getString("Controls.Settings.Catalog.DeletionConfirmationPlaylist") + ":";
+            labelDeletionConfirmationTag.Text = getString("Controls.Settings.Catalog.DeletionConfirmationTag") + ":";
+            labelShowTitleOfTheDayAsMedium.Text = getString("Controls.Settings.Catalog.ShowTitleOfTheDayAsMedium") + ":";
         }
         public string GetControlName() => "Catalog";
-        public string GetTabName() => LanguageProvider.getString("Controls.Settings.Catalog.TabName");
+        public string GetTabName() => getString("Controls.Settings.Catalog.TabName");
         bool SettingsEditorItem.IsVisible() => CatalogContext.CurrentCatalogId.HasValue;
         #endregion
         #region Data

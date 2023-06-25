@@ -1,7 +1,7 @@
 ﻿using MediaManager.Globals.DefaultDialogs;
 using System;
 using System.Windows;
-using static MediaManager.Globals.LanguageProvider.LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager

@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.HelpTopics;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             contentImageContainer.Visibility = Visibility.Collapsed;
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
             setupTopics();
@@ -36,12 +37,12 @@ namespace MediaManager.GUI.Menus
         }
         private List<HelpTopic> translateTopics(List<HelpTopic> topicList) => topicList.Select(t => new HelpTopic
         {
-            TreeCaption = LanguageProvider.getString("Help." + t.TreeCaption),
+            TreeCaption = getString("Help." + t.TreeCaption),
             Pages = t.Pages?.Select(p => new HelpTopicPage
             {
-                PageCaption = LanguageProvider.getString("Help." + p.PageCaption),
+                PageCaption = getString("Help." + p.PageCaption),
                 Image = p.Image,
-                Content = LanguageProvider.getString("Help." + p.Content),
+                Content = getString("Help." + p.Content),
             }).ToList(),
             Children = t.Children != null ? translateTopics(t.Children) : null
         }).ToList();

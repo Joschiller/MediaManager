@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,18 +35,18 @@ namespace MediaManager.GUI.Controls.Analyze
             rbMediumEmpty.IsChecked = true;
             afterRadioChanged();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            rbMediumEmpty.Content = LanguageProvider.getString("Controls.Analyze.MediumEmpty.Radio");
-            rbMediumDuplicate.Content = LanguageProvider.getString("Controls.Analyze.MediumDuplicate.Radio");
-            rbMediumCommonTags.Content = LanguageProvider.getString("Controls.Analyze.MediumCommonTags.Radio");
-            rbMediaAttribute.Content = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Radio");
-            rbPartAttribute.Content = LanguageProvider.getString("Controls.Analyze.PartAttribute.Radio");
+            rbMediumEmpty.Content = getString("Controls.Analyze.MediumEmpty.Radio");
+            rbMediumDuplicate.Content = getString("Controls.Analyze.MediumDuplicate.Radio");
+            rbMediumCommonTags.Content = getString("Controls.Analyze.MediumCommonTags.Radio");
+            rbMediaAttribute.Content = getString("Controls.Analyze.MediaAttribute.Radio");
+            rbPartAttribute.Content = getString("Controls.Analyze.PartAttribute.Radio");
             SetupComboBox();
             LoadDescription();
         }
-        ~AnalyzeModeSelector() => LanguageProvider.Unregister(this);
+        ~AnalyzeModeSelector() => Unregister(this);
         private void SetupComboBox()
         {
             Attributes.Clear();
@@ -60,9 +61,9 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.MediumTags:
                 case AnalyzeMode.MediumLocation:
                     attributeSelection.Visibility = Visibility.Visible;
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.MediaAttribute.Description.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.MediaAttribute.Tags.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.MediaAttribute.Location.Select"));
+                    Attributes.Add(getString("Controls.Analyze.MediaAttribute.Description.Select"));
+                    Attributes.Add(getString("Controls.Analyze.MediaAttribute.Tags.Select"));
+                    Attributes.Add(getString("Controls.Analyze.MediaAttribute.Location.Select"));
                     attributeSelection.SelectedIndex = 0;
                     ComboBoxMode = 0;
                     afterComboBoxChanged();
@@ -73,11 +74,11 @@ namespace MediaManager.GUI.Controls.Analyze
                 case AnalyzeMode.PartPublication:
                 case AnalyzeMode.PartImage:
                     attributeSelection.Visibility = Visibility.Visible;
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.PartAttribute.Description.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.PartAttribute.Tags.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.PartAttribute.Length.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.PartAttribute.Publication.Select"));
-                    Attributes.Add(LanguageProvider.getString("Controls.Analyze.PartAttribute.Image.Select"));
+                    Attributes.Add(getString("Controls.Analyze.PartAttribute.Description.Select"));
+                    Attributes.Add(getString("Controls.Analyze.PartAttribute.Tags.Select"));
+                    Attributes.Add(getString("Controls.Analyze.PartAttribute.Length.Select"));
+                    Attributes.Add(getString("Controls.Analyze.PartAttribute.Publication.Select"));
+                    Attributes.Add(getString("Controls.Analyze.PartAttribute.Image.Select"));
                     attributeSelection.SelectedIndex = 0;
                     ComboBoxMode = 1;
                     afterComboBoxChanged();
@@ -88,17 +89,17 @@ namespace MediaManager.GUI.Controls.Analyze
         {
             switch (Mode)
             {
-                case AnalyzeMode.MediumEmpty: description.Text = LanguageProvider.getString("Controls.Analyze.MediumEmpty.Description"); break;
-                case AnalyzeMode.MediumDoubled: description.Text = LanguageProvider.getString("Controls.Analyze.MediumDuplicate.Description"); break;
-                case AnalyzeMode.MediumCommonTags: description.Text = LanguageProvider.getString("Controls.Analyze.MediumCommonTags.Description"); break;
-                case AnalyzeMode.MediumDescription: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Description.Description"); break;
-                case AnalyzeMode.MediumTags: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Tags.Description"); break;
-                case AnalyzeMode.MediumLocation: description.Text = LanguageProvider.getString("Controls.Analyze.MediaAttribute.Location.Description"); break;
-                case AnalyzeMode.PartDescription: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Description.Description"); break;
-                case AnalyzeMode.PartTags: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Tags.Description"); break;
-                case AnalyzeMode.PartLength: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Length.Description"); break;
-                case AnalyzeMode.PartPublication: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Publication.Description"); break;
-                case AnalyzeMode.PartImage: description.Text = LanguageProvider.getString("Controls.Analyze.PartAttribute.Image.Description"); break;
+                case AnalyzeMode.MediumEmpty: description.Text = getString("Controls.Analyze.MediumEmpty.Description"); break;
+                case AnalyzeMode.MediumDoubled: description.Text = getString("Controls.Analyze.MediumDuplicate.Description"); break;
+                case AnalyzeMode.MediumCommonTags: description.Text = getString("Controls.Analyze.MediumCommonTags.Description"); break;
+                case AnalyzeMode.MediumDescription: description.Text = getString("Controls.Analyze.MediaAttribute.Description.Description"); break;
+                case AnalyzeMode.MediumTags: description.Text = getString("Controls.Analyze.MediaAttribute.Tags.Description"); break;
+                case AnalyzeMode.MediumLocation: description.Text = getString("Controls.Analyze.MediaAttribute.Location.Description"); break;
+                case AnalyzeMode.PartDescription: description.Text = getString("Controls.Analyze.PartAttribute.Description.Description"); break;
+                case AnalyzeMode.PartTags: description.Text = getString("Controls.Analyze.PartAttribute.Tags.Description"); break;
+                case AnalyzeMode.PartLength: description.Text = getString("Controls.Analyze.PartAttribute.Length.Description"); break;
+                case AnalyzeMode.PartPublication: description.Text = getString("Controls.Analyze.PartAttribute.Publication.Description"); break;
+                case AnalyzeMode.PartImage: description.Text = getString("Controls.Analyze.PartAttribute.Image.Description"); break;
             }
         }
         #endregion

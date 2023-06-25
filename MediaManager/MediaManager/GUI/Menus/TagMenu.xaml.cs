@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Dialogs;
 using System;
 using System.Collections.ObjectModel;
@@ -26,12 +27,12 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             LoadTags();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.AddTag");
-            Resources["btnEditTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.EditTag");
-            Resources["btnDeleteTag"] = LanguageProvider.getString("Menus.Tag.ToolTip.DeleteTag");
+            Resources["btnAddTag"] = getString("Menus.Tag.ToolTip.AddTag");
+            Resources["btnEditTag"] = getString("Menus.Tag.ToolTip.EditTag");
+            Resources["btnDeleteTag"] = getString("Menus.Tag.ToolTip.DeleteTag");
         }
         #endregion
 
@@ -56,7 +57,7 @@ namespace MediaManager.GUI.Menus
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationTag;
             if (!performDeletion)
             {
-                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Tag.TagDeletion"));
+                var confirmation = ShowDeletionConfirmationDialog(getString("Menus.Tag.TagDeletion"));
                 performDeletion = confirmation.HasValue && confirmation.Value;
             }
             if (performDeletion)

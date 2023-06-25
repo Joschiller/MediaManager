@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Linq;
 using System.Windows;
@@ -56,10 +57,10 @@ namespace MediaManager.GUI.Menus
                 updateVisibility(true); // start editing
             }
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnDeleteMedium"] = LanguageProvider.getString("Menus.Edit.ToolTip.DeleteMedium");
+            Resources["btnDeleteMedium"] = getString("Menus.Edit.ToolTip.DeleteMedium");
         }
         private bool IsExistingMedium { get => MediumId >= 0; }
         private void reloadData()
@@ -96,9 +97,9 @@ namespace MediaManager.GUI.Menus
         #region Handler
         private bool validate() => RunValidation(new System.Collections.Generic.List<Func<string>>
         {
-            () => editor.Medium.Title.Trim().Length == 0 ? LanguageProvider.getString("Menus.Edit.Validation.MediaTitle") : null,
-            () => editor.Medium.Parts.Any(p => p.Title.Trim().Length == 0) ? LanguageProvider.getString("Menus.Edit.Validation.PartTitle") : null,
-            () => editor.Medium.Tags.Where(t => t.Value.HasValue).Any(t => editor.Medium.Parts.Any(p => p.Tags.Find(pt => pt.Tag.Id == t.Tag.Id).Value != t.Value)) ? LanguageProvider.getString("Menus.Edit.Validation.PartTags") : null,
+            () => editor.Medium.Title.Trim().Length == 0 ? getString("Menus.Edit.Validation.MediaTitle") : null,
+            () => editor.Medium.Parts.Any(p => p.Title.Trim().Length == 0) ? getString("Menus.Edit.Validation.PartTitle") : null,
+            () => editor.Medium.Tags.Where(t => t.Value.HasValue).Any(t => editor.Medium.Parts.Any(p => p.Tags.Find(pt => pt.Tag.Id == t.Tag.Id).Value != t.Value)) ? getString("Menus.Edit.Validation.PartTags") : null,
         });
         private bool save()
         {
@@ -199,7 +200,7 @@ namespace MediaManager.GUI.Menus
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationMedium;
             if (!performDeletion)
             {
-                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Edit.MediaDeletion"));
+                var confirmation = ShowDeletionConfirmationDialog(getString("Menus.Edit.MediaDeletion"));
                 performDeletion = confirmation.HasValue && confirmation.Value;
             }
             if (performDeletion)

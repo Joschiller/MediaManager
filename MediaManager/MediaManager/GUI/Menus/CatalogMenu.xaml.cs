@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.XMLImportExport;
 using MediaManager.GUI.Dialogs;
 using Microsoft.Win32;
@@ -20,15 +21,15 @@ namespace MediaManager.GUI.Menus
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.AddCatalog");
-            Resources["btnImportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ImportCatalog");
-            Resources["btnEditCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.EditCatalog");
-            Resources["btnExportCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.ExportCatalog");
-            Resources["btnDeleteCatalog"] = LanguageProvider.getString("Menus.Catalog.ToolTip.DeleteCatalog");
-            Resources["btnSettings"] = LanguageProvider.getString("Menus.Catalog.ToolTip.Settings");
+            Resources["btnAddCatalog"] = getString("Menus.Catalog.ToolTip.AddCatalog");
+            Resources["btnImportCatalog"] = getString("Menus.Catalog.ToolTip.ImportCatalog");
+            Resources["btnEditCatalog"] = getString("Menus.Catalog.ToolTip.EditCatalog");
+            Resources["btnExportCatalog"] = getString("Menus.Catalog.ToolTip.ExportCatalog");
+            Resources["btnDeleteCatalog"] = getString("Menus.Catalog.ToolTip.DeleteCatalog");
+            Resources["btnSettings"] = getString("Menus.Catalog.ToolTip.Settings");
         }
         #endregion
 
@@ -44,7 +45,7 @@ namespace MediaManager.GUI.Menus
         private string showLoadFileDialog()
         {
             var ofd = new OpenFileDialog();
-            ofd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
+            ofd.Filter = getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
             ofd.ShowDialog();
             return ofd.FileName;
         }
@@ -55,15 +56,15 @@ namespace MediaManager.GUI.Menus
             var viewer = new ThreadProcessViewer(
                 new CatalogImportThread(
                     fileName,
-                    LanguageProvider.getString("Dialog.Import.importFailedStep"),
-                    LanguageProvider.getString("Dialog.Import.importFailedMessage"),
-                    LanguageProvider.getString("Dialog.Import.formatExceptionHeader"),
-                    LanguageProvider.getString("Dialog.Import.dbConstraintExceptionHeader"),
+                    getString("Dialog.Import.importFailedStep"),
+                    getString("Dialog.Import.importFailedMessage"),
+                    getString("Dialog.Import.formatExceptionHeader"),
+                    getString("Dialog.Import.dbConstraintExceptionHeader"),
                     new System.Collections.Generic.Dictionary<string, string>()),
                 new ThreadProcessViewerConfig
                 {
-                    Title = LanguageProvider.getString("Dialog.Import.DialogTitle"),
-                    FinishButtonCaption = LanguageProvider.getString("Dialog.Import.FinishButton"),
+                    Title = getString("Dialog.Import.DialogTitle"),
+                    FinishButtonCaption = getString("Dialog.Import.FinishButton"),
                     Style = InternalThreadProcessViewerStyle
                 });
             viewer.ProcessFailed += Viewer_ProcessFailed;
@@ -75,7 +76,7 @@ namespace MediaManager.GUI.Menus
         {
             var sfd = new SaveFileDialog();
             sfd.FileName = catalogTitle;
-            sfd.Filter = LanguageProvider.getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
+            sfd.Filter = getString("Common.ExportFileType") + " (*" + ExportFileExtension + ")|*" + ExportFileExtension;
             var res = sfd.ShowDialog();
             if (!res.HasValue || !res.Value) return "";
             return sfd.FileName;
@@ -88,13 +89,13 @@ namespace MediaManager.GUI.Menus
             var viewer = new ThreadProcessViewer(
                 new CatalogExportThread(
                     fileName,
-                    LanguageProvider.getString("Dialog.Export.exportFailedStep"),
-                    LanguageProvider.getString("Dialog.Export.exportFailedMessage"),
+                    getString("Dialog.Export.exportFailedStep"),
+                    getString("Dialog.Export.exportFailedMessage"),
                     catalogList.SelectedCatalog.Id),
                 new ThreadProcessViewerConfig
                 {
-                    Title = LanguageProvider.getString("Dialog.Export.DialogTitle"),
-                    FinishButtonCaption = LanguageProvider.getString("Dialog.Export.FinishButton"),
+                    Title = getString("Dialog.Export.DialogTitle"),
+                    FinishButtonCaption = getString("Dialog.Export.FinishButton"),
                     Style = InternalThreadProcessViewerStyle
                 });
             viewer.ProcessFailed += Viewer_ProcessFailed;
@@ -111,7 +112,7 @@ namespace MediaManager.GUI.Menus
             if (catalogList.SelectedCatalog == null) return;
 
             // deletion confirmation must always be shown
-            var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Menus.Catalog.CatalogDeletion"));
+            var confirmation = ShowDeletionConfirmationDialog(getString("Menus.Catalog.CatalogDeletion"));
             if (confirmation.HasValue && confirmation.Value)
             {
                 GlobalContext.Writer.DeleteCatalog(catalogList.SelectedCatalog.Id);

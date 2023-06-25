@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,7 +26,7 @@ namespace MediaManager.GUI.Dialogs
             allPlaylists.Add(new Playlist
             {
                 Id = -1,
-                Title = LanguageProvider.getString("Dialog.PlaylistAddition.New")
+                Title = getString("Dialog.PlaylistAddition.New")
             });
             playlists.ItemsSource = allPlaylists;
             playlists.SelectedIndex = 0;
@@ -33,11 +34,11 @@ namespace MediaManager.GUI.Dialogs
         }
         public void LoadTexts(string language)
         {
-            labelPlaylists.Text = LanguageProvider.getString("Dialog.PlaylistAddition.LabelPlaylists") + ":";
-            labelPlaylistName.Text = LanguageProvider.getString("Dialog.PlaylistAddition.LabelTitle") + ":";
-            headline.Text = mode == Controls.Search.SearchResultMode.MediaList ? LanguageProvider.getString("Dialog.PlaylistAddition.HeaderMedium") : LanguageProvider.getString("Dialog.PlaylistAddition.HeaderPart");
-            submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
-            cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
+            labelPlaylists.Text = getString("Dialog.PlaylistAddition.LabelPlaylists") + ":";
+            labelPlaylistName.Text = getString("Dialog.PlaylistAddition.LabelTitle") + ":";
+            headline.Text = mode == Controls.Search.SearchResultMode.MediaList ? getString("Dialog.PlaylistAddition.HeaderMedium") : getString("Dialog.PlaylistAddition.HeaderPart");
+            submit.Content = "_" + getString("Common.Button.Ok");
+            cancel.Content = "_" + getString("Common.Button.Cancel");
         }
         #endregion
 

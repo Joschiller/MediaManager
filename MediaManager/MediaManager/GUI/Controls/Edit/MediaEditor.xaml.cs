@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,13 +39,13 @@ namespace MediaManager.GUI.Controls.Edit
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            addPart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.AddPart");
-            deletePart.Tooltip = LanguageProvider.getString("Controls.Edit.Button.DeletePart");
+            addPart.Tooltip = getString("Controls.Edit.Button.AddPart");
+            deletePart.Tooltip = getString("Controls.Edit.Button.DeletePart");
         }
-        ~MediaEditor() => LanguageProvider.Unregister(this);
+        ~MediaEditor() => Unregister(this);
         private void reloadList()
         {
             list.SetPartList(medium.Title, medium.Parts.Select(p => new List.PartListElement
@@ -127,7 +128,7 @@ namespace MediaManager.GUI.Controls.Edit
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationPart;
             if (!performDeletion)
             {
-                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.Edit.PartDeletion"));
+                var confirmation = ShowDeletionConfirmationDialog(getString("Controls.Edit.PartDeletion"));
                 performDeletion = confirmation.HasValue && confirmation.Value;
             }
             if (performDeletion)

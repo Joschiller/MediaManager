@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
@@ -17,11 +18,11 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            labelBackup.Text = LanguageProvider.getString("Controls.Settings.Backup.BackupEnabled") + ":";
-            labelExplanation.Text = LanguageProvider.getString("Controls.Settings.Backup.BackupExplanation");
+            labelBackup.Text = getString("Controls.Settings.Backup.BackupEnabled") + ":";
+            labelExplanation.Text = getString("Controls.Settings.Backup.BackupExplanation");
         }
         public string GetControlName() => "Backup";
-        public string GetTabName() => LanguageProvider.getString("Controls.Settings.Backup.TabName");
+        public string GetTabName() => getString("Controls.Settings.Backup.TabName");
         bool SettingsEditorItem.IsVisible() => true;
         #endregion
         #region Data

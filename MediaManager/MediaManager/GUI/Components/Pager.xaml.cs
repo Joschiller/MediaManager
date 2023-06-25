@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -49,13 +50,13 @@ namespace MediaManager.GUI.Components
             RegisterAtLanguageProvider();
             UpdateGUI();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            prev.ToolTip = LanguageProvider.getString("Component.Pager.Previous");
-            next.ToolTip = LanguageProvider.getString("Component.Pager.Next");
+            prev.ToolTip = getString("Component.Pager.Previous");
+            next.ToolTip = getString("Component.Pager.Next");
         }
-        ~Pager() => LanguageProvider.Unregister(this);
+        ~Pager() => Unregister(this);
         private void UpdateGUI()
         {
             page.Text = CurrentPage.ToString() + "/" + TotalPages.ToString();

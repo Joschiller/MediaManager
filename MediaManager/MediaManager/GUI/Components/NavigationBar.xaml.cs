@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Atoms;
 using System;
 using System.Collections.ObjectModel;
@@ -55,13 +56,13 @@ namespace MediaManager.GUI.Components
             Children.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Children_CollectionChanged);
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            back.Tooltip = LanguageProvider.getString("Common.Tooltip.Back");
-            help.Tooltip = LanguageProvider.getString("Common.Tooltip.Help");
+            back.Tooltip = getString("Common.Tooltip.Back");
+            help.Tooltip = getString("Common.Tooltip.Help");
         }
-        ~NavigationBar() => LanguageProvider.Unregister(this);
+        ~NavigationBar() => Unregister(this);
         #endregion
 
         #region Handler

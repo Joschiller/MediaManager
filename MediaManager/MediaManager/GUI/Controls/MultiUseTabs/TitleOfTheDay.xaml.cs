@@ -1,7 +1,7 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -21,13 +21,13 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             RegisterAtLanguageProvider();
             ShowNextRandomItem();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            next.Tooltip = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
+            next.Tooltip = getString("Controls.MultiUseTabs.TitleOfTheDay.Next");
             ShowCurrentItem();
         }
-        ~TitleOfTheDay() => LanguageProvider.Unregister(this);
+        ~TitleOfTheDay() => Unregister(this);
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/title_of_the_day.png", UriKind.Relative));
         public bool GetIsVisible() => GlobalContext.Settings.TitleOfTheDayVisible;
         public void ReloadGUI() => ShowNextRandomItem();
@@ -50,16 +50,16 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             {
                 title.Text = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).ShowTitleOfTheDayAsMedium ? CurrentItem.Medium.Title : CurrentItem.Title;
                 description.Text = GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).ShowTitleOfTheDayAsMedium
-                    ? (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
+                    ? (getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForMedium(CurrentItem.MediumId)) + "\n" + "\n"
                     + CurrentItem.Medium.Description)
-                    : (LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ": " + CurrentItem.Medium.Title + "\n" + "\n"
-                    + LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
+                    : (getString("Controls.MultiUseTabs.TitleOfTheDay.Medium") + ": " + CurrentItem.Medium.Title + "\n" + "\n"
+                    + getString("Controls.MultiUseTabs.TitleOfTheDay.Tags") + ": " + getTagsString(GlobalContext.Reader.GetTagsForPart(CurrentItem.Id)) + "\n" + "\n"
                     + CurrentItem.Description);
             }
             else
             {
                 title.Text = "";
-                description.Text = LanguageProvider.getString("Controls.MultiUseTabs.TitleOfTheDay.Empty");
+                description.Text = getString("Controls.MultiUseTabs.TitleOfTheDay.Empty");
             }
         }
         private void ShowNextRandomItem()

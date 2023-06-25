@@ -1,5 +1,6 @@
 ﻿using MediaManager.Globals.DefaultDialogs;
-using MediaManager.Globals.LanguageProvider;
+using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Atoms;
 using MediaManager.GUI.Controls.Edit;
 using System;
@@ -37,27 +38,27 @@ namespace MediaManager.GUI.Menus
             }).ToList());
             prepareMediumSelection();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            mergeTab.Header = LanguageProvider.getString("Menus.Merge.Tabs.Merge");
-            previewTab.Header = LanguageProvider.getString("Menus.Merge.Tabs.Preview");
+            mergeTab.Header = getString("Menus.Merge.Tabs.Merge");
+            previewTab.Header = getString("Menus.Merge.Tabs.Preview");
 
-            nextButton1.Content = LanguageProvider.getString("Common.Button.Next");
-            nextButton2.Content = LanguageProvider.getString("Common.Button.Next");
+            nextButton1.Content = getString("Common.Button.Next");
+            nextButton2.Content = getString("Common.Button.Next");
 
-            mediaSelectionSection.Header = LanguageProvider.getString("Menus.Merge.mediaSelectionSection");
+            mediaSelectionSection.Header = getString("Menus.Merge.mediaSelectionSection");
 
-            mediaDataSection.Header = LanguageProvider.getString("Menus.Merge.mediaDataSection");
-            labelMediaDataPreviewSelection.Text = LanguageProvider.getString("Menus.Merge.labelMediaDataPreviewSelection") + ":";
-            labelMediaDataDescriptionSelection.Text = LanguageProvider.getString("Menus.Merge.labelMediaDataDescriptionSelection") + ":";
-            labelMediaDataTagSelection.Text = LanguageProvider.getString("Menus.Merge.labelMediaDataTagSelection") + ":";
-            labelMediaDataLocationSelection.Text = LanguageProvider.getString("Menus.Merge.labelMediaDataLocationSelection") + ":";
+            mediaDataSection.Header = getString("Menus.Merge.mediaDataSection");
+            labelMediaDataPreviewSelection.Text = getString("Menus.Merge.labelMediaDataPreviewSelection") + ":";
+            labelMediaDataDescriptionSelection.Text = getString("Menus.Merge.labelMediaDataDescriptionSelection") + ":";
+            labelMediaDataTagSelection.Text = getString("Menus.Merge.labelMediaDataTagSelection") + ":";
+            labelMediaDataLocationSelection.Text = getString("Menus.Merge.labelMediaDataLocationSelection") + ":";
 
-            partSelectionSection.Header = LanguageProvider.getString("Menus.Merge.partSelectionSection");
-            mergeButton.Content = LanguageProvider.getString("Menus.Merge.mergeButton");
+            partSelectionSection.Header = getString("Menus.Merge.partSelectionSection");
+            mergeButton.Content = getString("Menus.Merge.mergeButton");
 
-            submitButton.Content = LanguageProvider.getString("Menus.Merge.submitButton");
+            submitButton.Content = getString("Menus.Merge.submitButton");
         }
         #endregion
 
@@ -90,7 +91,7 @@ namespace MediaManager.GUI.Menus
         {
             if (mediaSelection.GetCheckedItems().Count < 2)
             {
-                ShowDefaultDialog(LanguageProvider.getString("Menus.Merge.Dialog.MissingMediaSelection"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaSelection"), Globals.DefaultDialogs.SuccessMode.Error);
                 return;
             }
 
@@ -167,7 +168,7 @@ namespace MediaManager.GUI.Menus
             if (mediaDataDescriptionSelection.SelectedItem == null || mediaDataTagSelection.SelectedItem == null || mediaDataLocationSelection.SelectedItem == null)
             {
                 // should not occur
-                ShowDefaultDialog(LanguageProvider.getString("Menus.Merge.Dialog.MissingMediaData"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaData"), Globals.DefaultDialogs.SuccessMode.Error);
                 return;
             }
 
@@ -212,11 +213,11 @@ namespace MediaManager.GUI.Menus
             if (partSelection.GetCheckedItems().Count == 0 && mediaToMerge.Select(m => m.Parts.Count).Sum() > 0)
             {
                 var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
-                    .WithTitle(LanguageProvider.getString("ApplicationName"))
-                    .WithText(LanguageProvider.getString("Menus.Merge.Dialog.NoPartSelected"))
+                    .WithTitle(getString("ApplicationName"))
+                    .WithText(getString("Menus.Merge.Dialog.NoPartSelected"))
                     .WithBorder(SuccessMode.Error)
-                    .WithCancelButton("_" + LanguageProvider.getString("Common.Button.No"), result: false)
-                    .WithNeutralButton("_" + LanguageProvider.getString("Common.Button.Yes"), result: true)
+                    .WithCancelButton("_" + getString("Common.Button.No"), result: false)
+                    .WithNeutralButton("_" + getString("Common.Button.Yes"), result: true)
                     .ShowForResult() as bool?;
                 if (!result.HasValue || !result.Value) return;
             }
@@ -260,11 +261,11 @@ namespace MediaManager.GUI.Menus
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
-                .WithTitle(LanguageProvider.getString("ApplicationName"))
-                .WithText(LanguageProvider.getString("Menus.Merge.Dialog.SubmitMerge"))
+                .WithTitle(getString("ApplicationName"))
+                .WithText(getString("Menus.Merge.Dialog.SubmitMerge"))
                 .WithBorder(SuccessMode.Error)
-                .WithCancelButton("_" + LanguageProvider.getString("Common.Button.No"), result: false)
-                .WithNeutralButton("_" + LanguageProvider.getString("Common.Button.Yes"), result: true)
+                .WithCancelButton("_" + getString("Common.Button.No"), result: false)
+                .WithNeutralButton("_" + getString("Common.Button.Yes"), result: true)
                 .ShowForResult() as bool?;
             if (!result.HasValue || !result.Value) return;
 
@@ -290,7 +291,7 @@ namespace MediaManager.GUI.Menus
             foreach (var m in mediaToMerge) GlobalContext.Writer.DeleteMedium(m.Id);
 
             // finish
-            ShowDefaultDialog(LanguageProvider.getString("Menus.Merge.Dialog.Success"), SuccessMode.Success);
+            ShowDefaultDialog(getString("Menus.Merge.Dialog.Success"), SuccessMode.Success);
             Close();
         }
         #endregion
@@ -300,11 +301,11 @@ namespace MediaManager.GUI.Menus
         private void NavigationBar_BackClicked(object sender, EventArgs e)
         {
             var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
-                .WithTitle(LanguageProvider.getString("ApplicationName"))
-                .WithText(LanguageProvider.getString("Menus.Merge.Dialog.UnfinishedMerge"))
+                .WithTitle(getString("ApplicationName"))
+                .WithText(getString("Menus.Merge.Dialog.UnfinishedMerge"))
                 .WithBorder(SuccessMode.Error)
-                .WithCancelButton("_" + LanguageProvider.getString("Common.Button.No"), result: false)
-                .WithNeutralButton("_" + LanguageProvider.getString("Common.Button.Yes"), result: true)
+                .WithCancelButton("_" + getString("Common.Button.No"), result: false)
+                .WithNeutralButton("_" + getString("Common.Button.Yes"), result: true)
                 .ShowForResult() as bool?;
             if (result.HasValue && result.Value) Close();
         }

@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -36,12 +37,12 @@ namespace MediaManager.GUI.Controls.Search
             RegisterAtLanguageProvider();
             CurrentSearchParameters = input.CurrentSearchParameters;
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            Resources["contextMenuAddToPlaylist"] = LanguageProvider.getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
+            Resources["contextMenuAddToPlaylist"] = getString(CurrentSearchParameters?.SearchResult == SearchResultMode.PartList ? "Controls.Search.AddPartToPlaylist" : "Controls.Search.AddMediumToPlaylist");
         }
-        ~SearchPanel() => LanguageProvider.Unregister(this);
+        ~SearchPanel() => Unregister(this);
         public void ReloadTags() => input.reloadTagList();
         public void ReloadResultList()
         {

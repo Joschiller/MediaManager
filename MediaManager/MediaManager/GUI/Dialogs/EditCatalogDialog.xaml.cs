@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Windows;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
@@ -40,17 +41,17 @@ namespace MediaManager.GUI.Dialogs
         }
         public void LoadTexts(string language)
         {
-            labelOldTitle.Text = LanguageProvider.getString("Dialog.EditCatalog.LabelOldTitle") + ":";
-            labelNewTitle.Text = LanguageProvider.getString("Dialog.EditCatalog.LabelNewTitle") + ":";
-            labelDescription.Text = LanguageProvider.getString("Dialog.EditCatalog.LabelDescription") + ":";
-            headingSettings.Text = LanguageProvider.getString("Dialog.EditCatalog.HeadingSettings") + ":";
-            cbDeletionConfirmationMedium.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationMedium");
-            cbDeletionConfirmationPart.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationPart");
-            cbDeletionConfirmationPlaylist.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationPlaylist");
-            cbDeletionConfirmationTag.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelDeletionConfirmationTag");
-            cbShowTitleOfTheDayAsMedium.Content = LanguageProvider.getString("Dialog.EditCatalog.LabelShowTitleOfTheDayAsMedium");
-            submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
-            cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
+            labelOldTitle.Text = getString("Dialog.EditCatalog.LabelOldTitle") + ":";
+            labelNewTitle.Text = getString("Dialog.EditCatalog.LabelNewTitle") + ":";
+            labelDescription.Text = getString("Dialog.EditCatalog.LabelDescription") + ":";
+            headingSettings.Text = getString("Dialog.EditCatalog.HeadingSettings") + ":";
+            cbDeletionConfirmationMedium.Content = getString("Dialog.EditCatalog.LabelDeletionConfirmationMedium");
+            cbDeletionConfirmationPart.Content = getString("Dialog.EditCatalog.LabelDeletionConfirmationPart");
+            cbDeletionConfirmationPlaylist.Content = getString("Dialog.EditCatalog.LabelDeletionConfirmationPlaylist");
+            cbDeletionConfirmationTag.Content = getString("Dialog.EditCatalog.LabelDeletionConfirmationTag");
+            cbShowTitleOfTheDayAsMedium.Content = getString("Dialog.EditCatalog.LabelShowTitleOfTheDayAsMedium");
+            submit.Content = "_" + getString("Common.Button.Ok");
+            cancel.Content = "_" + getString("Common.Button.Cancel");
         }
         #endregion
 

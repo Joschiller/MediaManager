@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,18 +31,18 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
 
             ReloadGUI();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            add.Content = LanguageProvider.getString("Common.Button.Add");
-            delete.Content = LanguageProvider.getString("Common.Button.Delete");
-            titleLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Title") + ":";
-            lengthLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Length") + ":";
-            tagLabel.Text = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.Tag") + ":";
-            create.Content = LanguageProvider.getString("Common.Button.Create");
-            editGroup.Header = LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.EditGroup");
+            add.Content = getString("Common.Button.Add");
+            delete.Content = getString("Common.Button.Delete");
+            titleLabel.Text = getString("Controls.MultiUseTabs.PlaylistEditor.Title") + ":";
+            lengthLabel.Text = getString("Controls.MultiUseTabs.PlaylistEditor.Length") + ":";
+            tagLabel.Text = getString("Controls.MultiUseTabs.PlaylistEditor.Tag") + ":";
+            create.Content = getString("Common.Button.Create");
+            editGroup.Header = getString("Controls.MultiUseTabs.PlaylistEditor.EditGroup");
         }
-        ~PlaylistEditor() => LanguageProvider.Unregister(this);
+        ~PlaylistEditor() => Unregister(this);
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/playlist.png", UriKind.Relative));
         public bool GetIsVisible() => GlobalContext.Settings.PlaylistEditorVisible;
         public void ReloadGUI()
@@ -70,7 +71,7 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationPlaylist;
             if (!performDeletion)
             {
-                var confirmation = ShowDeletionConfirmationDialog(LanguageProvider.getString("Controls.MultiUseTabs.PlaylistEditor.PlaylistDeletion"));
+                var confirmation = ShowDeletionConfirmationDialog(getString("Controls.MultiUseTabs.PlaylistEditor.PlaylistDeletion"));
                 performDeletion = confirmation.HasValue && confirmation.Value;
             }
             if (performDeletion)

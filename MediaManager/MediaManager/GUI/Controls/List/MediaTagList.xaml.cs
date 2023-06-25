@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -31,12 +32,12 @@ namespace MediaManager.GUI.Controls.List
             pager.setItemCount(CatalogContext.Reader.Statistics.CountOfMedia);
             LoadTagsOfSelectedMedium();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            saveButton.Tooltip = LanguageProvider.getString("Controls.MediaTagList.Save");
+            saveButton.Tooltip = getString("Controls.MediaTagList.Save");
         }
-        ~MediaTagList() => LanguageProvider.Unregister(this);
+        ~MediaTagList() => Unregister(this);
         #endregion
 
         #region Getter/Setter

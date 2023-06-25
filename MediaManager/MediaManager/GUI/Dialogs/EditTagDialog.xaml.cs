@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Windows;
 using static MediaManager.Globals.DataConnector;
 
@@ -29,10 +30,10 @@ namespace MediaManager.GUI.Dialogs
         }
         public void LoadTexts(string language)
         {
-            labelOldTag.Text = LanguageProvider.getString("Dialog.EditTag.LabelOld") + ":";
-            labelNewTag.Text = LanguageProvider.getString("Dialog.EditTag.LabelNew") + ":";
-            submit.Content = "_" + LanguageProvider.getString("Common.Button.Ok");
-            cancel.Content = "_" + LanguageProvider.getString("Common.Button.Cancel");
+            labelOldTag.Text = getString("Dialog.EditTag.LabelOld") + ":";
+            labelNewTag.Text = getString("Dialog.EditTag.LabelNew") + ":";
+            submit.Content = "_" + getString("Common.Button.Ok");
+            cancel.Content = "_" + getString("Common.Button.Cancel");
         }
         #endregion
 

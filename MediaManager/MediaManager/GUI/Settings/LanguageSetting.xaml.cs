@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace MediaManager.GUI.Settings
     public partial class LanguageSetting : UserControl, LanguageUser, SettingsEditorItem
     {
         #region Bindings
-        public List<string> LanguageList { get; set; } = LanguageProvider.LanguageList;
+        public List<string> LanguageList { get; set; } = LanguageProvider.LanguageProvider.LanguageList;
         #endregion
 
         #region Setup
@@ -24,23 +25,23 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            languageText.Text = LanguageProvider.getString(language ?? LanguageProvider.CurrentLanguage, "Controls.Settings.Language.Label") + ":";
+            languageText.Text = getString(language ?? CurrentLanguage, "Controls.Settings.Language.Label") + ":";
         }
         public string GetControlName() => "Language";
-        public string GetTabName() => LanguageProvider.getString("Menus.Settings.TabName");
+        public string GetTabName() => getString("Menus.Settings.TabName");
         bool SettingsEditorItem.IsVisible() => true;
         #endregion
         #region Data
         private void selectedLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e) => LoadTexts(selectedLanguage.SelectedItem as string);
         public void LoadData(int? accountIdentifier)
         {
-            selectedLanguage.SelectedItem = LanguageProvider.CurrentLanguage;
+            selectedLanguage.SelectedItem = CurrentLanguage;
             LoadTexts(null);
         }
-        public void SaveData() => LanguageProvider.CurrentLanguage = (selectedLanguage.SelectedItem as string) ?? LanguageProvider.CurrentLanguage;
+        public void SaveData() => CurrentLanguage = (selectedLanguage.SelectedItem as string) ?? CurrentLanguage;
         public bool ValidateData() => RunValidation(new List<Func<string>>
             {
-                () => selectedLanguage.SelectedItem == null ? LanguageProvider.getString("Controls.Settings.Language.Validation") : null
+                () => selectedLanguage.SelectedItem == null ? getString("Controls.Settings.Language.Validation") : null
             });
         #endregion
     }

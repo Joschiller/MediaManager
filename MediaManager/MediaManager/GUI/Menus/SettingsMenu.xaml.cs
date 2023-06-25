@@ -1,5 +1,6 @@
 ﻿using MediaManager.Globals.DefaultDialogs;
-using MediaManager.Globals.LanguageProvider;
+using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Windows;
 using static MediaManager.Globals.Navigation;
@@ -18,11 +19,11 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             editor.LoadData(null);
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnDiscard"] = LanguageProvider.getString("Menus.Settings.ToolTip.Discard");
-            Resources["btnSave"] = LanguageProvider.getString("Menus.Settings.ToolTip.Save");
+            Resources["btnDiscard"] = getString("Menus.Settings.ToolTip.Discard");
+            Resources["btnSave"] = getString("Menus.Settings.ToolTip.Save");
         }
         #endregion
 
@@ -35,14 +36,14 @@ namespace MediaManager.GUI.Menus
             if (editor.ValidateData())
             {
                 editor.SaveData();
-                ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.Saved"), SuccessMode.Success);
+                ShowDefaultDialog(getString("Menus.Settings.Saved"), SuccessMode.Success);
 
                 editor.InstantiateAllElements(); // reload all settings in case the language changed
                 editor.LoadData(null); // needed so that the tabs are reloaded correctly
             }
             else
             {
-                ShowDefaultDialog(LanguageProvider.getString("Menus.Settings.ValidationFailed"), SuccessMode.Error);
+                ShowDefaultDialog(getString("Menus.Settings.ValidationFailed"), SuccessMode.Error);
             }
         }
         #endregion

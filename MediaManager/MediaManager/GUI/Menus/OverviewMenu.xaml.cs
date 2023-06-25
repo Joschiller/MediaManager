@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Dialogs;
 using System;
 using System.Windows;
@@ -29,22 +30,22 @@ namespace MediaManager.GUI.Menus
                 Reload();
             }
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            Resources["btnAddMedium"] = LanguageProvider.getString("Menus.Overview.ToolTip.AddMedium");
-            Resources["btnAddTag"] = LanguageProvider.getString("Menus.Overview.ToolTip.AddTag");
-            Resources["btnTags"] = LanguageProvider.getString("Menus.Overview.ToolTip.Tags");
-            Resources["btnCatalogs"] = LanguageProvider.getString("Menus.Overview.ToolTip.Catalogs");
-            Resources["btnSettings"] = LanguageProvider.getString("Menus.Overview.ToolTip.Settings");
-            Resources["btnAnalyze"] = LanguageProvider.getString("Menus.Overview.ToolTip.Analyze");
+            Resources["btnAddMedium"] = getString("Menus.Overview.ToolTip.AddMedium");
+            Resources["btnAddTag"] = getString("Menus.Overview.ToolTip.AddTag");
+            Resources["btnTags"] = getString("Menus.Overview.ToolTip.Tags");
+            Resources["btnCatalogs"] = getString("Menus.Overview.ToolTip.Catalogs");
+            Resources["btnSettings"] = getString("Menus.Overview.ToolTip.Settings");
+            Resources["btnAnalyze"] = getString("Menus.Overview.ToolTip.Analyze");
         }
 
         private void CloseIfNoCatalogExists()
         {
             if (!GlobalContext.Reader.AnyCatalogExists)
             {
-                ShowDefaultDialog(LanguageProvider.getString("Menus.Overview.CloseHint"));
+                ShowDefaultDialog(getString("Menus.Overview.CloseHint"));
                 Close();
             }
             else ShowAndReload();

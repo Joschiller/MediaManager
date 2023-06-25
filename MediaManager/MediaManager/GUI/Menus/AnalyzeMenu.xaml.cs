@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Controls.Analyze;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace MediaManager.GUI.Menus
             RegisterAtLanguageProvider();
             reload();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.RegisterUnique(this);
+        public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
-            modeGroup.Header = LanguageProvider.getString("Menus.Analyze.Mode");
+            modeGroup.Header = getString("Menus.Analyze.Mode");
         }
         private void reload() => mode_ModeChanged(mode.Mode);
         #endregion

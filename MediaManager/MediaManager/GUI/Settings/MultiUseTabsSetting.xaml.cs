@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Windows.Controls;
 using static MediaManager.Globals.DataConnector;
@@ -17,12 +18,12 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            playlistLabel.Text = LanguageProvider.getString("Controls.Settings.MultiUseTabs.PlaylistLabel") + ":";
-            titleOfTheDayLabel.Text = LanguageProvider.getString("Controls.Settings.MultiUseTabs.TitleOfTheDayLabel") + ":";
-            statisticsLabel.Text = LanguageProvider.getString("Controls.Settings.MultiUseTabs.StatisticsLabel") + ":";
+            playlistLabel.Text = getString("Controls.Settings.MultiUseTabs.PlaylistLabel") + ":";
+            titleOfTheDayLabel.Text = getString("Controls.Settings.MultiUseTabs.TitleOfTheDayLabel") + ":";
+            statisticsLabel.Text = getString("Controls.Settings.MultiUseTabs.StatisticsLabel") + ":";
         }
         public string GetControlName() => "MultiUseTabs";
-        public string GetTabName() => LanguageProvider.getString("Menus.Settings.TabName");
+        public string GetTabName() => getString("Menus.Settings.TabName");
         bool SettingsEditorItem.IsVisible() => true;
         #endregion
         #region Data

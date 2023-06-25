@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -38,17 +39,17 @@ namespace MediaManager.GUI.Controls.Search
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            exactMode.Content = LanguageProvider.getString("Controls.Search.ExactMode");
-            searchDescriptionMode.Content = LanguageProvider.getString("Controls.Search.SearchDescriptionMode");
-            favouriteOnlyMode.Content = LanguageProvider.getString("Controls.Search.FavouriteOnlyMode");
-            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? LanguageProvider.getString("Controls.Search.ShowParts") : LanguageProvider.getString("Controls.Search.ShowMedia");
-            startSearch.Content = LanguageProvider.getString("Controls.Search.Search");
-            reset.Tooltip = LanguageProvider.getString("Controls.Search.Reset");
+            exactMode.Content = getString("Controls.Search.ExactMode");
+            searchDescriptionMode.Content = getString("Controls.Search.SearchDescriptionMode");
+            favouriteOnlyMode.Content = getString("Controls.Search.FavouriteOnlyMode");
+            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? getString("Controls.Search.ShowParts") : getString("Controls.Search.ShowMedia");
+            startSearch.Content = getString("Controls.Search.Search");
+            reset.Tooltip = getString("Controls.Search.Reset");
         }
-        ~SearchInput() => LanguageProvider.Unregister(this);
+        ~SearchInput() => Unregister(this);
         public void reloadTagList()
         {
             var tags = new List<ValuedTag>();
@@ -72,7 +73,7 @@ namespace MediaManager.GUI.Controls.Search
         private void resultListMode_Click(object sender, RoutedEventArgs e)
         {
             CurrentSearchResultMode = CurrentSearchResultMode == SearchResultMode.MediaList ? SearchResultMode.PartList : SearchResultMode.MediaList;
-            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? LanguageProvider.getString("Controls.Search.ShowParts") : LanguageProvider.getString("Controls.Search.ShowMedia");
+            resultListMode.Content = CurrentSearchResultMode == SearchResultMode.MediaList ? getString("Controls.Search.ShowParts") : getString("Controls.Search.ShowMedia");
             SearchParametersChanged?.Invoke(CurrentSearchParameters);
         }
         private void tagList_TagValueChanged(System.Collections.Generic.List<ValuedTag> tags) => SearchParametersChanged?.Invoke(CurrentSearchParameters);
@@ -83,7 +84,7 @@ namespace MediaManager.GUI.Controls.Search
             searchDescriptionMode.IsChecked = false;
             favouriteOnlyMode.IsChecked = false;
             CurrentSearchResultMode = SearchResultMode.MediaList;
-            resultListMode.Content = LanguageProvider.getString("Controls.Search.ShowParts");
+            resultListMode.Content = getString("Controls.Search.ShowParts");
             var tags = new List<ValuedTag>();
             Globals.DataConnector.CatalogContext.Reader.Lists.Tags.ForEach(t => tags.Add(new ValuedTag
             {

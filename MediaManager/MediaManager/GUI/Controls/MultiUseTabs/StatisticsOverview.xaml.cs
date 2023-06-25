@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,13 +20,13 @@ namespace MediaManager.GUI.Controls.MultiUseTabs
             RegisterAtLanguageProvider();
             ReloadGUI();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            labelMediaCount.Text = LanguageProvider.getString("Controls.MultiUseTabs.StatisticsOverview.CountMedia") + ":";
-            labelPartCount.Text = LanguageProvider.getString("Controls.MultiUseTabs.StatisticsOverview.CountParts") + ":";
+            labelMediaCount.Text = getString("Controls.MultiUseTabs.StatisticsOverview.CountMedia") + ":";
+            labelPartCount.Text = getString("Controls.MultiUseTabs.StatisticsOverview.CountParts") + ":";
         }
-        ~StatisticsOverview() => LanguageProvider.Unregister(this);
+        ~StatisticsOverview() => Unregister(this);
         public ImageSource GetHeader() => new BitmapImage(new Uri("/Resources/statistics.png", UriKind.Relative));
         public bool GetIsVisible() => GlobalContext.Settings.StatisticsOverviewVisible;
         public void ReloadGUI()

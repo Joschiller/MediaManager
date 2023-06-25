@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -25,15 +26,15 @@ namespace MediaManager.GUI.Controls.Analyze
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            editButton.ToolTip = LanguageProvider.getString("Common.Button.Edit");
-            labelMediumSelection.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
-            labelMediaTagList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
-            labelMediaPartList.Text = LanguageProvider.getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
+            editButton.ToolTip = getString("Common.Button.Edit");
+            labelMediumSelection.Text = getString("Controls.Analyze.AnalyzePreview.MediumSelection") + ":";
+            labelMediaTagList.Text = getString("Controls.Analyze.AnalyzePreview.MediaTagListLabel") + ":";
+            labelMediaPartList.Text = getString("Controls.Analyze.AnalyzePreview.PartListLabel") + ":";
         }
-        ~AnalyzePreview() => LanguageProvider.Unregister(this);
+        ~AnalyzePreview() => Unregister(this);
         #endregion
 
         #region Getter/Setter

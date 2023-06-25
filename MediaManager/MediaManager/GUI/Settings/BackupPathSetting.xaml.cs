@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,12 +20,12 @@ namespace MediaManager.GUI.Settings
         }
         public void LoadTexts(string language)
         {
-            labelBackupPath.Text = LanguageProvider.getString("Controls.Settings.Backup.BackupPath") + ":";
-            select.Content = LanguageProvider.getString("Controls.Settings.Backup.BtnSelect");
-            reset.Content = LanguageProvider.getString("Controls.Settings.Backup.BtnReset");
+            labelBackupPath.Text = getString("Controls.Settings.Backup.BackupPath") + ":";
+            select.Content = getString("Controls.Settings.Backup.BtnSelect");
+            reset.Content = getString("Controls.Settings.Backup.BtnReset");
         }
         public string GetControlName() => "Backup";
-        public string GetTabName() => LanguageProvider.getString("Controls.Settings.Backup.TabName");
+        public string GetTabName() => getString("Controls.Settings.Backup.TabName");
         bool SettingsEditorItem.IsVisible() => true;
         #endregion
         #region Data
@@ -53,7 +54,7 @@ namespace MediaManager.GUI.Settings
             if (folderName == null || folderName == "") return;
             if (folderName.Length > 512)
             {
-                ShowDefaultDialog(LanguageProvider.getString("Controls.Settings.Backup.PathToLong"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Controls.Settings.Backup.PathToLong"), Globals.DefaultDialogs.SuccessMode.Error);
                 return;
             }
             valueBackupPath.Text = folderName;

@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,7 +52,7 @@ namespace MediaManager.GUI.Controls.Edit
                 favoriteIcon.Source = new BitmapImage(new Uri(part.Favourite ? "/Resources/favorite.png" : "/Resources/nofavorite.png", UriKind.Relative));
                 description.Text = part.Description;
                 length.Text = part.Length.ToString();
-                textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
+                textMinute.Text = getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 textLength.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
                 length.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
                 textMinute.Visibility = part.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -70,14 +71,14 @@ namespace MediaManager.GUI.Controls.Edit
             InitializeComponent();
             RegisterAtLanguageProvider();
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
-            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
-            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
+            textLocation.Text = getString("Controls.Edit.Label.Location") + ":";
+            textLength.Text = getString("Controls.Edit.Label.Length") + ":";
+            textPublication.Text = getString("Controls.Edit.Label.Publication") + ":";
         }
-        ~ElementViewer() => LanguageProvider.Unregister(this);
+        ~ElementViewer() => Unregister(this);
         #endregion
     }
 }

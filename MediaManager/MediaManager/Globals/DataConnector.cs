@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.XMLImportExport;
+﻿using static LanguageProvider.LanguageProvider;
+using MediaManager.Globals.XMLImportExport;
 using MediaManager.GUI.Controls.Search;
 using System;
 using System.Collections.Generic;
@@ -606,7 +607,7 @@ namespace MediaManager.Globals
             private void step()
             {
                 currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Export.Steps." + currentStep.ToString()));
+                CallStep(currentStep / (float)maxSteps, getString("Dialog.Export.Steps." + currentStep.ToString()));
             }
             protected override void runExport()
             {
@@ -704,7 +705,7 @@ namespace MediaManager.Globals
                 get
                 {
                     try { return XDocument.Load(fileSource).Root.Attribute("ExportVersion").Value; }
-                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.Missing"), null); }
+                    catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Version.Missing"), null); }
                 }
             }
             public string downwardsCompatibleTo
@@ -712,7 +713,7 @@ namespace MediaManager.Globals
                 get
                 {
                     try { return XDocument.Load(fileSource).Root.Attribute("DownwardsCompatibleTo").Value; }
-                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.Missing"), null); }
+                    catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Version.Missing"), null); }
                 }
             }
 
@@ -730,15 +731,15 @@ namespace MediaManager.Globals
             private void step()
             {
                 currentStep++;
-                CallStep(currentStep / (float)maxSteps, LanguageProvider.LanguageProvider.getString("Dialog.Import.Steps." + currentStep.ToString()));
+                CallStep(currentStep / (float)maxSteps, getString("Dialog.Import.Steps." + currentStep.ToString()));
             }
             protected override void runImport()
             {
                 step();
                 if (!CheckVersionImportable(downwardsCompatibleTo, CurrentExportVersion) || !CheckVersionImportable(MinimumImportVersion, importVersion))
                 {
-                    CallStep(1, LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.IncompatibleStep"));
-                    CallFinished(new Exception(LanguageProvider.LanguageProvider.getString("Dialog.Import.Version.IncompatibleMessage")));
+                    CallStep(1, getString("Dialog.Import.Version.IncompatibleStep"));
+                    CallFinished(new Exception(getString("Dialog.Import.Version.IncompatibleMessage")));
                     return;
                 }
 
@@ -752,7 +753,7 @@ namespace MediaManager.Globals
                 {
                     importedCatalog.Title = xmlData.Attribute("Title").Value;
                 }
-                catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.MissingTitle"), null); }
+                catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Catalog.MissingTitle"), null); }
                 try
                 {
                     importedCatalog.Description = xmlData.Attribute("Description")?.Value ?? "";
@@ -762,12 +763,12 @@ namespace MediaManager.Globals
                     importedCatalog.DeletionConfirmationPlaylist = !(xmlData.Attribute("DeletionConfirmationPlaylist")?.Value ?? "true").ToLower().Equals("false");
                     importedCatalog.ShowTitleOfTheDayAsMedium = (xmlData.Attribute("ShowTitleOfTheDayAsMedium")?.Value ?? "false").ToLower().Equals("true");
                 }
-                catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.WrongFormat"), null); }
+                catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Catalog.WrongFormat"), null); }
                 try
                 {
                     catalogId = CreateCatalog(importedCatalog);
                 }
-                catch (Exception) { throw ParseDBConstraintException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Catalog.Writing"), null); }
+                catch (Exception) { throw ParseDBConstraintException(getString("Dialog.Import.Exceptions.Catalog.Writing"), null); }
                 #endregion
 
                 var tagIdMappings = new Dictionary<int, int>();
@@ -788,12 +789,12 @@ namespace MediaManager.Globals
                     {
                         xmlId = int.Parse(xmlTag.Attribute("Id").Value);
                     }
-                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.MissingId"), null); }
+                    catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Tag.MissingId"), null); }
                     try
                     {
                         xmlTitle = xmlTag.Attribute("Title").Value;
                     }
-                    catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.MissingTitle"), xmlId), null); }
+                    catch (Exception) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Tag.MissingTitle"), xmlId), null); }
                     try
                     {
                         tagIdMappings.Add(xmlId, CreateTag(new Tag
@@ -802,7 +803,7 @@ namespace MediaManager.Globals
                             Title = xmlTitle
                         }));
                     }
-                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Tag.Writing"), xmlId), null); }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(getString("Dialog.Import.Exceptions.Tag.Writing"), xmlId), null); }
                 }
                 #endregion
                 #region Import Media
@@ -818,7 +819,7 @@ namespace MediaManager.Globals
                     {
                         xmlMediumTitle = xmlMedium.Attribute("Title").Value;
                     }
-                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.MissingTitle"), null); }
+                    catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Medium.MissingTitle"), null); }
                     try
                     {
                         xmlMediumDescription = xmlMedium.Attribute("Description")?.Value ?? "";
@@ -830,11 +831,11 @@ namespace MediaManager.Globals
                             positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
                             negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
                         }
-                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.MissingTag"), xmlMediumTitle), null); }
+                        catch (Exception) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Medium.MissingTag"), xmlMediumTitle), null); }
                         xmlMediumTags.AddRange(tagIdListToTagList(positiveTags, true));
                         xmlMediumTags.AddRange(tagIdListToTagList(negativeTags, false));
                     }
-                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), e as FormatException); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Medium.WrongFormat"), xmlMediumTitle), e as FormatException); }
                     var mediumId = -1;
                     try
                     {
@@ -859,7 +860,7 @@ namespace MediaManager.Globals
                         }
                         DBCONNECTION.SaveChanges();
                     }
-                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Medium.Writing"), xmlMediumTitle), null); }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(getString("Dialog.Import.Exceptions.Medium.Writing"), xmlMediumTitle), null); }
 
                     var partList = xmlMedium.Elements()?.ToList() ?? new List<XElement>();
 
@@ -879,12 +880,12 @@ namespace MediaManager.Globals
                         {
                             xmlPartId = int.Parse(xmlPart.Attribute("Id").Value);
                         }
-                        catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingId"), null); }
+                        catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Part.MissingId"), null); }
                         try
                         {
                             xmlPartTitle = xmlPart.Attribute("Title").Value;
                         }
-                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingTitle"), xmlPartId), null); }
+                        catch (Exception) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Part.MissingTitle"), xmlPartId), null); }
                         try
                         {
                             xmlPartDescription = xmlPart.Attribute("Description")?.Value ?? "";
@@ -900,11 +901,11 @@ namespace MediaManager.Globals
                                 positiveTags = positiveTags.Select(t => tagIdMappings[t]).ToList();
                                 negativeTags = negativeTags.Select(t => tagIdMappings[t]).ToList();
                             }
-                            catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.MissingTag"), xmlPartId), null); }
+                            catch (Exception) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Part.MissingTag"), xmlPartId), null); }
                             xmlPartTags.AddRange(tagIdListToTagList(positiveTags, true));
                             xmlPartTags.AddRange(tagIdListToTagList(negativeTags, false));
                         }
-                        catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), e as FormatException); }
+                        catch (Exception e) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Part.WrongFormat"), xmlPartId), e as FormatException); }
                         try
                         {
                             partIdMappings.Add(xmlPartId, CreatePart(new Part
@@ -918,7 +919,7 @@ namespace MediaManager.Globals
                                 Image = xmlPartImage,
                             }, xmlPartTags));
                         }
-                        catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Part.Writing"), xmlPartId), null); }
+                        catch (Exception) { throw ParseDBConstraintException(string.Format(getString("Dialog.Import.Exceptions.Part.Writing"), xmlPartId), null); }
                     }
                 }
                 #endregion
@@ -933,7 +934,7 @@ namespace MediaManager.Globals
                     {
                         xmlTitle = xmlPlaylist.Attribute("Title").Value;
                     }
-                    catch (Exception) { throw AssembleFormatException(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
+                    catch (Exception) { throw AssembleFormatException(getString("Dialog.Import.Exceptions.Playlist.MissingTitle"), null); }
                     try
                     {
                         var playlistParts = stringToIntList(xmlPlaylist.Attribute("PlaylistParts")?.Value ?? "[]");
@@ -941,9 +942,9 @@ namespace MediaManager.Globals
                         {
                             xmlPlaylistParts = playlistParts.Select(p => partIdMappings[p]).ToList();
                         }
-                        catch (Exception) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.MissingPart"), xmlTitle), null); }
+                        catch (Exception) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Playlist.MissingPart"), xmlTitle), null); }
                     }
-                    catch (Exception e) { throw AssembleFormatException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), e as FormatException); }
+                    catch (Exception e) { throw AssembleFormatException(string.Format(getString("Dialog.Import.Exceptions.Playlist.WrongFormat"), xmlTitle), e as FormatException); }
                     try
                     {
                         DBCONNECTION.Playlists.Add(new Playlist
@@ -955,7 +956,7 @@ namespace MediaManager.Globals
                         var playlistId = DBCONNECTION.Playlists.OrderBy(p => p.Id).ToList().LastOrDefault()?.Id ?? 0;
                         xmlPlaylistParts.ForEach(p => GlobalContext.Writer.AddPartToPlaylist(playlistId, p));
                     }
-                    catch (Exception) { throw ParseDBConstraintException(string.Format(LanguageProvider.LanguageProvider.getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
+                    catch (Exception) { throw ParseDBConstraintException(string.Format(getString("Dialog.Import.Exceptions.Playlist.Writing"), xmlTitle), null); }
                 }
                 #endregion
 

@@ -1,4 +1,5 @@
-﻿using MediaManager.Globals.LanguageProvider;
+﻿using LanguageProvider;
+using static LanguageProvider.LanguageProvider;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Windows;
@@ -88,7 +89,7 @@ namespace MediaManager.GUI.Controls.Edit
                 updateFavoriteButtonVisibility();
                 description.Text = part.Description;
                 length.SetValue((uint)part.Length);
-                textMinute.Text = LanguageProvider.getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
+                textMinute.Text = getString(part.Length == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
                 publication.SetValue((uint)part.Publication_Year);
                 image.Source = part.Image != null ? convertByteArrayToBitmapImage(part.Image) : null;
                 imagePath.Text = "";
@@ -109,19 +110,19 @@ namespace MediaManager.GUI.Controls.Edit
             length.SetMin(0);
             publication.SetMin(0);
         }
-        public void RegisterAtLanguageProvider() => LanguageProvider.Register(this);
+        public void RegisterAtLanguageProvider() => Register(this);
         public void LoadTexts(string language)
         {
-            textTitle.Text = LanguageProvider.getString("Controls.Edit.Label.Title") + ":";
-            textDescription.Text = LanguageProvider.getString("Controls.Edit.Label.Description") + ":";
-            textTags.Text = LanguageProvider.getString("Controls.Edit.Label.Tags") + ":";
-            selectImage.Content = LanguageProvider.getString("Controls.Edit.Button.SelectImage");
-            removeImage.Content = LanguageProvider.getString("Controls.Edit.Button.RemoveImage");
-            textLocation.Text = LanguageProvider.getString("Controls.Edit.Label.Location") + ":";
-            textLength.Text = LanguageProvider.getString("Controls.Edit.Label.Length") + ":";
-            textPublication.Text = LanguageProvider.getString("Controls.Edit.Label.Publication") + ":";
+            textTitle.Text = getString("Controls.Edit.Label.Title") + ":";
+            textDescription.Text = getString("Controls.Edit.Label.Description") + ":";
+            textTags.Text = getString("Controls.Edit.Label.Tags") + ":";
+            selectImage.Content = getString("Controls.Edit.Button.SelectImage");
+            removeImage.Content = getString("Controls.Edit.Button.RemoveImage");
+            textLocation.Text = getString("Controls.Edit.Label.Location") + ":";
+            textLength.Text = getString("Controls.Edit.Label.Length") + ":";
+            textPublication.Text = getString("Controls.Edit.Label.Publication") + ":";
         }
-        ~ElementEditor() => LanguageProvider.Unregister(this);
+        ~ElementEditor() => Unregister(this);
         #endregion
 
         #region Handler
@@ -152,14 +153,14 @@ namespace MediaManager.GUI.Controls.Edit
         private void textChanged(object sender, TextChangedEventArgs e) => onEdited();
         private void numericValueChanged(uint newVal)
         {
-            textMinute.Text = LanguageProvider.getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
+            textMinute.Text = getString(length.Value == 1 ? "Controls.Edit.Minute" : "Controls.Edit.Minutes");
             onEdited();
         }
         private void tags_TagValueChanged(List<ValuedTag> tags) => onEdited();
         private string showLoadImageDialog()
         {
             var ofd = new OpenFileDialog();
-            ofd.Filter = LanguageProvider.getString("Common.ImageFileType") + " (*.png)|*.png";
+            ofd.Filter = getString("Common.ImageFileType") + " (*.png)|*.png";
             ofd.ShowDialog();
             return ofd.FileName;
         }
