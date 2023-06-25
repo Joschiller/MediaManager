@@ -1,5 +1,5 @@
 ﻿using static LanguageProvider.LanguageProvider;
-using MediaManager.Globals.DefaultDialogs;
+using DefaultDialogs;
 using XMLImportExport;
 using MediaManager.GUI.Menus;
 using System;

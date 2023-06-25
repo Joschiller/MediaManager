@@ -1,4 +1,5 @@
-﻿using LanguageProvider;
+﻿using DefaultDialogs;
+using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
 using MediaManager.Globals.SettingsEditor;
 using System.Windows;
@@ -54,7 +55,7 @@ namespace MediaManager.GUI.Settings
             if (folderName == null || folderName == "") return;
             if (folderName.Length > 512)
             {
-                ShowDefaultDialog(getString("Controls.Settings.Backup.PathToLong"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Controls.Settings.Backup.PathToLong"), SuccessMode.Error);
                 return;
             }
             valueBackupPath.Text = folderName;

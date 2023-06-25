@@ -1,4 +1,5 @@
-﻿using LanguageProvider;
+﻿using DefaultDialogs;
+using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
 using XMLImportExport;
 using MediaManager.GUI.Dialogs;
@@ -101,7 +102,7 @@ namespace MediaManager.GUI.Menus
             viewer.ProcessFailed += Viewer_ProcessFailed;
             viewer.ShowDialog();
         }
-        private void Viewer_ProcessFailed(string message) => ShowDefaultDialog(message, Globals.DefaultDialogs.SuccessMode.Error);
+        private void Viewer_ProcessFailed(string message) => ShowDefaultDialog(message, SuccessMode.Error);
         private void btnEditCatalogClick(object sender, RoutedEventArgs e)
         {
             var result = new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();

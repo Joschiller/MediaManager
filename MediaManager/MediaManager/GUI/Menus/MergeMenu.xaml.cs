@@ -1,4 +1,4 @@
-﻿using MediaManager.Globals.DefaultDialogs;
+﻿using DefaultDialogs;
 using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Atoms;
@@ -91,7 +91,7 @@ namespace MediaManager.GUI.Menus
         {
             if (mediaSelection.GetCheckedItems().Count < 2)
             {
-                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaSelection"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaSelection"), SuccessMode.Error);
                 return;
             }
 
@@ -168,7 +168,7 @@ namespace MediaManager.GUI.Menus
             if (mediaDataDescriptionSelection.SelectedItem == null || mediaDataTagSelection.SelectedItem == null || mediaDataLocationSelection.SelectedItem == null)
             {
                 // should not occur
-                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaData"), Globals.DefaultDialogs.SuccessMode.Error);
+                ShowDefaultDialog(getString("Menus.Merge.Dialog.MissingMediaData"), SuccessMode.Error);
                 return;
             }
 

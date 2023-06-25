@@ -1,4 +1,4 @@
-﻿using MediaManager.Globals.DefaultDialogs;
+﻿using DefaultDialogs;
 using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
 using System;

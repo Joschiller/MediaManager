@@ -53,6 +53,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DefaultDialogs, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DefaultDialogs.1.0.1\lib\net472\DefaultDialogs.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -117,11 +120,6 @@
     <Compile Include="GUI\Atoms\TagCheckbox.xaml.cs">
       <DependentUpon>TagCheckbox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml.cs">
-      <DependentUpon>GeneralButtonBasedDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Globals\DefaultDialogs\GeneralButtonBasedDialogStyle.cs" />
-    <Compile Include="Globals\DefaultDialogs\SuccessMode.cs" />
     <Compile Include="Globals\Navigation.cs" />
     <Compile Include="Globals\SettingsEditor\SettingsEditor.xaml.cs">
       <DependentUpon>SettingsEditor.xaml</DependentUpon>
@@ -296,10 +294,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Atoms\TagCheckbox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Globals\DefaultDialogs\GeneralButtonBasedDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
