@@ -39,6 +39,7 @@ namespace MediaManager.GUI.Menus
         #endregion
         private void mode_ModeChanged(Controls.Analyze.AnalyzeMode mode)
         {
+            // NOTE: not using SearchRunner here because it leads to issues with closed database connections if the analyze mode is changed quickly
             allItems = CatalogContext.Reader.Analysis.LoadAnalyzeResult(mode);
             pager.CurrentPage = 1;
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
