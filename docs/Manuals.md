@@ -30,7 +30,7 @@ The help menu can be reached from all other menus by using the "Help" button in 
 
 ## 3 Editing Catalogs
 
-Within the catalog menu, catalogs can be created, edited or deleted. Furthermore, the active catalog can be selected or catalogs can be exported and imported.
+Within the catalog menu, catalogs can be created, edited or deleted. Furthermore, the active catalog can be selected by double clicking it or catalogs can be exported and imported.
 
 The catalog menu is the first menu that will be opened, if no catalog exists yet. The menu then offers the access to the catalog creation as well as the settings and help menu.
 
@@ -46,7 +46,7 @@ When clicking the "Add Catalog" button in the menu bar, a dialog will be opened 
 
 ## 4 Overview Menu
 
-The overview menu provides the searching functionality on the righthand side of the menu as well as the access to all other menus.
+The overview menu provides the searching functionality on the righthand side of the menu as well as the access to all other menus. Furthermore, tags can be created by opening the corresponding dialog or submenu.
 
 On the lefthand side of the menu, further controls can be enabled that allow editing playlists, viewing the title of the day or viewing statistics.
 
@@ -73,6 +73,8 @@ To open an existing medium from the overview menu, an item in a playlist or the 
 <img style="float: right;" src="./styles/editing/edit_blue.png" height="80px" />
 
 If a medium is opened in the edit menu, the media and media part information can be edited. Therefore, editing can be started in the menu bar, in case the menu was opened to view a medium. Then the data can be edited and the changes can be saved.
+
+> <span style="color:red"><b>Changes must be shaved explicitly and will be discarded otherwise!</b></span>
 
 Media and parts are each described by a title and can hold additional information such as a description and tags. Parts also can contain further data such as images, a length and a publication year, whilst media can have a location.
 

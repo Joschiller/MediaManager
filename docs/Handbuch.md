@@ -18,7 +18,7 @@
 
 ## 1 Einleitung
 
-Die _Media Manager_ Anwendung kann genutzt werden, um verschiedene Typen von Medien aufzulisten. Diese Medien und Medienteile können kategorisiert und durch weitere Metadaten beschrieben werden und anhand dieser Daten innerhalb der Anwendung gesucht werden. Die Anwendung bietet eine Suchfunktion, sowie andere unterstützende Funktionen, die die Erstellung von Medien erleichtern.
+Die _Media Manager_ Anwendung kann genutzt werden, um verschiedene Typen von Medien aufzulisten. Diese Medien und Medienteile können kategorisiert und durch weitere Metadaten beschrieben, sowie anhand dieser Daten innerhalb der Anwendung gesucht werden. Die Anwendung bietet eine Suchfunktion, sowie andere unterstützende Funktionen, die die Erstellung von Medien erleichtern.
 
 ## 2 Hilfemenü
 
@@ -30,7 +30,7 @@ Das Hilfemenü kann aus jedem Menü heraus über den "Hilfe" Button in der Menü
 
 ## 3 Kataloge bearbeiten
 
-Im Katalogmenü können Kataloge erstellt, bearbeitet und gelöscht werden. Außerdem können der aktive Katalog ausgewählt und Kataloge exportiert und importiert werden.
+Im Katalogmenü können Kataloge erstellt, bearbeitet und gelöscht werden. Außerdem können der aktive Katalog durch einen Doppelklick ausgewählt und Kataloge exportiert und importiert werden.
 
 Das Katalogmenü ist das erste Menü, das beim Start der Anwendung geöffnet wird, wenn noch kein Katalog existiert. Das Menü bietet dann die Möglichkeit der Erstellung von Katalogen und den Zugriff auf die Einstellungen und das Hilfemenü.
 
@@ -46,7 +46,7 @@ Beim Klick auf den "Katalog hinzufügen" Button in der Menüleiste wird ein Dial
 
 ## 4 Übersichtsmenü
 
-Das Übersichtsmenü bietet auf der rechten Seite die Suchfunktion, sowie den Zugriff auf alle weiteren Menüs.
+Das Übersichtsmenü bietet auf der rechten Seite die Suchfunktion, sowie den Zugriff auf alle weiteren Menüs. Außerdem können Kategorien über einen Dialog oder das zugehörige Untermenü erstellt werden.
 
 Auf der linken Seite des Menüs sind weitere Funktionen verfügbar, die die Bearbeitung von Playlisten, die Ansicht von Titelvorschlägen und Statistiken bieten.
 
@@ -74,7 +74,9 @@ Um ein existierendes Medium aus dem Übersichtsmenü zu öffnen, kann das entspr
 
 Wurde ein Medium im Bearbeitungsmenü geöffnet, können die Medien- und Medienteilinformationen bearbeitet werden. Dafür kann die Bearbeitung über den Button in der Menüleiste gestartet werden, insofern das Medium zur Ansicht geöffnet wurde. Danach können Änderungen vorgenommen und gespeichert werden.
 
-Medien und Medienteile werden jeweils durch einen Titel beschrieben und können weitere Informationen enthalten, wie beispielsweise eine Beschreibung und Kategorien. Medienteile können zudem weitere Daten wie Bilder, eine Länge und ein Veröffentlichungsjahr enthalten, während Medien einen Aufbewahrungsort aufweisen können
+> <span style="color:red"><b>Änderungen müssen explizit gespeichert werden und werden andernfalls verworfen!</b></span>
+
+Medien und Medienteile werden jeweils durch einen Titel beschrieben und können weitere Informationen enthalten, wie beispielsweise eine Beschreibung und Kategorien. Medienteile können zudem weitere Daten wie Bilder, eine Länge und ein Veröffentlichungsjahr enthalten, während Medien einen Aufbewahrungsort aufweisen können.
 
 Wenn Kategorien für ein gesamtes Medium gesetzt werden, werden diese Werte auch auf alle enthaltenen Medienteile anwendet.
 
