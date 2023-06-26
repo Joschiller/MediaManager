@@ -11,6 +11,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="searchResultLabel" Grid.Column="0" Style="{StaticResource leftsideLabel}"/>
-        <wpfcomponents:NumericUpDown x:Name="searchResultValue" Grid.Column="1" StepPerScroll="1"/>
+        <wpfcomponents:NumericUpDown x:Name="searchResultValue" Grid.Column="1" StepPerScroll="1" Background="{StaticResource control_background_brush}"/>
     </Grid>
 </UserControl>

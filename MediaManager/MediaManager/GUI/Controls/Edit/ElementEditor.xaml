@@ -47,10 +47,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="textLength" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
-            <wpfcomponents:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Margin="{StaticResource defaultMarginSmall}"/>
+            <wpfcomponents:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Margin="{StaticResource defaultMarginSmall}" Background="{StaticResource control_background_brush}"/>
             <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
             <TextBlock x:Name="textPublication" Grid.Column="3" Style="{StaticResource dialogLabel}"/>
-            <wpfcomponents:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}"/>
+            <wpfcomponents:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}" Background="{StaticResource control_background_brush}"/>
         </Grid>
     </Grid>
 </UserControl>
