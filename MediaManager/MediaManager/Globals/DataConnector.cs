@@ -320,9 +320,9 @@ namespace MediaManager.Globals
                     var result = new List<SearchResultItem>();
 
                     var fittingSearchString = Lists.Parts.Where(p =>
-                        p.Title.Contains(parameters.SearchString) ||
-                        p.Medium.Title.Contains(parameters.SearchString) ||
-                        (parameters.SearchWithinDescriptions && (p.Description.Contains(parameters.SearchString) || p.Medium.Description.Contains(parameters.SearchString)))
+                        p.Title.ToLower().Contains(parameters.SearchString.ToLower()) ||
+                        p.Medium.Title.ToLower().Contains(parameters.SearchString.ToLower()) ||
+                        (parameters.SearchWithinDescriptions && (p.Description.ToLower().Contains(parameters.SearchString.ToLower()) || p.Medium.Description.ToLower().Contains(parameters.SearchString.ToLower())))
                         );
 
                     var positiveTags = parameters.SearchTags.Where(t => t.Value.HasValue && t.Value.Value).Select(t => t.Tag.Id).ToList();
