@@ -7,7 +7,7 @@
     <ProjectGuid>{F2B75A24-2C2B-48B9-A612-54C808105195}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MediaManager</RootNamespace>
-    <AssemblyName>MediaManager</AssemblyName>
+    <AssemblyName>Media Manager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
