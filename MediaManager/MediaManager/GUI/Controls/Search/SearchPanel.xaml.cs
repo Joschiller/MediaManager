@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
-using MediaManager.Globals;
 
 namespace MediaManager.GUI.Controls.Search
 {
@@ -56,13 +55,12 @@ namespace MediaManager.GUI.Controls.Search
         private void input_SearchParametersChanged(SearchParameters parameters)
         {
             CurrentSearchParameters = parameters;
-            SearchRunner<SearchParameters, List<SearchResultItem>>.runSearchOnThread(parameters, CatalogContext.Reader.SearchUsingParameters, (result) => Dispatcher.Invoke(() =>
-            {
-                CompleteResultList = result;
-                pager.CurrentPage = 1;
-                pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
-                pager.setItemCount(CompleteResultList.Count);
-            }));
+            // NOTE: not using SearchRunner here because it sometimes leads to issues with closed database connections when switching the catalog
+            CompleteResultList = CatalogContext.Reader.SearchUsingParameters(parameters);
+            pager.CurrentPage = 1;
+            pager.TotalPages = CompleteResultList.Count / ItemsPerPage + (CompleteResultList.Count % ItemsPerPage == 0 ? 0 : 1);
+            pager.setItemCount(CompleteResultList.Count);
+            LoadTexts(null);
         }
         private void pager_PageChanged(int newPage)
         {
