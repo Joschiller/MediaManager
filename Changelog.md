@@ -2,4 +2,25 @@
 
 ## Version 1.0.0
 
-- FEATURE LIST
+- adding, editing and deleting catalogs and their settings
+- adding, editing and deleting media with the attributes title, description, tags and location
+- adding, editing and deleting media parts with the attributes title, description, tags, image, length and publication year
+- adding, editing and deleting tags
+- changing tag values for all parts of a medium through the tag menu
+- searching media and media parts by title, description, tags and favourites
+- analyzing inconsistencies such as missing attributes, doubled or empty media
+- automatic backup, export and import of catalogs
+- adding, editing and deleting playlists
+- viewing the title of the day
+- viewing statistics
+- customizing the appearance and behavior of the application using different settings
+  - enabling or disabling the automatic backup
+  - changing the destination of the backup files
+  - enabling or disabling deletion confirmations for media, media parts, playlists and tags
+  - changing the mode of the title of the day between media part or whole medium
+  - changing the language between English and German
+  - enabling or disabling playlists
+  - enabling or disabling the title of the day
+  - enabling or disabling statistics
+  - changing the search result list length per page
+- help menu
