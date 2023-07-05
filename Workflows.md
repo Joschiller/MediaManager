@@ -25,11 +25,13 @@
     1. `git checkout -b X.X.X-rc`
     2. push new branch
     3. Github > Tags > Create a new Release
+       - Tag: "vX.X.X" -> set to create "on publish"
        - Target branch: "X.X.X-rc"
        - Title: "vX.X.X"
        - Description: Copy from Changelog
-       - add zip file of release
-       - add pdf-manuals in all languages
+       - Files: add executable or similar binary file
+         - add zip file of release
+         - add pdf-manuals in all languages
 
 # Update against template
 
