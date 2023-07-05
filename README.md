@@ -6,6 +6,8 @@
 
 The Media Manager application can be used to list different types of media with all their contents. Each media and media part can be categorized using tags as well as other metadata that can be used to search for specific items within the application. For a detailed description and handbook see the [Application Description](./docs/Application%20Description.md). For a feature documentation refer to the [Changelog](./Changelog.md).
 
+> For a quick start, refer to the [Manuals](./docs/Manuals.md).
+
 ## Installation Guide
 
 <!-- TODO INSTALLATION GUIDE -->
