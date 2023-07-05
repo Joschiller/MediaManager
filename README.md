@@ -10,7 +10,7 @@ The Media Manager application can be used to list different types of media with 
 
 ## Installation Guide
 
-<!-- TODO INSTALLATION GUIDE -->
+To install the application, extract the zip-file for the latest version and run the included `setup.exe`. This will either install or update the application.
 
 ## Related Files
 
