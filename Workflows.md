@@ -18,14 +18,16 @@
 6. Simplify code
    - remove unnecessary imports
    - check autocompletion hints
-7. FURTHER STEPS ...
-8. Create Release in Repository
-   1. `git checkout -b X.X.X-rc`
-   2. push new branch
-   3. Github > Tags > Create a new Release
-      - Target branch: "X.X.X-rc"
-      - Title: "vX.X.X"
-      - Description: Copy from Changelog
+7. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
+8. Right-click project > "Publish" > click through the wizard (keep all settings)
+9. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
+10. Create Release in Repository
+11. `git checkout -b X.X.X-rc`
+12. push new branch
+13. Github > Tags > Create a new Release
+    - Target branch: "X.X.X-rc"
+    - Title: "vX.X.X"
+    - Description: Copy from Changelog
 
 # Update against template
 
