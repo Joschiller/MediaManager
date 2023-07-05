@@ -22,12 +22,12 @@
 8. Right-click project > "Publish" > click through the wizard (keep all settings)
 9. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
 10. Create Release in Repository
-11. `git checkout -b X.X.X-rc`
-12. push new branch
-13. Github > Tags > Create a new Release
-    - Target branch: "X.X.X-rc"
-    - Title: "vX.X.X"
-    - Description: Copy from Changelog
+    1. `git checkout -b X.X.X-rc`
+    2. push new branch
+    3. Github > Tags > Create a new Release
+       - Target branch: "X.X.X-rc"
+       - Title: "vX.X.X"
+       - Description: Copy from Changelog
 
 # Update against template
 
