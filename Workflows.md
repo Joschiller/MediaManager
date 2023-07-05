@@ -28,6 +28,8 @@
        - Target branch: "X.X.X-rc"
        - Title: "vX.X.X"
        - Description: Copy from Changelog
+       - add zip file of release
+       - add pdf-manuals in all languages
 
 # Update against template
 
