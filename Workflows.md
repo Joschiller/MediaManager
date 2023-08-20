@@ -1,4 +1,4 @@
-docs(workflows): update against template# Release
+# Release
 
 1. Check Workflow documentation
 2. Update [Application Description](./Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
