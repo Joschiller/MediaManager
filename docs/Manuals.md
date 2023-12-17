@@ -15,6 +15,7 @@
 - [5 Editing Media and Media Parts](#5-editing-media-and-media-parts)
 - [6 Settings](#6-settings)
 - [7 Analyze Menu](#7-analyze-menu)
+- [8 Useful Keyboard Shortcuts](#8-useful-keyboard-shortcuts)
 
 ## 1 Introduction
 
@@ -105,3 +106,57 @@ In case of doubled media, the items are not edited in the edit menu. Rather they
 
 ![Analyze Menu](../HelpImages/AnalyzeMenu.png)
 ![Merge Menu](../HelpImages/AnalyzeMenu_MergeEdit.png)
+
+## 8 Useful Keyboard Shortcuts
+
+| Menu          | Shortcut                                  | Function                                                                        |
+| :------------ | :---------------------------------------- | :------------------------------------------------------------------------------ |
+| -             | F1                                        | Show help                                                                       |
+| -             | F2                                        | Open settings menu                                                              |
+| Help Menu     | Esc                                       | Close menu                                                                      |
+| Help Menu     | Arrow Keys                                | Navigation if the topic list has focus                                          |
+| Catalog Menu  | Esc                                       | Close menu                                                                      |
+| Catalog Menu  | Ctrl + N                                  | Add catalog                                                                     |
+| Catalog Menu  | Ctrl + I                                  | Import catalog                                                                  |
+| Catalog Menu  | Ctrl + L                                  | Open selected catalog                                                           |
+| Catalog Menu  | Ctrl + E                                  | Edit selected catalog                                                           |
+| Catalog Menu  | Ctrl + O                                  | Export selected catalog                                                         |
+| Catalog Menu  | Ctrl + D<br/>Del.                         | Delete selected catalog                                                         |
+| Overview Menu | Ctrl + N                                  | Add medium                                                                      |
+| Overview Menu | Ctrl + T                                  | Add tag                                                                         |
+| Overview Menu | Ctrl + R                                  | Reset search                                                                    |
+| Overview Menu | Ctrl + Shift + T                          | Open tag menu                                                                   |
+| Overview Menu | Ctrl + Shit + C                           | Open catalog menu                                                               |
+| Overview Menu | Ctrl + Shit + A                           | Open analyze menu                                                               |
+| Overview Menu | Arrow Keys                                | Navigation through search result list if it has focus                           |
+| Overview Menu | Ctrl + Enter                              | Open selected medium                                                            |
+| Edit Menu     | Esc                                       | Close menu                                                                      |
+| Edit Menu     | Ctrl + E                                  | Edit medium                                                                     |
+| Edit Menu     | Ctrl + R                                  | Discard changes                                                                 |
+| Edit Menu     | Ctrl + S                                  | Save medium                                                                     |
+| Edit Menu     | Ctrl + N                                  | Add a new part                                                                  |
+| Edit Menu     | Ctrl + M                                  | Show media information                                                          |
+| Edit Menu     | $\uparrow$/$\downarrow$ Arrow Keys        | Navigation through media part list if it has focus to show the part information |
+| Edit Menu     | Ctrl + F                                  | Toggle favourite for currently selected media part                              |
+| Edit Menu     | Ctrl + I                                  | Select image for currently selected media part                                  |
+| Edit Menu     | Ctrl + Shift + I                          | Clear image for currently selected media part                                   |
+| Edit Menu     | Ctrl + D<br/>Del.                         | Delete selected part or medium                                                  |
+| Tag Menu      | Esc                                       | Close menu                                                                      |
+| Tag Menu      | Ctrl + N                                  | Add tag                                                                         |
+| Tag Menu      | Ctrl + E                                  | Edit selected tag                                                               |
+| Tag Menu      | Ctrl + D<br/>Del.                         | Delete selected tag                                                             |
+| Tag Menu      | Ctrl + S                                  | Save changed tags                                                               |
+| Tag Menu      | Ctrl + R                                  | Discard changed tags                                                            |
+| Tag Menu      | $\uparrow$/$\downarrow$ Arrow Keys        | Navigation through tag list if it has focus                                     |
+| Tag Menu      | Arrow Keys                                | Navigation through media list if it has focus                                   |
+| Settings Menu | Esc                                       | Close menu                                                                      |
+| Settings Menu | Ctrl + R                                  | Discard changes                                                                 |
+| Settings Menu | Ctrl + S                                  | Save settings                                                                   |
+| Settings Menu | Ctrl + Tab<br/>Ctrl + Shift + Tab         | Change tab                                                                      |
+| Analyze Menu  | Esc                                       | Close menu                                                                      |
+| Analyze Menu  | Ctrl + $\uparrow$/$\downarrow$ Arrow Keys | Change mode                                                                     |
+| Analyze Menu  | Ctrl + E                                  | Edit selected element                                                           |
+| Analyze Menu  | Arrow Keys                                | Navigation through media list if it has focus                                   |
+| Merge Menu    | Esc                                       | Close menu                                                                      |
+
+> Furthermore, there exist key combinations for most buttons with textual content.

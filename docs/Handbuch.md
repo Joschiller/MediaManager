@@ -15,6 +15,7 @@
 - [5 Medien und Medienteile bearbeiten](#5-medien-und-medienteile-bearbeiten)
 - [6 Einstellungen](#6-einstellungen)
 - [7 Analysemenü](#7-analysemenü)
+- [8 Nützliche Tastenkombinationen](#8-nützliche-tastenkombinationen)
 
 ## 1 Einleitung
 
@@ -22,7 +23,7 @@ Die _Media Manager_ Anwendung kann genutzt werden, um verschiedene Typen von Med
 
 ## 2 Hilfemenü
 
-Das Hilfemenü kann aus jedem Menü heraus über den "Hilfe" Button in der Menüleiste erreicht werden. Das Hilfemenü zeigt verschiedene Themen in der Liste auf der linken Seite an, aus der das gewünschte Thema gewählt werden kann. Dann kann mit den Pfeil-Buttons oder Pfeil-Tasten durch die Seiten des Themas navigiert werden.
+Das Hilfemenü kann aus jedem Menü heraus über den "Hilfe" Button in der Menüleiste erreicht werden. Das Hilfemenü zeigt verschiedene Themen in der Liste auf der linken Seite an, aus der das gewünschte Thema gewählt werden kann. Dann kann mit den Pfeil-Buttons oder Pfeiltasten durch die Seiten des Themas navigiert werden.
 
 ![Help Menu](../HelpImages/HelpMenu.png)
 
@@ -105,3 +106,57 @@ Im Fall von doppelten Medien werden die Elemente nicht im Bearbeitungsmenü geö
 
 ![Analyze Menu](../HelpImages/AnalyzeMenu.png)
 ![Merge Menu](../HelpImages/AnalyzeMenu_MergeEdit.png)
+
+## 8 Nützliche Tastenkombinationen
+
+| Menü                 | Tastenkombination                          | Funktion                                                                                                |
+| :------------------- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| -                    | F1                                         | Hilfe anzeigen                                                                                          |
+| -                    | F2                                         | Einstellungsmenü öffnen                                                                                 |
+| Hilfemenü            | Esc                                        | Menü schließen                                                                                          |
+| Hilfemenü            | Pfeiltasten                                | Navigation durch die Themenliste, wenn diese im Fokus liegt                                             |
+| Katalogmenü          | Esc                                        | Menü schließen                                                                                          |
+| Katalogmenü          | Strg + N                                   | Katalog hinzufügen                                                                                      |
+| Katalogmenü          | Strg + I                                   | Katalog importieren                                                                                     |
+| Katalogmenü          | Strg + L                                   | Gewählten Katalog öffnen                                                                                |
+| Katalogmenü          | Strg + E                                   | Gewählten Katalog bearbeiten                                                                            |
+| Katalogmenü          | Strg + O                                   | Gewählten Katalog exportieren                                                                           |
+| Katalogmenü          | Strg + D<br/>Entf.                         | Gewählten Katalog löschen                                                                               |
+| Übersichtsmenü       | Strg + N                                   | Medium hinzufügen                                                                                       |
+| Übersichtsmenü       | Strg + T                                   | Kategorie hinzufügen                                                                                    |
+| Übersichtsmenü       | Strg + R                                   | Suche zurücksetzen                                                                                      |
+| Übersichtsmenü       | Strg + Shift + T                           | Kategoriemenü öffnen                                                                                    |
+| Übersichtsmenü       | Strg + Shit + C                            | Katalogmenü öffnen                                                                                      |
+| Übersichtsmenü       | Strg + Shit + A                            | Analysemenü öffnen                                                                                      |
+| Übersichtsmenü       | Pfeiltasten                                | Navigation durch die Suchergebnisliste, wenn diese im Fokus liegt                                       |
+| Übersichtsmenü       | Strg + Enter                               | Gewähltes Medium öffnen                                                                                 |
+| Bearbeitungsmenü     | Esc                                        | Menü schließen                                                                                          |
+| Bearbeitungsmenü     | Strg + E                                   | Medium bearbeiten                                                                                       |
+| Bearbeitungsmenü     | Strg + R                                   | Änderungen verwerfen                                                                                    |
+| Bearbeitungsmenü     | Strg + S                                   | Medium speichern                                                                                        |
+| Bearbeitungsmenü     | Strg + N                                   | Einen neuen Medienteil hinzufügen                                                                       |
+| Bearbeitungsmenü     | Strg + M                                   | Medieninformationen anzeigen                                                                            |
+| Bearbeitungsmenü     | $\uparrow$/$\downarrow$ Pfeiltasten        | Navigation durch die Medienteilliste, wenn diese im Fokus liegt, um Medienteilinformationen anzuzeigen  |
+| Bearbeitungsmenü     | Strg + F                                   | Aktuell selektierten Medienteil zum Favorit machen (oder eine bestehende Favoritenmarkierung entfernen) |
+| Bearbeitungsmenü     | Strg + I                                   | Bild für den aktuell selektierten Medienteil wählen                                                     |
+| Bearbeitungsmenü     | Strg + Shift + I                           | Bild aus dem aktuell selektierten Medienteil entfernen                                                  |
+| Bearbeitungsmenü     | Strg + D<br/>Entf.                         | Gewählten Medienteil oder das Medium löschen                                                            |
+| Kategoriemenü        | Esc                                        | Menü schließen                                                                                          |
+| Kategoriemenü        | Strg + N                                   | Kategorie hinzufügen                                                                                    |
+| Kategoriemenü        | Strg + E                                   | Gewählte Kategorie bearbeiten                                                                           |
+| Kategoriemenü        | Strg + D<br/>Entf.                         | Gewählte Kategorie löschen                                                                              |
+| Kategoriemenü        | Strg + S                                   | Geänderte Kategorien speichern                                                                          |
+| Kategoriemenü        | Strg + R                                   | Geänderte Kategorien verwerfen                                                                          |
+| Kategoriemenü        | $\uparrow$/$\downarrow$ Pfeiltasten        | Navigation durch die Kategorieliste, wenn diese im Fokus liegt                                          |
+| Kategoriemenü        | Pfeiltasten                                | Navigation durch die Medienliste, wenn diese im Fokus liegt                                             |
+| Einstellungsmenü     | Esc                                        | Menü schließen                                                                                          |
+| Einstellungsmenü     | Strg + R                                   | Änderungen verwerfen                                                                                    |
+| Einstellungsmenü     | Strg + S                                   | Einstellungen speichern                                                                                 |
+| Einstellungsmenü     | Strg + Tab<br/>Strg + Shift + Tab          | Tab wechseln                                                                                            |
+| Analysemenü          | Esc                                        | Menü schließen                                                                                          |
+| Analysemenü          | Strg + $\uparrow$/$\downarrow$ Pfeiltasten | Analysemodus ändern                                                                                     |
+| Analysemenü          | Strg + E                                   | Gewähltes Element bearbeiten                                                                            |
+| Analysemenü          | Pfeiltasten                                | Navigation durch die Medienliste, wenn diese im Fokus liegt                                             |
+| Zusammenführungsmenü | Esc                                        | Menü schließen                                                                                          |
+
+> Darüber hinaus gibt es weitere Tastenkombinationen, für die meisten Buttons mit Textaufschriften.
