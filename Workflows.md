@@ -6,22 +6,23 @@
    - also check the correct version number in respect to the performed changes
 2. Check Workflow documentation
 3. Update [Application Description](./docs/Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
-4. Update [Changelog](./Changelog.md)
+4. If any changes were made to the handbook or the referenced image files, re-export the pdf-files for [Handbuch.md](./docs/Handbuch.md) and [Manuals.md](./docs/Manuals.md)
+5. Update [Changelog](./Changelog.md)
    - document new features
    - document open issues that have a direct impact regarding the functionality
      > Add a "> Solved with Version x.x.x" mark at any open issue when it is solved in a later version.
    - document solved bugs
-5. Make testbuild in a copied folder and test functionality
+6. Make testbuild in a copied folder and test functionality
    - check added functionality for basic workflow
    - check validation of wrong or missing inputs
    - check if all validation messages are shown for missing inputs
-6. Simplify code
+7. Simplify code
    - remove unnecessary imports
    - check autocompletion hints
-7. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
-8. Right-click project > "Publish" > click through the wizard (keep all settings)
-9. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
-10. Create Release in Repository
+8. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
+9. Right-click project > "Publish" > click through the wizard (keep all settings)
+10. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
+11. Create Release in Repository
     1. `git checkout -b X.X.X-rc`
     2. push new branch
     3. Github > Tags > Create a new Release
