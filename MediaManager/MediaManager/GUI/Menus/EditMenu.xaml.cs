@@ -61,6 +61,9 @@ namespace MediaManager.GUI.Menus
         public void LoadTexts(string language)
         {
             Resources["btnDeleteMedium"] = getString("Menus.Edit.ToolTip.DeleteMedium");
+            Resources["btnEditMedium"] = getString("Menus.Edit.ToolTip.EditMedium");
+            Resources["btnUndoChanges"] = getString("Menus.Edit.ToolTip.Discard");
+            Resources["btnSaveMedium"] = getString("Menus.Edit.ToolTip.Save");
         }
         private bool IsExistingMedium { get => MediumId >= 0; }
         private void reloadData()
