@@ -244,7 +244,7 @@ The _Media Manager_ application can be used to list different types of media wit
 | --------------------------------: | :------------------------------------------------------------------------------------------------------------------------------ |
 |                 **Precondition:** | the settings menu is opened                                                                                                     |
 |                      **Actions:** | 1. Enable or disable a feature in the list<br/>2. Save or apply the new settings                                                |
-|                       **Result:** | The selected features are enabled and the other features are disabled<br/>This effects the multi-use control on the main screen |
+|                       **Result:** | The selected features are enabled and the other features are disabled<br/>This affects the multi-use control on the main screen |
 | **Exceptions and special cases:** | Changing the settings can also be cancelled                                                                                     |
 
 |                         **2.9.3** | **Changing the result list length**                                                    |
