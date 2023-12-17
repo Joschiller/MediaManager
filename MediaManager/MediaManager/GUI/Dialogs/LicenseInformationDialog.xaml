@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Dialogs" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
-        Style="{StaticResource defaultDialog}" Height="500" Width="600" MinHeight="500" MinWidth="600" MouseDown="Window_MouseDown">
+        Style="{StaticResource defaultDialog}" Height="520" Width="600" MinHeight="520" MinWidth="600" MouseDown="Window_MouseDown">
     <DockPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom">
             <Button x:Name="close" IsDefault="True" IsCancel="True" Click="close_Click" Margin="{StaticResource defaultMarginSmall}">_Close</Button>
