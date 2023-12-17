@@ -7,7 +7,7 @@
    - also check the correct version number in respect to the performed changes
 3. Check Workflow documentation
 4. Update [Application Description](./docs/Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
-5. If any changes were made to the handbook or the referenced image files, re-export the pdf-files for [Handbuch.md](./docs/Handbuch.md) and [Manuals.md](./docs/Manuals.md)
+5. If any changes were made to the handbook or the referenced image files, re-export the pdf-files for [Handbuch.md](./docs/Handbuch.md) and [Manuals.md](./docs/Manuals.md) and commit those as `docs(manuals): generate pdf`
 6. Update [Changelog](./Changelog.md)
    - document new features
    - document open issues that have a direct impact regarding the functionality
