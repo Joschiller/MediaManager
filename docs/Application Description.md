@@ -71,10 +71,17 @@ The _Media Manager_ application can be used to list different types of media wit
 
 |                         **2.1.2** | **Navigating through the help menu**                                                                           |
 | --------------------------------: | :------------------------------------------------------------------------------------------------------------- |
-|                 **Precondition:** |                                                                                                                |
+|                 **Precondition:** | the help menu is opened                                                                                        |
 |                      **Actions:** | 1. Select a topic in the lefthand list<br/>2. Navigate through the pages using the arrow buttons or arrow keys |
 |                       **Result:** | The menu navigates through the manual and shows screenshots and explanations accordingly                       |
 | **Exceptions and special cases:** |                                                                                                                |
+
+|                         **2.1.3** | **Opening license information**                                                   |
+| --------------------------------: | :-------------------------------------------------------------------------------- |
+|                 **Precondition:** | the help menu is opened                                                           |
+|                      **Actions:** | 1. Click the "License information" button                                         |
+|                       **Result:** | Information regarding the license of the application and the used assets is shown |
+| **Exceptions and special cases:** |                                                                                   |
 
 ### 2.2 Using Inputs
 
@@ -383,6 +390,8 @@ The _Media Manager_ supports the user with a clear UI design that highlights the
 
 The help menu can be reached from all other menus by using the "Help" button in the menu bar. The help menu shows different topics in the lefthand list from which the user can select a desired topic. The user can then navigate through the topics and pages of the topics by using the arrow buttons or the arrow keys.
 
+Furthermore, information regarding the license of the application and the used assets can be shown.
+
 ![Help Menu](../HelpImages/HelpMenu.png)
 
 ### 3.2 Catalog Menu
@@ -596,11 +605,11 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 
 ### 6.1 Showing Help
 
-|         **6.1.1** | **Opening the help menu and navigating through topics**                                                                                                                                                                                                                                            |
-| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Precondition:** |                                                                                                                                                                                                                                                                                                    |
-|      **Actions:** | 1. Click the "Help" button in any menu<br/>2. Select a topic on the lefthand side<br/>3. Navigate through the menu by either using the arrow buttons or arrow keys                                                                                                                                 |
-|       **Result:** | 1. The help menu is opened<br/>2. The contents of the topic are shown on the righthand side and if the topic contains several pages, the arrow buttons are enabled<br/>3. The contents of the topic and the selected page are shown in the righthand side and the page counter updates accordingly |
+|         **6.1.1** | **Opening the help menu and navigating through topics**                                                                                                                                                                                                                                                                                                                                     |
+| ----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Precondition:** |                                                                                                                                                                                                                                                                                                                                                                                             |
+|      **Actions:** | 1. Click the "Help" button in any menu<br/>2. Select a topic on the lefthand side<br/>3. Navigate through the menu by either using the arrow buttons or arrow keys<br/>4. Click the "License information" button                                                                                                                                                                            |
+|       **Result:** | 1. The help menu is opened<br/>2. The contents of the topic are shown on the righthand side and if the topic contains several pages, the arrow buttons are enabled<br/>3. The contents of the topic and the selected page are shown in the righthand side and the page counter updates accordingly<br/>4. Information regarding the license of the application and the used assets is shown |
 
 ### 6.2 Editing Catalogs
 
