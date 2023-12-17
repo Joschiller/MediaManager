@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:settingseditor="clr-namespace:SettingsEditor;assembly=SettingsEditor" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <system:String x:Key="btnDiscard">Discard changes</system:String>
         <system:String x:Key="btnSave">Save settings</system:String>

@@ -49,6 +49,7 @@ namespace MediaManager.GUI.Controls.Search
             ItemsPerPage = GlobalContext.Settings.ResultListLength;
             input_SearchParametersChanged(CurrentSearchParameters);
         }
+        public void ResetInput() => input.ResetInput();
         #endregion
 
         #region Handler
@@ -68,6 +69,19 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList.Skip((newPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList().ForEach(SearchResult.Add);
         }
 
+        private void resultList_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right && pager.CurrentPage < pager.TotalPages)
+            {
+                pager.CurrentPage++;
+                e.Handled = true;
+            }
+            if (e.Key == Key.Left && pager.CurrentPage > 1)
+            {
+                pager.CurrentPage--;
+                e.Handled = true;
+            }
+        }
         private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e) => OpenSearchResultItem(((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem);
         private int? rightClickPivotId = null;
         private void resultList_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -88,6 +102,7 @@ namespace MediaManager.GUI.Controls.Search
         #endregion
 
         #region Functions
+        public void OpenCurrentlySelectedItem() => OpenSearchResultItem(resultList.SelectedItem as SearchResultItem);
         private void OpenSearchResultItem(SearchResultItem item)
         {
             if (item != null)

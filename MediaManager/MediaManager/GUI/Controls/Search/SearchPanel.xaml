@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <local:SearchInput x:Name="input" Grid.Row="0" SearchParametersChanged="input_SearchParametersChanged"/>
         <components:Pager x:Name="pager" Grid.Row="1" HorizontalAlignment="Right" PageChanged="pager_PageChanged" TextPlacement="Left"/>
-        <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}" MouseDoubleClick="resultList_MouseDoubleClick" MouseRightButtonDown="resultList_MouseRightButtonDown">
+        <ListView x:Name="resultList" Grid.Row="2" ItemsSource="{Binding SearchResult}" PreviewKeyDown="resultList_PreviewKeyDown" MouseDoubleClick="resultList_MouseDoubleClick" MouseRightButtonDown="resultList_MouseRightButtonDown">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tag="{Binding Id}" Text="{Binding Text}" TextWrapping="WrapWithOverflow"/>

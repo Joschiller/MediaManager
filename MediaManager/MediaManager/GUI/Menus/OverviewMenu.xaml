@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:multiusetabs="clr-namespace:MediaManager.GUI.Controls.MultiUseTabs" xmlns:search="clr-namespace:MediaManager.GUI.Controls.Search" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <system:String x:Key="btnAddMedium">Add medium</system:String>
         <system:String x:Key="btnAddTag">Add tag</system:String>

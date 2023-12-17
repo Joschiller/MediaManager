@@ -1,9 +1,12 @@
 ﻿using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Controls.Edit
@@ -93,6 +96,22 @@ namespace MediaManager.GUI.Controls.Edit
                 };
             }
         }
+        public void HandleKeycode(Key key, bool shifted)
+        {
+            switch(key)
+            {
+                case Key.N:
+                    AddPart();
+                    break;
+                case Key.F:
+                    editor.ToggleFavourite();
+                    break;
+                case Key.I:
+                    if (shifted) editor.RemoveImage();
+                    else editor.SelectImage();
+                    break;
+            }
+        }
         #endregion
 
         #region Handler
@@ -105,6 +124,11 @@ namespace MediaManager.GUI.Controls.Edit
             else OpenMediumTab();
         }
         private void addPart_Click(object sender, RoutedEventArgs e) => AddPart();
+        private void list_PreviewKeyDown(object sender, KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.Control, Key.D)] = DeletePart,
+            [(ModifierKeys.None, Key.Delete)] = DeletePart,
+        });
         private void deletePart_Click(object sender, RoutedEventArgs e) => DeletePart();
 
         private void editor_MediumEdited(EditableMedium medium)

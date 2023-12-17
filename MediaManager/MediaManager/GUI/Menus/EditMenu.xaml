@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <system:String x:Key="btnDeleteMedium">Delete medium</system:String>
         <system:String x:Key="btnEditMedium">Edit medium</system:String>

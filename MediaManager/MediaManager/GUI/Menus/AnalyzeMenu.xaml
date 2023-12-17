@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:analyze="clr-namespace:MediaManager.GUI.Controls.Analyze"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked"/>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>
@@ -19,7 +19,13 @@
                     <analyze:AnalyzeModeSelector x:Name="mode" ModeChanged="mode_ModeChanged"/>
                 </GroupBox>
                 <components:Pager x:Name="pager" DockPanel.Dock="Top" PageChanged="pager_PageChanged" HorizontalAlignment="Right" TextPlacement="Left"/>
-                <analyze:AnalyzeList x:Name="list" SelectionChanged="list_SelectionChanged"/>
+                <ListView x:Name="list" ItemsSource="{Binding Items}" SelectionChanged="list_SelectionChanged" PreviewKeyDown="list_PreviewKeyDown">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" TextWrapping="WrapWithOverflow"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </DockPanel>
             <analyze:AnalyzePreview x:Name="preview" Grid.Column="1" Margin="4" StartEditing="preview_StartEditing"/>
         </Grid>

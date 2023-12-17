@@ -6,8 +6,10 @@ using MediaManager.GUI.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 
 namespace MediaManager.GUI.Menus
 {
@@ -35,6 +37,19 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.Escape)] = Close,
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.F2)] = OpenSettingsMenu,
+            [(ModifierKeys.Control, Key.N)] = AddCatalog,
+            [(ModifierKeys.Control, Key.I)] = ImportCatalog,
+            [(ModifierKeys.Control, Key.L)] = () => LoadCatalog(catalogList.SelectedCatalog),
+            [(ModifierKeys.Control, Key.E)] = EditCatalog,
+            [(ModifierKeys.Control, Key.O)] = ExportCatalog,
+            [(ModifierKeys.Control, Key.D)] = DeleteCatalog,
+            [(ModifierKeys.None, Key.Delete)] = DeleteCatalog,
+        });
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();

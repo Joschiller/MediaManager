@@ -18,7 +18,7 @@
             <wpfcomponents:ImageButton x:Name="saveButton" DockPanel.Dock="Right" Size="{StaticResource imageButtonSize}" Click="saveButton_Click" EnabledIconSource="../../../Resources/save.png" DisabledIconSource="../../../Resources/nosave.png"/>
             <components:Pager x:Name="pager" PageChanged="pager_PageChanged" DockPanel.Dock="Left" TextPlacement="Top"/>
         </DockPanel>
-        <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged" Margin="{StaticResource defaultMarginSmall}">
+        <ListView x:Name="mediaList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Media}" SelectionChanged="mediaList_SelectionChanged" Margin="{StaticResource defaultMarginSmall}" PreviewKeyDown="mediaList_PreviewKeyDown">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Tag="{Binding Id}" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>

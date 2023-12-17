@@ -3,7 +3,9 @@ using static LanguageProvider.LanguageProvider;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -98,6 +100,71 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+            {
+                [(ModifierKeys.None, Key.F1)] = () => { OpenHelpMenu(); e.Handled = true; },
+                [(ModifierKeys.None, Key.Escape)] = () => { Back(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.E)] = () => { EditMedium(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.R)] = () => { UndoChanges(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.S)] = () => { SaveMedium(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.N)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.N, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.M)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible) viewer.OpenMediumTab();
+                    else editor.OpenMediumTab();
+                    e.Handled = true;
+                },
+                [(ModifierKeys.Control, Key.F)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.F, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.I)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.I, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control | ModifierKeys.Shift, Key.I)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.I, true);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.D)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible)
+                    {
+                        DeleteMedium();
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.None, Key.Delete)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible)
+                    {
+                        DeleteMedium();
+                        e.Handled = true;
+                    }
+                },
+            }, false); // the cases are that complex, that every case must set Handled itself (especially important for the deletion events that may be needed in inner components)
+        }
         private bool validate() => RunValidation(new System.Collections.Generic.List<Func<string>>
         {
             () => editor.Medium.Title.Trim().Length == 0 ? getString("Menus.Edit.Validation.MediaTitle") : null,

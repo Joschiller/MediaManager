@@ -3,7 +3,9 @@ using static LanguageProvider.LanguageProvider;
 using MediaManager.GUI.Dialogs;
 using System;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -19,7 +21,7 @@ namespace MediaManager.GUI.Menus
             Globals.Init.Initialize();
             InitializeComponent();
             RegisterAtLanguageProvider();
-            if (!GlobalContext.Reader.AnyCatalogExists) OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
+            if (!GlobalContext.Reader.AnyCatalogExists) OpenCatalogMenu();
             else
             {
                 if (GlobalContext.Settings.BackupEnabled)
@@ -66,6 +68,18 @@ namespace MediaManager.GUI.Menus
 
         #region Handler
         #region Navbar
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.F2)] = OpenSettingsMenu,
+            [(ModifierKeys.Control, Key.N)] = AddMedium,
+            [(ModifierKeys.Control, Key.T)] = AddTag,
+            [(ModifierKeys.Control, Key.R)] = searchPanel.ResetInput,
+            [(ModifierKeys.Control | ModifierKeys.Shift, Key.T)] = OpenTagMenu,
+            [(ModifierKeys.Control | ModifierKeys.Shift, Key.C)] = OpenCatalogMenu,
+            [(ModifierKeys.Control | ModifierKeys.Shift, Key.A)] = OpenAnalyzeMenu,
+            [(ModifierKeys.Control, Key.Enter)] = searchPanel.OpenCurrentlySelectedItem,
+        });
         private void NavigationBar_IconClicked(object sender, EventArgs e) => OpenHelpMenu(); // NOTE: may only be a temporary link
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         private void btnAddMediumClick(object sender, RoutedEventArgs e) => AddMedium();

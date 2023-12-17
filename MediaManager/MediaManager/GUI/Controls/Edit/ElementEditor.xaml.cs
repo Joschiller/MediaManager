@@ -162,6 +162,14 @@ namespace MediaManager.GUI.Controls.Edit
         #endregion
 
         #region Functions
+        public void ToggleFavourite()
+        {
+            if (part == null) return;
+
+            IsCurrentlyFavorite = !IsCurrentlyFavorite;
+            updateFavoriteButtonVisibility();
+            onEdited();
+        }
         private string showLoadImageDialog()
         {
             var ofd = new OpenFileDialog();
@@ -171,6 +179,8 @@ namespace MediaManager.GUI.Controls.Edit
         }
         public void SelectImage()
         {
+            if (part == null) return;
+
             var fileName = showLoadImageDialog();
             if (fileName == null || fileName == "") return;
 
