@@ -4,6 +4,7 @@
     "Button": {
       "Add": "Add",
       "Cancel": "Cancel",
+      "Close": "Close",
       "Create": "Create",
       "Delete": "Delete",
       "Edit": "Edit",
@@ -253,6 +254,16 @@
       "partSelectionSection": "Select the parts for the merged medium",
       "mergeButton": "Merge and view preview",
       "submitButton": "Save merged medium"
+    },
+    "Help": {
+      "ToolTip": {
+        "License": "Show license information"
+      },
+      "Button": {
+        "License": "License information"
+      },
+      "LicenseFile": "license_en.html",
+      "Loading":  "... loading"
     }
   },
   "Dialog": {

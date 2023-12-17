@@ -431,6 +431,40 @@ namespace MediaManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;body&gt;
+        ///    &lt;div&gt;
+        ///        This application is licensed under the &lt;a href=&quot;https://github.com/Joschiller/MediaManager/blob/main/LICENSE.md&quot; target=&quot;_blank&quot;&gt;MIT License&lt;/a&gt;.
+        ///    &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;
+        ///.
+        /// </summary>
+        internal static string license_de {
+            get {
+                return ResourceManager.GetString("license_de", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;body&gt;
+        ///    &lt;div&gt;
+        ///        This application is licensed under the &lt;a href=&quot;https://github.com/Joschiller/MediaManager/blob/main/LICENSE.md&quot; target=&quot;_blank&quot;&gt;MIT License&lt;/a&gt;.
+        ///    &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;
+        ///.
+        /// </summary>
+        internal static string license_en {
+            get {
+                return ResourceManager.GetString("license_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap next {

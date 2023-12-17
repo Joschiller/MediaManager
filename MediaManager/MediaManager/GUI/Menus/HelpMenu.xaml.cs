@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using MediaManager.GUI.Dialogs;
 
 namespace MediaManager.GUI.Menus
 {
@@ -29,6 +30,8 @@ namespace MediaManager.GUI.Menus
         public void RegisterAtLanguageProvider() => RegisterUnique(this);
         public void LoadTexts(string language)
         {
+            Resources["btnLicenseTooltip"] = getString("Menus.Help.ToolTip.License");
+            Resources["btnLicenseText"] = getString("Menus.Help.Button.License");
             setupTopics();
         }
         private void setupTopics()
@@ -77,6 +80,8 @@ namespace MediaManager.GUI.Menus
             }
         }
         private ImageSource getImageSourceFromBitmap(Bitmap bmp) => Imaging.CreateBitmapSourceFromHBitmap(bmp.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+
+        private void license_Click(object sender, RoutedEventArgs e) => new LicenseInformationDialog().ShowDialog();
         #endregion
     }
 }

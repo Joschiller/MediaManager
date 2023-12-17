@@ -3,12 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Style="{StaticResource defaultWindow}" MinHeight="500" Height="500">
+    <Window.Resources>
+        <system:String x:Key="btnLicenseTooltip">Show license information</system:String>
+        <system:String x:Key="btnLicenseText">License information</system:String>
+    </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="350">
-            <components:Pager x:Name="pager" DockPanel.Dock="Top" HorizontalAlignment="Right" TextPlacement="Left" PageChanged="pager_PageChanged"/>
+            <DockPanel DockPanel.Dock="Top">
+                <components:Pager x:Name="pager" DockPanel.Dock="Right" TextPlacement="Left" PageChanged="pager_PageChanged"/>
+                <Button x:Name="license" ToolTip="{DynamicResource btnLicenseTooltip}" Content="{DynamicResource btnLicenseText}" Click="license_Click" Margin="{StaticResource defaultMarginSmall}"/>
+            </DockPanel>
             <TreeView x:Name="topics" Margin="{StaticResource defaultMarginSmall}" SelectedItemChanged="topics_SelectedItemChanged" PreviewKeyDown="topics_PreviewKeyDown">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
