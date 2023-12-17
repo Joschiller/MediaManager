@@ -43,7 +43,7 @@ namespace MediaManager.GUI.Dialogs
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             if (EditedTagId != null) CatalogContext.Writer.SaveTag(EditedTag);
-            else CatalogContext.Writer.CreateTag(EditedTag.Title);
+            else CatalogContext.Writer.CreateTag(EditedTag);
             DialogResult = true;
         }
         private void cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;

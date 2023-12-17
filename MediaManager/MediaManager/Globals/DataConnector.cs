@@ -477,14 +477,10 @@ namespace MediaManager.Globals
                 /// <summary>
                 /// Creates a new <see cref="Tag"/>.
                 /// </summary>
-                /// <param name="title">Title of the <see cref="Tag"/> to create</param>
-                public static void CreateTag(string title)
+                /// <param name="tag"><see cref="Tag"/> to create</param>
+                public static void CreateTag(Tag tag)
                 {
-                    CURRENT_CATALOG.Tags.Add(new Tag
-                    {
-                        // catalog id must not be set here, because it is set implicitly by the CURRENT_CATALOG
-                        Title = title
-                    });
+                    CURRENT_CATALOG.Tags.Add(tag);
                     DBCONNECTION.SaveChanges();
                 }
                 /// <summary>
