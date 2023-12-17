@@ -171,6 +171,31 @@ namespace MediaManager.GUI.Menus
             () => editor.Medium.Parts.Any(p => p.Title.Trim().Length == 0) ? getString("Menus.Edit.Validation.PartTitle") : null,
             () => editor.Medium.Tags.Where(t => t.Value.HasValue).Any(t => editor.Medium.Parts.Any(p => p.Tags.Find(pt => pt.Tag.Id == t.Tag.Id).Value != t.Value)) ? getString("Menus.Edit.Validation.PartTags") : null,
         });
+        #region Navbar
+        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+
+        private void updateVisibility(bool editMode)
+        {
+            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
+            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
+            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["saveEnabled"] = AnyChangeMade;
+        }
+        private void btnDeleteMediumClick(object sender, RoutedEventArgs e) => DeleteMedium();
+        private void btnEditMediumClick(object sender, RoutedEventArgs e) => EditMedium();
+        private void btnUndoChangesClick(object sender, RoutedEventArgs e) => UndoChanges();
+        private void btnSaveMediumClick(object sender, RoutedEventArgs e) => SaveMedium();
+        #endregion
+        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
+        {
+            AnyChangeMade = true;
+            updateVisibility(true);
+        }
+        #endregion
+
+        #region Functions
         private bool save()
         {
             if (!validate()) return false;
@@ -236,31 +261,6 @@ namespace MediaManager.GUI.Menus
                 return false;
             }
         }
-        #region Navbar
-        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
-        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-
-        private void updateVisibility(bool editMode)
-        {
-            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
-            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
-            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["saveEnabled"] = AnyChangeMade;
-        }
-        private void btnDeleteMediumClick(object sender, RoutedEventArgs e) => DeleteMedium();
-        private void btnEditMediumClick(object sender, RoutedEventArgs e) => EditMedium();
-        private void btnUndoChangesClick(object sender, RoutedEventArgs e) => UndoChanges();
-        private void btnSaveMediumClick(object sender, RoutedEventArgs e) => SaveMedium();
-        #endregion
-        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
-        {
-            AnyChangeMade = true;
-            updateVisibility(true);
-        }
-        #endregion
-
-        #region Functions
         private void Back()
         {
             if (editor.Visibility == Visibility.Collapsed)
