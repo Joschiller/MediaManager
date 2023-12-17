@@ -64,6 +64,10 @@ Different base colors differentiate between different categories of actions.
 
 ## Icons
 
+> If any new icons are added to the application, their links must be documented in `Resources/license_en.html` and `Resources/license_de.html`.
+>
+> The hyperrefs of the links are kept as is, but the captions will be translated to either "icons created by" or "Icons erstellt von".
+
 |       Icon Group | Name                  | Source (must be inserted in clear text)                                                                                                                                                      | Icon                                                        |
 | ---------------: | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | Application Icon | icon.png              | <a href="https://www.flaticon.com/free-icons/files-and-folders" title="files-and-folders icons">Files-and-folders icons created by Freepik - Flaticon</a>                                    | <img width="48px" src="./app_icon/icon.png"/>               |
