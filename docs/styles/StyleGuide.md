@@ -40,7 +40,7 @@ The color scheme will be based on the application icon.
 
 Enabled controls will use the colored variant. Disabled controls will use a monochrome variant.
 
-Differnt base colors differentiate between different categories of actions.
+Different base colors differentiate between different categories of actions.
 
 | Color Group | Color Name   | Color Code | Example                        | Usage                 |
 | ----------: | :----------- | :--------- | :----------------------------- | :-------------------- |
