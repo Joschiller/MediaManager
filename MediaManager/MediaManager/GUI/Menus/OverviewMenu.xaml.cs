@@ -67,7 +67,6 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
-        #region Navbar
         private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
         {
             [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
@@ -80,6 +79,7 @@ namespace MediaManager.GUI.Menus
             [(ModifierKeys.Control | ModifierKeys.Shift, Key.A)] = OpenAnalyzeMenu,
             [(ModifierKeys.Control, Key.Enter)] = searchPanel.OpenCurrentlySelectedItem,
         });
+        #region Navbar
         private void NavigationBar_IconClicked(object sender, EventArgs e) => OpenHelpMenu(); // NOTE: may only be a temporary link
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         private void btnAddMediumClick(object sender, RoutedEventArgs e) => AddMedium();
