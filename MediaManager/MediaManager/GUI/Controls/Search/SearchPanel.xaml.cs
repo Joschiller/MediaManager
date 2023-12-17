@@ -68,15 +68,7 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList.Skip((newPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList().ForEach(SearchResult.Add);
         }
 
-        private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var item = ((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem;
-            if (item != null)
-            {
-                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
-                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
-            }
-        }
+        private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e) => OpenSearchResultItem(((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem);
         private int? rightClickPivotId = null;
         private void resultList_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -92,6 +84,17 @@ namespace MediaManager.GUI.Controls.Search
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (rightClickPivotId.HasValue) PlaylistAdditionRequested?.Invoke(rightClickPivotId.Value, CurrentSearchParameters.SearchResult);
+        }
+        #endregion
+
+        #region Functions
+        private void OpenSearchResultItem(SearchResultItem item)
+        {
+            if (item != null)
+            {
+                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
+                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
+            }
         }
         #endregion
     }

@@ -148,7 +148,11 @@ namespace MediaManager.GUI.Controls.List
             saveButton.IsEnabled = true;
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void saveButton_Click(object sender, RoutedEventArgs e) => Save();
+        #endregion
+
+        #region Functions
+        public void Save()
         {
             if (mediaList.SelectedItem == null) return;
 

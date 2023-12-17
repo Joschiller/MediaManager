@@ -104,41 +104,8 @@ namespace MediaManager.GUI.Controls.Edit
             if (id.HasValue) OpenPartTab(id.Value, false);
             else OpenMediumTab();
         }
-        private void addPart_Click(object sender, RoutedEventArgs e)
-        {
-            var newId = -medium.Parts.Count - 1;
-            var newPart = new PartWithTags
-            {
-                Id = newId,
-                Title = "",
-                Description = "",
-                Favourite = false,
-                Length = 0,
-                Publication_Year = 0,
-                Image = null,
-                Tags = medium.Tags.Select(t => new ValuedTag { Tag = t.Tag, Value = t.Value }).ToList()
-            };
-            medium.Parts.Add(newPart);
-            reloadList();
-            OpenPartTab(newId);
-            onChange();
-        }
-        private void deletePart_Click(object sender, RoutedEventArgs e)
-        {
-            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationPart;
-            if (!performDeletion)
-            {
-                var confirmation = ShowDeletionConfirmationDialog(getString("Controls.Edit.PartDeletion"));
-                performDeletion = confirmation.HasValue && confirmation.Value;
-            }
-            if (performDeletion)
-            {
-                medium.Parts.Remove(medium.Parts.Find(p => p.Id == list.GetSelectedItem()));
-                reloadList();
-                list.SelectItem(null);
-                onChange();
-            }
-        }
+        private void addPart_Click(object sender, RoutedEventArgs e) => AddPart();
+        private void deletePart_Click(object sender, RoutedEventArgs e) => DeletePart();
 
         private void editor_MediumEdited(EditableMedium medium)
         {
@@ -174,6 +141,46 @@ namespace MediaManager.GUI.Controls.Edit
             internalPart.Image = part.Image;
             internalPart.Tags = part.Tags;
             onChange();
+        }
+        #endregion
+
+        #region Functions
+        private void AddPart()
+        {
+            var newId = -medium.Parts.Count - 1;
+            var newPart = new PartWithTags
+            {
+                Id = newId,
+                Title = "",
+                Description = "",
+                Favourite = false,
+                Length = 0,
+                Publication_Year = 0,
+                Image = null,
+                Tags = medium.Tags.Select(t => new ValuedTag { Tag = t.Tag, Value = t.Value }).ToList()
+            };
+            medium.Parts.Add(newPart);
+            reloadList();
+            OpenPartTab(newId);
+            onChange();
+        }
+        private void DeletePart()
+        {
+            var part = list.GetSelectedItem();
+            if (part == null) return;
+            var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationPart;
+            if (!performDeletion)
+            {
+                var confirmation = ShowDeletionConfirmationDialog(getString("Controls.Edit.PartDeletion"));
+                performDeletion = confirmation.HasValue && confirmation.Value;
+            }
+            if (performDeletion)
+            {
+                medium.Parts.Remove(medium.Parts.Find(p => p.Id == part));
+                reloadList();
+                list.SelectItem(null);
+                onChange();
+            }
         }
         #endregion
     }
