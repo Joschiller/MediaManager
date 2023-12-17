@@ -68,7 +68,10 @@
 // public methods
 #endregion
 #region Handler
-// internal event handlers and corresponding methods
+// internal event handlers that call the below functions (these just serve as a redirection to the actual functions)
+#endregion
+#region Functions
+// methods that are called by the handlers
 #endregion
 ```
 
