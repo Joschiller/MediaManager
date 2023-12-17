@@ -43,6 +43,7 @@
     - [5.2.1 Search Parameters](#521-search-parameters)
     - [5.2.2 Export and Automatic Backup](#522-export-and-automatic-backup)
     - [5.2.3 Analyze Results](#523-analyze-results)
+  - [5.3 Keyboard Shortcuts](#53-keyboard-shortcuts)
 - [6 Test Cases](#6-test-cases)
   - [6.1 Showing Help](#61-showing-help)
   - [6.2 Editing Catalogs](#62-editing-catalogs)
@@ -600,6 +601,62 @@ The analyze menu checks the currently active catalog for inconsistencies. Those 
 |           Missing medium tag | All parts of a medium share the same non-neutral tag value but the value is not globally set for the medium. |
 |      Missing media attribute | A given attribute (selectable within a dropdown) is not set for the medium.                                  |
 | Missing media part attribute | A given attribute (selectable within a dropdown) is not set for the media part.                              |
+
+### 5.3 Keyboard Shortcuts
+
+> The default shortcuts like `Ctrl + C`, `Ctrl + V`, `Ctrl + Z` and `Ctrl + Y` are not changed.
+
+| Menu          | Shortcut                                  | Function                                                                        |
+| :------------ | :---------------------------------------- | :------------------------------------------------------------------------------ |
+| -             | F1                                        | Show help                                                                       |
+| -             | F2                                        | Open settings menu                                                              |
+| Help Menu     | Esc                                       | Close menu                                                                      |
+| Help Menu     | Arrow Keys                                | Navigation if the topic list has focus                                          |
+| Catalog Menu  | Esc                                       | Close menu                                                                      |
+| Catalog Menu  | Ctrl + N                                  | Add catalog                                                                     |
+| Catalog Menu  | Ctrl + I                                  | Import catalog                                                                  |
+| Catalog Menu  | Ctrl + L                                  | Open selected catalog                                                           |
+| Catalog Menu  | Ctrl + E                                  | Edit selected catalog                                                           |
+| Catalog Menu  | Ctrl + O                                  | Export selected catalog                                                         |
+| Catalog Menu  | Ctrl + D<br/>Del.                         | Delete selected catalog                                                         |
+| Overview Menu | Ctrl + N                                  | Add medium                                                                      |
+| Overview Menu | Ctrl + T                                  | Add tag                                                                         |
+| Overview Menu | Ctrl + R                                  | Reset search                                                                    |
+| Overview Menu | Ctrl + Shift + T                          | Open tag menu                                                                   |
+| Overview Menu | Ctrl + Shit + C                           | Open catalog menu                                                               |
+| Overview Menu | Ctrl + Shit + A                           | Open analyze menu                                                               |
+| Overview Menu | Arrow Keys                                | Navigation through search result list if it has focus                           |
+| Overview Menu | Ctrl + Enter                              | Open selected medium                                                            |
+| Edit Menu     | Esc                                       | Close menu                                                                      |
+| Edit Menu     | Ctrl + E                                  | Edit medium                                                                     |
+| Edit Menu     | Ctrl + R                                  | Discard changes                                                                 |
+| Edit Menu     | Ctrl + S                                  | Save medium                                                                     |
+| Edit Menu     | Ctrl + N                                  | Add a new part                                                                  |
+| Edit Menu     | Ctrl + M                                  | Show media information                                                          |
+| Edit Menu     | $\uparrow$/$\downarrow$ Arrow Keys        | Navigation through media part list if it has focus to show the part information |
+| Edit Menu     | Ctrl + F                                  | Toggle favourite for currently selected media part                              |
+| Edit Menu     | Ctrl + I                                  | Select image for currently selected media part                                  |
+| Edit Menu     | Ctrl + Shift + I                          | Clear image for currently selected media part                                   |
+| Edit Menu     | Ctrl + D<br/>Del.                         | Delete selected part or medium                                                  |
+| Tag Menu      | Esc                                       | Close menu                                                                      |
+| Tag Menu      | Ctrl + N                                  | Add tag                                                                         |
+| Tag Menu      | Ctrl + E                                  | Edit selected tag                                                               |
+| Tag Menu      | Ctrl + D<br/>Del.                         | Delete selected tag                                                             |
+| Tag Menu      | Ctrl + S                                  | Save changed tags                                                               |
+| Tag Menu      | Ctrl + R                                  | Discard changed tags                                                            |
+| Tag Menu      | $\uparrow$/$\downarrow$ Arrow Keys        | Navigation through tag list if it has focus                                     |
+| Tag Menu      | Arrow Keys                                | Navigation through media list if it has focus                                   |
+| Settings Menu | Esc                                       | Close menu                                                                      |
+| Settings Menu | Ctrl + R                                  | Discard changes                                                                 |
+| Settings Menu | Ctrl + S                                  | Save settings                                                                   |
+| Settings Menu | Ctrl + Tab<br/>Ctrl + Shift + Tab         | Change tab                                                                      |
+| Analyze Menu  | Esc                                       | Close menu                                                                      |
+| Analyze Menu  | Ctrl + $\uparrow$/$\downarrow$ Arrow Keys | Change mode                                                                     |
+| Analyze Menu  | Ctrl + E                                  | Edit selected element                                                           |
+| Analyze Menu  | Arrow Keys                                | Navigation through media list if it has focus                                   |
+| Merge Menu    | Esc                                       | Close menu                                                                      |
+
+> Furthermore, there exist mnemonics for most buttons with textual content. Those depend on the language being used and therefore cannot be defined globally.
 
 ## 6 Test Cases
 

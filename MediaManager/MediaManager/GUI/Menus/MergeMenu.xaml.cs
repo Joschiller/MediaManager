@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -297,8 +299,20 @@ namespace MediaManager.GUI.Menus
         #endregion
         #endregion
 
+        #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.Escape)] = Back,
+        });
         #region Navbar
-        private void NavigationBar_BackClicked(object sender, EventArgs e)
+        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+        #endregion
+        #endregion
+
+        #region Functions
+        private void Back()
         {
             var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
                 .WithTitle(getString("ApplicationName"))
@@ -309,7 +323,6 @@ namespace MediaManager.GUI.Menus
                 .ShowForResult() as bool?;
             if (result.HasValue && result.Value) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         #endregion
     }
 }

@@ -165,5 +165,58 @@ namespace MediaManager.GUI.Controls.Analyze
             ModeChanged?.Invoke(Mode);
         }
         #endregion
+
+        public void ModeUp()
+        {
+            switch(Mode)
+            {
+                case AnalyzeMode.MediumEmpty:
+                    rbPartAttribute.IsChecked = true;
+                    rbPartAttribute_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumDoubled:
+                    rbMediumEmpty.IsChecked = true;
+                    rbMediumEmpty_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumCommonTags:
+                    rbMediumDuplicate.IsChecked = true;
+                    rbMediumDuplicate_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumDescription:
+                    rbMediumCommonTags.IsChecked = true;
+                    rbMediumCommonTags_Click(null, null);
+                    break;
+                case AnalyzeMode.PartDescription:
+                    rbMediaAttribute.IsChecked = true;
+                    rbMediaAttribute_Click(null, null);
+                    break;
+            }
+        }
+        public void ModeDown()
+        {
+            switch (Mode)
+            {
+                case AnalyzeMode.MediumEmpty:
+                    rbMediumDuplicate.IsChecked = true;
+                    rbMediumDuplicate_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumDoubled:
+                    rbMediumCommonTags.IsChecked = true;
+                    rbMediumCommonTags_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumCommonTags:
+                    rbMediaAttribute.IsChecked = true;
+                    rbMediaAttribute_Click(null, null);
+                    break;
+                case AnalyzeMode.MediumDescription:
+                    rbPartAttribute.IsChecked = true;
+                    rbPartAttribute_Click(null, null);
+                    break;
+                case AnalyzeMode.PartDescription:
+                    rbMediumEmpty.IsChecked = true;
+                    rbMediumEmpty_Click(null, null);
+                    break;
+            }
+        }
     }
 }

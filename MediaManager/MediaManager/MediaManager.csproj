@@ -133,6 +133,7 @@
     <Compile Include="Globals\DataConnector.cs" />
     <Compile Include="Globals\ImageUtils.cs" />
     <Compile Include="Globals\Init.cs" />
+    <Compile Include="Globals\KeyboardShortcutHelper.cs" />
     <Compile Include="Globals\SearchRunner.cs" />
     <Compile Include="Globals\XamlPartConcatenator.cs" />
     <Compile Include="Globals\XamlValueAdder.cs" />
@@ -158,9 +159,6 @@
       <DependentUpon>TagList.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Components\TagListElement.cs" />
-    <Compile Include="GUI\Controls\Analyze\AnalyzeList.xaml.cs">
-      <DependentUpon>AnalyzeList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Controls\Analyze\AnalyzeListElement.cs" />
     <Compile Include="GUI\Controls\Analyze\AnalyzeMode.cs" />
     <Compile Include="GUI\Controls\Analyze\AnalyzeModeSelector.xaml.cs">
@@ -323,10 +321,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Components\TagList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\Controls\Analyze\AnalyzeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

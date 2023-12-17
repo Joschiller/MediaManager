@@ -77,7 +77,11 @@ namespace MediaManager.GUI.Controls.Search
             SearchParametersChanged?.Invoke(CurrentSearchParameters);
         }
         private void tagList_TagValueChanged(System.Collections.Generic.List<ValuedTag> tags) => SearchParametersChanged?.Invoke(CurrentSearchParameters);
-        private void reset_Click(object sender, RoutedEventArgs e)
+        private void reset_Click(object sender, RoutedEventArgs e) => ResetInput();
+        #endregion
+
+        #region Functions
+        public void ResetInput()
         {
             searchText.Text = "";
             exactMode.IsChecked = false;

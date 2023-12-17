@@ -5,8 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace MediaManager.GUI.Menus
 {
@@ -15,12 +19,17 @@ namespace MediaManager.GUI.Menus
     /// </summary>
     public partial class AnalyzeMenu : Window, UpdatedLanguageUser
     {
+        #region Bindings
+        public ObservableCollection<AnalyzeListElement> Items { get; set; } = new ObservableCollection<AnalyzeListElement>();
+        #endregion
+
         #region Setup
         private List<AnalyzeListElement> allItems;
         private int itemsPerPage = GlobalContext.Settings.ResultListLength;
         public AnalyzeMenu()
         {
             InitializeComponent();
+            DataContext = this;
             RegisterAtLanguageProvider();
             reload();
         }
@@ -33,6 +42,14 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.Escape)] = Close,
+            [(ModifierKeys.Control, Key.Up)] = mode.ModeUp,
+            [(ModifierKeys.Control, Key.Down)] = mode.ModeDown,
+            [(ModifierKeys.Control, Key.E)] = preview.TriggerStartEditing,
+        });
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
@@ -45,9 +62,31 @@ namespace MediaManager.GUI.Menus
             pager.TotalPages = allItems.Count / itemsPerPage + (allItems.Count % itemsPerPage == 0 ? 0 : 1);
             pager.setItemCount(allItems.Count);
         }
-        private void pager_PageChanged(int newPage) => list.SetItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
-        private void list_SelectionChanged(AnalyzeListElement element) => preview.LoadPreview(mode.Mode, element);
-        private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element)
+        private void pager_PageChanged(int newPage)
+        {
+            Items.Clear();
+            allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList().ForEach(Items.Add);
+            if (Items.Count > 0) list.SelectedIndex = 0;
+        }
+        private void list_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right && pager.CurrentPage < pager.TotalPages)
+            {
+                pager.CurrentPage++;
+                e.Handled = true;
+            }
+            if (e.Key == Key.Left && pager.CurrentPage > 1)
+            {
+                pager.CurrentPage--;
+                e.Handled = true;
+            }
+        }
+        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e) => preview.LoadPreview(mode.Mode, ((ListView)sender).SelectedItem as AnalyzeListElement);
+        private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element) => StartEditing(mode, element);
+        #endregion
+
+        #region Functions
+        private void StartEditing(AnalyzeMode mode, AnalyzeListElement element)
         {
             switch (mode)
             {

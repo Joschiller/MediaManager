@@ -113,5 +113,7 @@ namespace MediaManager.GUI.Controls.Analyze
         private void elementViewer_EditClicked(Edit.ElementMode mode, int id) => StartEditing(this.mode, element);
         private void editButton_Click(object sender, RoutedEventArgs e) => StartEditing(mode, element);
         #endregion
+
+        public void TriggerStartEditing() => StartEditing(mode, element);
     }
 }

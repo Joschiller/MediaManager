@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}" MinHeight="500" Height="500">
+        Style="{StaticResource defaultWindow}" MinHeight="500" Height="500" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <system:String x:Key="btnLicenseTooltip">Show license information</system:String>
-        <system:String x:Key="btnLicenseText">License information</system:String>
+        <system:String x:Key="btnLicenseText">_License information</system:String>
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="350">

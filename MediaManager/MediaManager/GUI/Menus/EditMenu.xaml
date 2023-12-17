@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents"
+        xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:wpfcomponents="clr-namespace:WPFComponents;assembly=WPFComponents" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
+    <Window.Resources>
+        <system:String x:Key="btnDeleteMedium">Delete medium</system:String>
+        <system:String x:Key="btnEditMedium">Edit medium</system:String>
+        <system:String x:Key="btnUndoChanges">Discard changes</system:String>
+        <system:String x:Key="btnSaveMedium">Save medium</system:String>
+    </Window.Resources>
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked" HelpClicked="NavigationBar_HelpClicked">
             <atoms:NavigationButtonGroup Visibility="{DynamicResource viewerButtonsVisibility}">

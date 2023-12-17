@@ -16,7 +16,7 @@
                 <wpfcomponents:ImageButton x:Name="addPart" Size="{StaticResource imageButtonSize}" EnabledIconSource="../../../Resources/add_part.png" Click="addPart_Click"/>
                 <wpfcomponents:ImageButton x:Name="deletePart" Size="{StaticResource imageButtonSize}" EnabledIconSource="../../../Resources/delete_part.png" Click="deletePart_Click"/>
             </StackPanel>
-            <list:PartList x:Name="list" SelectionChanged="list_SelectionChanged"/>
+            <list:PartList x:Name="list" SelectionChanged="list_SelectionChanged" PreviewKeyDown="list_PreviewKeyDown"/>
         </DockPanel>
         <Border Grid.Column="1" Style="{StaticResource defaultBorder}"/>
         <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

@@ -192,7 +192,10 @@
     "Edit": {
       "ToolTip": {
         "AddPart": "Add part",
-        "DeleteMedium": "Delete medium"
+        "DeleteMedium": "Delete medium",
+        "EditMedium": "Edit medium",
+        "Save": "Save medium",
+        "Discard": "Discard changes"
       },
       "MediaDeletion": "the selected medium",
       "Validation": {

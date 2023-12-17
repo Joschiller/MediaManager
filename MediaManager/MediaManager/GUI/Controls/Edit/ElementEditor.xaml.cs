@@ -157,6 +157,19 @@ namespace MediaManager.GUI.Controls.Edit
             onEdited();
         }
         private void tags_TagValueChanged(List<ValuedTag> tags) => onEdited();
+        private void selectImage_Click(object sender, RoutedEventArgs e) => SelectImage();
+        private void removeImage_Click(object sender, RoutedEventArgs e) => SelectImage();
+        #endregion
+
+        #region Functions
+        public void ToggleFavourite()
+        {
+            if (part == null) return;
+
+            IsCurrentlyFavorite = !IsCurrentlyFavorite;
+            updateFavoriteButtonVisibility();
+            onEdited();
+        }
         private string showLoadImageDialog()
         {
             var ofd = new OpenFileDialog();
@@ -164,8 +177,10 @@ namespace MediaManager.GUI.Controls.Edit
             ofd.ShowDialog();
             return ofd.FileName;
         }
-        private void selectImage_Click(object sender, RoutedEventArgs e)
+        public void SelectImage()
         {
+            if (part == null) return;
+
             var fileName = showLoadImageDialog();
             if (fileName == null || fileName == "") return;
 
@@ -176,15 +191,14 @@ namespace MediaManager.GUI.Controls.Edit
 
             onEdited();
         }
-        private void removeImage_Click(object sender, RoutedEventArgs e)
+        public void RemoveImage()
         {
-            if (part != null)
-            {
-                part.Image = null;
-                imagePath.Text = "";
-                imagePath.Visibility = Visibility.Collapsed;
-                image.Source = null;
-            }
+            if (part == null) return;
+
+            part.Image = null;
+            imagePath.Text = "";
+            imagePath.Visibility = Visibility.Collapsed;
+            image.Source = null;
             onEdited();
         }
         #endregion

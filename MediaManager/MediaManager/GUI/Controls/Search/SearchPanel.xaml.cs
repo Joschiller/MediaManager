@@ -49,6 +49,7 @@ namespace MediaManager.GUI.Controls.Search
             ItemsPerPage = GlobalContext.Settings.ResultListLength;
             input_SearchParametersChanged(CurrentSearchParameters);
         }
+        public void ResetInput() => input.ResetInput();
         #endregion
 
         #region Handler
@@ -68,15 +69,20 @@ namespace MediaManager.GUI.Controls.Search
             CompleteResultList.Skip((newPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList().ForEach(SearchResult.Add);
         }
 
-        private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void resultList_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            var item = ((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem;
-            if (item != null)
+            if (e.Key == Key.Right && pager.CurrentPage < pager.TotalPages)
             {
-                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
-                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
+                pager.CurrentPage++;
+                e.Handled = true;
+            }
+            if (e.Key == Key.Left && pager.CurrentPage > 1)
+            {
+                pager.CurrentPage--;
+                e.Handled = true;
             }
         }
+        private void resultList_MouseDoubleClick(object sender, MouseButtonEventArgs e) => OpenSearchResultItem(((FrameworkElement)e.OriginalSource).DataContext as SearchResultItem);
         private int? rightClickPivotId = null;
         private void resultList_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -92,6 +98,18 @@ namespace MediaManager.GUI.Controls.Search
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (rightClickPivotId.HasValue) PlaylistAdditionRequested?.Invoke(rightClickPivotId.Value, CurrentSearchParameters.SearchResult);
+        }
+        #endregion
+
+        #region Functions
+        public void OpenCurrentlySelectedItem() => OpenSearchResultItem(resultList.SelectedItem as SearchResultItem);
+        private void OpenSearchResultItem(SearchResultItem item)
+        {
+            if (item != null)
+            {
+                if (CurrentSearchParameters.SearchResult == SearchResultMode.MediaList) MediumSelected?.Invoke(item.Id, null);
+                else MediumSelected?.Invoke(GlobalContext.Reader.GetPart(item.Id).MediumId, item.Id);
+            }
         }
         #endregion
     }

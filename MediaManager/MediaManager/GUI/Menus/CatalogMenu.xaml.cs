@@ -6,8 +6,10 @@ using MediaManager.GUI.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.Globals.Navigation;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 
 namespace MediaManager.GUI.Menus
 {
@@ -35,10 +37,35 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.Escape)] = Close,
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.F2)] = OpenSettingsMenu,
+            [(ModifierKeys.Control, Key.N)] = AddCatalog,
+            [(ModifierKeys.Control, Key.I)] = ImportCatalog,
+            [(ModifierKeys.Control, Key.L)] = () => LoadCatalog(catalogList.SelectedCatalog),
+            [(ModifierKeys.Control, Key.E)] = EditCatalog,
+            [(ModifierKeys.Control, Key.O)] = ExportCatalog,
+            [(ModifierKeys.Control, Key.D)] = DeleteCatalog,
+            [(ModifierKeys.None, Key.Delete)] = DeleteCatalog,
+        });
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-        private void btnAddCatalogClick(object sender, RoutedEventArgs e)
+        private void btnAddCatalogClick(object sender, RoutedEventArgs e) => AddCatalog();
+        private void btnImportCatalogClick(object sender, RoutedEventArgs e) => ImportCatalog();
+        private void btnExportCatalogClick(object sender, RoutedEventArgs e) => ExportCatalog();
+        private void btnEditCatalogClick(object sender, RoutedEventArgs e) => EditCatalog();
+        private void btnDeleteCatalogClick(object sender, RoutedEventArgs e) => DeleteCatalog();
+        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenSettingsMenu();
+        #endregion
+        private void catalogList_SelectionChanged(Catalog catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
+        private void catalogList_CatalogDoubleClick(Catalog catalog) => LoadCatalog(catalog);
+        #endregion
+
+        #region Functions
+        private void AddCatalog()
         {
             var result = new EditCatalogDialog(null).ShowDialog();
             if (result.HasValue && result.Value) catalogList.LoadCatalogs();
@@ -50,7 +77,7 @@ namespace MediaManager.GUI.Menus
             ofd.ShowDialog();
             return ofd.FileName;
         }
-        private void btnImportCatalogClick(object sender, RoutedEventArgs e)
+        private void ImportCatalog()
         {
             var fileName = showLoadFileDialog();
             if (fileName == null || fileName == "") return;
@@ -82,7 +109,7 @@ namespace MediaManager.GUI.Menus
             if (!res.HasValue || !res.Value) return "";
             return sfd.FileName;
         }
-        private void btnExportCatalogClick(object sender, RoutedEventArgs e)
+        private void ExportCatalog()
         {
             if (catalogList.SelectedCatalog == null) return;
             var fileName = showSaveFileDialog(catalogList.SelectedCatalog.Title);
@@ -103,12 +130,13 @@ namespace MediaManager.GUI.Menus
             viewer.ShowDialog();
         }
         private void Viewer_ProcessFailed(string message) => ShowDefaultDialog(message, SuccessMode.Error);
-        private void btnEditCatalogClick(object sender, RoutedEventArgs e)
+        private void EditCatalog()
         {
+            if (catalogList.SelectedCatalog == null) return;
             var result = new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
             if (result.HasValue && result.Value) catalogList.LoadCatalogs();
         }
-        private void btnDeleteCatalogClick(object sender, RoutedEventArgs e)
+        private void DeleteCatalog()
         {
             if (catalogList.SelectedCatalog == null) return;
 
@@ -121,11 +149,10 @@ namespace MediaManager.GUI.Menus
                 catalogList.LoadCatalogs();
             }
         }
-        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu());
-        #endregion
-        private void catalogList_SelectionChanged(Catalog catalog) => Resources["catalogDependentVisibility"] = catalog == null ? Visibility.Collapsed : Visibility.Visible;
-        private void catalogList_CatalogDoubleClick(Catalog catalog)
+        private void OpenSettingsMenu() => OpenWindow(this, new SettingsMenu());
+        private void LoadCatalog(Catalog catalog)
         {
+            if (catalog == null) return; // may be caused, if no catalog is selected, whilst a double click is triggered or a key-combination is run
             var oldCatalog = CatalogContext.CurrentCatalogId;
             CatalogContext.SetCurrentCatalog(catalog);
             if (GlobalContext.Settings.BackupEnabled)

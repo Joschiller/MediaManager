@@ -10,6 +10,8 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MediaManager.GUI.Dialogs;
+using System.Windows.Input;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 
 namespace MediaManager.GUI.Menus
 {
@@ -31,7 +33,7 @@ namespace MediaManager.GUI.Menus
         public void LoadTexts(string language)
         {
             Resources["btnLicenseTooltip"] = getString("Menus.Help.ToolTip.License");
-            Resources["btnLicenseText"] = getString("Menus.Help.Button.License");
+            Resources["btnLicenseText"] = "_" + getString("Menus.Help.Button.License");
             setupTopics();
         }
         private void setupTopics()
@@ -52,6 +54,10 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.Escape)] = Close,
+        });
         private void topics_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             selectedTopic = topics.SelectedItem as HelpTopic;
@@ -68,12 +74,12 @@ namespace MediaManager.GUI.Menus
         }
         private void topics_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Right && pager.CurrentPage < pager.TotalPages)
+            if (e.Key == Key.Right && pager.CurrentPage < pager.TotalPages)
             {
                 pager.CurrentPage++;
                 e.Handled = true;
             }
-            if (e.Key == System.Windows.Input.Key.Left && pager.CurrentPage > 1)
+            if (e.Key == Key.Left && pager.CurrentPage > 1)
             {
                 pager.CurrentPage--;
                 e.Handled = true;

@@ -3,7 +3,9 @@ using static LanguageProvider.LanguageProvider;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -61,6 +63,9 @@ namespace MediaManager.GUI.Menus
         public void LoadTexts(string language)
         {
             Resources["btnDeleteMedium"] = getString("Menus.Edit.ToolTip.DeleteMedium");
+            Resources["btnEditMedium"] = getString("Menus.Edit.ToolTip.EditMedium");
+            Resources["btnUndoChanges"] = getString("Menus.Edit.ToolTip.Discard");
+            Resources["btnSaveMedium"] = getString("Menus.Edit.ToolTip.Save");
         }
         private bool IsExistingMedium { get => MediumId >= 0; }
         private void reloadData()
@@ -95,6 +100,71 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+            {
+                [(ModifierKeys.None, Key.F1)] = () => { OpenHelpMenu(); e.Handled = true; },
+                [(ModifierKeys.None, Key.Escape)] = () => { Back(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.E)] = () => { EditMedium(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.R)] = () => { UndoChanges(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.S)] = () => { SaveMedium(); e.Handled = true; },
+                [(ModifierKeys.Control, Key.N)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.N, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.M)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible) viewer.OpenMediumTab();
+                    else editor.OpenMediumTab();
+                    e.Handled = true;
+                },
+                [(ModifierKeys.Control, Key.F)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.F, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.I)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.I, false);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control | ModifierKeys.Shift, Key.I)] = () =>
+                {
+                    if (editor.Visibility == Visibility.Visible)
+                    {
+                        editor.HandleKeycode(Key.I, true);
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.Control, Key.D)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible)
+                    {
+                        DeleteMedium();
+                        e.Handled = true;
+                    }
+                },
+                [(ModifierKeys.None, Key.Delete)] = () =>
+                {
+                    if (viewer.Visibility == Visibility.Visible)
+                    {
+                        DeleteMedium();
+                        e.Handled = true;
+                    }
+                },
+            }, false); // the cases are that complex, that every case must set Handled itself (especially important for the deletion events that may be needed in inner components)
+        }
         private bool validate() => RunValidation(new System.Collections.Generic.List<Func<string>>
         {
             () => editor.Medium.Title.Trim().Length == 0 ? getString("Menus.Edit.Validation.MediaTitle") : null,
@@ -167,7 +237,31 @@ namespace MediaManager.GUI.Menus
             }
         }
         #region Navbar
-        private void NavigationBar_BackClicked(object sender, EventArgs e)
+        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+
+        private void updateVisibility(bool editMode)
+        {
+            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
+            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
+            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["saveEnabled"] = AnyChangeMade;
+        }
+        private void btnDeleteMediumClick(object sender, RoutedEventArgs e) => DeleteMedium();
+        private void btnEditMediumClick(object sender, RoutedEventArgs e) => EditMedium();
+        private void btnUndoChangesClick(object sender, RoutedEventArgs e) => UndoChanges();
+        private void btnSaveMediumClick(object sender, RoutedEventArgs e) => SaveMedium();
+        #endregion
+        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
+        {
+            AnyChangeMade = true;
+            updateVisibility(true);
+        }
+        #endregion
+
+        #region Functions
+        private void Back()
         {
             if (editor.Visibility == Visibility.Collapsed)
             {
@@ -185,17 +279,7 @@ namespace MediaManager.GUI.Menus
             }
             if (confirmation) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-
-        private void updateVisibility(bool editMode)
-        {
-            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
-            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
-            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["saveEnabled"] = AnyChangeMade;
-        }
-        private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
+        private void DeleteMedium()
         {
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationMedium;
             if (!performDeletion)
@@ -209,12 +293,12 @@ namespace MediaManager.GUI.Menus
                 Close();
             }
         }
-        private void btnEditMediumClick(object sender, RoutedEventArgs e)
+        private void EditMedium()
         {
             editor.Medium = viewer.Medium;
             updateVisibility(true);
         }
-        private void btnUndoChangesClick(object sender, RoutedEventArgs e)
+        private void UndoChanges()
         {
             if (!IsExistingMedium) Close();
             else
@@ -224,7 +308,7 @@ namespace MediaManager.GUI.Menus
                 updateVisibility(false);
             }
         }
-        private void btnSaveMediumClick(object sender, RoutedEventArgs e)
+        private void SaveMedium()
         {
             if (save())
             {
@@ -232,12 +316,6 @@ namespace MediaManager.GUI.Menus
                 AnyChangeMade = false;
                 updateVisibility(false);
             }
-        }
-        #endregion
-        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
-        {
-            AnyChangeMade = true;
-            updateVisibility(true);
         }
         #endregion
     }

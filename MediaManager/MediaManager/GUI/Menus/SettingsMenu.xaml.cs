@@ -3,6 +3,8 @@ using LanguageProvider;
 using static LanguageProvider.LanguageProvider;
 using System;
 using System.Windows;
+using System.Windows.Input;
+using static MediaManager.Globals.KeyboardShortcutHelper;
 using static MediaManager.Globals.Navigation;
 
 namespace MediaManager.GUI.Menus
@@ -27,11 +29,25 @@ namespace MediaManager.GUI.Menus
         }
         #endregion
 
+        #region Handler
+        private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
+        {
+            [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
+            [(ModifierKeys.None, Key.Escape)] = Close,
+            [(ModifierKeys.Control, Key.R)] = Discard,
+            [(ModifierKeys.Control, Key.S)] = Save,
+        });
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(null);
-        private void btnSaveClick(object sender, RoutedEventArgs e)
+        private void btnDiscardClick(object sender, RoutedEventArgs e) => Discard();
+        private void btnSaveClick(object sender, RoutedEventArgs e) => Save();
+        #endregion
+        #endregion
+
+        #region Functions
+        private void Discard() => editor.LoadData(null);
+        private void Save()
         {
             if (editor.ValidateData())
             {

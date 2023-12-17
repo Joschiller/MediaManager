@@ -60,6 +60,19 @@ namespace MediaManager.GUI.Controls.List
                 Media.Add(dbMedia[(newPage - 1) * ItemsPerPage + i]);
             }
         }
+        private void mediaList_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right && pager.CurrentPage < pager.TotalPages)
+            {
+                pager.CurrentPage++;
+                e.Handled = true;
+            }
+            if (e.Key == Key.Left && pager.CurrentPage > 1)
+            {
+                pager.CurrentPage--;
+                e.Handled = true;
+            }
+        }
         private void mediaList_SelectionChanged(object sender, SelectionChangedEventArgs e) => LoadTagsOfSelectedMedium();
         #endregion
 
@@ -148,7 +161,12 @@ namespace MediaManager.GUI.Controls.List
             saveButton.IsEnabled = true;
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void saveButton_Click(object sender, RoutedEventArgs e) => Save();
+        #endregion
+
+        #region Functions
+        public void Undo() => LoadTagsOfSelectedMedium();
+        public void Save()
         {
             if (mediaList.SelectedItem == null) return;
 
