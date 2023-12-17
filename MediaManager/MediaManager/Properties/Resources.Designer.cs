@@ -431,6 +431,50 @@ namespace MediaManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;base target=&quot;_blank&quot;&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div&gt;
+        ///        Diese Anwendung unterliegt der &lt;a href=&quot;https://github.com/Joschiller/MediaManager/blob/main/LICENSE.md&quot;&gt;MIT Lizenz&lt;/a&gt;.
+        ///    &lt;/div&gt;
+        ///    &lt;div style=&quot;margin-top: 32px&quot;&gt;
+        ///        Alle Icons innerhalb dieser Anwendung basieren auf Icons von &lt;a href=&quot;https://www.flaticon.com/&quot;&gt;flaticon.com&lt;/a&gt;. Die Basis für eigens erstellte Icons bilden die folgenden Referenzen:
+        ///    &lt;/div&gt;
+        ///    &lt;div style=&quot;margin-top: 8px&quot;&gt;
+        ///     [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string license_de {
+            get {
+                return ResourceManager.GetString("license_de", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;base target=&quot;_blank&quot;&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div&gt;
+        ///        This application is licensed under the &lt;a href=&quot;https://github.com/Joschiller/MediaManager/blob/main/LICENSE.md&quot;&gt;MIT License&lt;/a&gt;.
+        ///    &lt;/div&gt;
+        ///    &lt;div style=&quot;margin-top: 32px&quot;&gt;
+        ///        All icons within this application are based on icons taken from &lt;a href=&quot;https://www.flaticon.com/&quot;&gt;flaticon.com&lt;/a&gt;. The base for the custom icons are the following references:
+        ///    &lt;/div&gt;
+        ///    &lt;div style=&quot;margin-top: 8px&quot;&gt;
+        ///   [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string license_en {
+            get {
+                return ResourceManager.GetString("license_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap next {

@@ -40,7 +40,7 @@ The color scheme will be based on the application icon.
 
 Enabled controls will use the colored variant. Disabled controls will use a monochrome variant.
 
-Differnt base colors differentiate between different categories of actions.
+Different base colors differentiate between different categories of actions.
 
 | Color Group | Color Name   | Color Code | Example                        | Usage                 |
 | ----------: | :----------- | :--------- | :----------------------------- | :-------------------- |
@@ -63,6 +63,10 @@ Differnt base colors differentiate between different categories of actions.
 |      Accent | white        | #f7f9fa    | ![](./assets/white.png)        | text, background      |
 
 ## Icons
+
+> If any new icons are added to the application, their links must be documented in `Resources/license_en.html` and `Resources/license_de.html`. The table below serves as an overview for the style documentation outside the application itself.
+>
+> The hyperrefs of the links are kept as is, but the captions will be translated to either "icons created by" or "Icons erstellt von".
 
 |       Icon Group | Name                  | Source (must be inserted in clear text)                                                                                                                                                      | Icon                                                        |
 | ---------------: | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |

@@ -4,6 +4,7 @@
     "Button": {
       "Add": "Hinzufügen",
       "Cancel": "Abbrechen",
+      "Close": "Schließen",
       "Create": "Erstellen",
       "Delete": "Löschen",
       "Edit": "Bearbeiten",
@@ -253,6 +254,16 @@
       "partSelectionSection": "Medienteile für das zusammengeführte Medium wählen",
       "mergeButton": "Zusammenführen und Vorschau ansehen",
       "submitButton": "Zusammengeführtes Medium speichern"
+    },
+    "Help": {
+      "ToolTip": {
+        "License": "Lizenzinformationen anzeigen"
+      },
+      "Button": {
+        "License": "Lizenzinformationen"
+      },
+      "LicenseFile": "license_de.html",
+      "Loading": "... lädt"
     }
   },
   "Dialog": {
