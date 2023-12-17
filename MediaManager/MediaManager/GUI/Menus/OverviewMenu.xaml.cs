@@ -66,7 +66,7 @@ namespace MediaManager.GUI.Menus
 
         #region Handler
         #region Navbar
-        private void NavigationBar_IconClicked(object sender, EventArgs e) => OpenHelpMenu(); // NOTE: may only be a temorary link
+        private void NavigationBar_IconClicked(object sender, EventArgs e) => OpenHelpMenu(); // NOTE: may only be a temporary link
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null, true), ShowAndReload);
         private void btnAddTagClick(object sender, RoutedEventArgs e)
