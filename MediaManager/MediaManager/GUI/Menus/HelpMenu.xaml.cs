@@ -31,7 +31,7 @@ namespace MediaManager.GUI.Menus
         public void LoadTexts(string language)
         {
             Resources["btnLicenseTooltip"] = getString("Menus.Help.ToolTip.License");
-            Resources["btnLicenseText"] = getString("Menus.Help.Button.License");
+            Resources["btnLicenseText"] = "_" + getString("Menus.Help.Button.License");
             setupTopics();
         }
         private void setupTopics()

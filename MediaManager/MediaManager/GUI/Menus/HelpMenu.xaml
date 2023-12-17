@@ -8,7 +8,7 @@
         Style="{StaticResource defaultWindow}" MinHeight="500" Height="500">
     <Window.Resources>
         <system:String x:Key="btnLicenseTooltip">Show license information</system:String>
-        <system:String x:Key="btnLicenseText">License information</system:String>
+        <system:String x:Key="btnLicenseText">_License information</system:String>
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="350">
