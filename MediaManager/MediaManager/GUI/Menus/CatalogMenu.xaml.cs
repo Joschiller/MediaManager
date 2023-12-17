@@ -117,6 +117,7 @@ namespace MediaManager.GUI.Menus
         private void Viewer_ProcessFailed(string message) => ShowDefaultDialog(message, SuccessMode.Error);
         private void EditCatalog()
         {
+            if (catalogList.SelectedCatalog == null) return;
             var result = new EditCatalogDialog(catalogList.SelectedCatalog.Id).ShowDialog();
             if (result.HasValue && result.Value) catalogList.LoadCatalogs();
         }
@@ -136,6 +137,7 @@ namespace MediaManager.GUI.Menus
         private void OpenSettingsMenu() => OpenWindow(this, new SettingsMenu());
         private void LoadCatalog(Catalog catalog)
         {
+            if (catalog == null) return; // may be caused, if no catalog is selected, whilst a double click is triggered or a key-combination is run
             var oldCatalog = CatalogContext.CurrentCatalogId;
             CatalogContext.SetCurrentCatalog(catalog);
             if (GlobalContext.Settings.BackupEnabled)
