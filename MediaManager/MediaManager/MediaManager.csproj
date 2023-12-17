@@ -133,6 +133,7 @@
     <Compile Include="Globals\DataConnector.cs" />
     <Compile Include="Globals\ImageUtils.cs" />
     <Compile Include="Globals\Init.cs" />
+    <Compile Include="Globals\KeyboardShortcutHelper.cs" />
     <Compile Include="Globals\SearchRunner.cs" />
     <Compile Include="Globals\XamlPartConcatenator.cs" />
     <Compile Include="Globals\XamlValueAdder.cs" />
