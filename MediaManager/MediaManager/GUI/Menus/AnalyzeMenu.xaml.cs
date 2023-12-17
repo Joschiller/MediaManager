@@ -47,7 +47,11 @@ namespace MediaManager.GUI.Menus
         }
         private void pager_PageChanged(int newPage) => list.SetItems(allItems.Skip((newPage - 1) * itemsPerPage).Take(itemsPerPage).ToList());
         private void list_SelectionChanged(AnalyzeListElement element) => preview.LoadPreview(mode.Mode, element);
-        private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element)
+        private void preview_StartEditing(AnalyzeMode mode, AnalyzeListElement element) => StartEditing(mode, element);
+        #endregion
+
+        #region Functions
+        private void StartEditing(AnalyzeMode mode, AnalyzeListElement element)
         {
             switch (mode)
             {

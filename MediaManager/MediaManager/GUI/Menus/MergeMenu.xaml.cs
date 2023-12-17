@@ -298,7 +298,12 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Navbar
-        private void NavigationBar_BackClicked(object sender, EventArgs e)
+        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+        #endregion
+
+        #region Functions
+        private void Back()
         {
             var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
                 .WithTitle(getString("ApplicationName"))
@@ -309,7 +314,6 @@ namespace MediaManager.GUI.Menus
                 .ShowForResult() as bool?;
             if (result.HasValue && result.Value) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
         #endregion
     }
 }

@@ -68,24 +68,34 @@ namespace MediaManager.GUI.Menus
         #region Navbar
         private void NavigationBar_IconClicked(object sender, EventArgs e) => OpenHelpMenu(); // NOTE: may only be a temporary link
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-        private void btnAddMediumClick(object sender, RoutedEventArgs e) => OpenWindow(this, new EditMenu(null, null, true), ShowAndReload);
-        private void btnAddTagClick(object sender, RoutedEventArgs e)
-        {
-            var result = new EditTagDialog(null).ShowDialog();
-            if (result.HasValue && result.Value) Reload();
-        }
-        private void btnTagsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new TagMenu(), ShowAndReload);
-        private void btnCatalogsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
-        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenWindow(this, new SettingsMenu(), ShowAndReload);
-        private void btnAnalyzeClick(object sender, RoutedEventArgs e) => OpenWindow(this, new AnalyzeMenu(), ShowAndReload);
+        private void btnAddMediumClick(object sender, RoutedEventArgs e) => AddMedium();
+        private void btnAddTagClick(object sender, RoutedEventArgs e) => AddTag();
+        private void btnTagsClick(object sender, RoutedEventArgs e) => OpenTagMenu();
+        private void btnCatalogsClick(object sender, RoutedEventArgs e) => OpenCatalogMenu();
+        private void btnSettingsClick(object sender, RoutedEventArgs e) => OpenSettingsMenu();
+        private void btnAnalyzeClick(object sender, RoutedEventArgs e) => OpenAnalyzeMenu();
         #endregion
-        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false), ShowAndReload);
+        private void searchPanel_MediumSelected(int mediumId, int? partId) => OpenMedium(mediumId, partId);
         private void searchPanel_PlaylistAdditionRequested(int id, Controls.Search.SearchResultMode mode)
         {
             var result = new PlaylistAdditionDialog(id, mode).ShowDialog();
             if (result.HasValue && result.Value) Reload();
         }
         private void PlaylistEditor_PartSelected(Part part) => OpenWindow(this, new EditMenu(part.MediumId, part.Id, false), ShowAndReload);
+        #endregion
+
+        #region Functions
+        private void AddMedium() => OpenWindow(this, new EditMenu(null, null, true), ShowAndReload);
+        private void AddTag()
+        {
+            var result = new EditTagDialog(null).ShowDialog();
+            if (result.HasValue && result.Value) Reload();
+        }
+        private void OpenTagMenu() => OpenWindow(this, new TagMenu(), ShowAndReload);
+        private void OpenCatalogMenu() => OpenWindow(this, new CatalogMenu(), CloseIfNoCatalogExists);
+        private void OpenSettingsMenu() => OpenWindow(this, new SettingsMenu(), ShowAndReload);
+        private void OpenAnalyzeMenu() => OpenWindow(this, new AnalyzeMenu(), ShowAndReload);
+        private void OpenMedium(int mediumId, int? partId) => OpenWindow(this, new EditMenu(mediumId, partId, false), ShowAndReload);
         #endregion
     }
 }

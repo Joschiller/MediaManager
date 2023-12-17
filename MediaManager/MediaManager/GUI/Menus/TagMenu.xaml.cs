@@ -40,18 +40,35 @@ namespace MediaManager.GUI.Menus
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-        private void btnAddTagClick(object sender, RoutedEventArgs e)
+        private void btnAddTagClick(object sender, RoutedEventArgs e) => AddTag();
+        private void btnEditTagClick(object sender, RoutedEventArgs e) => EditTag();
+        private void btnDeleteTagClick(object sender, RoutedEventArgs e) => DeleteTag();
+        #endregion
+        private void LoadTags()
+        {
+            Tags.Clear();
+            CatalogContext.Reader.Lists.Tags.ForEach(Tags.Add);
+        }
+        private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
+            mediaTagList.setCurrentTag(SelectedTag);
+        }
+        #endregion
+
+        #region Functions
+        private void AddTag()
         {
             var result = new EditTagDialog(null).ShowDialog();
             if (result.HasValue && result.Value) LoadTags();
         }
-        private void btnEditTagClick(object sender, RoutedEventArgs e)
+        private void EditTag()
         {
             if (SelectedTag == null) return;
             var result = new EditTagDialog(SelectedTag.Id).ShowDialog();
             if (result.HasValue && result.Value) LoadTags();
         }
-        private void btnDeleteTagClick(object sender, RoutedEventArgs e)
+        private void DeleteTag()
         {
             if (SelectedTag == null) return;
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationTag;
@@ -65,17 +82,6 @@ namespace MediaManager.GUI.Menus
                 GlobalContext.Writer.DeleteTag(SelectedTag.Id);
                 LoadTags();
             }
-        }
-        #endregion
-        private void LoadTags()
-        {
-            Tags.Clear();
-            CatalogContext.Reader.Lists.Tags.ForEach(Tags.Add);
-        }
-        private void tagList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            Resources["tagDependentVisibility"] = SelectedTag == null ? Visibility.Hidden : Visibility.Visible;
-            mediaTagList.setCurrentTag(SelectedTag);
         }
         #endregion
     }

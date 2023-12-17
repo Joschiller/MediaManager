@@ -30,8 +30,13 @@ namespace MediaManager.GUI.Menus
         #region Navbar
         private void NavigationBar_BackClicked(object sender, EventArgs e) => Close();
         private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-        private void btnDiscardClick(object sender, RoutedEventArgs e) => editor.LoadData(null);
-        private void btnSaveClick(object sender, RoutedEventArgs e)
+        private void btnDiscardClick(object sender, RoutedEventArgs e) => Discard();
+        private void btnSaveClick(object sender, RoutedEventArgs e) => Save();
+        #endregion
+
+        #region Functions
+        private void Discard() => editor.LoadData(null);
+        private void Save()
         {
             if (editor.ValidateData())
             {

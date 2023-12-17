@@ -167,7 +167,31 @@ namespace MediaManager.GUI.Menus
             }
         }
         #region Navbar
-        private void NavigationBar_BackClicked(object sender, EventArgs e)
+        private void NavigationBar_BackClicked(object sender, EventArgs e) => Back();
+        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
+
+        private void updateVisibility(bool editMode)
+        {
+            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
+            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
+            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
+            Resources["saveEnabled"] = AnyChangeMade;
+        }
+        private void btnDeleteMediumClick(object sender, RoutedEventArgs e) => DeleteMedium();
+        private void btnEditMediumClick(object sender, RoutedEventArgs e) => EditMedium();
+        private void btnUndoChangesClick(object sender, RoutedEventArgs e) => UndoChanges();
+        private void btnSaveMediumClick(object sender, RoutedEventArgs e) => SaveMedium();
+        #endregion
+        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
+        {
+            AnyChangeMade = true;
+            updateVisibility(true);
+        }
+        #endregion
+
+        #region Functions
+        private void Back()
         {
             if (editor.Visibility == Visibility.Collapsed)
             {
@@ -185,17 +209,7 @@ namespace MediaManager.GUI.Menus
             }
             if (confirmation) Close();
         }
-        private void NavigationBar_HelpClicked(object sender, EventArgs e) => OpenHelpMenu();
-
-        private void updateVisibility(bool editMode)
-        {
-            viewer.Visibility = editMode ? Visibility.Collapsed : Visibility.Visible;
-            editor.Visibility = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["viewerButtonsVisibility"] = editMode ? Visibility.Collapsed : Visibility.Visible;
-            Resources["editorButtonsVisibility"] = editMode ? Visibility.Visible : Visibility.Collapsed;
-            Resources["saveEnabled"] = AnyChangeMade;
-        }
-        private void btnDeleteMediumClick(object sender, RoutedEventArgs e)
+        private void DeleteMedium()
         {
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationMedium;
             if (!performDeletion)
@@ -209,12 +223,12 @@ namespace MediaManager.GUI.Menus
                 Close();
             }
         }
-        private void btnEditMediumClick(object sender, RoutedEventArgs e)
+        private void EditMedium()
         {
             editor.Medium = viewer.Medium;
             updateVisibility(true);
         }
-        private void btnUndoChangesClick(object sender, RoutedEventArgs e)
+        private void UndoChanges()
         {
             if (!IsExistingMedium) Close();
             else
@@ -224,7 +238,7 @@ namespace MediaManager.GUI.Menus
                 updateVisibility(false);
             }
         }
-        private void btnSaveMediumClick(object sender, RoutedEventArgs e)
+        private void SaveMedium()
         {
             if (save())
             {
@@ -232,12 +246,6 @@ namespace MediaManager.GUI.Menus
                 AnyChangeMade = false;
                 updateVisibility(false);
             }
-        }
-        #endregion
-        private void editor_MediumEdited(Controls.Edit.MediumWithTags medium)
-        {
-            AnyChangeMade = true;
-            updateVisibility(true);
         }
         #endregion
     }
