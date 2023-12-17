@@ -64,7 +64,7 @@ Different base colors differentiate between different categories of actions.
 
 ## Icons
 
-> If any new icons are added to the application, their links must be documented in `Resources/license_en.html` and `Resources/license_de.html`.
+> If any new icons are added to the application, their links must be documented in `Resources/license_en.html` and `Resources/license_de.html`. The table below serves as an overview for the style documentation outside the application itself.
 >
 > The hyperrefs of the links are kept as is, but the captions will be translated to either "icons created by" or "Icons erstellt von".
 
