@@ -1,5 +1,16 @@
 # Features and Changelog
 
+### Version 1.1.0
+
+- license information in the help menu for the application and used assets
+- keyboard shortcuts
+
+Solved Issues:
+
+- missing tooltips for menu buttons in edit menu
+- possible NPEs when editing or loading catalogs
+- pressing enter when creating a tag leaves an empty title
+
 ## Version 1.0.0
 
 - adding, editing and deleting catalogs and their settings
