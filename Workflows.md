@@ -23,8 +23,9 @@
 9. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
 10. Right-click project > "Publish" > click through the wizard (keep all settings)
 11. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
-12. Push, review and merge `X.X.X-rc-preparation`
-13. Create Release in Repository
+12. Commit as `chore: build vX.X.X`
+13. Push, review and merge `X.X.X-rc-preparation`
+14. Create Release in Repository
     1. `git checkout -b X.X.X-rc`
     2. push new branch
     3. Github > Tags > Create a new Release
