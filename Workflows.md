@@ -1,28 +1,31 @@
 # Release
 
-1. Check API
+1. Checkout `X.X.X-rc-preparation`
+2. Check API
    - Configuration in `CatalogExportThread` and `CatalogImportThread` code
    - Description in [specification file](./XML-API.md) including all changelog and migration information
    - also check the correct version number in respect to the performed changes
-2. Check Workflow documentation
-3. Update [Application Description](./docs/Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
-4. If any changes were made to the handbook or the referenced image files, re-export the pdf-files for [Handbuch.md](./docs/Handbuch.md) and [Manuals.md](./docs/Manuals.md)
-5. Update [Changelog](./Changelog.md)
+3. Check Workflow documentation
+4. Update [Application Description](./docs/Application%20Description.md) and perform a check of the content for any erros (e.g. using MS Word)
+5. If any changes were made to the handbook or the referenced image files, re-export the pdf-files for [Handbuch.md](./docs/Handbuch.md) and [Manuals.md](./docs/Manuals.md) and commit those as `docs(manuals): generate pdf`
+6. Update [Changelog](./Changelog.md)
    - document new features
    - document open issues that have a direct impact regarding the functionality
      > Add a "> Solved with Version x.x.x" mark at any open issue when it is solved in a later version.
    - document solved bugs
-6. Make testbuild in a copied folder and test functionality
+7. Make testbuild in a copied folder and test functionality
    - check added functionality for basic workflow
    - check validation of wrong or missing inputs
    - check if all validation messages are shown for missing inputs
-7. Simplify code
+8. Simplify code
    - remove unnecessary imports
    - check autocompletion hints
-8. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
-9. Right-click project > "Publish" > click through the wizard (keep all settings)
-10. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
-11. Create Release in Repository
+9. Check the "Publish Version" in `Properties > Publish > Publish Version` and correct it, if needed (usually instead of the revision, the build part should be raised in comparison to the latest release)
+10. Right-click project > "Publish" > click through the wizard (keep all settings)
+11. Select all items in the release folder and zip them to a file called `Media_Manager-vX.X.X`
+12. Commit as `chore: build vX.X.X`
+13. Push, review and merge `X.X.X-rc-preparation`
+14. Create Release in Repository
     1. `git checkout -b X.X.X-rc`
     2. push new branch
     3. Github > Tags > Create a new Release
@@ -66,7 +69,10 @@
 // public methods
 #endregion
 #region Handler
-// internal event handlers and corresponding methods
+// internal event handlers that call the below functions (these just serve as a redirection to the actual functions)
+#endregion
+#region Functions
+// methods that are called by the handlers
 #endregion
 ```
 
