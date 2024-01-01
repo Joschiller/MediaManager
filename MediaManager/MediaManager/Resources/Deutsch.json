@@ -499,7 +499,7 @@
             },
             "2": {
               "PageCaption": "Elemente zu einer Playlist hinzufügen",
-              "Content": "Einträge können zu einer existierenden Playlist hinzugefügt werden, indem in der Suchergebnisliste ein Element ausgewählt und dann ein Rechtsklick auf die Suchergebnisliste erfolgt. So wird ein Kontextmenü eingeblendet, über dessen angebotene Aktionen ein Hinzufügen eines Medienteils oder aller Teile eines Mediums zu einer bestehenden oder neuen Playlist möglich ist."
+              "Content": "Einträge können zu einer existierenden Playlist hinzugefügt werden, indem in der Suchergebnisliste ein Element ausgewählt wird und dann ein Rechtsklick auf die Suchergebnisliste erfolgt. So wird ein Kontextmenü eingeblendet, über dessen angebotene Aktionen ein Hinzufügen eines Medienteils oder aller Teile eines Mediums zu einer bestehenden oder neuen Playlist möglich ist."
             },
             "3": {
               "PageCaption": "Eine Playlist löschen",
