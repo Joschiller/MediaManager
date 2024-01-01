@@ -58,7 +58,10 @@ namespace MediaManager.Globals
         public static void OpenWindow(Window w1, Window w2, Action doOnClose = null)
         {
             w1.Hide();
-            w2.Closing += (s, e) => { if (doOnClose == null) w1.Show(); else doOnClose(); };
+            w2.Closing += (s, e) => {
+                if (e.Cancel) return; // skip navigation as the event was cancelled
+                if (doOnClose == null) w1.Show(); else doOnClose();
+            };
             w2.ShowDialog();
         }
         public static void ShowDefaultDialog(string text, SuccessMode mode = SuccessMode.Neutral, string language = null)
