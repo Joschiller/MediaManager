@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaManager.GUI.Menus" xmlns:components="clr-namespace:MediaManager.GUI.Components" xmlns:edit="clr-namespace:MediaManager.GUI.Controls.Edit" xmlns:atoms="clr-namespace:MediaManager.GUI.Atoms"
         mc:Ignorable="d"
-        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown">
+        Style="{StaticResource defaultWindow}" PreviewKeyDown="Window_PreviewKeyDown" Closing="Window_Closing">
     <DockPanel>
         <components:NavigationBar DockPanel.Dock="Top" Mode="WithBackButton,WithHelpButton" BackClicked="NavigationBar_BackClicked"  HelpClicked="NavigationBar_HelpClicked"/>
         <Border DockPanel.Dock="Top" Style="{StaticResource defaultBorder}"/>

@@ -300,6 +300,10 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!ClosingPermitted()) e.Cancel = true;
+        }
         private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
         {
             [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
@@ -312,7 +316,7 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Functions
-        private void Back()
+        private bool ClosingPermitted()
         {
             var result = new GeneralButtonBasedDialog(Globals.Navigation.GeneralButtonBasedDialogStyle)
                 .WithTitle(getString("ApplicationName"))
@@ -321,8 +325,9 @@ namespace MediaManager.GUI.Menus
                 .WithCancelButton("_" + getString("Common.Button.No"), result: false)
                 .WithNeutralButton("_" + getString("Common.Button.Yes"), result: true)
                 .ShowForResult() as bool?;
-            if (result.HasValue && result.Value) Close();
+            return result.HasValue && result.Value;
         }
+        private void Back() => Close(); // the confirmation is handled in the "Window_Closing" event
         #endregion
     }
 }
