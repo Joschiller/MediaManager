@@ -89,6 +89,7 @@ namespace MediaManager.GUI.Controls.Search
             var item = resultList.SelectedItem as SearchResultItem;
             if (item != null)
             {
+                e.Handled = true;
                 rightClickPivotId = item.Id;
                 ContextMenu cm = FindResource("contextMenu") as ContextMenu;
                 cm.PlacementTarget = (FrameworkElement)e.OriginalSource;
