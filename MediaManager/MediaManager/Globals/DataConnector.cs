@@ -198,6 +198,7 @@ namespace MediaManager.Globals
             /// <summary>Offers reading and writing access to settings independent from the currently active <see cref="Catalog"/>.</summary>
             public static class Settings
             {
+                public static string DefaultLanguage = "English";
                 private static T GetSettingsValue<T>(string settingsName, Func<string, T> parser, T defaultValue)
                 {
                     var val = DBCONNECTION.Settings.FirstOrDefault(s => s.Key == settingsName)?.Value;
@@ -246,6 +247,12 @@ namespace MediaManager.Globals
                 {
                     get => GetSettingsValue("BACKUP_ENABLED", bool.Parse, true);
                     set => SaveSetting("BACKUP_ENABLED", value.ToString());
+                }
+                /// <summary>Currently configured language.</summary>
+                public static string Language
+                {
+                    get => GetSettingsValue("LANGUAGE", s => s, DefaultLanguage);
+                    set => SaveSetting("LANGUAGE", value);
                 }
             }
         }

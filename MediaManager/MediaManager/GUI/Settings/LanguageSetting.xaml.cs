@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using static MediaManager.Globals.Navigation;
+using static MediaManager.Globals.DataConnector;
 
 namespace MediaManager.GUI.Settings
 {
@@ -38,7 +39,11 @@ namespace MediaManager.GUI.Settings
             selectedLanguage.SelectedItem = CurrentLanguage;
             LoadTexts(null);
         }
-        public void SaveData() => CurrentLanguage = (selectedLanguage.SelectedItem as string) ?? CurrentLanguage;
+        public void SaveData()
+        {
+            CurrentLanguage = (selectedLanguage.SelectedItem as string) ?? CurrentLanguage;
+            GlobalContext.Settings.Language = CurrentLanguage;
+        }
         public bool ValidateData() => RunValidation(new List<Func<string>>
             {
                 () => selectedLanguage.SelectedItem == null ? getString("Controls.Settings.Language.Validation") : null

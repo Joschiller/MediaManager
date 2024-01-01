@@ -16,6 +16,7 @@ namespace MediaManager.Globals
                 { "English", Properties.Resources.English },
                 { "Deutsch", Properties.Resources.Deutsch }
             }, "English");
+            CurrentLanguage = DataConnector.GlobalContext.Settings.Language;
         }
     }
 }
