@@ -43,7 +43,10 @@ namespace MediaManager.GUI.Controls.Edit
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
                 textLocation.Visibility = Visibility.Visible;
                 location.Visibility = Visibility.Visible;
-                integerMeta.Visibility = Visibility.Collapsed;
+                textLength.Visibility = Visibility.Collapsed;
+                dataLength.Visibility = Visibility.Collapsed;
+                textPublication.Visibility = Visibility.Collapsed;
+                publication.Visibility = Visibility.Collapsed;
                 imageButtons.Visibility = Visibility.Collapsed;
                 imageViewer.Visibility = Visibility.Collapsed;
 
@@ -80,7 +83,10 @@ namespace MediaManager.GUI.Controls.Edit
                 favoriteButtonDisabled.Visibility = Visibility.Collapsed;
                 textLocation.Visibility = Visibility.Collapsed;
                 location.Visibility = Visibility.Collapsed;
-                integerMeta.Visibility = Visibility.Visible;
+                textLength.Visibility = Visibility.Visible;
+                dataLength.Visibility = Visibility.Visible;
+                textPublication.Visibility = Visibility.Visible;
+                publication.Visibility = Visibility.Visible;
                 imageButtons.Visibility = Visibility.Visible;
                 imageViewer.Visibility = Visibility.Visible;
 

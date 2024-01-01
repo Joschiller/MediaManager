@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="textTitle" Grid.Row="0" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}">
@@ -38,19 +39,12 @@
         </DockPanel>
         <TextBlock x:Name="textLocation" Grid.Row="4" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
         <TextBox x:Name="location" Grid.Row="4" Grid.Column="1" MaxLength="128" TextChanged="textChanged" Margin="{StaticResource defaultMarginSmall}"/>
-        <Grid x:Name="integerMeta" Grid.Row="5" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="textLength" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
-            <wpfcomponents:NumericUpDown x:Name="length" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Margin="{StaticResource defaultMarginSmall}" Background="{StaticResource control_background_brush}"/>
-            <TextBlock x:Name="textMinute" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,16,0"/>
-            <TextBlock x:Name="textPublication" Grid.Column="3" Style="{StaticResource dialogLabel}"/>
-            <wpfcomponents:NumericUpDown x:Name="publication" Grid.Column="4" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}" Background="{StaticResource control_background_brush}"/>
-        </Grid>
+        <TextBlock x:Name="textLength" Grid.Row="5" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+        <DockPanel x:Name="dataLength" Grid.Row="5" Grid.Column="1" Margin="{StaticResource defaultMarginSmall}">
+            <TextBlock x:Name="textMinute" DockPanel.Dock="Right" Width="60" VerticalAlignment="Center" TextAlignment="Right"/>
+            <wpfcomponents:NumericUpDown x:Name="length" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="10" Background="{StaticResource control_background_brush}"/>
+        </DockPanel>
+        <TextBlock x:Name="textPublication" Grid.Row="6" Grid.Column="0" Style="{StaticResource dialogLabel}"/>
+        <wpfcomponents:NumericUpDown x:Name="publication" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" ValueChanged="numericValueChanged" StepPerScroll="50" Margin="{StaticResource defaultMarginSmall}" Background="{StaticResource control_background_brush}"/>
     </Grid>
 </UserControl>

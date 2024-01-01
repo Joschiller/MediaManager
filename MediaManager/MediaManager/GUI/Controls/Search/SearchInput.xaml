@@ -24,7 +24,7 @@
             <Button x:Name="startSearch" Grid.Row="0" Grid.Column="1" Click="startSearch_Click" Margin="{StaticResource defaultMarginSmall}">Search</Button>
             <wpfcomponents:ImageButton x:Name="reset" Grid.Row="1" Grid.Column="1" Size="24" Click="reset_Click"  EnabledIconSource="../../../Resources/undo.png" VerticalAlignment="Bottom" Margin="{StaticResource defaultMarginSmall}"/>
             <DockPanel Grid.Row="1" Grid.Column="0">
-                <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="100" Click="resultListMode_Click" VerticalAlignment="Top" Margin="{StaticResource defaultMarginSmall}">_Show Media</Button>
+                <Button x:Name="resultListMode" DockPanel.Dock="Right" Width="120" Click="resultListMode_Click" VerticalAlignment="Top" Margin="{StaticResource defaultMarginSmall}">_Show Media</Button>
                 <WrapPanel Orientation="Horizontal" Margin="{StaticResource defaultMarginSmall}">
                     <CheckBox x:Name="exactMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search _Exact</CheckBox>
                     <CheckBox x:Name="searchDescriptionMode" DockPanel.Dock="Left" VerticalContentAlignment="Center" Checked="modeChanged" Unchecked="modeChanged">Search in _Description</CheckBox>
