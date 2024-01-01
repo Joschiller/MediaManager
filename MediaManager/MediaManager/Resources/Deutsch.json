@@ -148,7 +148,7 @@
         }
       },
       "PartAttribute": {
-        "Radio": "Missing media part attribute",
+        "Radio": "Fehlendes Medienteilattribut",
         "Description": {
           "Select": "Beschreibung",
           "Description": "Der Medienteil hat keine Beschreibung."
