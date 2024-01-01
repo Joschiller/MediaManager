@@ -100,6 +100,10 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!ClosingPermitted()) e.Cancel = true;
+        }
         private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
@@ -261,13 +265,9 @@ namespace MediaManager.GUI.Menus
                 return false;
             }
         }
-        private void Back()
+        private bool ClosingPermitted()
         {
-            if (editor.Visibility == Visibility.Collapsed)
-            {
-                Close();
-                return;
-            }
+            if (editor.Visibility == Visibility.Collapsed) return true;
 
             var confirmation = !AnyChangeMade;
             if (!confirmation)
@@ -277,8 +277,9 @@ namespace MediaManager.GUI.Menus
                 // if should save => try saving and cancel closing, if saving fails
                 if (result.HasValue && result.Value && !save()) confirmation = false;
             }
-            if (confirmation) Close();
+            return confirmation;
         }
+        private void Back() => Close(); // the confirmation is handled in the "Window_Closing" event
         private void DeleteMedium()
         {
             var performDeletion = !GlobalContext.Reader.GetCatalog(CatalogContext.CurrentCatalogId.Value).DeletionConfirmationMedium;
