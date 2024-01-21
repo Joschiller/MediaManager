@@ -39,6 +39,10 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Handler
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!ClosingPermitted()) e.Cancel = true;
+        }
         private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) => runKeyboardShortcut(e, new System.Collections.Generic.Dictionary<(ModifierKeys Modifiers, Key Key), Action>
         {
             [(ModifierKeys.None, Key.F1)] = OpenHelpMenu,
@@ -70,6 +74,18 @@ namespace MediaManager.GUI.Menus
         #endregion
 
         #region Functions
+        private bool ClosingPermitted()
+        {
+            var confirmation = !mediaTagList.IsDirty;
+            if (!confirmation)
+            {
+                var result = ShowUnsavedChangesDialog();
+                confirmation = result.HasValue;
+                // if should save => try saving and cancel closing, if saving fails
+                if (result.HasValue && result.Value) mediaTagList.Save();
+            }
+            return confirmation;
+        }
         private void AddTag()
         {
             var result = new EditTagDialog(null).ShowDialog();

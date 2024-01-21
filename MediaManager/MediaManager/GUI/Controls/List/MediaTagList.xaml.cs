@@ -46,6 +46,7 @@ namespace MediaManager.GUI.Controls.List
             CurrentTag = tag;
             LoadTagsOfSelectedMedium();
         }
+        public bool IsDirty { get => saveButton.IsEnabled; }
         #endregion
 
         #region Handler
