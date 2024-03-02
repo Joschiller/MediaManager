@@ -23,7 +23,7 @@ namespace MediaManager.Globals
                 /// <summary>True, if any <see cref="Catalog"/> exists</summary>
                 public static bool AnyCatalogExists { get => DBCONNECTION.Catalogs.Count() > 0; }
                 /// <summary><see cref="Catalog"/>s ordered by title.</summary>
-                public static List<Catalog> Catalogs { get => DBCONNECTION.Catalogs.OrderBy(c => c.Title).ToList() ?? new List<Catalog>(); }
+                public static List<Catalog> Catalogs { get => DBCONNECTION.Catalogs.ToList().OrderBy(c => c.Title, new StringComparer()).ToList() ?? new List<Catalog>(); }
                 /// <summary>
                 /// Retrieves a <see cref="Catalog"/> by its id.
                 /// </summary>
@@ -59,7 +59,7 @@ namespace MediaManager.Globals
                     var result = new List<ValuedTag>();
                     var medium = GetMedium(id);
                     var mediaTags = medium.MT_Relation;
-                    foreach (var t in medium.Catalog.Tags.OrderBy(t => t.Title))
+                    foreach (var t in medium.Catalog.Tags.ToList().OrderBy(t => t.Title, new StringComparer()))
                     {
                         var val = mediaTags.FirstOrDefault(v => v.TagId == t.Id);
                         result.Add(new ValuedTag
@@ -80,7 +80,7 @@ namespace MediaManager.Globals
                     var result = new List<ValuedTag>();
                     var part = GetPart(id);
                     var partTags = part.PT_Relation;
-                    foreach (var t in part.Medium.Catalog.Tags.OrderBy(t => t.Title))
+                    foreach (var t in part.Medium.Catalog.Tags.ToList().OrderBy(t => t.Title, new StringComparer()))
                     {
                         var val = partTags.FirstOrDefault(v => v.TagId == t.Id);
                         result.Add(new ValuedTag
@@ -296,21 +296,21 @@ namespace MediaManager.Globals
                     /// <summary>List of all <see cref="Medium"/>.</summary>
                     public static List<Medium> UnorderedMedia { get => CURRENT_CATALOG?.Media.ToList() ?? new List<Medium>(); }
                     /// <summary>List of all <see cref="Medium"/> ordered by title.</summary>
-                    public static List<Medium> Media { get => UnorderedMedia.OrderBy(m => m.Title).ToList(); }
+                    public static List<Medium> Media { get => UnorderedMedia.OrderBy(m => m.Title, new StringComparer()).ToList(); }
                     /// <summary>List of all <see cref="Medium"/> containing at least one <see cref="Part"/>.</summary>
                     public static List<Medium> NonEmptyMedia { get => CURRENT_CATALOG?.Media.Where(m => m.Parts.Count > 0).ToList() ?? new List<Medium>(); }
                     /// <summary>List of all <see cref="Part"/>s.</summary>
                     public static List<Part> UnorderedParts { get => DBCONNECTION?.Parts.Where(p => p.Medium.CatalogId == CURRENT_CATALOG.Id).ToList() ?? new List<Part>(); }
                     /// <summary>List of all <see cref="Part"/>s ordered by title.</summary>
-                    public static List<Part> Parts { get => UnorderedParts.OrderBy(p => p.Title).ToList(); }
+                    public static List<Part> Parts { get => UnorderedParts.OrderBy(p => p.Title, new StringComparer()).ToList(); }
                     /// <summary>List of all <see cref="Tag"/>s.</summary>
                     public static List<Tag> UnorderedTags { get => CURRENT_CATALOG?.Tags.ToList() ?? new List<Tag>(); }
                     /// <summary>List of all <see cref="Tag"/>s ordered by title.</summary>
-                    public static List<Tag> Tags { get => UnorderedTags.OrderBy(p => p.Title).ToList(); }
+                    public static List<Tag> Tags { get => UnorderedTags.OrderBy(p => p.Title, new StringComparer()).ToList(); }
                     /// <summary>List of all <see cref="Playlist"/>s.</summary>
                     public static List<Playlist> UnorderedPlaylists { get => CURRENT_CATALOG?.Playlists.ToList() ?? new List<Playlist>(); }
                     /// <summary>List of all <see cref="Playlist"/>s ordered by title.</summary>
-                    public static List<Playlist> Playlists { get => UnorderedPlaylists.OrderBy(p => p.Title).ToList(); }
+                    public static List<Playlist> Playlists { get => UnorderedPlaylists.OrderBy(p => p.Title, new StringComparer()).ToList(); }
                 }
                 public static class Statistics
                 {
@@ -348,7 +348,7 @@ namespace MediaManager.Globals
                         {
                             Id = p.Medium.Id,
                             Text = p.Medium.Title,
-                        }).OrderBy(m => m.Text)) { if (!result.Any(r => r.Id == item.Id)) result.Add(item); }
+                        }).ToList().OrderBy(m => m.Text, new StringComparer())) { if (!result.Any(r => r.Id == item.Id)) result.Add(item); }
                     }
                     else
                     {
@@ -356,7 +356,7 @@ namespace MediaManager.Globals
                         {
                             Id = p.Id,
                             Text = p.Title + " (" + p.Medium.Title + ")"
-                        }).OrderBy(p => p.Text)) result.Add(item);
+                        }).ToList().OrderBy(p => p.Text, new StringComparer())) result.Add(item);
                     }
 
                     return result;

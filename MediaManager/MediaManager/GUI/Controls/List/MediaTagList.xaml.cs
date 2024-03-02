@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using static MediaManager.Globals.DataConnector;
 using static MediaManager.TagUtils;
+using MediaManager.Globals;
 
 namespace MediaManager.GUI.Controls.List
 {
@@ -86,7 +87,7 @@ namespace MediaManager.GUI.Controls.List
                 partList.Visibility = Visibility.Visible;
                 saveButton.Visibility = Visibility.Visible;
                 var currentMedium = mediaList.SelectedItem as Medium;
-                foreach (var p in currentMedium.Parts)
+                foreach (var p in currentMedium.Parts.ToList().OrderBy(p => p.Title, new StringComparer()))
                 {
                     var value = GlobalContext.Reader.GetTagsForPart(p.Id).Find(t => t.Tag.Id == CurrentTag.Id).Value;
                     Parts.Add(new MediaTagListElement

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MediaManager.Globals;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,7 @@ namespace MediaManager.GUI.Controls.List
         public void SetPartList(string mediaTitle, List<PartListElement> parts)
         {
             title.Text = mediaTitle;
-            list.ItemsSource = parts.OrderBy(part => part.Title).ToList();
+            list.ItemsSource = parts.OrderBy(part => part.Title, new StringComparer()).ToList();
         }
         public void SelectItem(int? id)
         {

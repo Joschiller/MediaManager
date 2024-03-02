@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MediaManager.Globals;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
@@ -53,7 +54,7 @@ namespace MediaManager.GUI.Components
         public void SetTagList(List<ValuedTag> tags, List<int> disabledTagIds, List<int> highlightedTagIds)
         {
             Tags.Clear();
-            tags.OrderBy(tag => tag.Tag.Title).ToList().ForEach(t =>
+            tags.OrderBy(tag => tag.Tag.Title, new StringComparer()).ToList().ForEach(t =>
             {
                 Tags.Add(new TagListElement
                 {
