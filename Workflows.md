@@ -13,6 +13,7 @@
    - document open issues that have a direct impact regarding the functionality
      > Add a "> Solved with Version x.x.x" mark at any open issue when it is solved in a later version.
    - document solved bugs
+   - commit as `docs: update changelog`
 7. Make testbuild in a copied folder and test functionality
    - check added functionality for basic workflow
    - check validation of wrong or missing inputs
