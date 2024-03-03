@@ -1,5 +1,19 @@
 # Features and Changelog
 
+### Version 1.2.0
+
+- showing unsaved changes warning when leaving tag menu
+- sort titles respecting leading numbers
+
+Solved Issues:
+
+- language not being persisted when changed
+- missing translation in analyze menu
+- small label widths causing cropped texts
+- right-click behavior for adding media parts to playlists
+- typo in help menu text regarding playlists
+- showing unsaved changes warning when using OS close button
+
 ### Version 1.1.0
 
 - license information in the help menu for the application and used assets
