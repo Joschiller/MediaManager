@@ -7,7 +7,7 @@
 
 Solved Issues:
 
-- language not being persistend when changed
+- language not being persisted when changed
 - missing translation in analyze menu
 - small label widths causing cropped texts
 - right-click behavior for adding media parts to playlists
